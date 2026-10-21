@@ -15,3 +15,15 @@ export async function getProducts(): Promise<Product[]> {
 
   return data.products;
 }
+
+export async function getProduct(id: string): Promise<Product> {
+  const response = await fetch(`https://dummyjson.com/products/${id}`);
+
+  if (!response.ok) {
+    throw new Error("Could not load product");
+  }
+
+  const product: Product = await response.json();
+
+  return product;
+}
