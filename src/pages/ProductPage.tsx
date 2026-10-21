@@ -12,8 +12,6 @@ function ProductPage() {
 
   useEffect(() => {
     if (!id) {
-      setError("Product ID is missing.");
-      setLoading(false);
       return;
     }
 
@@ -22,6 +20,10 @@ function ProductPage() {
       .catch(() => setError("Could not load product. Please try again."))
       .finally(() => setLoading(false));
   }, [id]);
+
+  if (!id) {
+    return <p className="text-red-600">Product ID is missing.</p>;
+  }
 
   if (loading) {
     return <p>Loading product...</p>;
