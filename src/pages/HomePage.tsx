@@ -1,20 +1,27 @@
 import { useEffect, useState } from "react";
-
-type Product = {
-  id: number;
-  title: string;
-  price: number;
-  thumbnail: string;
-};
+import ProductCard from "../components/products/ProductCard";
+import type { Product } from "../types/product";
+import { getProducts } from "../api/products";
 
 function HomePage() {
   const [products, setProducts] = useState<Product[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState("");
 
   useEffect(() => {
-    fetch("https://dummyjson.com/products")
-      .then((response) => response.json())
-      .then((data) => setProducts(data.products));
+    getProducts()
+      .then((data) => setProducts(data))
+      .catch(() => setError("Could not load products. Please try again."))
+      .finally(() => setLoading(false));
   }, []);
+
+  if (loading) {
+    return <p>Loading products...</p>;
+  }
+
+  if (error) {
+    return <p className="text-red-600">{error}</p>;
+  }
 
   return (
     <div>
@@ -22,18 +29,7 @@ function HomePage() {
 
       <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
         {products.map((product) => (
-          <div
-            key={product.id}
-            className="rounded-lg border border-gray-200 p-4"
-          >
-            <img
-              src={product.thumbnail}
-              alt={product.title}
-              className="h-48 w-full object-contain"
-            />
-            <h2 className="mt-4 text-lg font-semibold">{product.title}</h2>
-            <p className="mt-2 text-gray-600">${product.price}</p>
-          </div>
+          <ProductCard key={product.id} product={product} />
         ))}
       </div>
     </div>
