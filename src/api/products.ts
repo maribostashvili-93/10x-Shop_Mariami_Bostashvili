@@ -1,4 +1,4 @@
-import type { Product } from "../types/product";
+import type { Category, Product } from "../types/product";
 
 type ProductsResponse = {
   products: Product[];
@@ -26,4 +26,16 @@ export async function getProduct(id: string): Promise<Product> {
   const product: Product = await response.json();
 
   return product;
+}
+
+export async function getCategories(): Promise<Category[]> {
+  const response = await fetch("https://dummyjson.com/products/categories");
+
+  if (!response.ok) {
+    throw new Error("Could not load categories");
+  }
+
+  const categories: Category[] = await response.json();
+
+  return categories;
 }
