@@ -1,67 +1,140 @@
-﻿# 10X Shop
+# 10X Shop
 
-10X Shop is a front-end graduation project for an online store. The goal is to build a responsive shopping experience where users can browse products, view product details, manage a cart, and complete a checkout flow. Product data is planned to come from the [DummyJSON API](https://dummyjson.com/).
+10X Shop is a responsive front-end e-commerce application built as a graduation project. Users can browse products from the DummyJSON API, view product details, manage a shared cart, sign in through a local demo authentication flow, and complete a simulated checkout.
 
 ## Current status
 
-The project is in its early stages. The React application, styling setup, and initial project structure are in place. A header links to the Products, Cart, and Login pages; these pages currently display placeholder headings.
+The CORE shopping flow is implemented and the project builds successfully with strict TypeScript checking. Authentication, cart, checkout, responsive layouts, loading states, error states, empty states, and the not-found route are included.
 
-The API integration and shopping features listed below are planned and have not yet been implemented.
+This is a front-end demo. Login and checkout are local simulations: no real authentication, payment, order processing, or delivery service is connected.
 
-## Planned features
+## Features
 
-- Product catalog and product details using the DummyJSON API
-- Login and shared authentication state
-- Shopping cart with quantity controls and item removal
-- Checkout form and order summary
-- Loading, error, and empty states
-- Responsive layouts and accessibility improvements
+### CORE
 
-Additional features such as search, filters, sorting, orders, and a profile page are described in the project plan.
+- Responsive storefront layout with header, sidebar, main content area, and footer
+- Product catalog loaded from the DummyJSON API
+- Product cards and product details by route
+- Loading, error, empty, and invalid-product states
+- Local demo login with controlled username and password fields
+- Shared authentication state through React Context
+- Shared cart state through React Context
+- Add products to cart with stock-aware quantities
+- Update quantities and remove products from the cart
+- Cart subtotal and order summary
+- Protected checkout flow for signed-in users
+- Checkout fields: full name, email, address, and city
+- Field-level checkout validation
+- Local order confirmation and cart clearing
+- Responsive Tailwind UI with hover, focus, and disabled states
+- 404 page for unknown routes
 
-## Technologies
+### Additional interface work
 
-- React and TypeScript
+- Wishlist state and wishlist page
+- Supporting navigation pages prepared for future features
+
+These additional pages do not represent real order history, coupons, addresses, or account services yet.
+
+## Routes
+
+| Route | Purpose |
+| --- | --- |
+| `/` | Storefront home page |
+| `/products` | Product catalog |
+| `/products/:id` | Product details |
+| `/wishlist` | Local wishlist |
+| `/cart` | Shopping cart |
+| `/checkout` | Protected checkout form |
+| `/login` | Local demo login |
+| `*` | Not-found page |
+
+## Tech stack
+
+- React 19
+- TypeScript 6 with strict checking
 - Vite
 - React Router
 - Tailwind CSS v4
+- DummyJSON Products API
 - ESLint
+
+## Project structure
+
+```text
+src/
+  api/          DummyJSON API requests
+  components/   Layout, navigation, product, and UI components
+  context/      Authentication, cart, and wishlist state
+  hooks/        Context hooks used by pages and components
+  pages/        Home, catalog, product, cart, checkout, login, and 404 pages
+  types/        Product, cart, user, and API types
+  utils/        Shared utility functions
+```
+
+The main data flow is: pages request products from the API, product components render typed data, and Context providers share authentication, cart, and wishlist state across routes. Checkout reads cart state, validates the local form, clears the cart, and displays a confirmation state.
 
 ## Getting started
 
-Install Node.js and npm, then run the following commands in the project folder:
+Requirements: Node.js and npm.
 
 ```bash
 npm install
 npm run dev
 ```
 
-Open the local URL shown in the terminal. On Windows, if PowerShell blocks `npm`, use `npm.cmd` instead (for example, `npm.cmd run dev`).
+Open the local URL shown by Vite. On Windows, use `npm.cmd` if PowerShell blocks the `npm` command:
+
+```bash
+npm.cmd run dev
+```
 
 ## Available scripts
 
 | Command | Purpose |
 | --- | --- |
-| `npm run dev` | Start the development server. |
-| `npm run build` | Type-check the project and create a production build in `dist/`. |
-| `npm run lint` | Run ESLint. |
-| `npm run preview` | Preview the production build locally. |
+| `npm run dev` | Start the Vite development server |
+| `npm run typecheck` | Run the strict TypeScript check |
+| `npm run build` | Type-check and create a production build |
+| `npm run lint` | Run ESLint |
+| `npm run preview` | Preview the production build locally |
 
-## Project structure
+The current validation status is:
 
 ```text
-src/
-  api/          Planned API integration
-  components/   Layout, product, and reusable UI components
-  context/      Planned authentication and cart state
-  hooks/        Planned custom hooks
-  pages/        Application pages
-  types/        Planned TypeScript types
-  utils/        Utility functions
+npm run typecheck  ✅
+npm run build      ✅
+npm run lint       ✅
 ```
 
-Some files in these folders are currently placeholders. See [PLAN.md](PLAN.md) for the roadmap and [REPORT.md](REPORT.md) for the project report.
+## Demo login
+
+Login is simulated locally. Enter any non-empty username and password. Do not use a real password. There is no external authentication service.
+
+## API
+
+Product data is requested from:
+
+```text
+https://dummyjson.com/products
+https://dummyjson.com/products/:id
+https://dummyjson.com/products/categories
+```
+
+The application shows an error state when the API cannot be reached. No production database or payment provider is connected.
 
 ## Deployment
 
-A live deployment link will be added when the project is deployed.
+The project is prepared for deployment to Vercel or Netlify. The live URL will be added here after deployment:
+
+```text
+Live demo: to be added
+```
+
+For SPA deployments, configure a rewrite so direct visits and refreshes on routes such as `/products/5` and `/checkout` serve `index.html`.
+
+## Project documentation
+
+- [PLAN.md](PLAN.md) — project plan and implementation scope
+- [REPORT.md](REPORT.md) — completion report and final results
+- [STYLE_GUIDE.md](STYLE_GUIDE.md) — UI and Tailwind conventions
