@@ -3,6 +3,7 @@ import ProductCard from "../components/products/ProductCard";
 import type { Category, Product } from "../types/product";
 import { getCategories, getProducts } from "../api/products";
 import heroImage from "../assets/shop-hero.png";
+import { HomeHighlights } from "../components/products/HomeHighlights";
 
 function HomePage() {
   const [products, setProducts] = useState<Product[]>([]);
@@ -84,24 +85,25 @@ function HomePage() {
         ) : categories.length === 0 ? (
           <p className="mt-6 text-stone-600">No categories available yet.</p>
         ) : (
-          <div className="mt-6 grid grid-cols-2 gap-4 md:grid-cols-3 lg:grid-cols-4">
+          <div className="mt-6 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
             {(showAllCategories ? categories : categories.slice(0, 4)).map((category, index) => {
               const preview = products.find((product) => product.category === category.slug);
               const colors = ["bg-rose-100", "bg-orange-100", "bg-stone-200", "bg-red-100"];
               return (
-                <div key={category.slug} className={`relative flex min-h-44 flex-col overflow-hidden rounded-2xl p-5 ${colors[index % colors.length]}`}>
+                <div key={category.slug} className={`relative isolate flex min-h-44 flex-col justify-center overflow-hidden rounded-2xl p-4 ${colors[index % colors.length]}`}>
                   <span className="flex size-9 items-center justify-center rounded-full bg-white/60 text-red-900">
                     <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" className="size-5"><path d="M4 8h16l-1 12H5L4 8Z" /><path d="M8 8V7a4 4 0 0 1 8 0v1" /></svg>
                   </span>
-                  <p className="relative z-10 mt-4 max-w-[65%] text-sm font-semibold text-stone-900">{category.name}</p>
-                  <p className="relative z-10 mt-1 max-w-[60%] text-xs text-stone-600">Explore the collection</p>
-                  {preview && <img src={preview.thumbnail} alt="" loading="lazy" className="absolute right-1 bottom-1 h-24 w-24 object-contain sm:h-28 sm:w-28" />}
+                  <p className="relative z-10 mt-3 max-w-[48%] text-sm font-semibold text-stone-900">{category.name}</p>
+                  <p className="relative z-10 mt-1 max-w-[45%] text-xs text-stone-600">Explore the collection</p>
+                  {preview && <img src={preview.thumbnail} alt="" loading="lazy" className="absolute right-0 bottom-0 -z-10 h-full w-[55%] object-contain object-bottom" />}
                 </div>
               );
             })}
           </div>
         )}
       </section>
+      <HomeHighlights products={products} categories={categories} />
     </div>
   );
 }

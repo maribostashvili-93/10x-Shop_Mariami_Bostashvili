@@ -1,9 +1,10 @@
 import { NavLink } from "react-router";
 import { useAuth } from "../../hooks/useAuth";
+import { ShoppingPanels } from "./ShoppingPanels";
 
 const links = [
-  { to: "/", label: "Products", end: true },
-  { to: "/cart", label: "Cart", end: false },
+  { to: "/", label: "Home", end: true },
+  { to: "/products", label: "Products", end: false },
 ];
 
 function Header() {
@@ -37,6 +38,7 @@ function Header() {
             Login
           </NavLink>
         )}
+        <ShoppingPanels />
       </nav>
     </header>
   );

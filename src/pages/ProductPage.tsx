@@ -3,6 +3,7 @@ import { Link, useParams } from "react-router";
 import { getProduct } from "../api/products";
 import type { Product } from "../types/product";
 import { useCart } from "../hooks/useCart";
+import { CartToast } from "../components/ui/CartToast";
 
 function ProductPage() {
   const { id } = useParams();
@@ -104,7 +105,7 @@ function ProductPage() {
               </button>
             </div>
             {product.stock > 0 && product.stock <= (items.find((item) => item.product.id === product.id)?.quantity ?? 0) && <p className="text-sm text-slate-600">All available stock is in your cart.</p>}
-            <p role="status" className="text-sm text-slate-600">{message}</p>
+            <CartToast message={message} onClose={() => setMessage("")} />
           </form>
         </div>
       </div>
