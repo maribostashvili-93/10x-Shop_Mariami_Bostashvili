@@ -4,8 +4,8 @@ type ProductsResponse = {
   products: Product[];
 };
 
-export async function getProducts(): Promise<Product[]> {
-  const response = await fetch("https://dummyjson.com/products");
+export async function getProducts(all = false): Promise<Product[]> {
+  const response = await fetch(`https://dummyjson.com/products${all ? "?limit=0" : ""}`);
 
   if (!response.ok) {
     throw new Error("Could not load products");

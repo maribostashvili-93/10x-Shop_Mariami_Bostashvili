@@ -25,7 +25,7 @@ const upcomingGroups = [
 export function Sidebar() {
   const { user, logout } = useAuth();
   return (
-    <aside className="rounded-2xl border border-slate-200 bg-white p-3 lg:sticky lg:top-6 lg:self-start lg:p-4">
+    <aside className="hidden rounded-2xl border border-slate-200 bg-white p-3 lg:sticky lg:top-20 lg:block lg:self-start lg:p-4">
       <nav aria-label="Store navigation" className="flex flex-wrap gap-2 lg:flex-col">
         {links.map(({ to, label, path }) => (
           <NavLink key={to} to={to} end={to === "/"} className={({ isActive }) => `flex min-h-11 items-center gap-3 rounded-xl px-3 text-sm font-semibold focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-red-900 ${isActive ? "bg-red-900 text-white" : "text-slate-600 hover:bg-red-50 hover:text-red-900"}`}>
