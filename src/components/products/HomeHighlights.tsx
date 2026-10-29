@@ -51,7 +51,7 @@ export function HomeHighlights({ products, categories }: { products: Product[]; 
       <section aria-labelledby="top-rated">
         <div className="flex flex-wrap items-center justify-between gap-4"><h2 id="top-rated" className="text-2xl font-semibold text-slate-900">Top-rated products</h2><Link to="/products" className="inline-flex min-h-11 items-center font-semibold text-red-900 underline">View all</Link></div>
         <p className="mt-2 text-sm text-slate-600">Customer favorites by product rating.</p>
-        <div className="mt-6 grid gap-4 min-[480px]:grid-cols-2 xl:grid-cols-3">{rated.slice(0, 3).map((product) => <ProductCard key={product.id} product={product} />)}</div>
+        <div className="mt-6 flex snap-x gap-3 overflow-x-auto pb-2 md:grid md:grid-cols-2 xl:grid-cols-3">{rated.slice(0, 6).map((product) => <div key={product.id} className="product-slide min-w-0 snap-start"><ProductCard product={product} /></div>)}</div>
       </section>
 
       <section aria-labelledby="customer-feedback" className="rounded-2xl bg-rose-50 p-6 sm:p-8">
