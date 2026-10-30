@@ -9,6 +9,7 @@ import ComingSoonPage from "./pages/ComingSoonPage";
 import WishlistPage from "./pages/WishlistPage";
 import CheckoutPage from "./pages/CheckoutPage";
 import NotFoundPage from "./pages/NotFoundPage";
+import JournalPage from "./pages/JournalPage";
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
       <Route element={<Layout />}>
         <Route path="/" element={<HomePage />} />
         <Route path="/products" element={<ProductsPage />} />
+        <Route path="/journal/:slug" element={<JournalPage />} />
         <Route path="/wishlist" element={<WishlistPage />} />
         {["New Arrivals", "Best Sellers", "Brands", "Collections", "My Orders", "Coupons", "Addresses", "Account Settings"].map((title) => (
           <Route key={title} path={`/${title.toLowerCase().replaceAll(" ", "-")}`} element={<ComingSoonPage title={title} />} />
