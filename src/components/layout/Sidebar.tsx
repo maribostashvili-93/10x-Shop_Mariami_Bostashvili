@@ -1,5 +1,8 @@
 import { Link, NavLink } from "react-router";
 import { useAuth } from "../../hooks/useAuth";
+import { useEffect, useState } from "react";
+import { getCategories } from "../../api/products";
+import type { Category } from "../../types/product";
 
 const links = [
   { to: "/", label: "Home", path: "m3 10 9-7 9 7M5 9v12h14V9M9 21v-8h6v8" },
@@ -24,8 +27,10 @@ const upcomingGroups = [
 
 export function Sidebar() {
   const { user, logout } = useAuth();
+  const [categories, setCategories] = useState<Category[]>([]);
+  useEffect(() => { getCategories().then(setCategories).catch(() => setCategories([])); }, []);
   return (
-    <aside className="hidden rounded-2xl border border-slate-200 bg-white p-3 lg:sticky lg:top-20 lg:block lg:self-start lg:p-4">
+    <aside className="hidden rounded-[1.5rem] border border-purple-100 bg-white p-3 shadow-[0_10px_30px_rgba(98,61,140,0.06)] lg:sticky lg:top-20 lg:block lg:self-start lg:p-4">
       <nav aria-label="Store navigation" className="flex flex-wrap gap-2 lg:flex-col">
         {links.map(({ to, label, path }) => (
           <NavLink key={to} to={to} end={to === "/"} className={({ isActive }) => `flex min-h-11 items-center gap-3 rounded-xl px-3 text-sm font-semibold focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-red-900 ${isActive ? "bg-red-900 text-white" : "text-slate-600 hover:bg-red-50 hover:text-red-900"}`}>
@@ -35,6 +40,12 @@ export function Sidebar() {
         ))}
         {user ? <button type="button" onClick={logout} className="min-h-11 rounded-xl px-3 text-left text-sm font-semibold text-red-900 hover:bg-red-50 focus-visible:outline-2 focus-visible:outline-red-900">Logout</button> : <NavLink to="/login" className={({ isActive }) => `flex min-h-11 items-center rounded-xl px-3 text-sm font-semibold focus-visible:outline-2 focus-visible:outline-red-900 ${isActive ? "bg-red-900 text-white" : "text-slate-600 hover:bg-red-50"}`}>Login</NavLink>}
       </nav>
+      <div className="mt-5 border-t border-purple-100 pt-4">
+        <p className="px-3 text-[11px] font-bold tracking-[0.16em] text-purple-700 uppercase">Shop by category</p>
+        <nav aria-label="Product categories" className="mt-2 grid gap-1">
+          {categories.slice(0, 9).map((category) => <NavLink key={category.slug} to={`/products?category=${category.slug}`} className={({ isActive }) => `flex min-h-10 items-center rounded-xl px-3 text-sm font-medium transition ${isActive ? "bg-purple-100 text-purple-800" : "text-slate-600 hover:bg-pink-50 hover:text-purple-800"}`}>{category.name}</NavLink>)}
+        </nav>
+      </div>
       {upcomingGroups.map((group, index) => (
         index === 1 && !user ? null :
         <ul key={index} aria-label={index === 0 ? "Upcoming shopping features" : "Upcoming account features"} className="mt-3 grid gap-1 border-t border-slate-200 pt-3 sm:grid-cols-2 lg:grid-cols-1">
@@ -48,8 +59,8 @@ export function Sidebar() {
           ))}
         </ul>
       ))}
-      <div className="mt-6 hidden rounded-2xl bg-gradient-to-br from-red-900 to-red-700 p-5 text-white lg:block">
-        <p className="text-xs text-red-100">The 10X collection</p>
+      <div className="mt-6 hidden rounded-2xl bg-gradient-to-br from-[#21134f] via-[#6036a8] to-[#e06aa8] p-5 text-white lg:block">
+        <p className="text-xs text-purple-100">The 10X collection</p>
         <p className="mt-3 text-xl font-semibold">Find your everyday favorites</p>
         <Link to="/products" className="mt-5 inline-flex min-h-11 items-center rounded-lg bg-white px-4 text-sm font-semibold text-red-900 hover:bg-red-50 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white">Shop now</Link>
       </div>

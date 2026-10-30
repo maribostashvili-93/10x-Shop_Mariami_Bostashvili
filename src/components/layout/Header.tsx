@@ -13,7 +13,8 @@ function Header() {
   const [menuOpen, setMenuOpen] = useState(false);
 
   return (
-    <header className="sticky top-0 z-30 flex flex-wrap items-center justify-between gap-x-6 gap-y-2 border-b border-stone-200 bg-[#f7f3f1]/95 py-3 backdrop-blur sm:py-4">
+    <header className="sticky top-0 z-30 border-b border-stone-200 bg-[#f7f3f1]/95 backdrop-blur">
+      <div className="flex flex-wrap items-center justify-between gap-x-6 gap-y-2 py-3 sm:py-4">
       <NavLink to="/" className="flex min-h-11 items-center gap-3 text-xl font-bold tracking-tight text-stone-900 focus-visible:outline-2 focus-visible:outline-red-900">
         <span aria-hidden="true" className="flex size-9 items-center justify-center rounded-xl bg-red-900 text-sm text-white">10X</span>
         10X Shop
@@ -50,6 +51,7 @@ function Header() {
         )}
         <ShoppingPanels />
       </nav>
+      </div>
     </header>
   );
 }
