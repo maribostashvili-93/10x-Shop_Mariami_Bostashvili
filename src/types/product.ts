@@ -6,6 +6,7 @@ export type Product = {
   rating: number;
   stock: number;
   price: number;
+  discountPercentage?: number;
   thumbnail: string;
 };
 

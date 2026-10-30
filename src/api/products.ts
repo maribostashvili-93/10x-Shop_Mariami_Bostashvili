@@ -4,6 +4,19 @@ type ProductsResponse = {
   products: Product[];
 };
 
+const featuredCategories: Record<string, string> = {
+  beauty: "Beauty & Care",
+  "skin-care": "Skin Rituals",
+  fragrances: "Fragrance Edit",
+  "womens-dresses": "Dresses & One-Pieces",
+  "womens-bags": "Signature Bags",
+  sunglasses: "Eyewear Edit",
+  "womens-jewellery": "Jewellery Edit",
+  "womens-watches": "Timepieces",
+  "mens-watches": "Timepieces",
+  "home-decoration": "Home Details",
+};
+
 export async function getProducts(all = false): Promise<Product[]> {
   const response = await fetch(`https://dummyjson.com/products${all ? "?limit=0" : ""}`);
 
@@ -13,7 +26,7 @@ export async function getProducts(all = false): Promise<Product[]> {
 
   const data: ProductsResponse = await response.json();
 
-  return data.products;
+  return data.products.filter((product) => product.category in featuredCategories);
 }
 
 export async function getProduct(id: string): Promise<Product> {
@@ -37,5 +50,7 @@ export async function getCategories(): Promise<Category[]> {
 
   const categories: Category[] = await response.json();
 
-  return categories;
+  return categories
+    .filter((category) => featuredCategories[category.slug])
+    .map((category) => ({ ...category, name: featuredCategories[category.slug] }));
 }

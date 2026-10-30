@@ -9,6 +9,7 @@ export default function ProductsPage() {
   const query = (params.get("q") ?? "").trim().toLowerCase();
   const category = params.get("category") ?? "";
   const sort = params.get("sort") ?? "";
+  const price = params.get("price") ?? "";
   const [products, setProducts] = useState<Product[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
@@ -24,6 +25,7 @@ export default function ProductsPage() {
 
   const filtered = products.filter((product) =>
     (!category || product.category === category) &&
+    (price === "under-50" ? product.price < 50 : price === "50-100" ? product.price >= 50 && product.price <= 100 : price === "over-100" ? product.price > 100 : true) &&
     (!query || `${product.title} ${product.description} ${product.category}`.toLowerCase().includes(query)),
   ).sort((a, b) => sort === "price-asc" ? a.price - b.price : sort === "price-desc" ? b.price - a.price : sort === "rating" ? b.rating - a.rating : 0);
 

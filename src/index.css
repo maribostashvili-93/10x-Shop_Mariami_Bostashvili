@@ -1,5 +1,24 @@
 @import "tailwindcss";
 
+/* One violet accent family across existing storefront components. */
+@theme {
+  --color-red-50: #f5f3ff;
+  --color-red-100: #ede9fe;
+  --color-red-200: #ddd6fe;
+  --color-red-700: #6d28d9;
+  --color-red-800: #5b21b6;
+  --color-red-900: #5b21b6;
+  --color-red-950: #2e1065;
+  --color-purple-50: #f5f3ff;
+  --color-purple-100: #ede9fe;
+  --color-purple-200: #ddd6fe;
+  --color-purple-500: #8b5cf6;
+  --color-purple-700: #6d28d9;
+  --color-purple-800: #5b21b6;
+  --color-purple-900: #4c1d95;
+  --color-purple-950: #2e1065;
+}
+
 /* The app shell switches to desktop navigation at lg. */
 @media (width < 64rem) {
   .store-home { --mobile-card-width: 10rem; }

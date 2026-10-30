@@ -1,5 +1,12 @@
 # 10X Shop Style Guide
 
+## Current palette
+
+The approved storefront accent is violet: violet-700 for primary actions,
+violet-800 for hover, violet-50/100 for surfaces, and violet-950 for dark panels.
+Use this single hue family across the header, sidebar, cards and promotions.
+This replaces the older deep-red direction below. Keep error feedback distinct.
+
 Use this guide for new and updated interfaces throughout the project. The visual direction is a modern, friendly shopping dashboard inspired by the user's reference: a light canvas, white rounded surfaces, deep red accents, clear product imagery, and compact but readable information. Adapt the reference to 10X Shop rather than copying its brand or content.
 
 This guide adapts recommendations from the UI/UX Pro Max design-system generator for an ecommerce store and the visual direction supplied by the user. Use deep red consistently as the main accent rather than the generator's suggested green and orange palette.
