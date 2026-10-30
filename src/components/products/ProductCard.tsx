@@ -27,7 +27,7 @@ function ProductCard({ product }: ProductCardProps) {
 
   return (
     <article
-      className="group flex h-full flex-col overflow-hidden rounded-2xl bg-white p-3 shadow-[0_2px_16px_rgba(68,35,35,0.04)] transition-shadow duration-200 hover:shadow-[0_12px_30px_rgba(68,35,35,0.1)] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-red-900"
+      className="product-card group flex h-full flex-col overflow-hidden rounded-2xl bg-white p-3 shadow-[0_2px_16px_rgba(68,35,35,0.04)] transition-shadow duration-200 hover:shadow-[0_12px_30px_rgba(68,35,35,0.1)] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-red-900"
     >
       <div className="relative flex aspect-square items-center justify-center overflow-hidden rounded-xl bg-[#f6f1ef] p-6">
         <Link to={`/products/${product.id}`} className="flex h-full w-full items-center justify-center rounded-lg focus-visible:outline-2 focus-visible:outline-red-900">
