@@ -10,7 +10,7 @@ import JournalCards from "../components/products/JournalCards";
 import CommunityStories from "../components/products/CommunityStories";
 import HeroCarousel from "../components/products/HeroCarousel";
 
-function ProductRail({ title, eyebrow, products }: { title: string; eyebrow: string; products: Product[] }) {
+function ProductRail({ title, eyebrow, products, loading }: { title: string; eyebrow: string; products: Product[]; loading: boolean }) {
   return (
     <section className="mt-10" aria-labelledby={`${title.toLowerCase().replaceAll(" ", "-")}-heading`}>
       <div className="flex items-end justify-between gap-4">
@@ -18,7 +18,9 @@ function ProductRail({ title, eyebrow, products }: { title: string; eyebrow: str
         <Link to="/products" className="inline-flex min-h-11 items-center text-sm font-semibold text-violet-700 hover:text-violet-950">View all <span aria-hidden="true" className="ml-1">→</span></Link>
       </div>
       <div className="mt-4 grid grid-cols-2 gap-3 lg:grid-cols-4">
-        {products.slice(0, 4).map((product) => <ProductCard key={product.id} product={product} />)}
+        {loading
+          ? Array.from({ length: 4 }, (_, index) => <div key={index} aria-hidden="true" className="aspect-[3/4] animate-pulse rounded-2xl bg-violet-50" />)
+          : products.slice(0, 4).map((product) => <ProductCard key={product.id} product={product} />)}
       </div>
     </section>
   );
@@ -43,14 +45,6 @@ function HomePage() {
       .catch(() => setCategories([]));
   }, []);
 
-  if (loading) {
-    return <p>Loading products...</p>;
-  }
-
-  if (error) {
-    return <p className="text-red-600">{error}</p>;
-  }
-
   return (
     <div className="storefront-home">
       <HeroCarousel />
@@ -59,6 +53,8 @@ function HomePage() {
       </div>
       <section className="mt-8" aria-labelledby="shop-categories-heading">
         <ShopSearch showCategories={false} />
+        {loading && <p role="status" className="sr-only">Loading products...</p>}
+        {error && <p role="alert" className="mb-6 text-red-800">{error}</p>}
         <CollectionShowcase products={products} />
         <div className="flex items-center justify-between"><div><p className="text-[10px] font-bold tracking-[0.18em] text-violet-700 uppercase">Discover the edit</p><h2 id="shop-categories-heading" className="mt-1 text-xl font-bold text-stone-900 sm:text-2xl">Shop by category</h2></div><Link to="/products" className="text-sm font-semibold text-violet-700">See all →</Link></div>
         <div className="mt-4 flex snap-x gap-3 overflow-x-auto pb-2 lg:grid lg:grid-cols-6">
@@ -67,9 +63,9 @@ function HomePage() {
           })}
         </div>
       </section>
-      <ProductRail title="New arrivals" eyebrow="Just in" products={[...products].sort((a, b) => b.id - a.id)} />
-      <ProductRail title="Best sellers" eyebrow="Most wanted" products={[...products].sort((a, b) => b.rating - a.rating)} />
-      <ProductRail title="Sale edit" eyebrow="Limited offers" products={[...products].sort((a, b) => (b.discountPercentage ?? 0) - (a.discountPercentage ?? 0))} />
+      <ProductRail title="New arrivals" eyebrow="Just in" loading={loading} products={[...products].sort((a, b) => b.id - a.id)} />
+      <ProductRail title="Best sellers" eyebrow="Most wanted" loading={loading} products={[...products].sort((a, b) => b.rating - a.rating)} />
+      <ProductRail title="Sale edit" eyebrow="Limited offers" loading={loading} products={[...products].sort((a, b) => (b.discountPercentage ?? 0) - (a.discountPercentage ?? 0))} />
       <JournalCards />
       <section className="mt-10 rounded-3xl bg-white p-5 shadow-[0_10px_30px_rgba(98,61,140,0.05)] sm:p-8" aria-labelledby="top-brands-heading">
         <div className="flex items-center justify-between"><h2 id="top-brands-heading" className="text-xl font-bold text-stone-900">Top brands</h2><Link to="/products" className="text-sm font-semibold text-violet-700">View all →</Link></div>
