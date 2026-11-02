@@ -1,6 +1,6 @@
-import style from "../../assets/community-style.jpg";
-import city from "../../assets/community-city.jpg";
-import together from "../../assets/community-together.jpg";
+import style from "../../assets/community-style.webp";
+import city from "../../assets/community-city.webp";
+import together from "../../assets/community-together.webp";
 
 const voices = [
   { image: style, alt: "Woman smiling in sunglasses and a purple jacket", label: "Make it personal", title: "A little more you.", quote: "The little details make the biggest difference. I love finding pieces that feel like my own style.", position: "object-[40%_35%]" },

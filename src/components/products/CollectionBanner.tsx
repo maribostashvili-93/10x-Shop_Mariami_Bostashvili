@@ -1,8 +1,8 @@
 import { useState } from "react";
 import { Link } from "react-router";
-import backpack from "../../assets/collection-backpack.jpg";
-import watch from "../../assets/collection-watch.jpg";
-import headphones from "../../assets/collection-headphones.jpg";
+import backpack from "../../assets/collection-backpack.webp";
+import watch from "../../assets/collection-watch.webp";
+import headphones from "../../assets/collection-headphones.webp";
 
 const slides = [
   { image: backpack, label: "Everyday elegance", title: "Ready for wherever life takes you.", text: "Explore bags and accessories with a little more personality.", action: "Explore bags", to: "/products?category=womens-bags", alt: "Purple backpack surrounded by floating pens" },

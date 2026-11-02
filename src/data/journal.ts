@@ -1,5 +1,5 @@
-import slowDays from "../assets/journal-slow-days.jpg";
-import style from "../assets/journal-style.jpg";
+import slowDays from "../assets/journal-slow-days.webp";
+import style from "../assets/journal-style.webp";
 
 export const stories = [
   {

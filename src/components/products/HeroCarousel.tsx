@@ -1,8 +1,8 @@
 import { useState } from "react";
 import { Link } from "react-router";
-import bags from "../../assets/hero-bags.jpg";
-import eyewear from "../../assets/hero-eyewear.jpg";
-import fragrance from "../../assets/hero-fragrance.jpg";
+import bags from "../../assets/hero-bags.webp";
+import eyewear from "../../assets/hero-eyewear.webp";
+import fragrance from "../../assets/hero-fragrance.webp";
 
 const slides = [
   { image: bags, label: "The signature collection", title: "Carry a little elegance.", description: "Discover bags that bring the finishing touch to your everyday style.", action: "Explore bags", category: "womens-bags" },
