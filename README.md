@@ -2,6 +2,10 @@
 
 10X Shop is a responsive front-end e-commerce application built as a graduation project. Users can browse products from the DummyJSON API, view product details, manage a shared cart, sign in through a local demo authentication flow, and complete a simulated checkout.
 
+**[View live demo](https://10x-shop-mariami-bostashvili-mt61.vercel.app/)**
+
+The storefront features a violet visual theme, curated lifestyle collections, image-led collection carousels, and a shoppable lifestyle journal.
+
 ## Current status
 
 The CORE shopping flow is implemented and the project builds successfully with strict TypeScript checking. Authentication, cart, checkout, responsive layouts, loading states, error states, empty states, and the not-found route are included.
@@ -32,9 +36,20 @@ This is a front-end demo. Login and checkout are local simulations: no real auth
 ### Additional interface work
 
 - Wishlist state and wishlist page
+- Mobile bottom navigation and a desktop sidebar
+- Featured collection carousels with animated dot controls and category links
+- Category navigation with SVG icons
+- Product search, category filtering, price ranges, and price/rating sorting through URL parameters
+- New arrivals, rating-based favorites, and discount-based product selections
+- Product detail layout with image previews, description, and review sections
+- Lifestyle journal articles with related DummyJSON products below each story
+- Brand and community inspiration sections
+- Expanded footer with product search and navigation
 - Supporting navigation pages prepared for future features
 
 These additional pages do not represent real order history, coupons, addresses, or account services yet.
+
+Community stories and some product review displays are illustrative demo content, not verified customer feedback. New-arrival ordering uses product IDs, and the best-seller section uses ratings rather than sales data.
 
 ## Routes
 
@@ -42,7 +57,9 @@ These additional pages do not represent real order history, coupons, addresses, 
 | --- | --- |
 | `/` | Storefront home page |
 | `/products` | Product catalog |
+| `/products?q=perfume&category=fragrances&price=under-50` | Search and filter the catalog |
 | `/products/:id` | Product details |
+| `/journal/:slug` | Lifestyle article with related products |
 | `/wishlist` | Local wishlist |
 | `/cart` | Shopping cart |
 | `/checkout` | Protected checkout form |
@@ -65,6 +82,8 @@ These additional pages do not represent real order history, coupons, addresses, 
 src/
   api/          DummyJSON API requests
   components/   Layout, navigation, product, and UI components
+  assets/       Local photography and collection banners
+  data/         Lifestyle journal content and image references
   context/      Authentication, cart, and wishlist state
   hooks/        Context hooks used by pages and components
   pages/        Home, catalog, product, cart, checkout, login, and 404 pages
@@ -99,13 +118,7 @@ npm.cmd run dev
 | `npm run lint` | Run ESLint |
 | `npm run preview` | Preview the production build locally |
 
-The current validation status is:
-
-```text
-npm run typecheck  ✅
-npm run build      ✅
-npm run lint       ✅
-```
+Run the relevant checks locally before publishing changes. The production build includes TypeScript checking.
 
 ## Demo login
 
@@ -117,19 +130,22 @@ Product data is requested from:
 
 ```text
 https://dummyjson.com/products
+https://dummyjson.com/products?limit=0
 https://dummyjson.com/products/:id
 https://dummyjson.com/products/categories
 ```
 
 The application shows an error state when the API cannot be reached. No production database or payment provider is connected.
 
+The catalog is curated from DummyJSON categories including beauty, skincare, fragrances, dresses, bags, eyewear, jewellery, watches, and home decoration. Product names, prices, stock, ratings, and thumbnails come from the API; banner and journal photography are local assets.
+
 ## Deployment
 
-The project is prepared for deployment to Vercel or Netlify. The live URL will be added here after deployment:
+The application is deployed on Vercel:
 
-```text
-Live demo: to be added
-```
+[10X Shop — live website](https://10x-shop-mariami-bostashvili-mt61.vercel.app/)
+
+Build command: `npm run build`. Output directory: `dist`.
 
 For SPA deployments, configure a rewrite so direct visits and refreshes on routes such as `/products/5` and `/checkout` serve `index.html`.
 
