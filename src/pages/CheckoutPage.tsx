@@ -43,8 +43,8 @@ function CheckoutPage() {
   if (submitted) {
     return (
       <section className="mx-auto max-w-4xl py-10 sm:py-14">
-        <div className="rounded-[1.5rem] border border-emerald-200 bg-emerald-50/80 p-8 sm:p-12">
-          <p className="text-base font-medium uppercase tracking-wide text-emerald-800">Order confirmed</p>
+        <div className="rounded-[1.5rem] border border-violet-200 bg-violet-50/80 p-8 sm:p-12">
+          <p className="text-base font-medium uppercase tracking-wide text-violet-800">Order confirmed</p>
           <h1 className="mt-3 text-4xl font-semibold tracking-tight text-slate-900 sm:text-5xl">Thank you for your order</h1>
           <p className="mt-5 text-lg leading-8 text-slate-700">
             Your order has been placed locally for this demo. No real payment was processed.

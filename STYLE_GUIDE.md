@@ -5,7 +5,7 @@
 The approved storefront accent is violet: violet-700 for primary actions,
 violet-800 for hover, violet-50/100 for surfaces, and violet-950 for dark panels.
 Use this single hue family across the header, sidebar, cards and promotions.
-This replaces the older warm-red direction. Use indigo or amber only for semantic feedback.
+This replaces the older warm-red direction. Use light violet surfaces for confirmations and indigo or amber only for semantic feedback.
 
 Use this guide for new and updated interfaces throughout the project. The visual direction is a modern, friendly shopping dashboard: a light canvas, white rounded surfaces, a fresh violet-led palette, clear product imagery, and compact but readable information.
 
