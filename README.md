@@ -124,6 +124,10 @@ Run the relevant checks locally before publishing changes. The production build 
 
 Login is simulated locally. Enter any non-empty username and password. Do not use a real password. There is no external authentication service.
 
+### Test account
+
+Use any demo values, for example `demo-user` / `demo-password`. These values are local only and are not real credentials.
+
 ## API
 
 Product data is requested from:
@@ -149,8 +153,16 @@ Build command: `npm run build`. Output directory: `dist`.
 
 For SPA deployments, configure a rewrite so direct visits and refreshes on routes such as `/products/5` and `/checkout` serve `index.html`.
 
+Vercel uses the committed [`vercel.json`](vercel.json) rewrite for this behavior.
+
 ## Project documentation
 
 - [PLAN.md](PLAN.md) — project plan and implementation scope
 - [REPORT.md](REPORT.md) — completion report and final results
 - [STYLE_GUIDE.md](STYLE_GUIDE.md) — UI and Tailwind conventions
+
+## Credits
+
+- Product data: [DummyJSON](https://dummyjson.com/)
+- Stack: React, TypeScript, Vite, React Router, and Tailwind CSS
+- Project author: Mariami Bostashvili

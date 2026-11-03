@@ -9,7 +9,7 @@ This document records real issues found and fixed while building 10X Shop. The p
 - **Tool:** React Router route inspection and browser navigation.
 - **Root cause:** `CheckoutPage.tsx` was empty and `/checkout` was not registered in `App.tsx`.
 - **Fix:** Implemented the controlled checkout form, added the `/checkout` route, added the authenticated redirect, and connected order confirmation to `clearCart()`.
-- **Commit:** `e489902 feat: add checkout flow and not-found page`
+- **Fix (commit):** [e489902 feat: add checkout flow and not-found page](https://github.com/maribostashvili-93/10x-Shop_Mariami_Bostashvili/commit/e489902)
 - **What I learned:** A page component is not reachable until it is connected to the router and tested through the real user flow.
 
 ## 2. Guests could not complete the checkout flow safely
@@ -19,7 +19,7 @@ This document records real issues found and fixed while building 10X Shop. The p
 - **Tool:** Browser address-bar navigation and React state inspection in React DevTools.
 - **Root cause:** The checkout screen did not check `AuthContext.user` before rendering the form.
 - **Fix:** Added a `Navigate` guard that redirects guests to `/login` with `{ from: "/checkout" }`. After login, `LoginPage` returns the user to checkout.
-- **Commit:** `e489902 feat: add checkout flow and not-found page`
+- **Fix (commit):** [e489902 feat: add checkout flow and not-found page](https://github.com/maribostashvili-93/10x-Shop_Mariami_Bostashvili/commit/e489902)
 - **What I learned:** Protected flows must be tested through direct URLs as well as button clicks.
 
 ## 3. Invalid URLs had no dedicated recovery experience
@@ -29,18 +29,8 @@ This document records real issues found and fixed while building 10X Shop. The p
 - **Tool:** Browser route testing and React Router route table review.
 - **Root cause:** `NotFoundPage.tsx` was empty and the router had no `*` fallback route.
 - **Fix:** Added a styled 404 page with a clear message and a keyboard-accessible `Back to home` action, then registered the wildcard route.
-- **Commit:** `e489902 feat: add checkout flow and not-found page`
+- **Fix (commit):** [e489902 feat: add checkout flow and not-found page](https://github.com/maribostashvili-93/10x-Shop_Mariami_Bostashvili/commit/e489902)
 - **What I learned:** Every route should have an intentional failure state and a clear way back into the product.
-
-## 4. Product API failures could otherwise look like an empty catalog
-
-- **Symptom:** If the product request failed, the catalog needed to distinguish a network/API error from a valid empty response.
-- **Reproduction:** Open the catalog while the request is blocked or the API is unavailable.
-- **Tool:** Browser Network panel and the rendered error state.
-- **Root cause:** API requests must check `response.ok` instead of assuming every fetch response is successful.
-- **Fix:** The API helpers throw when a response is not successful, and the catalog page renders a user-facing error message while loading and empty states remain separate.
-- **Commit:** `42b33bf feat: refresh storefront and load product categories`
-- **What I learned:** Loading, error, and empty states represent different system states and should not share one fallback message.
 
 ## Debugging checklist
 
