@@ -29,7 +29,7 @@ class ErrorBoundary extends Component<ErrorBoundaryProps, ErrorBoundaryState> {
     if (!this.state.hasError) return this.props.children;
 
     return (
-      <main className="flex min-h-dvh items-center justify-center bg-[#f7f3f1] px-4 py-10 text-stone-900">
+      <main className="flex min-h-dvh items-center justify-center bg-[#eee8ff] px-4 py-10 text-stone-900">
         <section role="alert" className="w-full max-w-lg rounded-2xl border border-slate-200 bg-white p-6 text-center shadow-sm sm:p-8">
           <p className="text-sm font-semibold uppercase tracking-[0.18em] text-red-900">Something went wrong</p>
           <h1 className="mt-3 text-3xl font-semibold text-slate-900">We could not load this page</h1>

@@ -5,11 +5,11 @@
 The approved storefront accent is violet: violet-700 for primary actions,
 violet-800 for hover, violet-50/100 for surfaces, and violet-950 for dark panels.
 Use this single hue family across the header, sidebar, cards and promotions.
-This replaces the older deep-red direction below. Keep error feedback distinct.
+This replaces the older warm-red direction. Use indigo or amber only for semantic feedback.
 
-Use this guide for new and updated interfaces throughout the project. The visual direction is a modern, friendly shopping dashboard inspired by the user's reference: a light canvas, white rounded surfaces, deep red accents, clear product imagery, and compact but readable information. Adapt the reference to 10X Shop rather than copying its brand or content.
+Use this guide for new and updated interfaces throughout the project. The visual direction is a modern, friendly shopping dashboard: a light canvas, white rounded surfaces, a fresh violet-led palette, clear product imagery, and compact but readable information.
 
-This guide adapts recommendations from the UI/UX Pro Max design-system generator for an ecommerce store and the visual direction supplied by the user. Use deep red consistently as the main accent rather than the generator's suggested green and orange palette.
+This guide adapts recommendations from the UI/UX Pro Max design-system generator for an ecommerce store. Use violet consistently as the main accent, supported by lilac, sky blue, sage, and warm amber details.
 
 ## Store experience
 
@@ -26,14 +26,14 @@ The following patterns are the target for future work, not a claim that these fe
 
 ## Visual direction
 
-- Use a pale neutral canvas (`bg-slate-50`), white panels, dark slate text, and a deep red accent (`bg-red-900 text-white`) for primary actions and active navigation. Reserve red for errors and meaningful sale labels; check contrast for each pairing.
-- Use product imagery as the main visual element. Keep borders subtle and shadows soft. A restrained warm red gradient may be used for a featured banner, with readable text and no emoji.
+- Use a pale neutral canvas (`bg-slate-50`), white panels, dark slate text, and violet (`bg-violet-700 text-white`) for primary actions and active navigation. Use amber or indigo for semantic feedback; do not use red as a brand color.
+- Use product imagery as the main visual element. Keep borders subtle and shadows soft. Featured surfaces may use restrained lilac, sky, sage, or amber gradients, with readable text and no emoji.
 - Use a consistent `rounded-xl` or `rounded-2xl` treatment for cards and panels; smaller controls can use `rounded-lg`. Use `max-w-6xl` for the main content area.
 - Use descriptive SVG icons from one consistent set when needed for search, account, and cart. Give icon-only controls accessible names and never use emoji as icons.
 
 ## Color and type
 
-- Use `white` for surfaces, `slate-50` or `slate-100` for the canvas and image backgrounds, `slate-200` for borders, `slate-900` for primary text, and `slate-600` for secondary text. Use deep red for active navigation and primary actions.
+- Use `white` for surfaces, `slate-50` or `slate-100` for the canvas and image backgrounds, `slate-200` for borders, `slate-900` for primary text, and `slate-600` for secondary text. Use violet for active navigation and primary actions.
 - Use a single, consistent accent when an action needs emphasis; do not introduce new accent colors on individual pages without updating this guide.
 - Use the default sans-serif font stack. Use `font-semibold` for headings and important prices, and regular weight for body text.
 - Use `text-sm` for supporting information, `text-base` for body copy, and responsive sizes such as `text-3xl sm:text-4xl` for page headings.

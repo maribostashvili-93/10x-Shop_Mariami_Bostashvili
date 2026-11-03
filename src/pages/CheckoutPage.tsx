@@ -1,7 +1,10 @@
-import { useState, type FormEvent } from "react";
+import { useEffect, useState, type FormEvent } from "react";
 import { Link, Navigate } from "react-router";
 import { useAuth } from "../hooks/useAuth";
 import { useCart } from "../hooks/useCart";
+import { getProducts } from "../api/products";
+import type { Product } from "../types/product";
+import ProductCard from "../components/products/ProductCard";
 
 type CheckoutFields = {
   fullName: string;
@@ -22,9 +25,16 @@ const initialFields: CheckoutFields = {
 function CheckoutPage() {
   const { user } = useAuth();
   const { items, clearCart } = useCart();
-  const [fields, setFields] = useState<CheckoutFields>(initialFields);
+  const [fields, setFields] = useState<CheckoutFields>(() => {
+    try { return { ...initialFields, ...JSON.parse(localStorage.getItem("10x-profile") ?? "{}")} as CheckoutFields; } catch { return initialFields; }
+  });
   const [errors, setErrors] = useState<CheckoutErrors>({});
   const [submitted, setSubmitted] = useState(false);
+  const [suggestedProducts, setSuggestedProducts] = useState<Product[]>([]);
+
+  useEffect(() => {
+    getProducts(true).then((products) => setSuggestedProducts(products.slice(0, 4))).catch(() => setSuggestedProducts([]));
+  }, []);
 
   if (!user) {
     return <Navigate to="/login" state={{ from: "/checkout" }} replace />;
@@ -32,20 +42,25 @@ function CheckoutPage() {
 
   if (submitted) {
     return (
-      <section className="mx-auto max-w-2xl py-10">
-        <div className="rounded-2xl border border-emerald-200 bg-emerald-50 p-6 sm:p-8">
-          <p className="text-sm font-semibold uppercase tracking-wide text-emerald-800">Order confirmed</p>
-          <h1 className="mt-2 text-3xl font-semibold text-slate-900">Thank you for your order</h1>
-          <p className="mt-3 leading-7 text-slate-700">
+      <section className="mx-auto max-w-4xl py-10 sm:py-14">
+        <div className="rounded-[1.5rem] border border-emerald-200 bg-emerald-50/80 p-8 sm:p-12">
+          <p className="text-base font-medium uppercase tracking-wide text-emerald-800">Order confirmed</p>
+          <h1 className="mt-3 text-4xl font-semibold tracking-tight text-slate-900 sm:text-5xl">Thank you for your order</h1>
+          <p className="mt-5 text-lg leading-8 text-slate-700">
             Your order has been placed locally for this demo. No real payment was processed.
           </p>
           <Link
             to="/products"
-            className="mt-6 inline-flex min-h-11 items-center rounded-lg bg-red-900 px-5 font-semibold text-white transition-colors hover:bg-red-950 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-red-900"
+            className="mt-8 inline-flex min-h-14 items-center rounded-xl bg-violet-700 px-7 text-lg font-semibold text-white transition-colors hover:bg-violet-800 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-violet-700"
           >
             Continue shopping
           </Link>
         </div>
+        {suggestedProducts.length > 0 && <section className="mt-12 rounded-[1.5rem] bg-[#f4efff] p-5 text-left sm:p-8" aria-labelledby="checkout-recommendations">
+          <p className="text-xs font-semibold uppercase tracking-[0.18em] text-violet-700">Keep browsing</p>
+          <h2 id="checkout-recommendations" className="mt-2 text-2xl font-semibold text-slate-900">You may also like</h2>
+          <div className="mt-6 grid grid-cols-2 gap-4 lg:grid-cols-4">{suggestedProducts.map((product) => <ProductCard key={product.id} product={product} />)}</div>
+        </section>}
       </section>
     );
   }

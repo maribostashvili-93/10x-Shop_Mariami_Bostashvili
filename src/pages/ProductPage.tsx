@@ -1,32 +1,22 @@
 import { useEffect, useState } from "react";
 import { Link, useParams } from "react-router";
-import { getProduct } from "../api/products";
+import { getProduct, getProducts } from "../api/products";
 import type { Product } from "../types/product";
 import { useCart } from "../hooks/useCart";
 import { CartToast } from "../components/ui/CartToast";
-
-const productColors: Record<string, [string, string]> = {
-  beauty: ["#f5c6c8", "#a41322"],
-  "skin-care": ["#f3d1bd", "#b4533f"],
-  fragrances: ["#e4c7d9", "#7a284b"],
-  furniture: ["#d9c2aa", "#744b35"],
-  "home-decoration": ["#e8d8bc", "#946b3d"],
-  "kitchen-accessories": ["#d3e2d4", "#47745a"],
-  smartphones: ["#c4d7ec", "#315a86"],
-  laptops: ["#c9d0dc", "#475569"],
-  tablets: ["#d3d0e8", "#5b4b8a"],
-  "mobile-accessories": ["#c7e1e2", "#27757b"],
-};
-
-function getProductColors(category: string): [string, string] {
-  return productColors[category] ?? ["#f2d7d2", "#7f1d1d"];
-}
+import ProductCard from "../components/products/ProductCard";
 
 function ProductPage() {
   const { id } = useParams();
   const { items, addToCart } = useCart();
   const [quantity, setQuantity] = useState(1);
   const [message, setMessage] = useState("");
+  const [selectedView, setSelectedView] = useState(0);
+  const [selectedColor, setSelectedColor] = useState("Lilac");
+  const [selectedSize, setSelectedSize] = useState("Standard");
+  const [comment, setComment] = useState("");
+  const [comments, setComments] = useState<string[]>([]);
+  const [relatedProducts, setRelatedProducts] = useState<Product[]>([]);
 
   const [product, setProduct] = useState<Product | null>(null);
   const [loading, setLoading] = useState(true);
@@ -43,8 +33,19 @@ function ProductPage() {
       .finally(() => setLoading(false));
   }, [id]);
 
+  useEffect(() => {
+    if (!product) return;
+    getProducts(true)
+      .then((products) => {
+        const available = products.filter((item) => item.id !== product.id);
+        const sameCategory = available.filter((item) => item.category === product.category);
+        setRelatedProducts([...sameCategory, ...available.filter((item) => item.category !== product.category)].slice(0, 4));
+      })
+      .catch(() => setRelatedProducts([]));
+  }, [product]);
+
   if (!id) {
-    return <p className="text-red-600">Product ID is missing.</p>;
+    return <p className="text-amber-700">Product ID is missing.</p>;
   }
 
   if (loading) {
@@ -52,48 +53,57 @@ function ProductPage() {
   }
 
   if (error) {
-    return <p className="text-red-600">{error}</p>;
+    return <p className="text-amber-700">{error}</p>;
   }
 
   if (!product) {
     return <p>Product not found.</p>;
   }
 
-  const [colorOne, colorTwo] = getProductColors(product.category);
-  const productGradient = `linear-gradient(135deg, ${colorOne} 0%, ${colorTwo} 100%)`;
+  const productGradient = "linear-gradient(135deg, #f1edff 0%, #cfc8f2 100%)";
+  const galleryViews = [
+    { label: "Lilac", size: "h-[94%] w-[94%]", position: "object-center", filter: "hue-rotate(0deg) saturate(0.9)" },
+    { label: "Rose", size: "h-[94%] w-[94%]", position: "object-center", filter: "hue-rotate(315deg) saturate(1.15)" },
+    { label: "Sky", size: "h-[94%] w-[94%]", position: "object-center", filter: "hue-rotate(170deg) saturate(0.9)" },
+    { label: "Sage", size: "h-[94%] w-[94%]", position: "object-center", filter: "hue-rotate(75deg) saturate(0.85)" },
+  ];
 
   return (
     <div className="pb-10 sm:pb-16">
-      <div className="-mx-3 mb-6 bg-stone-100 px-3 py-7 sm:-mx-6 sm:px-6 lg:mb-10"><div className="mx-auto max-w-5xl"><p className="text-right text-2xl font-bold text-stone-900">Shop</p><p className="mt-1 text-right text-xs text-stone-500"><Link to="/" className="hover:text-purple-700">Home</Link> / Shop / Product details</p></div></div>
       <Link to="/" className="inline-flex min-h-11 items-center text-sm font-medium text-stone-600 transition hover:text-purple-800 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-purple-700">
         ← Back to products
       </Link>
 
-      <div className="mt-8 grid gap-8 overflow-hidden rounded-[2rem] bg-white p-4 shadow-[0_18px_50px_rgba(67,36,30,0.08)] sm:p-6 md:grid-cols-2 md:gap-12 md:p-10 lg:gap-16">
+      <div className="mt-8 grid gap-8 overflow-hidden rounded-[2rem] border border-violet-100 bg-white p-4 shadow-[0_18px_50px_rgba(76,29,149,0.08)] sm:p-6 md:grid-cols-2 md:gap-8 md:p-6 lg:gap-10">
         <div>
         <div className="relative flex aspect-square items-center justify-center overflow-hidden rounded-[1.5rem] p-8 sm:p-12" style={{ backgroundImage: productGradient }}>
           <span aria-hidden="true" className="absolute inset-0 bg-white/10" />
         <img
           src={product.thumbnail}
           alt={product.title}
-          className="relative h-full w-full object-contain drop-shadow-[0_18px_18px_rgba(63,27,23,0.22)] transition-transform duration-500 hover:scale-105"
+          style={{ filter: galleryViews[selectedView].filter }}
+          className={`relative ${galleryViews[selectedView].size} ${galleryViews[selectedView].position} object-contain drop-shadow-[0_18px_18px_rgba(45,20,80,0.25)] transition-all duration-300 hover:scale-105`}
         />
         </div>
-        <div className="mt-3 grid grid-cols-4 gap-2">
-          {["object-center", "object-left", "object-right", "object-top"].map((position) => <button key={position} type="button" aria-label={`View product image ${position}`} className="flex aspect-square items-center justify-center overflow-hidden rounded-xl border border-stone-200 bg-stone-50 p-1 transition hover:border-purple-500 focus-visible:outline-2 focus-visible:outline-purple-700"><img src={product.thumbnail} alt="" className={`h-full w-full object-contain ${position}`} /></button>)}
+        <div className="mt-3 grid grid-cols-4 items-end gap-2">
+          {galleryViews.map((view, index) => <button key={view.label} type="button" onClick={() => setSelectedView(index)} aria-label={`View ${view.label} color`} aria-pressed={selectedView === index} className={`flex aspect-square items-center justify-center overflow-hidden rounded-xl border bg-violet-50 p-1 transition hover:border-violet-500 focus-visible:outline-2 focus-visible:outline-violet-700 ${selectedView === index ? "border-violet-700 ring-2 ring-violet-200" : "border-violet-100"}`}><img src={product.thumbnail} alt={`${product.title} in ${view.label.toLowerCase()}`} style={{ filter: view.filter }} className={`h-full w-full object-contain ${view.position}`} /></button>)}
         </div>
         </div>
 
         <div className="flex flex-col justify-center py-2">
-          <p className="text-xs font-semibold tracking-[0.2em] text-red-900 uppercase">{product.category.replaceAll("-", " ")}</p>
+          <p className="text-xs font-semibold tracking-[0.2em] text-violet-700 uppercase">{product.category.replaceAll("-", " ")}</p>
           <h1 className="mt-3 text-3xl font-semibold tracking-tight text-stone-900 sm:text-4xl">{product.title}</h1>
-          <p className="mt-4 text-3xl font-semibold text-red-900">${product.price.toFixed(2)}</p>
+          <p className="mt-4 text-3xl font-semibold text-violet-700">${product.price.toFixed(2)}</p>
           <p className="mt-6 leading-7 text-stone-600">{product.description}</p>
           <dl className="mt-8 divide-y divide-stone-200 border-y border-stone-200 text-sm">
             <div className="flex justify-between gap-4 py-4"><dt className="text-stone-500">Category</dt><dd className="font-medium text-stone-900">{product.category}</dd></div>
             <div className="flex justify-between gap-4 py-4"><dt className="text-stone-500">Rating</dt><dd className="font-medium text-stone-900">{product.rating} / 5</dd></div>
             <div className="flex justify-between gap-4 py-4"><dt className="text-stone-500">Availability</dt><dd className="font-medium text-stone-900">{product.stock > 0 ? `${product.stock} in stock` : "Out of stock"}</dd></div>
           </dl>
+          <div className="mt-6 space-y-5">
+            <fieldset><legend className="text-sm font-semibold text-stone-900">Color <span className="font-normal text-stone-500">{selectedColor}</span></legend><div className="mt-3 flex flex-wrap gap-2">{["Lilac", "Sage", "Sky", "Rose"].map((color) => <button key={color} type="button" onClick={() => setSelectedColor(color)} aria-pressed={selectedColor === color} className={`min-h-10 rounded-lg border px-3 text-xs font-semibold transition ${selectedColor === color ? "border-violet-700 bg-violet-100 text-violet-800 ring-2 ring-violet-200" : "border-stone-200 bg-white text-stone-600 hover:border-violet-300"}`}>{color}</button>)}</div></fieldset>
+            <fieldset><legend className="text-sm font-semibold text-stone-900">Size <span className="font-normal text-stone-500">{selectedSize}</span></legend><div className="mt-3 flex flex-wrap gap-2">{["Standard", "Deluxe", "Premium"].map((size) => <button key={size} type="button" onClick={() => setSelectedSize(size)} aria-pressed={selectedSize === size} className={`min-h-10 rounded-lg border px-3 text-xs font-semibold transition ${selectedSize === size ? "border-violet-700 bg-violet-100 text-violet-800 ring-2 ring-violet-200" : "border-stone-200 bg-white text-stone-600 hover:border-violet-300"}`}>{size}</button>)}</div></fieldset>
+          </div>
           <form
             className="mt-6 space-y-4"
             onSubmit={(event) => {
@@ -121,12 +131,12 @@ function ProductPage() {
                   setMessage("");
                 }}
                 disabled={product.stock <= (items.find((item) => item.product.id === product.id)?.quantity ?? 0)}
-                className="min-h-11 w-24 rounded-lg border border-slate-300 px-3 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-red-900 disabled:opacity-50"
+                className="min-h-11 w-24 rounded-lg border border-slate-300 px-3 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-violet-700 disabled:opacity-50"
               />
               <button
                 type="submit"
                 disabled={!Number.isInteger(quantity) || quantity < 1 || product.stock <= (items.find((item) => item.product.id === product.id)?.quantity ?? 0)}
-                className="min-h-11 rounded-lg bg-red-900 px-6 font-semibold text-white hover:bg-red-950 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-red-900 disabled:cursor-not-allowed disabled:opacity-50"
+                className="min-h-11 rounded-lg bg-violet-700 px-6 font-semibold text-white hover:bg-violet-800 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-violet-700 disabled:cursor-not-allowed disabled:opacity-50"
               >
                 Add to cart
               </button>
@@ -136,14 +146,30 @@ function ProductPage() {
           </form>
         </div>
       </div>
+      <section className="mt-12 rounded-[2rem] bg-[#f4efff] p-5 sm:p-8" aria-labelledby="related-products">
+        <div className="flex items-end justify-between gap-4">
+          <div><p className="text-xs font-semibold uppercase tracking-[0.18em] text-violet-700">You may also like</p><h2 id="related-products" className="mt-2 text-2xl font-semibold text-slate-900 sm:text-3xl">Shop similar pieces</h2></div>
+          <Link to="/products" className="hidden min-h-11 items-center text-sm font-semibold text-violet-700 hover:text-violet-900 sm:inline-flex">View all</Link>
+        </div>
+        <div className="mt-6 grid grid-cols-2 gap-4 lg:grid-cols-4">{relatedProducts.map((item) => <ProductCard key={item.id} product={item} />)}</div>
+      </section>
       <section className="mx-auto mt-12 max-w-5xl rounded-[1.5rem] bg-white p-5 shadow-[0_10px_30px_rgba(67,36,30,0.05)] sm:p-8" aria-labelledby="product-description">
-        <div className="flex gap-6 border-b border-stone-200 text-sm font-semibold"><h2 id="product-description" className="border-b-2 border-purple-700 pb-3 text-purple-800">Description</h2><span className="pb-3 text-stone-400">Additional information</span></div>
+        <div className="flex gap-6 border-b border-stone-200 text-sm font-semibold"><h2 id="product-description" className="border-b-2 border-violet-700 pb-3 text-violet-800">Description</h2><span className="pb-3 text-stone-400">Additional information</span></div>
         <p className="mt-6 max-w-3xl text-sm leading-7 text-stone-600">{product.description}</p>
         <div className="mt-10 grid gap-8 border-t border-stone-200 pt-8 md:grid-cols-[180px_1fr]">
           <div><p className="text-4xl font-bold text-stone-900">{product.rating.toFixed(1)}</p><p className="mt-1 text-sm text-stone-500">out of 5</p><div className="mt-2 text-amber-500">★★★★★</div><p className="mt-1 text-xs text-stone-500">({Math.max(24, Math.round(product.rating * 49))} reviews)</p></div>
           <div className="space-y-2 text-xs text-stone-500">{[5, 4, 3, 2, 1].map((score) => <div key={score} className="flex items-center gap-3"><span className="w-8">{score} Star</span><div className="h-2 flex-1 overflow-hidden rounded-full bg-stone-100"><div className="h-full rounded-full bg-amber-400" style={{ width: `${score === 5 ? 78 : score === 4 ? 60 : score === 3 ? 24 : 10}%` }} /></div></div>)}</div>
         </div>
-        <div className="mt-10 border-t border-stone-200 pt-8"><h2 className="text-xl font-bold text-stone-900">Review List</h2><p className="mt-1 text-xs text-stone-500">Showing 1–4 of 24 reviews</p><div className="mt-6 grid gap-6 md:grid-cols-2">{["Kristian Watson", "Jenny Wilson"].map((name) => <article key={name} className="border-b border-stone-100 pb-5"><div className="flex items-center gap-3"><span className="flex size-9 items-center justify-center rounded-full bg-purple-100 text-xs font-bold text-purple-800">{name.split(" ").map((part) => part[0]).join("")}</span><div><p className="text-sm font-semibold text-stone-900">{name}</p><p className="text-xs text-stone-500">Verified buyer</p></div></div><p className="mt-3 text-amber-500">★★★★★</p><p className="mt-2 text-sm leading-6 text-stone-600">Absolutely love this product! The quality and presentation are beautiful.</p></article>)}</div></div>
+        <div className="mt-10 border-t border-stone-200 pt-8">
+          <h2 className="text-xl font-bold text-stone-900">Review List</h2>
+          <p className="mt-1 text-xs text-stone-500">Showing {Math.min(4 + comments.length, 24)} of 24 reviews</p>
+          <div className="mt-6 grid gap-6 md:grid-cols-2">{["Kristian Watson", "Jenny Wilson"].map((name) => <article key={name} className="border-b border-stone-100 pb-5"><div className="flex items-center gap-3"><span className="flex size-9 items-center justify-center rounded-full bg-violet-100 text-xs font-bold text-violet-800">{name.split(" ").map((part) => part[0]).join("")}</span><div><p className="text-sm font-semibold text-stone-900">{name}</p><p className="text-xs text-stone-500">Verified buyer</p></div></div><p className="mt-3 text-amber-500">★★★★★</p><p className="mt-2 text-sm leading-6 text-stone-600">Absolutely love this product! The quality and presentation are beautiful.</p></article>)}{comments.map((entry, index) => <article key={`${entry}-${index}`} className="border-b border-stone-100 pb-5"><div className="flex items-center gap-3"><span className="flex size-9 items-center justify-center rounded-full bg-violet-100 text-xs font-bold text-violet-800">YO</span><div><p className="text-sm font-semibold text-stone-900">You</p><p className="text-xs text-stone-500">Just now</p></div></div><p className="mt-3 text-amber-500">★★★★★</p><p className="mt-2 text-sm leading-6 text-stone-600">{entry}</p></article>)}</div>
+          <form className="mt-8 rounded-2xl bg-violet-50 p-5" onSubmit={(event) => { event.preventDefault(); if (!comment.trim()) return; setComments((current) => [...current, comment.trim()]); setComment(""); }}>
+            <label htmlFor="review-comment" className="text-sm font-semibold text-slate-900">Add a comment</label>
+            <textarea id="review-comment" value={comment} onChange={(event) => setComment(event.target.value)} rows={3} placeholder="Share your experience with this product" className="mt-3 w-full resize-y rounded-xl border border-violet-200 bg-white p-3 text-sm text-slate-900 outline-none focus:border-violet-600 focus:ring-2 focus:ring-violet-200" />
+            <button type="submit" className="mt-3 min-h-11 rounded-lg bg-violet-700 px-5 text-sm font-semibold text-white transition hover:bg-violet-800 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-violet-700">Post comment</button>
+          </form>
+        </div>
       </section>
     </div>
   );

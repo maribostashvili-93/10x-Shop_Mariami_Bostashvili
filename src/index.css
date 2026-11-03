@@ -27,7 +27,7 @@
     display: grid; grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr);
     column-gap: .5rem; padding: 1.25rem; min-height: 0;
     margin-top: 1.5rem; overflow: visible;
-    border-radius: 1.25rem; background: #f4e9e7;
+    border-radius: 1.25rem; background: #eee8ff;
   }
   .store-home > div:first-child > div:first-child {
     display: contents;
@@ -60,7 +60,7 @@
     grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 0; margin-top: 2rem;
     width: calc(100% + 2.5rem); margin-inline: -1.25rem; margin-bottom: -1.25rem;
     padding: 1rem .5rem; border: 0; border-top: 1px solid #eadedb;
-    border-radius: 0 0 1.25rem 1.25rem; background: #fffaf8;
+    border-radius: 0 0 1.25rem 1.25rem; background: #faf8ff;
     box-shadow: none;
   }
   .store-home > div:first-child .grid > div {
@@ -69,7 +69,7 @@
   }
   .store-home > div:first-child .grid > div + div { border-left: 1px solid #eadedb; }
   .store-home > div:first-child .grid span {
-    width: 1.75rem; height: 1.75rem; border-radius: .5rem; background: #f7ece9;
+    width: 1.75rem; height: 1.75rem; border-radius: .5rem; background: #f1ebff;
   }
   .store-home > div:first-child .grid svg { width: 1.125rem; height: 1.125rem; }
   .store-home > div:first-child .grid p {
@@ -99,7 +99,7 @@
   .store-home > section { margin-top: 1.5rem; }
   .store-home > section .grid { grid-template-columns: repeat(4, minmax(0, 1fr)); margin-top: .75rem; }
   .store-home > section .grid > div {
-    min-height: 5rem; padding: .5rem .25rem; align-items: center; text-align: center; background: #f2e9e7;
+    min-height: 5rem; padding: .5rem .25rem; align-items: center; text-align: center; background: #f3efff;
   }
   .store-home > section .grid > div > span { width: 2rem; height: 2rem; }
   .store-home > section .grid > div > p { max-width: 100%; font-size: .6875rem; margin-top: .25rem; }
