@@ -22,8 +22,7 @@ function LoginPage() {
     setError("");
     login(username);
 
-    const destination =
-      location.state?.from === "/checkout" ? "/checkout" : "/";
+    const destination = typeof location.state?.from === "string" ? location.state.from : "/";
 
     navigate(destination, { replace: true });
   }

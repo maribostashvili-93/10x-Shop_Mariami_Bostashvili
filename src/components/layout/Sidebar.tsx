@@ -40,13 +40,14 @@ export function Sidebar() {
         ))}
         {user ? <button type="button" onClick={logout} className="min-h-11 rounded-xl px-3 text-left text-sm font-semibold text-red-900 hover:bg-red-50 focus-visible:outline-2 focus-visible:outline-red-900">Logout</button> : <NavLink to="/login" className={({ isActive }) => `flex min-h-11 items-center rounded-xl px-3 text-sm font-semibold focus-visible:outline-2 focus-visible:outline-red-900 ${isActive ? "bg-red-900 text-white" : "text-slate-600 hover:bg-red-50"}`}>Login</NavLink>}
       </nav>
+      {user && <ul aria-label="Account navigation" className="mt-3 grid gap-1 border-t border-slate-200 pt-3">{upcomingGroups[1].map(({ label, path }) => <li key={label}><NavLink to={`/${label.toLowerCase().replaceAll(" ", "-")}`} className="flex min-h-11 w-full items-center gap-3 rounded-xl px-3 py-2 text-left text-sm font-medium text-slate-600 hover:bg-violet-50 hover:text-violet-800"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" className="size-4 shrink-0"><path d={path}/></svg><span>{label === "Wishlist" ? "My Wishlist" : label}</span></NavLink></li>)}</ul>}
       <div className="mt-5 border-t border-purple-100 pt-4">
         <p className="px-3 text-[11px] font-bold tracking-[0.16em] text-purple-700 uppercase">Shop by category</p>
         <nav aria-label="Product categories" className="mt-2 grid gap-1">
           {categories.slice(0, 9).map((category) => <NavLink key={category.slug} to={`/products?category=${category.slug}`} className={({ isActive }) => `flex min-h-10 items-center rounded-xl px-3 text-sm font-medium transition ${isActive ? "bg-purple-100 text-purple-800" : "text-slate-600 hover:bg-pink-50 hover:text-purple-800"}`}>{category.name}</NavLink>)}
         </nav>
       </div>
-      {upcomingGroups.map((group, index) => (
+      {upcomingGroups.slice(0, 1).map((group, index) => (
         index === 1 && !user ? null :
         <ul key={index} aria-label={index === 0 ? "Upcoming shopping features" : "Upcoming account features"} className="mt-3 grid gap-1 border-t border-slate-200 pt-3 sm:grid-cols-2 lg:grid-cols-1">
           {group.map(({ label, path }) => (
