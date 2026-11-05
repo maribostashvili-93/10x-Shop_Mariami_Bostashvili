@@ -410,7 +410,7 @@
    text on the new colours stays at or above 4.5:1.
    ------------------------------------------------------------------------- */
 [data-theme="dark"] {
-  --color-white: #0e0b16;
+  --color-white: #1a1526;
   --color-violet-700: #c084fc;
   --color-violet-800: #d8b4fe;
   --color-brand-700: #c084fc;
@@ -433,7 +433,8 @@
 }
 
 [data-theme="dark"] .product-card {
-  border: 1px solid rgb(192 132 252 / 0.14);
+  background: linear-gradient(180deg, #2a2140 0%, #1d172b 100%);
+  border: 1px solid rgb(192 132 252 / 0.22);
   box-shadow: none;
 }
 
@@ -462,7 +463,7 @@
 /* Product photos sit on a light "stage" in dark mode, so dark products such as
    phones and watches stay visible against the near-black page. */
 [data-theme="dark"] .product-stage {
-  background: radial-gradient(120% 95% at 50% 30%, #ffffff 0%, #f1ecfb 55%, #dfd5f4 100%) !important;
+  background: radial-gradient(120% 95% at 50% 30%, #f7f4fc 0%, #e6def3 55%, #cfc2e8 100%) !important;
   border-color: rgb(192 132 252 / 0.3);
 }
 
