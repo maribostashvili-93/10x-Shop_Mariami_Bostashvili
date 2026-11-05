@@ -23,7 +23,7 @@ export default function CollectionShowcase() {
   if (selected && selected.length === 0) return null;
   return (
     <section aria-labelledby="signature-edit-heading" className="mb-10 space-y-5">
-      <div className="grid gap-5 rounded-3xl border border-violet-100 bg-white p-5 sm:p-6 xl:grid-cols-[190px_minmax(0,1fr)]">
+      <div className="grid gap-5 rounded-3xl border border-violet-100 bg-white p-5 sm:p-6 lg:grid-cols-[170px_minmax(0,1fr)]">
         <div className="flex flex-col justify-center">
           <p className="text-[10px] font-semibold tracking-[0.18em] text-violet-700 uppercase">The signature edit</p>
           <h2 id="signature-edit-heading" className="mt-3 text-2xl font-semibold leading-tight tracking-tight text-slate-900">Little details.<br />Lasting impressions.</h2>

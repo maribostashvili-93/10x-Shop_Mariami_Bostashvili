@@ -19,7 +19,7 @@ const selectControl = `${control} appearance-none pr-6`;
 
 function Field({ icon, label, children }: { icon: string; label: string; children: ReactNode }) {
   return (
-    <label className="flex h-[56px] min-w-0 items-center gap-2 rounded-2xl px-2 py-1 focus-within:bg-violet-50/60 xl:border-r xl:border-violet-100">
+    <label className="flex h-[56px] min-w-0 items-center gap-2 rounded-2xl px-2 py-1 focus-within:bg-violet-50/60 lg:border-r lg:border-violet-100">
       <span className="flex size-7 shrink-0 items-center justify-center rounded-full bg-violet-50 text-violet-700">
         <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" className="size-3.5 shrink-0"><path d={icon} /></svg>
       </span>
@@ -85,7 +85,7 @@ function CatalogSearchBar({ params, live = false }: CatalogSearchBarProps) {
       <form
         role="search"
         onSubmit={handleSubmit}
-        className="relative z-10 grid w-full min-w-0 max-w-full grid-cols-1 items-stretch gap-1 overflow-visible rounded-[2rem] border border-violet-100 bg-white p-2 shadow-[0_8px_30px_rgba(91,33,182,0.08)] lg:grid-cols-2 xl:grid-cols-[minmax(0,1.2fr)_minmax(0,1fr)_minmax(0,1fr)_minmax(120px,auto)] xl:items-center xl:gap-0.5 xl:rounded-full xl:p-1"
+        className="relative z-10 grid w-full min-w-0 max-w-full grid-cols-1 items-stretch gap-1 overflow-visible rounded-[2rem] border border-violet-100 bg-white p-2 shadow-[0_8px_30px_rgba(91,33,182,0.08)] md:grid-cols-2 lg:grid-cols-[minmax(0,1.2fr)_minmax(0,1fr)_minmax(0,1fr)_minmax(110px,auto)] lg:items-center lg:gap-0.5 lg:rounded-full lg:p-1"
       >
         <Field icon="M21 21l-5-5M18 10a8 8 0 1 1-16 0 8 8 0 0 1 16 0" label="Find your next favorite">
           <input name="q" type="search" value={query} onChange={(event) => setQuery(event.target.value)} placeholder="Search products" className={control} />
@@ -120,7 +120,7 @@ function CatalogSearchBar({ params, live = false }: CatalogSearchBarProps) {
           </select>
           <Chevron />
         </Field>
-        <button type="submit" className="m-0 flex min-h-10 min-w-0 w-full items-center justify-center gap-1.5 self-center rounded-[1.4rem] bg-violet-700 px-3 text-xs font-semibold text-white transition hover:bg-violet-800 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-violet-700 xl:min-h-10 xl:px-3 xl:mr-2">
+        <button type="submit" className="m-0 flex min-h-10 min-w-0 w-full items-center justify-center gap-1.5 self-center rounded-[1.4rem] bg-violet-700 px-3 text-xs font-semibold text-white transition hover:bg-violet-800 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-violet-700 lg:min-h-10 lg:px-3 lg:mr-2">
           <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" className="size-3.5 shrink-0"><circle cx="10" cy="10" r="6" /><path d="m15 15 5 5" /></svg>
           <span>Search</span>
         </button>
