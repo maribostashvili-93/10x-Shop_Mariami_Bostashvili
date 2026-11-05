@@ -1,0 +1,281 @@
+{
+  "config": {
+    "argv": [
+      "C:\\Program Files\\nodejs\\node.exe",
+      "C:\\samushao\\ფრონტ დველოპერი\\ფინალური პროექტი\\10x-Shop\\node_modules\\@playwright\\test\\cli.js",
+      "test",
+      "--config=playwright.compat.config.ts",
+      "--project=firefox-desktop",
+      "--grep=matrix: not-found",
+      "--workers=1",
+      "--reporter=list,json",
+      "--output=docs/compat/recheck-artifacts"
+    ],
+    "configFile": "C:\\samushao\\ფრონტ დველოპერი\\ფინალური პროექტი\\10x-Shop\\playwright.compat.config.ts",
+    "rootDir": "C:/samushao/ფრონტ დველოპერი/ფინალური პროექტი/10x-Shop/tests/compat",
+    "failOnFlakyTests": false,
+    "forbidOnly": false,
+    "fullyParallel": false,
+    "globalSetup": null,
+    "globalTeardown": null,
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 0,
+    "metadata": {
+      "actualWorkers": 1
+    },
+    "preserveOutput": "always",
+    "projects": [
+      {
+        "outputDir": "C:/samushao/ფრონტ დველოპერი/ფინალური პროექტი/10x-Shop/docs/compat/recheck-artifacts",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "chromium-desktop",
+        "name": "chromium-desktop",
+        "testDir": "C:/samushao/ფრონტ დველოპერი/ფინალური პროექტი/10x-Shop/tests/compat",
+        "testIgnore": [],
+        "testMatch": [
+          "**/*.@(spec|test).?(c|m)[jt]s?(x)"
+        ],
+        "timeout": 60000
+      },
+      {
+        "outputDir": "C:/samushao/ფრონტ დველოპერი/ფინალური პროექტი/10x-Shop/docs/compat/recheck-artifacts",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "chromium-mobile",
+        "name": "chromium-mobile",
+        "testDir": "C:/samushao/ფრონტ დველოპერი/ფინალური პროექტი/10x-Shop/tests/compat",
+        "testIgnore": [],
+        "testMatch": [
+          "**/*.@(spec|test).?(c|m)[jt]s?(x)"
+        ],
+        "timeout": 60000
+      },
+      {
+        "outputDir": "C:/samushao/ფრონტ დველოპერი/ფინალური პროექტი/10x-Shop/docs/compat/recheck-artifacts",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "firefox-desktop",
+        "name": "firefox-desktop",
+        "testDir": "C:/samushao/ფრონტ დველოპერი/ფინალური პროექტი/10x-Shop/tests/compat",
+        "testIgnore": [],
+        "testMatch": [
+          "**/*.@(spec|test).?(c|m)[jt]s?(x)"
+        ],
+        "timeout": 60000
+      },
+      {
+        "outputDir": "C:/samushao/ფრონტ დველოპერი/ფინალური პროექტი/10x-Shop/docs/compat/recheck-artifacts",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "firefox-mobile",
+        "name": "firefox-mobile",
+        "testDir": "C:/samushao/ფრონტ დველოპერი/ფინალური პროექტი/10x-Shop/tests/compat",
+        "testIgnore": [],
+        "testMatch": [
+          "**/*.@(spec|test).?(c|m)[jt]s?(x)"
+        ],
+        "timeout": 60000
+      },
+      {
+        "outputDir": "C:/samushao/ფრონტ დველოპერი/ფინალური პროექტი/10x-Shop/docs/compat/recheck-artifacts",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "webkit-desktop",
+        "name": "webkit-desktop",
+        "testDir": "C:/samushao/ფრონტ დველოპერი/ფინალური პროექტი/10x-Shop/tests/compat",
+        "testIgnore": [],
+        "testMatch": [
+          "**/*.@(spec|test).?(c|m)[jt]s?(x)"
+        ],
+        "timeout": 60000
+      },
+      {
+        "outputDir": "C:/samushao/ფრონტ დველოპერი/ფინალური პროექტი/10x-Shop/docs/compat/recheck-artifacts",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "webkit-mobile",
+        "name": "webkit-mobile",
+        "testDir": "C:/samushao/ფრონტ დველოპერი/ფინალური პროექტი/10x-Shop/tests/compat",
+        "testIgnore": [],
+        "testMatch": [
+          "**/*.@(spec|test).?(c|m)[jt]s?(x)"
+        ],
+        "timeout": 60000
+      }
+    ],
+    "filteredProjects": [
+      {
+        "grep": {},
+        "grepInvert": null,
+        "outputDir": "C:\\samushao\\ფრონტ დველოპერი\\ფინალური პროექტი\\10x-Shop\\docs\\compat\\recheck-artifacts",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "name": "firefox-desktop",
+        "testDir": "C:\\samushao\\ფრონტ დველოპერი\\ფინალური პროექტი\\10x-Shop\\tests\\compat",
+        "snapshotDir": "C:\\samushao\\ფრონტ დველოპერი\\ფინალური პროექტი\\10x-Shop\\tests\\compat",
+        "testIgnore": [],
+        "testMatch": "**/*.@(spec|test).?(c|m)[jt]s?(x)",
+        "timeout": 60000,
+        "use": {
+          "baseURL": "http://127.0.0.1:4173",
+          "screenshot": "only-on-failure",
+          "trace": "retain-on-failure",
+          "browserName": "firefox",
+          "viewport": {
+            "width": 1440,
+            "height": 900
+          }
+        },
+        "dependencies": [],
+        "ignoreSnapshots": false,
+        "__projectId": "firefox-desktop"
+      }
+    ],
+    "quiet": false,
+    "reporter": [
+      [
+        "list"
+      ],
+      [
+        "json"
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "shard": null,
+    "tags": [],
+    "updateSnapshots": "default",
+    "updateSourceMethod": "patch",
+    "version": "1.64.1",
+    "workers": 1,
+    "webServer": {
+      "command": "npm.cmd run preview -- --host 127.0.0.1",
+      "url": "http://127.0.0.1:4173",
+      "reuseExistingServer": true
+    }
+  },
+  "suites": [
+    {
+      "title": "compat.spec.ts",
+      "file": "compat.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "matrix: not-found",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 60000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "firefox-desktop",
+              "projectName": "firefox-desktop",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 5086,
+                  "error": {
+                    "message": "Error: WCAG A/AA axe violations\n\n\u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoEqual\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // deep equality\u001b[22m\n\n\u001b[32m- Expected  -  1\u001b[39m\n\u001b[31m+ Received  + 80\u001b[39m\n\n\u001b[32m- Array []\u001b[39m\n\u001b[31m+ Array [\u001b[39m\n\u001b[31m+   Object {\u001b[39m\n\u001b[31m+     \"description\": \"Ensure that elements labelled through their content must have their visible text as part of their accessible name\",\u001b[39m\n\u001b[31m+     \"help\": \"Elements must have their visible text as part of their accessible name\",\u001b[39m\n\u001b[31m+     \"helpUrl\": \"https://dequeuniversity.com/rules/axe/4.14/label-content-name-mismatch?application=playwright\",\u001b[39m\n\u001b[31m+     \"id\": \"label-content-name-mismatch\",\u001b[39m\n\u001b[31m+     \"impact\": \"serious\",\u001b[39m\n\u001b[31m+     \"nodes\": Array [\u001b[39m\n\u001b[31m+       Object {\u001b[39m\n\u001b[31m+         \"all\": Array [],\u001b[39m\n\u001b[31m+         \"any\": Array [\u001b[39m\n\u001b[31m+           Object {\u001b[39m\n\u001b[31m+             \"data\": null,\u001b[39m\n\u001b[31m+             \"id\": \"label-content-name-mismatch\",\u001b[39m\n\u001b[31m+             \"impact\": \"serious\",\u001b[39m\n\u001b[31m+             \"message\": \"Text inside the element is not included in the accessible name\",\u001b[39m\n\u001b[31m+             \"relatedNodes\": Array [],\u001b[39m\n\u001b[31m+           },\u001b[39m\n\u001b[31m+         ],\u001b[39m\n\u001b[31m+         \"failureSummary\": \"Fix any of the following:\u001b[39m\n\u001b[31m+   Text inside the element is not included in the accessible name\",\u001b[39m\n\u001b[31m+         \"html\": \"<a aria-label=\\\"Cart, 0 items\\\" class=\\\"relative flex min-h-...\\\" href=\\\"/cart\\\" data-discover=\\\"true\\\">\",\u001b[39m\n\u001b[31m+         \"impact\": \"serious\",\u001b[39m\n\u001b[31m+         \"none\": Array [],\u001b[39m\n\u001b[31m+         \"target\": Array [\u001b[39m\n\u001b[31m+           \".sm\\\\:gap-2 > .min-w-11.hover\\\\:bg-violet-50.hover\\\\:text-violet-800\",\u001b[39m\n\u001b[31m+         ],\u001b[39m\n\u001b[31m+       },\u001b[39m\n\u001b[31m+       Object {\u001b[39m\n\u001b[31m+         \"all\": Array [],\u001b[39m\n\u001b[31m+         \"any\": Array [\u001b[39m\n\u001b[31m+           Object {\u001b[39m\n\u001b[31m+             \"data\": null,\u001b[39m\n\u001b[31m+             \"id\": \"label-content-name-mismatch\",\u001b[39m\n\u001b[31m+             \"impact\": \"serious\",\u001b[39m\n\u001b[31m+             \"message\": \"Text inside the element is not included in the accessible name\",\u001b[39m\n\u001b[31m+             \"relatedNodes\": Array [],\u001b[39m\n\u001b[31m+           },\u001b[39m\n\u001b[31m+         ],\u001b[39m\n\u001b[31m+         \"failureSummary\": \"Fix any of the following:\u001b[39m\n\u001b[31m+   Text inside the element is not included in the accessible name\",\u001b[39m\n\u001b[31m+         \"html\": \"<button type=\\\"button\\\" aria-expanded=\\\"false\\\" aria-controls=\\\"shopping-panel\\\" aria-label=\\\"Open wishlist (0 ite...\\\" class=\\\"flex size-11 shrink-...\\\">\",\u001b[39m\n\u001b[31m+         \"impact\": \"serious\",\u001b[39m\n\u001b[31m+         \"none\": Array [],\u001b[39m\n\u001b[31m+         \"target\": Array [\u001b[39m\n\u001b[31m+           \"button[aria-label=\\\"Open wishlist (0 items)\\\"]\",\u001b[39m\n\u001b[31m+         ],\u001b[39m\n\u001b[31m+       },\u001b[39m\n\u001b[31m+       Object {\u001b[39m\n\u001b[31m+         \"all\": Array [],\u001b[39m\n\u001b[31m+         \"any\": Array [\u001b[39m\n\u001b[31m+           Object {\u001b[39m\n\u001b[31m+             \"data\": null,\u001b[39m\n\u001b[31m+             \"id\": \"label-content-name-mismatch\",\u001b[39m\n\u001b[31m+             \"impact\": \"serious\",\u001b[39m\n\u001b[31m+             \"message\": \"Text inside the element is not included in the accessible name\",\u001b[39m\n\u001b[31m+             \"relatedNodes\": Array [],\u001b[39m\n\u001b[31m+           },\u001b[39m\n\u001b[31m+         ],\u001b[39m\n\u001b[31m+         \"failureSummary\": \"Fix any of the following:\u001b[39m\n\u001b[31m+   Text inside the element is not included in the accessible name\",\u001b[39m\n\u001b[31m+         \"html\": \"<button type=\\\"button\\\" aria-expanded=\\\"false\\\" aria-controls=\\\"shopping-panel\\\" aria-label=\\\"Open cart (0 items)\\\" class=\\\"flex size-11 shrink-...\\\">\",\u001b[39m\n\u001b[31m+         \"impact\": \"serious\",\u001b[39m\n\u001b[31m+         \"none\": Array [],\u001b[39m\n\u001b[31m+         \"target\": Array [\u001b[39m\n\u001b[31m+           \"button[aria-label=\\\"Open cart (0 items)\\\"]\",\u001b[39m\n\u001b[31m+         ],\u001b[39m\n\u001b[31m+       },\u001b[39m\n\u001b[31m+     ],\u001b[39m\n\u001b[31m+     \"tags\": Array [\u001b[39m\n\u001b[31m+       \"cat.semantics\",\u001b[39m\n\u001b[31m+       \"wcag21a\",\u001b[39m\n\u001b[31m+       \"wcag253\",\u001b[39m\n\u001b[31m+       \"EN-301-549\",\u001b[39m\n\u001b[31m+       \"EN-9.2.5.3\",\u001b[39m\n\u001b[31m+       \"RGAAv4\",\u001b[39m\n\u001b[31m+       \"RGAA-6.1.5\",\u001b[39m\n\u001b[31m+     ],\u001b[39m\n\u001b[31m+   },\u001b[39m\n\u001b[31m+ ]\u001b[39m",
+                    "stack": "Error: WCAG A/AA axe violations\n\n\u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoEqual\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // deep equality\u001b[22m\n\n\u001b[32m- Expected  -  1\u001b[39m\n\u001b[31m+ Received  + 80\u001b[39m\n\n\u001b[32m- Array []\u001b[39m\n\u001b[31m+ Array [\u001b[39m\n\u001b[31m+   Object {\u001b[39m\n\u001b[31m+     \"description\": \"Ensure that elements labelled through their content must have their visible text as part of their accessible name\",\u001b[39m\n\u001b[31m+     \"help\": \"Elements must have their visible text as part of their accessible name\",\u001b[39m\n\u001b[31m+     \"helpUrl\": \"https://dequeuniversity.com/rules/axe/4.14/label-content-name-mismatch?application=playwright\",\u001b[39m\n\u001b[31m+     \"id\": \"label-content-name-mismatch\",\u001b[39m\n\u001b[31m+     \"impact\": \"serious\",\u001b[39m\n\u001b[31m+     \"nodes\": Array [\u001b[39m\n\u001b[31m+       Object {\u001b[39m\n\u001b[31m+         \"all\": Array [],\u001b[39m\n\u001b[31m+         \"any\": Array [\u001b[39m\n\u001b[31m+           Object {\u001b[39m\n\u001b[31m+             \"data\": null,\u001b[39m\n\u001b[31m+             \"id\": \"label-content-name-mismatch\",\u001b[39m\n\u001b[31m+             \"impact\": \"serious\",\u001b[39m\n\u001b[31m+             \"message\": \"Text inside the element is not included in the accessible name\",\u001b[39m\n\u001b[31m+             \"relatedNodes\": Array [],\u001b[39m\n\u001b[31m+           },\u001b[39m\n\u001b[31m+         ],\u001b[39m\n\u001b[31m+         \"failureSummary\": \"Fix any of the following:\u001b[39m\n\u001b[31m+   Text inside the element is not included in the accessible name\",\u001b[39m\n\u001b[31m+         \"html\": \"<a aria-label=\\\"Cart, 0 items\\\" class=\\\"relative flex min-h-...\\\" href=\\\"/cart\\\" data-discover=\\\"true\\\">\",\u001b[39m\n\u001b[31m+         \"impact\": \"serious\",\u001b[39m\n\u001b[31m+         \"none\": Array [],\u001b[39m\n\u001b[31m+         \"target\": Array [\u001b[39m\n\u001b[31m+           \".sm\\\\:gap-2 > .min-w-11.hover\\\\:bg-violet-50.hover\\\\:text-violet-800\",\u001b[39m\n\u001b[31m+         ],\u001b[39m\n\u001b[31m+       },\u001b[39m\n\u001b[31m+       Object {\u001b[39m\n\u001b[31m+         \"all\": Array [],\u001b[39m\n\u001b[31m+         \"any\": Array [\u001b[39m\n\u001b[31m+           Object {\u001b[39m\n\u001b[31m+             \"data\": null,\u001b[39m\n\u001b[31m+             \"id\": \"label-content-name-mismatch\",\u001b[39m\n\u001b[31m+             \"impact\": \"serious\",\u001b[39m\n\u001b[31m+             \"message\": \"Text inside the element is not included in the accessible name\",\u001b[39m\n\u001b[31m+             \"relatedNodes\": Array [],\u001b[39m\n\u001b[31m+           },\u001b[39m\n\u001b[31m+         ],\u001b[39m\n\u001b[31m+         \"failureSummary\": \"Fix any of the following:\u001b[39m\n\u001b[31m+   Text inside the element is not included in the accessible name\",\u001b[39m\n\u001b[31m+         \"html\": \"<button type=\\\"button\\\" aria-expanded=\\\"false\\\" aria-controls=\\\"shopping-panel\\\" aria-label=\\\"Open wishlist (0 ite...\\\" class=\\\"flex size-11 shrink-...\\\">\",\u001b[39m\n\u001b[31m+         \"impact\": \"serious\",\u001b[39m\n\u001b[31m+         \"none\": Array [],\u001b[39m\n\u001b[31m+         \"target\": Array [\u001b[39m\n\u001b[31m+           \"button[aria-label=\\\"Open wishlist (0 items)\\\"]\",\u001b[39m\n\u001b[31m+         ],\u001b[39m\n\u001b[31m+       },\u001b[39m\n\u001b[31m+       Object {\u001b[39m\n\u001b[31m+         \"all\": Array [],\u001b[39m\n\u001b[31m+         \"any\": Array [\u001b[39m\n\u001b[31m+           Object {\u001b[39m\n\u001b[31m+             \"data\": null,\u001b[39m\n\u001b[31m+             \"id\": \"label-content-name-mismatch\",\u001b[39m\n\u001b[31m+             \"impact\": \"serious\",\u001b[39m\n\u001b[31m+             \"message\": \"Text inside the element is not included in the accessible name\",\u001b[39m\n\u001b[31m+             \"relatedNodes\": Array [],\u001b[39m\n\u001b[31m+           },\u001b[39m\n\u001b[31m+         ],\u001b[39m\n\u001b[31m+         \"failureSummary\": \"Fix any of the following:\u001b[39m\n\u001b[31m+   Text inside the element is not included in the accessible name\",\u001b[39m\n\u001b[31m+         \"html\": \"<button type=\\\"button\\\" aria-expanded=\\\"false\\\" aria-controls=\\\"shopping-panel\\\" aria-label=\\\"Open cart (0 items)\\\" class=\\\"flex size-11 shrink-...\\\">\",\u001b[39m\n\u001b[31m+         \"impact\": \"serious\",\u001b[39m\n\u001b[31m+         \"none\": Array [],\u001b[39m\n\u001b[31m+         \"target\": Array [\u001b[39m\n\u001b[31m+           \"button[aria-label=\\\"Open cart (0 items)\\\"]\",\u001b[39m\n\u001b[31m+         ],\u001b[39m\n\u001b[31m+       },\u001b[39m\n\u001b[31m+     ],\u001b[39m\n\u001b[31m+     \"tags\": Array [\u001b[39m\n\u001b[31m+       \"cat.semantics\",\u001b[39m\n\u001b[31m+       \"wcag21a\",\u001b[39m\n\u001b[31m+       \"wcag253\",\u001b[39m\n\u001b[31m+       \"EN-301-549\",\u001b[39m\n\u001b[31m+       \"EN-9.2.5.3\",\u001b[39m\n\u001b[31m+       \"RGAAv4\",\u001b[39m\n\u001b[31m+       \"RGAA-6.1.5\",\u001b[39m\n\u001b[31m+     ],\u001b[39m\n\u001b[31m+   },\u001b[39m\n\u001b[31m+ ]\u001b[39m\n    at C:\\samushao\\ფრონტ დველოპერი\\ფინალური პროექტი\\10x-Shop\\tests\\compat\\compat.spec.ts:40:65",
+                    "location": {
+                      "file": "C:\\samushao\\ფრონტ დველოპერი\\ფინალური პროექტი\\10x-Shop\\tests\\compat\\compat.spec.ts",
+                      "column": 65,
+                      "line": 40
+                    },
+                    "snippet": "  38 |     await info.attach('axe', { body: JSON.stringify(results.violations, null, 2), contentType: 'application/json' });\n  39 |     expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth + 1), 'horizontal overflow').toBe(true);\n> 40 |     expect.soft(results.violations, 'WCAG A/AA axe violations').toEqual([]);\n     |                                                                 ^\n  41 |   });\n  42 | }\n  43 |"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "C:\\samushao\\ფრონტ დველოპერი\\ფინალური პროექტი\\10x-Shop\\tests\\compat\\compat.spec.ts",
+                        "column": 65,
+                        "line": 40
+                      },
+                      "message": "Error: WCAG A/AA axe violations\n\n\u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoEqual\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // deep equality\u001b[22m\n\n\u001b[32m- Expected  -  1\u001b[39m\n\u001b[31m+ Received  + 80\u001b[39m\n\n\u001b[32m- Array []\u001b[39m\n\u001b[31m+ Array [\u001b[39m\n\u001b[31m+   Object {\u001b[39m\n\u001b[31m+     \"description\": \"Ensure that elements labelled through their content must have their visible text as part of their accessible name\",\u001b[39m\n\u001b[31m+     \"help\": \"Elements must have their visible text as part of their accessible name\",\u001b[39m\n\u001b[31m+     \"helpUrl\": \"https://dequeuniversity.com/rules/axe/4.14/label-content-name-mismatch?application=playwright\",\u001b[39m\n\u001b[31m+     \"id\": \"label-content-name-mismatch\",\u001b[39m\n\u001b[31m+     \"impact\": \"serious\",\u001b[39m\n\u001b[31m+     \"nodes\": Array [\u001b[39m\n\u001b[31m+       Object {\u001b[39m\n\u001b[31m+         \"all\": Array [],\u001b[39m\n\u001b[31m+         \"any\": Array [\u001b[39m\n\u001b[31m+           Object {\u001b[39m\n\u001b[31m+             \"data\": null,\u001b[39m\n\u001b[31m+             \"id\": \"label-content-name-mismatch\",\u001b[39m\n\u001b[31m+             \"impact\": \"serious\",\u001b[39m\n\u001b[31m+             \"message\": \"Text inside the element is not included in the accessible name\",\u001b[39m\n\u001b[31m+             \"relatedNodes\": Array [],\u001b[39m\n\u001b[31m+           },\u001b[39m\n\u001b[31m+         ],\u001b[39m\n\u001b[31m+         \"failureSummary\": \"Fix any of the following:\u001b[39m\n\u001b[31m+   Text inside the element is not included in the accessible name\",\u001b[39m\n\u001b[31m+         \"html\": \"<a aria-label=\\\"Cart, 0 items\\\" class=\\\"relative flex min-h-...\\\" href=\\\"/cart\\\" data-discover=\\\"true\\\">\",\u001b[39m\n\u001b[31m+         \"impact\": \"serious\",\u001b[39m\n\u001b[31m+         \"none\": Array [],\u001b[39m\n\u001b[31m+         \"target\": Array [\u001b[39m\n\u001b[31m+           \".sm\\\\:gap-2 > .min-w-11.hover\\\\:bg-violet-50.hover\\\\:text-violet-800\",\u001b[39m\n\u001b[31m+         ],\u001b[39m\n\u001b[31m+       },\u001b[39m\n\u001b[31m+       Object {\u001b[39m\n\u001b[31m+         \"all\": Array [],\u001b[39m\n\u001b[31m+         \"any\": Array [\u001b[39m\n\u001b[31m+           Object {\u001b[39m\n\u001b[31m+             \"data\": null,\u001b[39m\n\u001b[31m+             \"id\": \"label-content-name-mismatch\",\u001b[39m\n\u001b[31m+             \"impact\": \"serious\",\u001b[39m\n\u001b[31m+             \"message\": \"Text inside the element is not included in the accessible name\",\u001b[39m\n\u001b[31m+             \"relatedNodes\": Array [],\u001b[39m\n\u001b[31m+           },\u001b[39m\n\u001b[31m+         ],\u001b[39m\n\u001b[31m+         \"failureSummary\": \"Fix any of the following:\u001b[39m\n\u001b[31m+   Text inside the element is not included in the accessible name\",\u001b[39m\n\u001b[31m+         \"html\": \"<button type=\\\"button\\\" aria-expanded=\\\"false\\\" aria-controls=\\\"shopping-panel\\\" aria-label=\\\"Open wishlist (0 ite...\\\" class=\\\"flex size-11 shrink-...\\\">\",\u001b[39m\n\u001b[31m+         \"impact\": \"serious\",\u001b[39m\n\u001b[31m+         \"none\": Array [],\u001b[39m\n\u001b[31m+         \"target\": Array [\u001b[39m\n\u001b[31m+           \"button[aria-label=\\\"Open wishlist (0 items)\\\"]\",\u001b[39m\n\u001b[31m+         ],\u001b[39m\n\u001b[31m+       },\u001b[39m\n\u001b[31m+       Object {\u001b[39m\n\u001b[31m+         \"all\": Array [],\u001b[39m\n\u001b[31m+         \"any\": Array [\u001b[39m\n\u001b[31m+           Object {\u001b[39m\n\u001b[31m+             \"data\": null,\u001b[39m\n\u001b[31m+             \"id\": \"label-content-name-mismatch\",\u001b[39m\n\u001b[31m+             \"impact\": \"serious\",\u001b[39m\n\u001b[31m+             \"message\": \"Text inside the element is not included in the accessible name\",\u001b[39m\n\u001b[31m+             \"relatedNodes\": Array [],\u001b[39m\n\u001b[31m+           },\u001b[39m\n\u001b[31m+         ],\u001b[39m\n\u001b[31m+         \"failureSummary\": \"Fix any of the following:\u001b[39m\n\u001b[31m+   Text inside the element is not included in the accessible name\",\u001b[39m\n\u001b[31m+         \"html\": \"<button type=\\\"button\\\" aria-expanded=\\\"false\\\" aria-controls=\\\"shopping-panel\\\" aria-label=\\\"Open cart (0 items)\\\" class=\\\"flex size-11 shrink-...\\\">\",\u001b[39m\n\u001b[31m+         \"impact\": \"serious\",\u001b[39m\n\u001b[31m+         \"none\": Array [],\u001b[39m\n\u001b[31m+         \"target\": Array [\u001b[39m\n\u001b[31m+           \"button[aria-label=\\\"Open cart (0 items)\\\"]\",\u001b[39m\n\u001b[31m+         ],\u001b[39m\n\u001b[31m+       },\u001b[39m\n\u001b[31m+     ],\u001b[39m\n\u001b[31m+     \"tags\": Array [\u001b[39m\n\u001b[31m+       \"cat.semantics\",\u001b[39m\n\u001b[31m+       \"wcag21a\",\u001b[39m\n\u001b[31m+       \"wcag253\",\u001b[39m\n\u001b[31m+       \"EN-301-549\",\u001b[39m\n\u001b[31m+       \"EN-9.2.5.3\",\u001b[39m\n\u001b[31m+       \"RGAAv4\",\u001b[39m\n\u001b[31m+       \"RGAA-6.1.5\",\u001b[39m\n\u001b[31m+     ],\u001b[39m\n\u001b[31m+   },\u001b[39m\n\u001b[31m+ ]\u001b[39m\n\n  38 |     await info.attach('axe', { body: JSON.stringify(results.violations, null, 2), contentType: 'application/json' });\n  39 |     expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth + 1), 'horizontal overflow').toBe(true);\n> 40 |     expect.soft(results.violations, 'WCAG A/AA axe violations').toEqual([]);\n     |                                                                 ^\n  41 |   });\n  42 | }\n  43 |\n    at C:\\samushao\\ფრონტ დველოპერი\\ფინალური პროექტი\\10x-Shop\\tests\\compat\\compat.spec.ts:40:65"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-05T12:25:42.858Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "axe",
+                      "contentType": "application/json",
+                      "body": "WwogIHsKICAgICJpZCI6ICJsYWJlbC1jb250ZW50LW5hbWUtbWlzbWF0Y2giLAogICAgImltcGFjdCI6ICJzZXJpb3VzIiwKICAgICJ0YWdzIjogWwogICAgICAiY2F0LnNlbWFudGljcyIsCiAgICAgICJ3Y2FnMjFhIiwKICAgICAgIndjYWcyNTMiLAogICAgICAiRU4tMzAxLTU0OSIsCiAgICAgICJFTi05LjIuNS4zIiwKICAgICAgIlJHQUF2NCIsCiAgICAgICJSR0FBLTYuMS41IgogICAgXSwKICAgICJkZXNjcmlwdGlvbiI6ICJFbnN1cmUgdGhhdCBlbGVtZW50cyBsYWJlbGxlZCB0aHJvdWdoIHRoZWlyIGNvbnRlbnQgbXVzdCBoYXZlIHRoZWlyIHZpc2libGUgdGV4dCBhcyBwYXJ0IG9mIHRoZWlyIGFjY2Vzc2libGUgbmFtZSIsCiAgICAiaGVscCI6ICJFbGVtZW50cyBtdXN0IGhhdmUgdGhlaXIgdmlzaWJsZSB0ZXh0IGFzIHBhcnQgb2YgdGhlaXIgYWNjZXNzaWJsZSBuYW1lIiwKICAgICJoZWxwVXJsIjogImh0dHBzOi8vZGVxdWV1bml2ZXJzaXR5LmNvbS9ydWxlcy9heGUvNC4xNC9sYWJlbC1jb250ZW50LW5hbWUtbWlzbWF0Y2g/YXBwbGljYXRpb249cGxheXdyaWdodCIsCiAgICAibm9kZXMiOiBbCiAgICAgIHsKICAgICAgICAiYW55IjogWwogICAgICAgICAgewogICAgICAgICAgICAiaWQiOiAibGFiZWwtY29udGVudC1uYW1lLW1pc21hdGNoIiwKICAgICAgICAgICAgImRhdGEiOiBudWxsLAogICAgICAgICAgICAicmVsYXRlZE5vZGVzIjogW10sCiAgICAgICAgICAgICJpbXBhY3QiOiAic2VyaW91cyIsCiAgICAgICAgICAgICJtZXNzYWdlIjogIlRleHQgaW5zaWRlIHRoZSBlbGVtZW50IGlzIG5vdCBpbmNsdWRlZCBpbiB0aGUgYWNjZXNzaWJsZSBuYW1lIgogICAgICAgICAgfQogICAgICAgIF0sCiAgICAgICAgImFsbCI6IFtdLAogICAgICAgICJub25lIjogW10sCiAgICAgICAgImltcGFjdCI6ICJzZXJpb3VzIiwKICAgICAgICAiaHRtbCI6ICI8YSBhcmlhLWxhYmVsPVwiQ2FydCwgMCBpdGVtc1wiIGNsYXNzPVwicmVsYXRpdmUgZmxleCBtaW4taC0uLi5cIiBocmVmPVwiL2NhcnRcIiBkYXRhLWRpc2NvdmVyPVwidHJ1ZVwiPiIsCiAgICAgICAgInRhcmdldCI6IFsKICAgICAgICAgICIuc21cXDpnYXAtMiA+IC5taW4tdy0xMS5ob3ZlclxcOmJnLXZpb2xldC01MC5ob3ZlclxcOnRleHQtdmlvbGV0LTgwMCIKICAgICAgICBdLAogICAgICAgICJmYWlsdXJlU3VtbWFyeSI6ICJGaXggYW55IG9mIHRoZSBmb2xsb3dpbmc6XG4gIFRleHQgaW5zaWRlIHRoZSBlbGVtZW50IGlzIG5vdCBpbmNsdWRlZCBpbiB0aGUgYWNjZXNzaWJsZSBuYW1lIgogICAgICB9LAogICAgICB7CiAgICAgICAgImFueSI6IFsKICAgICAgICAgIHsKICAgICAgICAgICAgImlkIjogImxhYmVsLWNvbnRlbnQtbmFtZS1taXNtYXRjaCIsCiAgICAgICAgICAgICJkYXRhIjogbnVsbCwKICAgICAgICAgICAgInJlbGF0ZWROb2RlcyI6IFtdLAogICAgICAgICAgICAiaW1wYWN0IjogInNlcmlvdXMiLAogICAgICAgICAgICAibWVzc2FnZSI6ICJUZXh0IGluc2lkZSB0aGUgZWxlbWVudCBpcyBub3QgaW5jbHVkZWQgaW4gdGhlIGFjY2Vzc2libGUgbmFtZSIKICAgICAgICAgIH0KICAgICAgICBdLAogICAgICAgICJhbGwiOiBbXSwKICAgICAgICAibm9uZSI6IFtdLAogICAgICAgICJpbXBhY3QiOiAic2VyaW91cyIsCiAgICAgICAgImh0bWwiOiAiPGJ1dHRvbiB0eXBlPVwiYnV0dG9uXCIgYXJpYS1leHBhbmRlZD1cImZhbHNlXCIgYXJpYS1jb250cm9scz1cInNob3BwaW5nLXBhbmVsXCIgYXJpYS1sYWJlbD1cIk9wZW4gd2lzaGxpc3QgKDAgaXRlLi4uXCIgY2xhc3M9XCJmbGV4IHNpemUtMTEgc2hyaW5rLS4uLlwiPiIsCiAgICAgICAgInRhcmdldCI6IFsKICAgICAgICAgICJidXR0b25bYXJpYS1sYWJlbD1cIk9wZW4gd2lzaGxpc3QgKDAgaXRlbXMpXCJdIgogICAgICAgIF0sCiAgICAgICAgImZhaWx1cmVTdW1tYXJ5IjogIkZpeCBhbnkgb2YgdGhlIGZvbGxvd2luZzpcbiAgVGV4dCBpbnNpZGUgdGhlIGVsZW1lbnQgaXMgbm90IGluY2x1ZGVkIGluIHRoZSBhY2Nlc3NpYmxlIG5hbWUiCiAgICAgIH0sCiAgICAgIHsKICAgICAgICAiYW55IjogWwogICAgICAgICAgewogICAgICAgICAgICAiaWQiOiAibGFiZWwtY29udGVudC1uYW1lLW1pc21hdGNoIiwKICAgICAgICAgICAgImRhdGEiOiBudWxsLAogICAgICAgICAgICAicmVsYXRlZE5vZGVzIjogW10sCiAgICAgICAgICAgICJpbXBhY3QiOiAic2VyaW91cyIsCiAgICAgICAgICAgICJtZXNzYWdlIjogIlRleHQgaW5zaWRlIHRoZSBlbGVtZW50IGlzIG5vdCBpbmNsdWRlZCBpbiB0aGUgYWNjZXNzaWJsZSBuYW1lIgogICAgICAgICAgfQogICAgICAgIF0sCiAgICAgICAgImFsbCI6IFtdLAogICAgICAgICJub25lIjogW10sCiAgICAgICAgImltcGFjdCI6ICJzZXJpb3VzIiwKICAgICAgICAiaHRtbCI6ICI8YnV0dG9uIHR5cGU9XCJidXR0b25cIiBhcmlhLWV4cGFuZGVkPVwiZmFsc2VcIiBhcmlhLWNvbnRyb2xzPVwic2hvcHBpbmctcGFuZWxcIiBhcmlhLWxhYmVsPVwiT3BlbiBjYXJ0ICgwIGl0ZW1zKVwiIGNsYXNzPVwiZmxleCBzaXplLTExIHNocmluay0uLi5cIj4iLAogICAgICAgICJ0YXJnZXQiOiBbCiAgICAgICAgICAiYnV0dG9uW2FyaWEtbGFiZWw9XCJPcGVuIGNhcnQgKDAgaXRlbXMpXCJdIgogICAgICAgIF0sCiAgICAgICAgImZhaWx1cmVTdW1tYXJ5IjogIkZpeCBhbnkgb2YgdGhlIGZvbGxvd2luZzpcbiAgVGV4dCBpbnNpZGUgdGhlIGVsZW1lbnQgaXMgbm90IGluY2x1ZGVkIGluIHRoZSBhY2Nlc3NpYmxlIG5hbWUiCiAgICAgIH0KICAgIF0KICB9Cl0="
+                    },
+                    {
+                      "name": "screenshot",
+                      "contentType": "image/png",
+                      "path": "C:\\samushao\\ფრონტ დველოპერი\\ფინალური პროექტი\\10x-Shop\\docs\\compat\\recheck-artifacts\\compat-matrix-not-found-firefox-desktop\\test-failed-1.png"
+                    },
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "C:\\samushao\\ფრონტ დველოპერი\\ფინალური პროექტი\\10x-Shop\\docs\\compat\\recheck-artifacts\\compat-matrix-not-found-firefox-desktop\\error-context.md"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "C:\\samushao\\ფრონტ დველოპერი\\ფინალური პროექტი\\10x-Shop\\docs\\compat\\recheck-artifacts\\compat-matrix-not-found-firefox-desktop\\trace.zip"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "C:\\samushao\\ფრონტ დველოპერი\\ფინალური პროექტი\\10x-Shop\\tests\\compat\\compat.spec.ts",
+                    "column": 65,
+                    "line": 40
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "6d8778aa2e7a24d8a2df-4432ef03c17de45f5324",
+          "file": "compat.spec.ts",
+          "line": 33,
+          "column": 3
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "stats": {
+    "startTime": "2026-11-05T12:25:41.847Z",
+    "duration": 8165.489,
+    "expected": 0,
+    "skipped": 0,
+    "unexpected": 1,
+    "flaky": 0
+  }
+}

@@ -1,0 +1,26 @@
+[
+  {
+    "key": "Tab",
+    "focused": "<button>Button</button>"
+  },
+  {
+    "key": "Tab",
+    "focused": "<input aria-label=\"Input\">"
+  },
+  {
+    "key": "Tab",
+    "focused": "<body><a href=\"#\">Link</a><button>Button</button><input aria-label=\"Input\"></body>"
+  },
+  {
+    "key": "Alt+Tab",
+    "focused": "<button>Button</button>"
+  },
+  {
+    "key": "Alt+Tab",
+    "focused": "<input aria-label=\"Input\">"
+  },
+  {
+    "key": "Alt+Tab",
+    "focused": "<body><a href=\"#\">Link</a><button>Button</button><input aria-label=\"Input\"></body>"
+  }
+]
