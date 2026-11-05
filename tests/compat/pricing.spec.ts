@@ -76,3 +76,18 @@ test('pricing: Best deals lists only products with 15% off or more', async ({ pa
   await expect(page.getByText('1 product with 15% off or more')).toBeVisible();
   expect(requests).toContain('/products?limit=12&skip=0&sortBy=discountPercentage&order=desc');
 });
+
+test('pricing: the cart advert reveals 10X10 and applies it', async ({ page }) => {
+  await mockApi(page);
+  await page.goto('/products/1');
+  await page.getByRole('button', { name: 'Add to cart', exact: true }).click();
+  await page.goto('/cart');
+  await page.getByRole('button', { name: 'Unlock a promo code' }).click();
+  const advert = page.getByRole('dialog');
+  await expect(advert.getByText(/Your code is coming up/)).toBeVisible();
+  await expect(advert.getByText('10X10', { exact: true })).toBeVisible({ timeout: 6000 });
+  await advert.getByRole('button', { name: 'Apply code' }).click();
+  await expect(advert).toBeHidden();
+  const summary = page.getByRole('complementary', { name: 'Order summary' });
+  await expect(summary.getByText('Discount (10X10 −10%)').first()).toBeVisible();
+});
