@@ -428,7 +428,7 @@
 }
 
 [data-theme="dark"] header.sticky {
-  background: rgb(7 6 11 / 0.72);
+  background: rgb(7 6 11 / 0.94);
   border-bottom-color: rgb(192 132 252 / 0.25);
 }
 
@@ -457,4 +457,17 @@
 [data-theme="dark"] ::selection {
   background: #c084fc;
   color: #0e0b16;
+}
+
+/* Product photos sit on a light "stage" in dark mode, so dark products such as
+   phones and watches stay visible against the near-black page. */
+[data-theme="dark"] .product-stage {
+  background: radial-gradient(120% 95% at 50% 30%, #ffffff 0%, #f1ecfb 55%, #dfd5f4 100%) !important;
+  border-color: rgb(192 132 252 / 0.3);
+}
+
+/* The light-theme brand colours inside .keep-light panels keep their glow off. */
+[data-theme="dark"] .keep-light :is(.bg-violet-700, .bg-brand-700),
+[data-theme="dark"] .keep-light:is(.bg-violet-700, .bg-brand-700) {
+  box-shadow: none;
 }

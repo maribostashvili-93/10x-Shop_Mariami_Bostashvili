@@ -47,7 +47,7 @@ function ProductCard({ product }: ProductCardProps) {
     <article
       className="product-card group flex h-full flex-col overflow-hidden rounded-2xl bg-white p-3 shadow-[0_2px_16px_rgba(68,35,35,0.04)] transition-shadow duration-200 hover:shadow-[0_12px_30px_rgba(68,35,35,0.1)] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-red-900"
     >
-      <div className="relative flex aspect-square items-center justify-center overflow-hidden rounded-xl bg-[#faf8ff] dark:bg-[#211c2e] p-6">
+      <div className="relative flex aspect-square items-center justify-center overflow-hidden rounded-xl bg-[#faf8ff] product-stage p-6">
         <Link to={`/products/${product.id}`} className="flex h-full w-full items-center justify-center rounded-lg focus-visible:outline-2 focus-visible:outline-red-900">
         <img
           src={product.thumbnail}
@@ -102,7 +102,7 @@ function ProductCard({ product }: ProductCardProps) {
           </button>
         </div>
         <div className="grid gap-6 sm:grid-cols-2">
-          <div className="self-start rounded-xl bg-slate-100 p-4">
+          <div className="product-stage self-start rounded-xl bg-slate-100 p-4">
             {/* The filter previews the chosen colour on the photo only, not on its background. */}
             <img src={product.thumbnail} alt={`${product.title}, ${options.color}`} style={{ filter: colorFilter(options.color), transition: "filter 200ms ease" }} className="aspect-square w-full object-contain" />
           </div>

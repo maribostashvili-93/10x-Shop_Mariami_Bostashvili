@@ -23,7 +23,7 @@ function Header() {
     <header className="sticky top-0 z-30 border-b border-violet-100 bg-[#fcfaff]/95 backdrop-blur dark:bg-[#0f0d17]/95">
       <div className="flex flex-wrap items-center justify-between gap-x-6 gap-y-2 py-3 sm:py-4">
         <NavLink to="/" className="flex min-h-11 items-center gap-3 text-xl font-bold tracking-tight text-stone-900 focus-visible:outline-2 focus-visible:outline-violet-700">
-          <span aria-hidden="true" className="flex size-9 items-center justify-center rounded-xl bg-violet-700 text-sm text-white">10X</span>
+          <span aria-hidden="true" className="keep-light flex size-9 items-center justify-center rounded-xl bg-violet-700 text-sm text-white">10X</span>
           10X Shop
         </NavLink>
 

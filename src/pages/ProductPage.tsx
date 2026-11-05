@@ -163,7 +163,7 @@ function ProductPage() {
 
       <div className="mt-8 grid gap-8 overflow-hidden rounded-[2rem] border border-violet-100 bg-white p-4 shadow-[0_18px_50px_rgba(76,29,149,0.08)] sm:p-6 md:grid-cols-2 md:gap-8 md:p-6 lg:gap-10">
         <div>
-          <div className="relative flex aspect-square items-center justify-center overflow-hidden rounded-[1.5rem] bg-gradient-to-br from-violet-50 to-violet-200 p-8 sm:p-12">
+          <div className="relative flex aspect-square items-center justify-center overflow-hidden rounded-[1.5rem] product-stage bg-gradient-to-br from-violet-50 to-violet-200 p-8 sm:p-12">
             <img
               src={activeImage}
               alt={`${product.title}, ${options.color}`}
@@ -182,7 +182,7 @@ function ProductPage() {
                   onClick={() => setSelectedImage(index)}
                   aria-label={`Show image ${index + 1} of ${images.length}`}
                   aria-pressed={selectedImage === index}
-                  className={`flex aspect-square items-center justify-center overflow-hidden rounded-xl border bg-violet-50 p-1 transition hover:border-violet-500 focus-visible:outline-2 focus-visible:outline-violet-700 ${selectedImage === index ? "border-violet-700 ring-2 ring-violet-200" : "border-violet-100"}`}
+                  className={`flex aspect-square items-center justify-center overflow-hidden rounded-xl border product-stage bg-violet-50 p-1 transition hover:border-violet-500 focus-visible:outline-2 focus-visible:outline-violet-700 ${selectedImage === index ? "border-violet-700 ring-2 ring-violet-200" : "border-violet-100"}`}
                 >
                   <img src={image} alt="" loading="lazy" width={120} height={120} className="h-full w-full object-contain" />
                 </button>
