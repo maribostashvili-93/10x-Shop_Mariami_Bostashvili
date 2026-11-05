@@ -17,6 +17,11 @@ export class ApiError extends Error {
   }
 }
 
+/** Type guard for errors caught as `unknown`. */
+export function isApiError(error: unknown): error is ApiError {
+  return error instanceof ApiError;
+}
+
 export function isRecord(value: unknown): value is Record<string, unknown> {
   return typeof value === "object" && value !== null;
 }

@@ -35,6 +35,8 @@ function ProductCard({ product }: ProductCardProps) {
         <img
           src={product.thumbnail}
           alt={product.title}
+          width={300}
+          height={300}
           loading="lazy"
           decoding="async"
           className="h-full w-full object-contain transition-transform duration-300 motion-safe:group-hover:scale-105"

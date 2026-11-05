@@ -1,6 +1,6 @@
 import type { Category, Product, ProductReview, ProductsResponse } from "../types/product";
 import { PAGE_SIZE, toApiSort, type CatalogParams } from "../utils/url";
-import { ApiClient, ApiError, isRecord } from "./client";
+import { ApiClient, isApiError, isRecord } from "./client";
 
 const api = new ApiClient("https://dummyjson.com");
 export const CATALOG_PAGE_SIZE = 12;
@@ -110,7 +110,7 @@ export async function getProduct(id: string, signal?: AbortSignal): Promise<Prod
   try {
     return await api.get(`/products/${id}`, isProduct, { signal });
   } catch (error) {
-    if (error instanceof ApiError && (error.isNotFound || error.kind === "invalid-response")) return null;
+    if (isApiError(error) && (error.isNotFound || error.kind === "invalid-response")) return null;
     throw error;
   }
 }
