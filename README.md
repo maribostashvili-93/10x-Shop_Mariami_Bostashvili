@@ -43,7 +43,7 @@ This is a front-end demo. Login and checkout are local simulations: no real auth
 - **Checkout:** full name, email, phone, address, city, postal code and country (Georgia by default) with exact validation messages; the button is disabled while the order is placed
 - **Orders:** `/orders` and `/orders/:id`, sequential numbers (`10X-00001`), an `Order` class with `create()`, `getStatus()` and `toJSON()`, simulated status (Processing < 1 min, Shipped 1–3 min, Delivered after 3 min) and Reorder
 - **Login:** Formik (`useFormik`) with a Yup validation schema, field errors, loading/disabled state and success feedback
-- **Profile:** edit first name, last name, email and phone; light/dark theme; "Clear local data" (cart, orders, reviews); log out
+- **Profile:** an Overview tab (member since, city, contact details, order/spend/wishlist/review counts, a timeline of recent orders with live status, delivery address, member perks and recent activity — all from the shopper's own data) and a Settings tab (edit first name, last name, email and phone; light/dark theme; "Clear local data"; log out)
 - **UX:** shared toast notifications, light/dark theme saved as `shop_theme`
 - **TypeScript:** generic `ApiClient.get<T>()` with runtime type guards, `ApiError` and `isApiError`, `AsyncState<T>` and `CartAction` discriminated unions, `STORAGE_KEYS as const`, utility types (`Omit`, `Partial`, `Pick`)
 - **Optimization:** route-level code splitting with `React.lazy`/`Suspense`, sized lazy images, deferred hero slides, Lighthouse before/after reports in `docs/lighthouse/`
