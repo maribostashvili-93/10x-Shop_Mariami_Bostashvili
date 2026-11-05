@@ -1,5 +1,6 @@
 import { useState, type FormEvent } from "react";
 import { useCart } from "../../hooks/useCart";
+import PromoAd from "./PromoAd";
 
 function PromoCodeForm() {
   const { promo, applyPromo, removePromo } = useCart();
@@ -34,6 +35,7 @@ function PromoCodeForm() {
   }
 
   return (
+    <div>
     <form onSubmit={handleSubmit} noValidate>
       <label htmlFor="promo-code" className="block text-sm font-medium text-slate-900">Promo code</label>
       <div className="mt-2 flex gap-2">
@@ -52,6 +54,8 @@ function PromoCodeForm() {
       </div>
       {error && <p id="promo-code-error" role="alert" className="mt-2 text-sm text-amber-800">{error}</p>}
     </form>
+    <PromoAd onApply={(promoCode) => { applyPromo(promoCode); setCode(""); setError(""); }} />
+    </div>
   );
 }
 
