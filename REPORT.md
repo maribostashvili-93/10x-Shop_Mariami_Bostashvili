@@ -1,12 +1,12 @@
-﻿# Project Report
+# Project Report
 
 ## Status
 
-### Current local verification and deployment limits — 2026-11-05
+### Current verification — 2026-11-06
 
-The local compatibility/pricing suite reports 70 passed, 0 failed, and 2 WebKit keyboard skips. The route/auth smoke suite reports 16 passed. Discounted-price filtering/sorting uses shared final-price calculations. Current axe scans found no violations; four local Lighthouse Accessibility audits scored 100/100.
+Everything was re-run from scratch on `main` after the bold dark theme was merged. Typecheck, lint and build pass. The compatibility/pricing/dark-theme suite reports 94 passed, 0 failed and 2 WebKit keyboard skips across six browser/device projects; the route/auth smoke suite reports 16 passed. axe found no WCAG A/AA violations on nine pages in the light theme or in the dark theme. Four Lighthouse Accessibility audits scored 100/100.
 
-Deployed verification is separate: home and in-app simulated checkout work, but direct product/checkout URLs return provider 404 and live checkout still charges the original API price ($9.99 rather than $8.94 for the checked product). These are open release blockers. See `QA-REPORT.md`, `BUG-REPORT.md`, and `docs/compat/live-results.json`. Earlier completion statements below concern implemented local source, not full deployed compliance.
+The deployed Vercel site passes all six live checks: direct product and checkout URLs load after a refresh, the shopping flow reaches confirmation, and the checkout total matches the discounted API price plus shipping ($18.94 for the checked product). The two earlier deployment bugs (BUG-004, BUG-005) are fixed. See `QA-REPORT.md`, `BUG-REPORT.md`, `COMPATIBILITY.md` and `docs/compat/live-results.json`.
 
 The CORE scope from the graduation project PRD is implemented. The application is a responsive React SPA built with TypeScript, Tailwind CSS v4, React Router, and the DummyJSON products API.
 
@@ -76,6 +76,7 @@ All FULL items of PRD Annex A were checked against the code; the list below matc
 - **P0/P1:** toast notifications, lazy routes, Formik + Yup login, "Log In" and "Back to catalog", Log out returns to the catalog.
 - **T:** `ApiClient.get<T>()` with type guards, `ApiError` and `isApiError`, `AsyncState<T>`, `CartAction` with an exhaustive `never` check, `STORAGE_KEYS as const`, ESLint `no-explicit-any: error`; remaining `as` casts replaced by guards.
 - **TW:** `brand` and `card` tokens in `@theme`, a `dark:` custom variant and a dark theme built from mirrored colour scales.
+- **Bold dark theme (merged from `feature/bold-dark-theme`):** near-black page with violet and pink glows, neon violet accents, glowing primary buttons, gradient page titles, lighter violet-grey cards, and a light "product stage" behind every product photo so dark products stay visible. Panels with photos or brand colours keep their light-theme look (`.keep-light`).
 
 DummyJSON gives 187 of 194 products a discount of 1–19.6%, so following the annex rule (badge when `discountPercentage ≥ 1`) puts a badge on almost every card. The rule is kept; a separate "Best deals" view (`/products?deals=1`) lists the 48 products with at least 15% off. The API cannot filter by discount, so the view combines a tiny `?select=discountPercentage` request (ids and discounts only) to count the deals with one page sorted by discount.
 
@@ -100,11 +101,22 @@ What changed between the runs:
 2. Route-level code splitting. Lazy-loading every page at first made results worse (mobile product CLS 0.661); catalog, product and cart stay in the entry chunk and the main area reserves its height (`DEBUG-LOG.md` entry 10).
 3. Hidden hero slides download their photo only when shown; card images have width and height; restored home sections keep their size while loading (`DEBUG-LOG.md` entry 14).
 
-FULL targets (Performance ≥ 85, Accessibility ≥ 90, Best Practices ≥ 90, CLS < 0.1): accessibility, best practices and CLS meet them on every measured page; performance meets them on mobile for every page and on desktop for the cart. The home page on desktop (79) and product details on desktop (83) stay below 85 because the home page keeps its image-led storefront sections (hero, collection banners, journal). The script still labels `/` as "catalog", the name it had in the baseline run. Local runs vary by several points and are not a substitute for an audit of the deployed site.
+Current run after the bold dark theme (`docs/lighthouse/current/`, 2026-11-06):
+
+| Page | Mode | Performance | Accessibility | Best Practices | LCP | CLS |
+| --- | --- | --- | --- | --- | --- | --- |
+| Home (/) | mobile | 89 | 100 | 100 | 3.7 s | 0 |
+| Product | mobile | 94 | 100 | 100 | 3.0 s | 0 |
+| Cart | mobile | 100 | 100 | 100 | 0.9 s | 0 |
+| Home (/) | desktop | 80 | 100 | 100 | 3.2 s | 0.013 |
+| Product | desktop | 83 | 100 | 100 | 2.9 s | 0.013 |
+| Cart | desktop | 98 | 100 | 100 | 0.9 s | 0.013 |
+
+FULL targets (Performance ≥ 85, Accessibility ≥ 90, Best Practices ≥ 90, CLS < 0.1): accessibility, best practices and CLS meet them on every measured page; performance meets them on mobile for every page and on desktop for the cart. The home page on desktop (80) and product details on desktop (83) stay below 85 because the home page keeps its image-led storefront sections (hero, collection banners, journal). The script still labels `/` as "catalog", the name it had in the baseline run. Local runs vary by several points and are not a substitute for an audit of the deployed site.
 
 ## Out of scope
 
-Real authentication, payment processing, delivery and server-side data are out of scope by the PRD. Dark mode was not implemented.
+Real authentication, payment processing, delivery and server-side data are out of scope by the PRD.
 
 ## Planned vs delivered
 
@@ -115,11 +127,11 @@ The planned CORE scope was delivered: catalog, product details, simulated auth, 
 - `npm run lint` — passed.
 - `npm run typecheck` — passed.
 - `npm run build` — passed.
-- JavaScript entry chunk: approximately 294 kB raw / 87 kB gzip (annex target ≤ 250 kB gzip); route chunks load on demand (login chunk ~81 kB with Formik + Yup).
-- CSS bundle: approximately 63 kB raw / 12 kB gzip.
+- JavaScript entry chunk: approximately 323 kB raw / 93 kB gzip (annex target ≤ 250 kB gzip); route chunks load on demand (login chunk ~81 kB with Formik + Yup).
+- CSS bundle: approximately 83 kB raw / 15 kB gzip (including the dark theme).
 - Git history contains multiple meaningful `feat:`, `fix:`, `perf:`, and `docs:` commits.
 - Lighthouse before/after results for the local production build are in the "Lighthouse before and after" section.
-- Chrome and Firefox smoke testing is an external release check and is not provable from the compiler alone.
+- Playwright: 94 compatibility/pricing/dark-theme tests and 16 smoke tests pass in Chromium, Firefox and WebKit; 6/6 live checks pass on the deployed site.
 
 ## Three difficult problems and solutions
 

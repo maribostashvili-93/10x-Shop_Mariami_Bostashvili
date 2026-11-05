@@ -154,6 +154,26 @@ This document records real issues found and fixed while building 10X Shop. The p
 - **Fix (commit):** [5281e49 fix: use a list for profile details so screen readers pair labels and values](https://github.com/maribostashvili-93/10x-Shop_Mariami_Bostashvili/commit/5281e49)
 - **What I learned:** Extending automated accessibility checks to every page finds issues that visual checks miss.
 
+## 16. The live-site check failed although the site worked
+
+- **Symptom:** `node scripts/qa-live.mjs` reported `desktop-shopping-flow` as FAIL: "waiting for getByRole('link', { name: 'View cart' })". Opening the deployed site by hand, the same flow worked.
+- **Reproduction:** `node scripts/qa-live.mjs`, then read the error and `docs/compat/live/desktop-shopping-flow-failed.png`.
+- **Tool:** Playwright error log and the failure screenshot.
+- **Root cause:** The script still described the old interface: the "View cart" dialog (replaced by an "Added ✓" button), a "Login" button (now "Log In"), only four checkout fields (phone and postal code are now required) and a total without shipping.
+- **Fix:** The script follows the current flow and expects the discounted price plus $10 shipping below $100. All six live checks pass; the old failure screenshots were removed.
+- **Fix (commit):** [c0f55b5 test: check the dark theme with axe and bring the live checks up to date](https://github.com/maribostashvili-93/10x-Shop_Mariami_Bostashvili/commit/c0f55b5)
+- **What I learned:** When the interface changes, the tests that describe it have to change in the same commit, or a FAIL stops meaning a broken site.
+
+## 17. Lighthouse scored the product page 0 on mobile
+
+- **Symptom:** `node scripts/lighthouse-perf.mjs current` gave Product / mobile a performance score of 0, twice in a row; the other pages scored normally.
+- **Reproduction:** run the script; in `docs/lighthouse/current/product-mobile.json` `runtimeError.code` is `NO_NAVSTART`.
+- **Tool:** the Lighthouse JSON report (`runtimeError`) and a separate Lighthouse run of `/products/1` alone, which scored 89.
+- **Root cause:** Lighthouse failed to record the page-load trace when it ran straight after the previous page in the same Chrome. The score of 0 meant "not measured", not a slow page.
+- **Fix:** The script runs a page once more when `runtimeError` is set and stops with an error if it fails again, so a broken trace can no longer be reported as a score. The next run measured Product / mobile at 94.
+- **Fix (commit):** [c0f55b5 test: check the dark theme with axe and bring the live checks up to date](https://github.com/maribostashvili-93/10x-Shop_Mariami_Bostashvili/commit/c0f55b5)
+- **What I learned:** Check whether a tool actually measured something before trusting its number.
+
 ## Debugging checklist
 
 - Run `npm run typecheck` before investigating runtime behavior.

@@ -44,7 +44,7 @@ This is a front-end demo. Login and checkout are local simulations: no real auth
 - **Orders:** `/orders` and `/orders/:id`, sequential numbers (`10X-00001`), an `Order` class with `create()`, `getStatus()` and `toJSON()`, simulated status (Processing < 1 min, Shipped 1–3 min, Delivered after 3 min) and Reorder
 - **Login:** Formik (`useFormik`) with a Yup validation schema, field errors, loading/disabled state and success feedback
 - **Profile:** an Overview tab (member since, city, contact details, order/spend/wishlist/review counts, a timeline of recent orders with live status, delivery address, member perks and recent activity — all from the shopper's own data) and a Settings tab (edit first name, last name, email and phone; light/dark theme; "Clear local data"; log out)
-- **UX:** shared toast notifications, light/dark theme saved as `shop_theme`; the dark theme is a bold variant with near-black surfaces, neon violet accents with a soft glow and gradient page titles (axe reports no contrast issues on any page in dark mode)
+- **UX:** shared toast notifications, light/dark theme saved as `shop_theme`; the dark theme is a bold variant: a near-black page with violet glows, lighter violet-grey cards, neon violet accents with a soft glow, gradient page titles, and a light "product stage" behind every product photo so dark products stay visible (axe reports no issues on any tested page in dark mode)
 - **TypeScript:** generic `ApiClient.get<T>()` with runtime type guards, `ApiError` and `isApiError`, `AsyncState<T>` and `CartAction` discriminated unions, `STORAGE_KEYS as const`, utility types (`Omit`, `Partial`, `Pick`)
 - **Optimization:** route-level code splitting with `React.lazy`/`Suspense`, sized lazy images, deferred hero slides, Lighthouse before/after reports in `docs/lighthouse/`
 - **Tailwind:** custom `brand` colour and `card` radius tokens in `@theme`, a `dark:` custom variant and a dark theme built from mirrored colour scales
@@ -138,6 +138,21 @@ npm.cmd run dev
 
 Run the relevant checks locally before publishing changes. The production build includes TypeScript checking.
 
+## Testing
+
+Build first (`npm run build`); the Playwright suites start `vite preview` on port 4173 themselves.
+
+| Command | What it checks |
+| --- | --- |
+| `npx playwright test` | Route/auth smoke tests in Chromium, Firefox, WebKit and mobile Chromium |
+| `npx playwright test --config=playwright.compat.config.ts` | Compatibility matrix: nine pages × three engines × desktop/mobile, axe in the light and dark theme, a keyboard-only shopping flow, and pricing/promo regressions. Results: `docs/compat/results.json` |
+| `node scripts/compat-report.mjs` | Writes [COMPATIBILITY.md](COMPATIBILITY.md) from the last compatibility run |
+| `node scripts/compat-lighthouse.mjs` | Lighthouse Accessibility for Catalog and Login (needs the preview server running) |
+| `node scripts/lighthouse-perf.mjs current` | Lighthouse Performance, Accessibility and Best Practices for Home, Product and Cart; reports in `docs/lighthouse/current/` |
+| `node scripts/qa-live.mjs` | Checks the deployed site with real network requests; results in `docs/compat/live-results.json` |
+
+Latest results (2026-11-06): smoke 16/16; compatibility 94 passed, 0 failed, 2 skipped (a WebKit automation limit on Tab to links); axe found no violations in either theme; Lighthouse Accessibility 100/100; live site 6/6. Details: [QA-REPORT.md](QA-REPORT.md).
+
 ## Demo login
 
 Login is simulated locally. Enter any non-empty username and a password of at least 6 characters. Do not use a real password. There is no external authentication service.
@@ -172,7 +187,7 @@ Build command: `npm run build`. Output directory: `dist`.
 
 For SPA deployments, configure a rewrite so direct visits and refreshes on routes such as `/products/5` and `/checkout` serve `index.html`.
 
-The repository includes this fallback in [`vercel.json`](vercel.json). The latest deployed-site check found provider 404 responses on direct nested URLs; publishing the current configuration and rechecking deployment are still required. See [QA-REPORT.md](QA-REPORT.md).
+The repository includes this fallback in [`vercel.json`](vercel.json). The latest deployed-site check (2026-11-06) passed all six checks: direct product and checkout URLs load after a refresh, the shopping flow reaches confirmation, and the checkout total matches the discounted price plus shipping. See [QA-REPORT.md](QA-REPORT.md).
 
 ## Project documentation
 
@@ -181,6 +196,8 @@ The repository includes this fallback in [`vercel.json`](vercel.json). The lates
 - [STYLE_GUIDE.md](STYLE_GUIDE.md) — UI and Tailwind conventions
 - [DEBUG-LOG.md](DEBUG-LOG.md) — real bugs, their root causes and fixes
 - [COMPATIBILITY.md](COMPATIBILITY.md) — browser and device test matrix
+- [QA-REPORT.md](QA-REPORT.md) — latest test results, local and deployed
+- [BUG-REPORT.md](BUG-REPORT.md) — reported bugs and their status
 
 ## Credits
 

@@ -1,6 +1,6 @@
 # Bug Report — 10X Shop
 
-Updated: 2026-11-05. Statuses distinguish current local source from the deployed site.
+Updated: 2026-11-06. Statuses distinguish current local source from the deployed site.
 
 ## BUG-001 — Product back link targeted home
 
@@ -35,24 +35,24 @@ Updated: 2026-11-05. Statuses distinguish current local source from the deployed
 - Root cause: comparisons used product.price while ProductPrice displayed getFinalPrice(product).
 - Resolution: use shared rounded final prices for comparisons and both price sort directions.
 - Evidence: tests/compat/pricing.spec.ts, pricing rows in docs/compat/results.json, and COMPATIBILITY.md.
-- Deployment: not published by this task; no claim of a live fix.
+- Deployment: verified on the live site on 2026-11-06 (live-discount-consistency PASS in docs/compat/live-results.json).
 
 ## BUG-004 — Deployed nested routes return provider 404
 
 - Severity: High
-- Status: OPEN on deployed site.
+- Status: FIXED on the deployed site (verified 2026-11-06). Direct `/products/5` and `/checkout` return HTTP 200 and survive a refresh on Desktop and Mobile.
 - Target: https://10x-shop-mariami-bostashvili-mt61.vercel.app.
 - Steps: open /products/5 directly on Desktop or Mobile; separately open /checkout directly.
 - Expected: serve the SPA and show product details or redirect a guest to login, including after refresh.
 - Actual: Vercel HTTP 404 NOT_FOUND; the root page returns HTTP 200.
 - Investigation: in-app navigation works. The deployed server is not supplying the application for nested URLs. Exact Vercel project settings/build configuration were not inspected, so the underlying remote configuration cause remains unconfirmed.
 - Suggested resolution: deploy current source with the existing vercel.json rewrite; verify project root/build settings and repeat direct URL/refresh checks.
-- Evidence: docs/compat/live-results.json and Desktop/Mobile failure screenshots under docs/compat/live/.
+- Evidence: docs/compat/live-results.json and the passing screenshots under docs/compat/live/ (the old failure screenshots were removed).
 
 ## BUG-005 — Deployed checkout uses the original price
 
 - Severity: High
-- Status: OPEN on deployed site; shared discounted calculations already exist locally.
+- Status: FIXED on the deployed site (verified 2026-11-06). The live checkout shows $8.94 + $10 shipping = $18.94, matching the API price and discount.
 - Steps: open live home, use its shop link, add “Essence Mascara Lash Princess”, sign in with synthetic demo values, and inspect Checkout.
 - Expected: API price $9.99 × (1 − 10.48/100), rounded to cents = $8.94.
 - Actual: live summary/total show $9.99.

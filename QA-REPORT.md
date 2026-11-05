@@ -1,56 +1,64 @@
 # QA Report — 10X Shop
 
-Updated: 2026-11-05. This report supersedes the earlier 14-pass/22-fail audit, which described a previous build.
+Updated: 2026-11-06. Every check below was re-run from scratch on the current `main` (bold dark theme merged). This report replaces the previous one, which still listed two open deployment bugs.
 
 ## Executive summary
 
-The local production build passes typecheck, lint, the route/auth smoke suite, and the compatibility/pricing suite. Price filters and sorting now use the same rounded discounted price as product cards, cart, and checkout. No axe violations were reported by the current matrix scans.
-
-The deployed site differs from the local build. Its home page and simulated shopping flow work through client-side navigation, but direct nested URLs return Vercel 404 and the live checkout ignores the API discount. Deployment remains a release blocker.
+The local production build passes typecheck, lint, the route/auth smoke suite and the compatibility/pricing suite. axe found no WCAG A/AA violations in the light theme or in the dark theme. The deployed Vercel site now passes every live check: direct product URLs and `/checkout` load after a refresh, the shopping flow reaches confirmation, and the checkout total matches the discounted API price plus shipping. BUG-004 and BUG-005 are fixed on the deployed site.
 
 ## Current results
 
 | Check | Passed | Failed | Skipped | Evidence |
 | --- | --- | --- | --- | --- |
-| Compatibility + pricing, six browser/device projects | 70 | 0 | 2 | docs/compat/results.json |
+| Compatibility + pricing + dark theme, six browser/device projects | 94 | 0 | 2 | docs/compat/results.json, [COMPATIBILITY.md](COMPATIBILITY.md) |
 | Route/auth smoke, four browser projects | 16 | 0 | 0 | docs/compat/smoke-results.json |
-| Deployed-site checks, real network | 2 | 3 | 1 blocked | docs/compat/live-results.json |
+| Deployed-site checks, real network | 6 | 0 | 0 | docs/compat/live-results.json, docs/compat/live/ |
+| Lighthouse Accessibility (Catalog, Login × Desktop/Mobile) | 4 × 100/100 | — | — | docs/compat/lighthouse/ |
+| Lighthouse Performance (Catalog, Product, Cart × Desktop/Mobile) | see below | — | — | docs/lighthouse/current/ |
 
-The two compatibility skips are the existing WebKit keyboard-navigation limitation, reproduced independently on plain HTML. They are not passes. Live failures are Desktop/Mobile direct product access and checkout price consistency; direct guest checkout is blocked by the server 404.
+The two compatibility skips are the known WebKit keyboard-navigation limitation, reproduced on plain HTML (docs/compat/webkit-keyboard-baseline.json). They are not passes.
 
-Typecheck, lint, and production build completed successfully. The build includes strict TypeScript checking.
+`npm run typecheck`, `npm run lint` and `npm run build` completed without errors.
 
 ## Test environment and methods
 
 - Local Vite production build: http://127.0.0.1:4173.
-- Playwright Test 1.64.1; Chromium, Firefox, WebKit; Desktop 1440×900 and Mobile 390×844. The smoke mobile project explicitly uses Chromium.
-- Deterministic DummyJSON interception for compatibility and pricing tests. The smoke product-link test uses the real API.
-- @axe-core/playwright 4.14.0, WCAG 2.0/2.1 Level A/AA tags.
-- Keyboard flow: Catalog → Product → Cart → Login → Checkout → Confirmation using Tab, Enter, and typing.
-- Pricing: three bands, ascending/descending order, exact $50/$100 boundaries, cent rounding, reload, and filter/search/sort history preservation.
-- Full-page screenshots are evidence, not pixel-diff visual regression tests. Current local images are under docs/compat/current/.
-- Deployed checks use real network requests and isolated browser contexts with synthetic demo credentials/delivery data. No real payment was submitted.
-
-Full methods, per-project matrix, screenshots, and limitations: [COMPATIBILITY.md](COMPATIBILITY.md).
+- Playwright Test 1.64.1; Chromium, Firefox, WebKit; Desktop 1440×900 and Mobile 390×844. The smoke mobile project uses Chromium.
+- Deterministic DummyJSON interception for the compatibility and pricing tests. The smoke product-link test and the live checks use the real API.
+- @axe-core/playwright 4.14.0 with WCAG 2.0/2.1 A/AA tags, on nine pages (Home, Catalog, Best deals, Product, empty Cart, Login, Orders, Profile, 404) in the light theme and again in the dark theme, plus Checkout.
+- Keyboard flow: Catalog → Product → Add to cart ("Added ✓") → header Cart → Login → Checkout → Confirmation, using Tab, Shift+Tab, Enter and typing.
+- Pricing: discounted card prices, API sorting kept in URL history, $10 shipping below $100, the 10X10 promo, Best deals (15% off or more) and the promo advert.
+- Full-page screenshots are evidence, not pixel-diff tests. Local images: docs/compat/current/ (dark theme: `*-home-dark.png`, `*-catalog-dark.png`).
+- Live checks use isolated browser contexts and synthetic demo login and delivery data. No real payment exists in the app.
 
 ## Accessibility and performance
 
-Current matrix and checkout scans recorded no axe A/AA violations. This does not establish complete WCAG compliance or cover every menu, screen reader, focus trap, and Shift+Tab interaction.
+No axe A/AA violations were recorded on any scanned page, in either theme. This does not establish complete WCAG compliance or replace screen-reader testing.
 
-Lighthouse Accessibility was rerun on local Catalog and Login: Desktop 100/100; Mobile 100/100 for both pages. HTML/JSON reports are under docs/compat/lighthouse/. These are local accessibility scores, not deployed-site performance scores. Performance, SEO, Best Practices, LCP, CLS, and INP were not measured in this run.
+Lighthouse Accessibility on local Catalog and Login: 100/100 on Desktop and Mobile.
+
+Lighthouse Performance, local production build, default throttling (Lighthouse's headless Chrome reports `prefers-color-scheme: dark`, so this run audits the dark theme):
+
+| Page | Mobile perf. | Desktop perf. | Mobile LCP | Desktop LCP | CLS | A11y | Best practices |
+| --- | --- | --- | --- | --- | --- | --- | --- |
+| Home / catalog | 89 | 80 | 3.7 s | 3.2 s | 0 / 0.013 | 100 | 100 |
+| Product | 94 | 83 | 3.0 s | 2.9 s | 0 / 0.013 | 100 | 100 |
+| Cart | 100 | 98 | 0.9 s | 0.9 s | 0 / 0.013 | 100 | 100 |
+
+Desktop performance on Home (80) and Product (83) is below the 85 target. The largest cost is the product photos and the DummyJSON responses, which arrive over the real network. Scores vary by a few points between runs. `scripts/lighthouse-perf.mjs` now repeats a page once when Lighthouse reports a broken trace (NO_NAVSTART), which otherwise shows up as a performance score of 0.
 
 ## Deployed verification
 
-Target: https://10x-shop-mariami-bostashvili-mt61.vercel.app.
+Target: https://10x-shop-mariami-bostashvili-mt61.vercel.app (run 2026-11-05 23:56 UTC).
 
 - Home: HTTP 200, application shell visible.
-- /products/5: HTTP 404 on Desktop and Mobile; application refresh verification cannot proceed.
-- Direct /checkout: HTTP 404 before the application can redirect to login.
-- Through home-page links: Catalog → Product → Cart → Login → Checkout → Confirmation → empty Cart completed.
-- Price accuracy failed independently: product 1 costs $9.99 with 10.48% API discount; expected total $8.94, live total $9.99.
+- `/products/5` on Desktop and Mobile: HTTP 200, the product heading and Add to cart are visible, and the same product is shown after a refresh. No horizontal overflow on Mobile.
+- Direct `/checkout` as a guest: HTTP 200, redirects to Login.
+- Shopping flow: Catalog → Product → Add to cart ("Added ✓") → Cart → Login → Checkout → Place order → Confirmation → empty Cart.
+- Price accuracy: Essence Mascara Lash Princess costs $9.99 with a 10.48% discount. The expected total is $8.94 + $10 shipping = $18.94, and the live checkout shows $18.94.
 
-The repository already contains the SPA rewrite in vercel.json and shared discounted calculations. Publishing current source and verifying Vercel routing is required. Exact remote project settings were not inspected, and this task did not deploy changes.
+`scripts/qa-live.mjs` was updated for the current interface ("Added ✓" instead of the old pop-up, the header Cart link, the "Log In" button, the phone and postal-code fields, and shipping in the total).
 
 ## Release recommendation
 
-Review the local fix, publish the current build with vercel.json, and rerun node scripts/qa-live.mjs. Resolve BUG-004 and BUG-005 before claiming complete deployed CORE compliance. Local passing results do not establish that these live failures are fixed.
+Local and deployed checks pass. Open items: a manual keyboard pass in real Safari (WebKit automation cannot Tab to links), and desktop performance on Home and Product below 85.
