@@ -1,5 +1,5 @@
 import { Outlet, useLocation } from "react-router";
-import { useEffect } from "react";
+import { Suspense, useEffect } from "react";
 import ShopSearch from "../products/ShopSearch";
 import Header from "./Header";
 import Footer from "./Footer";
@@ -19,7 +19,9 @@ function Layout() {
           <Sidebar />
           <main className="min-w-0 w-full">
             {pathname === "/products" && <ShopSearch />}
-            <Outlet />
+            <Suspense fallback={<p role="status" className="py-10 text-slate-600">Loading page...</p>}>
+              <Outlet />
+            </Suspense>
           </main>
         </div>
         <Footer />
