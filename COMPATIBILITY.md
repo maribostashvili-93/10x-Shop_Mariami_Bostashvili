@@ -1,10 +1,10 @@
 # Compatibility — 10X Shop
 
-Run started (UTC): 2026-11-05T20:51:20.905Z. Duration: 80.9 seconds. Local production build: http://127.0.0.1:4173. Desktop: 1440×900; Mobile: 390×844. Chromium, Firefox, and WebKit are Playwright browser engines; branded Chrome/Firefox/Safari applications and physical phones were not tested. Firefox Mobile uses viewport and touch emulation only.
+Run started (UTC): 2026-11-05T21:03:41.732Z. Duration: 120.3 seconds. Local production build: http://127.0.0.1:4173. Desktop: 1440×900; Mobile: 390×844. Chromium, Firefox, and WebKit are Playwright browser engines; branded Chrome/Firefox/Safari applications and physical phones were not tested. Firefox Mobile uses viewport and touch emulation only.
 
 Matrix and keyboard tests replace DummyJSON responses with one fixed product (QA Beauty Product), using favicon.svg as its image. Pricing regression tests use six products with different discounts and boundary prices. This verifies the UI and shopping flow but does not verify the live API or real product images. Lighthouse uses real network requests; its results apply to the state displayed during each run. Deployed-site checks, when available, are recorded separately in docs/compat/live-results.json and QA-REPORT.md.
 
-Tests: 64 passed, 0 failed, 2 skipped. FAIL includes axe violations and does not always indicate a broken page or keyboard flow.
+Tests: 88 passed, 0 failed, 2 skipped. FAIL includes axe violations and does not always indicate a broken page or keyboard flow.
 
 ## Testing Tools and Methodology
 
@@ -21,10 +21,14 @@ Tests: 64 passed, 0 failed, 2 skipped. FAIL includes axe violations and does not
 
 | Scenario | chromium-desktop | chromium-mobile | firefox-desktop | firefox-mobile | webkit-desktop | webkit-mobile |
 | --- | --- | --- | --- | --- | --- | --- |
+| matrix: home | PASS | PASS | PASS | PASS | PASS | PASS |
 | matrix: catalog | PASS | PASS | PASS | PASS | PASS | PASS |
+| matrix: best-deals | PASS | PASS | PASS | PASS | PASS | PASS |
 | matrix: product | PASS | PASS | PASS | PASS | PASS | PASS |
 | matrix: cart-empty | PASS | PASS | PASS | PASS | PASS | PASS |
 | matrix: login | PASS | PASS | PASS | PASS | PASS | PASS |
+| matrix: orders | PASS | PASS | PASS | PASS | PASS | PASS |
+| matrix: profile | PASS | PASS | PASS | PASS | PASS | PASS |
 | matrix: not-found | PASS | PASS | PASS | PASS | PASS | PASS |
 | keyboard: catalog → product → cart → login → checkout → confirmation | PASS | PASS | PASS | PASS | skipped | skipped |
 | pricing: cards show the discounted price, original price and badge | PASS | PASS | PASS | PASS | PASS | PASS |
@@ -33,12 +37,12 @@ Tests: 64 passed, 0 failed, 2 skipped. FAIL includes axe violations and does not
 | pricing: Best deals lists only products with 15% off or more | PASS | PASS | PASS | PASS | PASS | PASS |
 | pricing: the cart advert reveals 10X10 and applies it | PASS | PASS | PASS | PASS | PASS | PASS |
 
-The matrix covers Catalog, Product Details, empty Cart, Login, 404, and populated Cart/Checkout/Confirmation within the shopping flow. Home, Journal, Wishlist, Profile, and supporting pages are outside the scope of this run.
+The matrix covers Home, Catalog, Best deals, Product Details, empty Cart, Login, Orders, Profile and 404, plus populated Cart, Checkout and Confirmation within the keyboard flow. Orders and Profile are opened as a signed-in demo shopper. Journal and Wishlist pages are outside the scope of this run.
 
 ## Confirmed Accessibility Findings
 
 - No violations were recorded in the available axe attachments.
-- Exact failure reasons and selectors are recorded in `docs/compat/report/index.html`, `results.json`, and `artifacts/`.
+- Every result, including axe output, is stored in `docs/compat/results.json`. The HTML report and failure traces (`docs/compat/report/`, `docs/compat/artifacts/`) are generated locally by the run and are not committed.
 
 ## Keyboard Navigation
 
@@ -68,48 +72,72 @@ A score of 100 does not establish full WCAG compliance. Lighthouse and axe use d
 
 ## Screenshots
 
+- [chromium-desktop-best-deals.png](docs/compat/current/chromium-desktop-best-deals.png)
 - [chromium-desktop-cart-empty.png](docs/compat/current/chromium-desktop-cart-empty.png)
 - [chromium-desktop-cart-populated.png](docs/compat/current/chromium-desktop-cart-populated.png)
 - [chromium-desktop-catalog.png](docs/compat/current/chromium-desktop-catalog.png)
 - [chromium-desktop-checkout.png](docs/compat/current/chromium-desktop-checkout.png)
 - [chromium-desktop-confirmation.png](docs/compat/current/chromium-desktop-confirmation.png)
+- [chromium-desktop-home.png](docs/compat/current/chromium-desktop-home.png)
 - [chromium-desktop-login.png](docs/compat/current/chromium-desktop-login.png)
 - [chromium-desktop-not-found.png](docs/compat/current/chromium-desktop-not-found.png)
+- [chromium-desktop-orders.png](docs/compat/current/chromium-desktop-orders.png)
 - [chromium-desktop-product.png](docs/compat/current/chromium-desktop-product.png)
+- [chromium-desktop-profile.png](docs/compat/current/chromium-desktop-profile.png)
+- [chromium-mobile-best-deals.png](docs/compat/current/chromium-mobile-best-deals.png)
 - [chromium-mobile-cart-empty.png](docs/compat/current/chromium-mobile-cart-empty.png)
 - [chromium-mobile-cart-populated.png](docs/compat/current/chromium-mobile-cart-populated.png)
 - [chromium-mobile-catalog.png](docs/compat/current/chromium-mobile-catalog.png)
 - [chromium-mobile-checkout.png](docs/compat/current/chromium-mobile-checkout.png)
 - [chromium-mobile-confirmation.png](docs/compat/current/chromium-mobile-confirmation.png)
+- [chromium-mobile-home.png](docs/compat/current/chromium-mobile-home.png)
 - [chromium-mobile-login.png](docs/compat/current/chromium-mobile-login.png)
 - [chromium-mobile-not-found.png](docs/compat/current/chromium-mobile-not-found.png)
+- [chromium-mobile-orders.png](docs/compat/current/chromium-mobile-orders.png)
 - [chromium-mobile-product.png](docs/compat/current/chromium-mobile-product.png)
+- [chromium-mobile-profile.png](docs/compat/current/chromium-mobile-profile.png)
+- [firefox-desktop-best-deals.png](docs/compat/current/firefox-desktop-best-deals.png)
 - [firefox-desktop-cart-empty.png](docs/compat/current/firefox-desktop-cart-empty.png)
 - [firefox-desktop-cart-populated.png](docs/compat/current/firefox-desktop-cart-populated.png)
 - [firefox-desktop-catalog.png](docs/compat/current/firefox-desktop-catalog.png)
 - [firefox-desktop-checkout.png](docs/compat/current/firefox-desktop-checkout.png)
 - [firefox-desktop-confirmation.png](docs/compat/current/firefox-desktop-confirmation.png)
+- [firefox-desktop-home.png](docs/compat/current/firefox-desktop-home.png)
 - [firefox-desktop-login.png](docs/compat/current/firefox-desktop-login.png)
 - [firefox-desktop-not-found.png](docs/compat/current/firefox-desktop-not-found.png)
+- [firefox-desktop-orders.png](docs/compat/current/firefox-desktop-orders.png)
 - [firefox-desktop-product.png](docs/compat/current/firefox-desktop-product.png)
+- [firefox-desktop-profile.png](docs/compat/current/firefox-desktop-profile.png)
+- [firefox-mobile-best-deals.png](docs/compat/current/firefox-mobile-best-deals.png)
 - [firefox-mobile-cart-empty.png](docs/compat/current/firefox-mobile-cart-empty.png)
 - [firefox-mobile-cart-populated.png](docs/compat/current/firefox-mobile-cart-populated.png)
 - [firefox-mobile-catalog.png](docs/compat/current/firefox-mobile-catalog.png)
 - [firefox-mobile-checkout.png](docs/compat/current/firefox-mobile-checkout.png)
 - [firefox-mobile-confirmation.png](docs/compat/current/firefox-mobile-confirmation.png)
+- [firefox-mobile-home.png](docs/compat/current/firefox-mobile-home.png)
 - [firefox-mobile-login.png](docs/compat/current/firefox-mobile-login.png)
 - [firefox-mobile-not-found.png](docs/compat/current/firefox-mobile-not-found.png)
+- [firefox-mobile-orders.png](docs/compat/current/firefox-mobile-orders.png)
 - [firefox-mobile-product.png](docs/compat/current/firefox-mobile-product.png)
+- [firefox-mobile-profile.png](docs/compat/current/firefox-mobile-profile.png)
+- [webkit-desktop-best-deals.png](docs/compat/current/webkit-desktop-best-deals.png)
 - [webkit-desktop-cart-empty.png](docs/compat/current/webkit-desktop-cart-empty.png)
 - [webkit-desktop-catalog.png](docs/compat/current/webkit-desktop-catalog.png)
+- [webkit-desktop-home.png](docs/compat/current/webkit-desktop-home.png)
 - [webkit-desktop-login.png](docs/compat/current/webkit-desktop-login.png)
 - [webkit-desktop-not-found.png](docs/compat/current/webkit-desktop-not-found.png)
+- [webkit-desktop-orders.png](docs/compat/current/webkit-desktop-orders.png)
 - [webkit-desktop-product.png](docs/compat/current/webkit-desktop-product.png)
+- [webkit-desktop-profile.png](docs/compat/current/webkit-desktop-profile.png)
+- [webkit-mobile-best-deals.png](docs/compat/current/webkit-mobile-best-deals.png)
 - [webkit-mobile-cart-empty.png](docs/compat/current/webkit-mobile-cart-empty.png)
 - [webkit-mobile-catalog.png](docs/compat/current/webkit-mobile-catalog.png)
+- [webkit-mobile-home.png](docs/compat/current/webkit-mobile-home.png)
 - [webkit-mobile-login.png](docs/compat/current/webkit-mobile-login.png)
 - [webkit-mobile-not-found.png](docs/compat/current/webkit-mobile-not-found.png)
+- [webkit-mobile-orders.png](docs/compat/current/webkit-mobile-orders.png)
 - [webkit-mobile-product.png](docs/compat/current/webkit-mobile-product.png)
+- [webkit-mobile-profile.png](docs/compat/current/webkit-mobile-profile.png)
 
 ## Reproducing the Results
 

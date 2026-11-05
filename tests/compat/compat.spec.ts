@@ -25,14 +25,25 @@ async function tabTo(page: Page, target: Locator, key: 'Tab' | 'Shift+Tab' = 'Ta
   throw new Error('Keyboard target unreachable after 180 Tab presses');
 }
 
-for (const [name, path, heading] of [
-  ['catalog', '/products', 'Catalog'],
-  ['product', '/products/1', 'QA Beauty Product'],
-  ['cart-empty', '/cart', 'Your cart is empty.'],
-  ['login', '/login', 'Login'],
-  ['not-found', '/missing-compat-route', 'Page not found'],
-] as const) {
+// [name, path, a heading that proves the page rendered, needs a signed-in shopper]
+const MATRIX: readonly (readonly [string, string, string, boolean])[] = [
+  ['home', '/', 'All products', false],
+  ['catalog', '/products', 'Catalog', false],
+  ['best-deals', '/products?deals=1', 'Catalog', false],
+  ['product', '/products/1', 'QA Beauty Product', false],
+  ['cart-empty', '/cart', 'Your cart is empty.', false],
+  ['login', '/login', 'Login', false],
+  ['orders', '/orders', 'My orders', true],
+  ['profile', '/profile', 'compat-user', true],
+  ['not-found', '/missing-compat-route', 'Page not found', false],
+];
+
+for (const [name, path, heading, signedIn] of MATRIX) {
   test(`matrix: ${name}`, async ({ page }, info) => {
+    if (signedIn) {
+      // Local demo login: only the username is stored, exactly as the Login page does.
+      await page.addInitScript(() => localStorage.setItem('shop_user', JSON.stringify({ username: 'compat-user' })));
+    }
     await page.goto(path);
     await expect(page.getByRole('heading', { name: heading, exact: true })).toBeVisible();
     await capture(page, name, info.project.name);

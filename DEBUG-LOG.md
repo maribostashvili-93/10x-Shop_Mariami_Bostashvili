@@ -144,6 +144,16 @@ This document records real issues found and fixed while building 10X Shop. The p
 - **Fix (commit):** [e413d2b feat: restore storefront home sections with lightweight requests](https://github.com/maribostashvili-93/10x-Shop_Mariami_Bostashvili/commit/e413d2b)
 - **What I learned:** A component that renders nothing while loading still causes layout shift when it appears; reserve the space instead.
 
+## 15. Profile details broke the description-list structure
+
+- **Symptom:** After the Profile page was added to the compatibility matrix, axe failed on all six browser projects with `definition-list` and `dlitem` violations.
+- **Reproduction:** `npx playwright test -c playwright.compat.config.ts -g "matrix: profile"`.
+- **Tool:** axe-core through Playwright (`@axe-core/playwright`), WCAG 2.1 A/AA rules.
+- **Root cause:** Each detail (member since, city, email, phone) placed an icon `span` and a `div` holding `dt`/`dd` inside the `dl`. A `dl` may only contain `dt`/`dd` groups, so screen readers could not pair labels with values.
+- **Fix:** The details are now a labelled list (`ul` / `li`) with the label and value as text, which keeps the icon layout and is valid markup. axe reports no violations on Profile.
+- **Fix (commit):** [5281e49 fix: use a list for profile details so screen readers pair labels and values](https://github.com/maribostashvili-93/10x-Shop_Mariami_Bostashvili/commit/5281e49)
+- **What I learned:** Extending automated accessibility checks to every page finds issues that visual checks miss.
+
 ## Debugging checklist
 
 - Run `npm run typecheck` before investigating runtime behavior.

@@ -367,6 +367,46 @@
       "line": 0,
       "specs": [
         {
+          "title": "matrix: home",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 60000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium-desktop",
+              "projectName": "chromium-desktop",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 3952,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-05T21:03:44.384Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "axe",
+                      "contentType": "application/json",
+                      "body": "W10="
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "6d8778aa2e7a24d8a2df-92307b80880c9edaa8bd",
+          "file": "compat.spec.ts",
+          "line": 42,
+          "column": 3
+        },
+        {
           "title": "matrix: catalog",
           "ok": true,
           "tags": [],
@@ -382,12 +422,12 @@
                   "workerIndex": 0,
                   "parallelIndex": 0,
                   "status": "passed",
-                  "duration": 1640,
+                  "duration": 1526,
                   "errors": [],
                   "stdout": [],
                   "stderr": [],
                   "retry": 0,
-                  "startTime": "2026-11-05T20:51:23.945Z",
+                  "startTime": "2026-11-05T21:03:48.508Z",
                   "annotations": [],
                   "attachments": [
                     {
@@ -403,7 +443,47 @@
           ],
           "id": "6d8778aa2e7a24d8a2df-29f14893e30b17b8c990",
           "file": "compat.spec.ts",
-          "line": 35,
+          "line": 42,
+          "column": 3
+        },
+        {
+          "title": "matrix: best-deals",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 60000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium-desktop",
+              "projectName": "chromium-desktop",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 1437,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-05T21:03:50.053Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "axe",
+                      "contentType": "application/json",
+                      "body": "W10="
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "6d8778aa2e7a24d8a2df-6ab990c0a578f1bad6cd",
+          "file": "compat.spec.ts",
+          "line": 42,
           "column": 3
         },
         {
@@ -422,12 +502,12 @@
                   "workerIndex": 0,
                   "parallelIndex": 0,
                   "status": "passed",
-                  "duration": 1628,
+                  "duration": 1690,
                   "errors": [],
                   "stdout": [],
                   "stderr": [],
                   "retry": 0,
-                  "startTime": "2026-11-05T20:51:25.781Z",
+                  "startTime": "2026-11-05T21:03:51.511Z",
                   "annotations": [],
                   "attachments": [
                     {
@@ -443,7 +523,7 @@
           ],
           "id": "6d8778aa2e7a24d8a2df-743a1d4468e97c1b029b",
           "file": "compat.spec.ts",
-          "line": 35,
+          "line": 42,
           "column": 3
         },
         {
@@ -462,12 +542,12 @@
                   "workerIndex": 0,
                   "parallelIndex": 0,
                   "status": "passed",
-                  "duration": 944,
+                  "duration": 1470,
                   "errors": [],
                   "stdout": [],
                   "stderr": [],
                   "retry": 0,
-                  "startTime": "2026-11-05T20:51:27.420Z",
+                  "startTime": "2026-11-05T21:03:53.220Z",
                   "annotations": [],
                   "attachments": [
                     {
@@ -483,7 +563,7 @@
           ],
           "id": "6d8778aa2e7a24d8a2df-1eb9a15d80a75297fab8",
           "file": "compat.spec.ts",
-          "line": 35,
+          "line": 42,
           "column": 3
         },
         {
@@ -502,12 +582,12 @@
                   "workerIndex": 0,
                   "parallelIndex": 0,
                   "status": "passed",
-                  "duration": 1434,
+                  "duration": 1847,
                   "errors": [],
                   "stdout": [],
                   "stderr": [],
                   "retry": 0,
-                  "startTime": "2026-11-05T20:51:28.376Z",
+                  "startTime": "2026-11-05T21:03:54.711Z",
                   "annotations": [],
                   "attachments": [
                     {
@@ -523,7 +603,87 @@
           ],
           "id": "6d8778aa2e7a24d8a2df-dee169b42b54bfcf7457",
           "file": "compat.spec.ts",
-          "line": 35,
+          "line": 42,
+          "column": 3
+        },
+        {
+          "title": "matrix: orders",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 60000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium-desktop",
+              "projectName": "chromium-desktop",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 1543,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-05T21:03:56.579Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "axe",
+                      "contentType": "application/json",
+                      "body": "W10="
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "6d8778aa2e7a24d8a2df-080e92bcd5d6a95b1ade",
+          "file": "compat.spec.ts",
+          "line": 42,
+          "column": 3
+        },
+        {
+          "title": "matrix: profile",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 60000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium-desktop",
+              "projectName": "chromium-desktop",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 2501,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-05T21:03:58.142Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "axe",
+                      "contentType": "application/json",
+                      "body": "W10="
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "6d8778aa2e7a24d8a2df-fc5d115fa24677e89ab3",
+          "file": "compat.spec.ts",
+          "line": 42,
           "column": 3
         },
         {
@@ -542,12 +702,12 @@
                   "workerIndex": 0,
                   "parallelIndex": 0,
                   "status": "passed",
-                  "duration": 1002,
+                  "duration": 1240,
                   "errors": [],
                   "stdout": [],
                   "stderr": [],
                   "retry": 0,
-                  "startTime": "2026-11-05T20:51:29.825Z",
+                  "startTime": "2026-11-05T21:04:00.659Z",
                   "annotations": [],
                   "attachments": [
                     {
@@ -563,7 +723,7 @@
           ],
           "id": "6d8778aa2e7a24d8a2df-042d36da4af84d308c46",
           "file": "compat.spec.ts",
-          "line": 35,
+          "line": 42,
           "column": 3
         },
         {
@@ -582,12 +742,12 @@
                   "workerIndex": 0,
                   "parallelIndex": 0,
                   "status": "passed",
-                  "duration": 5865,
+                  "duration": 6823,
                   "errors": [],
                   "stdout": [],
                   "stderr": [],
                   "retry": 0,
-                  "startTime": "2026-11-05T20:51:30.837Z",
+                  "startTime": "2026-11-05T21:04:01.914Z",
                   "annotations": [],
                   "attachments": [
                     {
@@ -603,8 +763,48 @@
           ],
           "id": "6d8778aa2e7a24d8a2df-67a2604ddf5add5a5f78",
           "file": "compat.spec.ts",
-          "line": 46,
+          "line": 57,
           "column": 1
+        },
+        {
+          "title": "matrix: home",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 60000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium-mobile",
+              "projectName": "chromium-mobile",
+              "results": [
+                {
+                  "workerIndex": 2,
+                  "parallelIndex": 1,
+                  "status": "passed",
+                  "duration": 8580,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-05T21:03:53.230Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "axe",
+                      "contentType": "application/json",
+                      "body": "W10="
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "6d8778aa2e7a24d8a2df-e05f7e91a958d9e84133",
+          "file": "compat.spec.ts",
+          "line": 42,
+          "column": 3
         },
         {
           "title": "matrix: catalog",
@@ -622,12 +822,12 @@
                   "workerIndex": 2,
                   "parallelIndex": 1,
                   "status": "passed",
-                  "duration": 2692,
+                  "duration": 3338,
                   "errors": [],
                   "stdout": [],
                   "stderr": [],
                   "retry": 0,
-                  "startTime": "2026-11-05T20:51:31.614Z",
+                  "startTime": "2026-11-05T21:04:01.970Z",
                   "annotations": [],
                   "attachments": [
                     {
@@ -643,7 +843,47 @@
           ],
           "id": "6d8778aa2e7a24d8a2df-a581aa0bd39496a0026a",
           "file": "compat.spec.ts",
-          "line": 35,
+          "line": 42,
+          "column": 3
+        },
+        {
+          "title": "matrix: best-deals",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 60000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium-mobile",
+              "projectName": "chromium-mobile",
+              "results": [
+                {
+                  "workerIndex": 2,
+                  "parallelIndex": 1,
+                  "status": "passed",
+                  "duration": 1608,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-05T21:04:05.319Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "axe",
+                      "contentType": "application/json",
+                      "body": "W10="
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "6d8778aa2e7a24d8a2df-814ee94bc687f0a5bb2a",
+          "file": "compat.spec.ts",
+          "line": 42,
           "column": 3
         },
         {
@@ -662,12 +902,12 @@
                   "workerIndex": 2,
                   "parallelIndex": 1,
                   "status": "passed",
-                  "duration": 2240,
+                  "duration": 2594,
                   "errors": [],
                   "stdout": [],
                   "stderr": [],
                   "retry": 0,
-                  "startTime": "2026-11-05T20:51:34.494Z",
+                  "startTime": "2026-11-05T21:04:06.940Z",
                   "annotations": [],
                   "attachments": [
                     {
@@ -683,7 +923,7 @@
           ],
           "id": "6d8778aa2e7a24d8a2df-fb51d4057d2657a713a2",
           "file": "compat.spec.ts",
-          "line": 35,
+          "line": 42,
           "column": 3
         },
         {
@@ -702,12 +942,12 @@
                   "workerIndex": 2,
                   "parallelIndex": 1,
                   "status": "passed",
-                  "duration": 1168,
+                  "duration": 1509,
                   "errors": [],
                   "stdout": [],
                   "stderr": [],
                   "retry": 0,
-                  "startTime": "2026-11-05T20:51:36.748Z",
+                  "startTime": "2026-11-05T21:04:09.544Z",
                   "annotations": [],
                   "attachments": [
                     {
@@ -723,7 +963,7 @@
           ],
           "id": "6d8778aa2e7a24d8a2df-f800760e16a14cde1170",
           "file": "compat.spec.ts",
-          "line": 35,
+          "line": 42,
           "column": 3
         },
         {
@@ -742,12 +982,12 @@
                   "workerIndex": 2,
                   "parallelIndex": 1,
                   "status": "passed",
-                  "duration": 1566,
+                  "duration": 1854,
                   "errors": [],
                   "stdout": [],
                   "stderr": [],
                   "retry": 0,
-                  "startTime": "2026-11-05T20:51:37.927Z",
+                  "startTime": "2026-11-05T21:04:11.066Z",
                   "annotations": [],
                   "attachments": [
                     {
@@ -763,7 +1003,87 @@
           ],
           "id": "6d8778aa2e7a24d8a2df-71cac9530e7970daabde",
           "file": "compat.spec.ts",
-          "line": 35,
+          "line": 42,
+          "column": 3
+        },
+        {
+          "title": "matrix: orders",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 60000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium-mobile",
+              "projectName": "chromium-mobile",
+              "results": [
+                {
+                  "workerIndex": 2,
+                  "parallelIndex": 1,
+                  "status": "passed",
+                  "duration": 1906,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-05T21:04:12.936Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "axe",
+                      "contentType": "application/json",
+                      "body": "W10="
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "6d8778aa2e7a24d8a2df-bccdf7dc6588a2e5c1ea",
+          "file": "compat.spec.ts",
+          "line": 42,
+          "column": 3
+        },
+        {
+          "title": "matrix: profile",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 60000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium-mobile",
+              "projectName": "chromium-mobile",
+              "results": [
+                {
+                  "workerIndex": 2,
+                  "parallelIndex": 1,
+                  "status": "passed",
+                  "duration": 2061,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-05T21:04:14.856Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "axe",
+                      "contentType": "application/json",
+                      "body": "W10="
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "6d8778aa2e7a24d8a2df-4e95e6eae689ca1ddd1a",
+          "file": "compat.spec.ts",
+          "line": 42,
           "column": 3
         },
         {
@@ -782,12 +1102,12 @@
                   "workerIndex": 2,
                   "parallelIndex": 1,
                   "status": "passed",
-                  "duration": 1254,
+                  "duration": 1240,
                   "errors": [],
                   "stdout": [],
                   "stderr": [],
                   "retry": 0,
-                  "startTime": "2026-11-05T20:51:39.507Z",
+                  "startTime": "2026-11-05T21:04:16.932Z",
                   "annotations": [],
                   "attachments": [
                     {
@@ -803,7 +1123,7 @@
           ],
           "id": "6d8778aa2e7a24d8a2df-2b3073e3fb7c6131dbd4",
           "file": "compat.spec.ts",
-          "line": 35,
+          "line": 42,
           "column": 3
         },
         {
@@ -822,12 +1142,12 @@
                   "workerIndex": 2,
                   "parallelIndex": 1,
                   "status": "passed",
-                  "duration": 5784,
+                  "duration": 6860,
                   "errors": [],
                   "stdout": [],
                   "stderr": [],
                   "retry": 0,
-                  "startTime": "2026-11-05T20:51:40.773Z",
+                  "startTime": "2026-11-05T21:04:18.186Z",
                   "annotations": [],
                   "attachments": [
                     {
@@ -843,8 +1163,48 @@
           ],
           "id": "6d8778aa2e7a24d8a2df-bdd4892b5f91cfbb2ca4",
           "file": "compat.spec.ts",
-          "line": 46,
+          "line": 57,
           "column": 1
+        },
+        {
+          "title": "matrix: home",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 60000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "firefox-desktop",
+              "projectName": "firefox-desktop",
+              "results": [
+                {
+                  "workerIndex": 4,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 5915,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-05T21:04:19.679Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "axe",
+                      "contentType": "application/json",
+                      "body": "W10="
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "6d8778aa2e7a24d8a2df-02a998bba3bd03094cd6",
+          "file": "compat.spec.ts",
+          "line": 42,
+          "column": 3
         },
         {
           "title": "matrix: catalog",
@@ -862,12 +1222,12 @@
                   "workerIndex": 4,
                   "parallelIndex": 0,
                   "status": "passed",
-                  "duration": 4022,
+                  "duration": 2363,
                   "errors": [],
                   "stdout": [],
                   "stderr": [],
                   "retry": 0,
-                  "startTime": "2026-11-05T20:51:46.494Z",
+                  "startTime": "2026-11-05T21:04:26.631Z",
                   "annotations": [],
                   "attachments": [
                     {
@@ -883,7 +1243,47 @@
           ],
           "id": "6d8778aa2e7a24d8a2df-6ad94503a34047a3fe4c",
           "file": "compat.spec.ts",
-          "line": 35,
+          "line": 42,
+          "column": 3
+        },
+        {
+          "title": "matrix: best-deals",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 60000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "firefox-desktop",
+              "projectName": "firefox-desktop",
+              "results": [
+                {
+                  "workerIndex": 4,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 1878,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-05T21:04:29.014Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "axe",
+                      "contentType": "application/json",
+                      "body": "W10="
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "6d8778aa2e7a24d8a2df-847c55730fe6ad7dbb38",
+          "file": "compat.spec.ts",
+          "line": 42,
           "column": 3
         },
         {
@@ -902,12 +1302,12 @@
                   "workerIndex": 4,
                   "parallelIndex": 0,
                   "status": "passed",
-                  "duration": 2396,
+                  "duration": 2319,
                   "errors": [],
                   "stdout": [],
                   "stderr": [],
                   "retry": 0,
-                  "startTime": "2026-11-05T20:51:51.208Z",
+                  "startTime": "2026-11-05T21:04:30.913Z",
                   "annotations": [],
                   "attachments": [
                     {
@@ -923,7 +1323,7 @@
           ],
           "id": "6d8778aa2e7a24d8a2df-889125690e6e9c825fbc",
           "file": "compat.spec.ts",
-          "line": 35,
+          "line": 42,
           "column": 3
         },
         {
@@ -942,12 +1342,12 @@
                   "workerIndex": 4,
                   "parallelIndex": 0,
                   "status": "passed",
-                  "duration": 1823,
+                  "duration": 1772,
                   "errors": [],
                   "stdout": [],
                   "stderr": [],
                   "retry": 0,
-                  "startTime": "2026-11-05T20:51:53.617Z",
+                  "startTime": "2026-11-05T21:04:33.247Z",
                   "annotations": [],
                   "attachments": [
                     {
@@ -963,7 +1363,7 @@
           ],
           "id": "6d8778aa2e7a24d8a2df-fa8734ec0b1a20f6ec33",
           "file": "compat.spec.ts",
-          "line": 35,
+          "line": 42,
           "column": 3
         },
         {
@@ -982,12 +1382,12 @@
                   "workerIndex": 4,
                   "parallelIndex": 0,
                   "status": "passed",
-                  "duration": 1949,
+                  "duration": 2264,
                   "errors": [],
                   "stdout": [],
                   "stderr": [],
                   "retry": 0,
-                  "startTime": "2026-11-05T20:51:55.455Z",
+                  "startTime": "2026-11-05T21:04:35.032Z",
                   "annotations": [],
                   "attachments": [
                     {
@@ -1003,7 +1403,87 @@
           ],
           "id": "6d8778aa2e7a24d8a2df-ea7fccc33cac7c670c72",
           "file": "compat.spec.ts",
-          "line": 35,
+          "line": 42,
+          "column": 3
+        },
+        {
+          "title": "matrix: orders",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 60000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "firefox-desktop",
+              "projectName": "firefox-desktop",
+              "results": [
+                {
+                  "workerIndex": 4,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 1633,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-05T21:04:37.308Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "axe",
+                      "contentType": "application/json",
+                      "body": "W10="
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "6d8778aa2e7a24d8a2df-d8a1848234fbef22b654",
+          "file": "compat.spec.ts",
+          "line": 42,
+          "column": 3
+        },
+        {
+          "title": "matrix: profile",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 60000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "firefox-desktop",
+              "projectName": "firefox-desktop",
+              "results": [
+                {
+                  "workerIndex": 4,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 2002,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-05T21:04:38.949Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "axe",
+                      "contentType": "application/json",
+                      "body": "W10="
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "6d8778aa2e7a24d8a2df-091665f0ed7147f26400",
+          "file": "compat.spec.ts",
+          "line": 42,
           "column": 3
         },
         {
@@ -1022,12 +1502,12 @@
                   "workerIndex": 4,
                   "parallelIndex": 0,
                   "status": "passed",
-                  "duration": 2093,
+                  "duration": 1693,
                   "errors": [],
                   "stdout": [],
                   "stderr": [],
                   "retry": 0,
-                  "startTime": "2026-11-05T20:51:57.415Z",
+                  "startTime": "2026-11-05T21:04:40.963Z",
                   "annotations": [],
                   "attachments": [
                     {
@@ -1043,7 +1523,7 @@
           ],
           "id": "6d8778aa2e7a24d8a2df-4432ef03c17de45f5324",
           "file": "compat.spec.ts",
-          "line": 35,
+          "line": 42,
           "column": 3
         },
         {
@@ -1062,12 +1542,12 @@
                   "workerIndex": 4,
                   "parallelIndex": 0,
                   "status": "passed",
-                  "duration": 7212,
+                  "duration": 8251,
                   "errors": [],
                   "stdout": [],
                   "stderr": [],
                   "retry": 0,
-                  "startTime": "2026-11-05T20:51:59.525Z",
+                  "startTime": "2026-11-05T21:04:42.669Z",
                   "annotations": [],
                   "attachments": [
                     {
@@ -1083,8 +1563,48 @@
           ],
           "id": "6d8778aa2e7a24d8a2df-380a698c99facf549265",
           "file": "compat.spec.ts",
-          "line": 46,
+          "line": 57,
           "column": 1
+        },
+        {
+          "title": "matrix: home",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 60000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "firefox-mobile",
+              "projectName": "firefox-mobile",
+              "results": [
+                {
+                  "workerIndex": 6,
+                  "parallelIndex": 1,
+                  "status": "passed",
+                  "duration": 4682,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-05T21:04:39.025Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "axe",
+                      "contentType": "application/json",
+                      "body": "W10="
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "6d8778aa2e7a24d8a2df-3f07026942907229d625",
+          "file": "compat.spec.ts",
+          "line": 42,
+          "column": 3
         },
         {
           "title": "matrix: catalog",
@@ -1102,12 +1622,12 @@
                   "workerIndex": 6,
                   "parallelIndex": 1,
                   "status": "passed",
-                  "duration": 4607,
+                  "duration": 2364,
                   "errors": [],
                   "stdout": [],
                   "stderr": [],
                   "retry": 0,
-                  "startTime": "2026-11-05T20:51:59.237Z",
+                  "startTime": "2026-11-05T21:04:44.364Z",
                   "annotations": [],
                   "attachments": [
                     {
@@ -1123,7 +1643,47 @@
           ],
           "id": "6d8778aa2e7a24d8a2df-c4d5ffee12f7b172d7f5",
           "file": "compat.spec.ts",
-          "line": 35,
+          "line": 42,
+          "column": 3
+        },
+        {
+          "title": "matrix: best-deals",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 60000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "firefox-mobile",
+              "projectName": "firefox-mobile",
+              "results": [
+                {
+                  "workerIndex": 6,
+                  "parallelIndex": 1,
+                  "status": "passed",
+                  "duration": 1697,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-05T21:04:46.738Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "axe",
+                      "contentType": "application/json",
+                      "body": "W10="
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "6d8778aa2e7a24d8a2df-4260084874fc39829f97",
+          "file": "compat.spec.ts",
+          "line": 42,
           "column": 3
         },
         {
@@ -1142,12 +1702,12 @@
                   "workerIndex": 6,
                   "parallelIndex": 1,
                   "status": "passed",
-                  "duration": 2899,
+                  "duration": 2447,
                   "errors": [],
                   "stdout": [],
                   "stderr": [],
                   "retry": 0,
-                  "startTime": "2026-11-05T20:52:04.473Z",
+                  "startTime": "2026-11-05T21:04:48.443Z",
                   "annotations": [],
                   "attachments": [
                     {
@@ -1163,7 +1723,7 @@
           ],
           "id": "6d8778aa2e7a24d8a2df-a116baaf5599040fdba0",
           "file": "compat.spec.ts",
-          "line": 35,
+          "line": 42,
           "column": 3
         },
         {
@@ -1182,12 +1742,12 @@
                   "workerIndex": 6,
                   "parallelIndex": 1,
                   "status": "passed",
-                  "duration": 1951,
+                  "duration": 2275,
                   "errors": [],
                   "stdout": [],
                   "stderr": [],
                   "retry": 0,
-                  "startTime": "2026-11-05T20:52:07.381Z",
+                  "startTime": "2026-11-05T21:04:50.900Z",
                   "annotations": [],
                   "attachments": [
                     {
@@ -1203,7 +1763,7 @@
           ],
           "id": "6d8778aa2e7a24d8a2df-1363c53a5a6f89db99dc",
           "file": "compat.spec.ts",
-          "line": 35,
+          "line": 42,
           "column": 3
         },
         {
@@ -1222,12 +1782,12 @@
                   "workerIndex": 6,
                   "parallelIndex": 1,
                   "status": "passed",
-                  "duration": 2626,
+                  "duration": 2280,
                   "errors": [],
                   "stdout": [],
                   "stderr": [],
                   "retry": 0,
-                  "startTime": "2026-11-05T20:52:09.343Z",
+                  "startTime": "2026-11-05T21:04:53.186Z",
                   "annotations": [],
                   "attachments": [
                     {
@@ -1243,7 +1803,87 @@
           ],
           "id": "6d8778aa2e7a24d8a2df-53cfefbe5db3d821cb60",
           "file": "compat.spec.ts",
-          "line": 35,
+          "line": 42,
+          "column": 3
+        },
+        {
+          "title": "matrix: orders",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 60000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "firefox-mobile",
+              "projectName": "firefox-mobile",
+              "results": [
+                {
+                  "workerIndex": 6,
+                  "parallelIndex": 1,
+                  "status": "passed",
+                  "duration": 2293,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-05T21:04:55.475Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "axe",
+                      "contentType": "application/json",
+                      "body": "W10="
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "6d8778aa2e7a24d8a2df-fbe501846c0e6d9c8920",
+          "file": "compat.spec.ts",
+          "line": 42,
+          "column": 3
+        },
+        {
+          "title": "matrix: profile",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 60000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "firefox-mobile",
+              "projectName": "firefox-mobile",
+              "results": [
+                {
+                  "workerIndex": 6,
+                  "parallelIndex": 1,
+                  "status": "passed",
+                  "duration": 2129,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-05T21:04:57.779Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "axe",
+                      "contentType": "application/json",
+                      "body": "W10="
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "6d8778aa2e7a24d8a2df-d4bcfdf1bcc048e8d99c",
+          "file": "compat.spec.ts",
+          "line": 42,
           "column": 3
         },
         {
@@ -1262,12 +1902,12 @@
                   "workerIndex": 6,
                   "parallelIndex": 1,
                   "status": "passed",
-                  "duration": 2054,
+                  "duration": 1467,
                   "errors": [],
                   "stdout": [],
                   "stderr": [],
                   "retry": 0,
-                  "startTime": "2026-11-05T20:52:11.978Z",
+                  "startTime": "2026-11-05T21:04:59.919Z",
                   "annotations": [],
                   "attachments": [
                     {
@@ -1283,7 +1923,7 @@
           ],
           "id": "6d8778aa2e7a24d8a2df-dac92d5d3b63636f1e97",
           "file": "compat.spec.ts",
-          "line": 35,
+          "line": 42,
           "column": 3
         },
         {
@@ -1302,12 +1942,12 @@
                   "workerIndex": 6,
                   "parallelIndex": 1,
                   "status": "passed",
-                  "duration": 6191,
+                  "duration": 7560,
                   "errors": [],
                   "stdout": [],
                   "stderr": [],
                   "retry": 0,
-                  "startTime": "2026-11-05T20:52:14.045Z",
+                  "startTime": "2026-11-05T21:05:01.396Z",
                   "annotations": [],
                   "attachments": [
                     {
@@ -1323,8 +1963,48 @@
           ],
           "id": "6d8778aa2e7a24d8a2df-0d971ca9323c524c0992",
           "file": "compat.spec.ts",
-          "line": 46,
+          "line": 57,
           "column": 1
+        },
+        {
+          "title": "matrix: home",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 60000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "webkit-desktop",
+              "projectName": "webkit-desktop",
+              "results": [
+                {
+                  "workerIndex": 8,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 3108,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-05T21:05:05.097Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "axe",
+                      "contentType": "application/json",
+                      "body": "W10="
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "6d8778aa2e7a24d8a2df-a027fdfdc15078a5897c",
+          "file": "compat.spec.ts",
+          "line": 42,
+          "column": 3
         },
         {
           "title": "matrix: catalog",
@@ -1340,14 +2020,14 @@
               "results": [
                 {
                   "workerIndex": 8,
-                  "parallelIndex": 1,
+                  "parallelIndex": 0,
                   "status": "passed",
-                  "duration": 2074,
+                  "duration": 1574,
                   "errors": [],
                   "stdout": [],
                   "stderr": [],
                   "retry": 0,
-                  "startTime": "2026-11-05T20:52:21.268Z",
+                  "startTime": "2026-11-05T21:05:08.349Z",
                   "annotations": [],
                   "attachments": [
                     {
@@ -1363,7 +2043,47 @@
           ],
           "id": "6d8778aa2e7a24d8a2df-c05fb12b545a1063b6e7",
           "file": "compat.spec.ts",
-          "line": 35,
+          "line": 42,
+          "column": 3
+        },
+        {
+          "title": "matrix: best-deals",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 60000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "webkit-desktop",
+              "projectName": "webkit-desktop",
+              "results": [
+                {
+                  "workerIndex": 8,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 1528,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-05T21:05:09.935Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "axe",
+                      "contentType": "application/json",
+                      "body": "W10="
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "6d8778aa2e7a24d8a2df-816c7402fa56f607222c",
+          "file": "compat.spec.ts",
+          "line": 42,
           "column": 3
         },
         {
@@ -1380,14 +2100,14 @@
               "results": [
                 {
                   "workerIndex": 8,
-                  "parallelIndex": 1,
+                  "parallelIndex": 0,
                   "status": "passed",
-                  "duration": 1796,
+                  "duration": 1889,
                   "errors": [],
                   "stdout": [],
                   "stderr": [],
                   "retry": 0,
-                  "startTime": "2026-11-05T20:52:23.474Z",
+                  "startTime": "2026-11-05T21:05:11.474Z",
                   "annotations": [],
                   "attachments": [
                     {
@@ -1403,7 +2123,7 @@
           ],
           "id": "6d8778aa2e7a24d8a2df-5a829d9d3466269d9ca8",
           "file": "compat.spec.ts",
-          "line": 35,
+          "line": 42,
           "column": 3
         },
         {
@@ -1420,14 +2140,14 @@
               "results": [
                 {
                   "workerIndex": 8,
-                  "parallelIndex": 1,
+                  "parallelIndex": 0,
                   "status": "passed",
-                  "duration": 1368,
+                  "duration": 1423,
                   "errors": [],
                   "stdout": [],
                   "stderr": [],
                   "retry": 0,
-                  "startTime": "2026-11-05T20:52:25.278Z",
+                  "startTime": "2026-11-05T21:05:13.373Z",
                   "annotations": [],
                   "attachments": [
                     {
@@ -1443,7 +2163,7 @@
           ],
           "id": "6d8778aa2e7a24d8a2df-14c5dfa17673b6136759",
           "file": "compat.spec.ts",
-          "line": 35,
+          "line": 42,
           "column": 3
         },
         {
@@ -1460,14 +2180,14 @@
               "results": [
                 {
                   "workerIndex": 8,
-                  "parallelIndex": 1,
+                  "parallelIndex": 0,
                   "status": "passed",
-                  "duration": 1599,
+                  "duration": 1698,
                   "errors": [],
                   "stdout": [],
                   "stderr": [],
                   "retry": 0,
-                  "startTime": "2026-11-05T20:52:26.655Z",
+                  "startTime": "2026-11-05T21:05:14.806Z",
                   "annotations": [],
                   "attachments": [
                     {
@@ -1483,7 +2203,87 @@
           ],
           "id": "6d8778aa2e7a24d8a2df-0d0a6561f7fe334f9eaf",
           "file": "compat.spec.ts",
-          "line": 35,
+          "line": 42,
+          "column": 3
+        },
+        {
+          "title": "matrix: orders",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 60000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "webkit-desktop",
+              "projectName": "webkit-desktop",
+              "results": [
+                {
+                  "workerIndex": 8,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 1620,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-05T21:05:16.514Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "axe",
+                      "contentType": "application/json",
+                      "body": "W10="
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "6d8778aa2e7a24d8a2df-5a25b1ae6789a8d5ded6",
+          "file": "compat.spec.ts",
+          "line": 42,
+          "column": 3
+        },
+        {
+          "title": "matrix: profile",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 60000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "webkit-desktop",
+              "projectName": "webkit-desktop",
+              "results": [
+                {
+                  "workerIndex": 8,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 1818,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-05T21:05:18.144Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "axe",
+                      "contentType": "application/json",
+                      "body": "W10="
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "6d8778aa2e7a24d8a2df-bcb1b90ad3748f74fff0",
+          "file": "compat.spec.ts",
+          "line": 42,
           "column": 3
         },
         {
@@ -1500,14 +2300,14 @@
               "results": [
                 {
                   "workerIndex": 8,
-                  "parallelIndex": 1,
+                  "parallelIndex": 0,
                   "status": "passed",
-                  "duration": 1280,
+                  "duration": 1411,
                   "errors": [],
                   "stdout": [],
                   "stderr": [],
                   "retry": 0,
-                  "startTime": "2026-11-05T20:52:28.265Z",
+                  "startTime": "2026-11-05T21:05:19.971Z",
                   "annotations": [],
                   "attachments": [
                     {
@@ -1523,7 +2323,7 @@
           ],
           "id": "6d8778aa2e7a24d8a2df-3ae26207a73230ba69ee",
           "file": "compat.spec.ts",
-          "line": 35,
+          "line": 42,
           "column": 3
         },
         {
@@ -1539,7 +2339,7 @@
                   "description": "Playwright WebKit never moves focus to links with Tab or Alt+Tab, even on a bare <a href> page (docs/compat/webkit-keyboard-baseline.json). Check this flow in real Safari with \"Press Tab to highlight each item\" enabled.",
                   "location": {
                     "file": "C:\\samushao\\ფრონტ დველოპერი\\ფინალური პროექტი\\10x-Shop\\tests\\compat\\compat.spec.ts",
-                    "line": 47,
+                    "line": 58,
                     "column": 8
                   }
                 }
@@ -1550,21 +2350,21 @@
               "results": [
                 {
                   "workerIndex": 8,
-                  "parallelIndex": 1,
+                  "parallelIndex": 0,
                   "status": "skipped",
-                  "duration": 302,
+                  "duration": 277,
                   "errors": [],
                   "stdout": [],
                   "stderr": [],
                   "retry": 0,
-                  "startTime": "2026-11-05T20:52:29.555Z",
+                  "startTime": "2026-11-05T21:05:21.394Z",
                   "annotations": [
                     {
                       "type": "skip",
                       "description": "Playwright WebKit never moves focus to links with Tab or Alt+Tab, even on a bare <a href> page (docs/compat/webkit-keyboard-baseline.json). Check this flow in real Safari with \"Press Tab to highlight each item\" enabled.",
                       "location": {
                         "file": "C:\\samushao\\ფრონტ დველოპერი\\ფინალური პროექტი\\10x-Shop\\tests\\compat\\compat.spec.ts",
-                        "line": 47,
+                        "line": 58,
                         "column": 8
                       }
                     }
@@ -1577,8 +2377,48 @@
           ],
           "id": "6d8778aa2e7a24d8a2df-e2475e02f4e95a53acf1",
           "file": "compat.spec.ts",
-          "line": 46,
+          "line": 57,
           "column": 1
+        },
+        {
+          "title": "matrix: home",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 60000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "webkit-mobile",
+              "projectName": "webkit-mobile",
+              "results": [
+                {
+                  "workerIndex": 10,
+                  "parallelIndex": 1,
+                  "status": "passed",
+                  "duration": 4313,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-05T21:05:20.392Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "axe",
+                      "contentType": "application/json",
+                      "body": "W10="
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "6d8778aa2e7a24d8a2df-38842aee3766bac3de45",
+          "file": "compat.spec.ts",
+          "line": 42,
+          "column": 3
         },
         {
           "title": "matrix: catalog",
@@ -1596,12 +2436,12 @@
                   "workerIndex": 10,
                   "parallelIndex": 1,
                   "status": "passed",
-                  "duration": 2612,
+                  "duration": 2619,
                   "errors": [],
                   "stdout": [],
                   "stderr": [],
                   "retry": 0,
-                  "startTime": "2026-11-05T20:52:30.474Z",
+                  "startTime": "2026-11-05T21:05:24.794Z",
                   "annotations": [],
                   "attachments": [
                     {
@@ -1617,7 +2457,47 @@
           ],
           "id": "6d8778aa2e7a24d8a2df-c02bc75cc043e3a96c18",
           "file": "compat.spec.ts",
-          "line": 35,
+          "line": 42,
+          "column": 3
+        },
+        {
+          "title": "matrix: best-deals",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 60000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "webkit-mobile",
+              "projectName": "webkit-mobile",
+              "results": [
+                {
+                  "workerIndex": 10,
+                  "parallelIndex": 1,
+                  "status": "passed",
+                  "duration": 1820,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-05T21:05:27.424Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "axe",
+                      "contentType": "application/json",
+                      "body": "W10="
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "6d8778aa2e7a24d8a2df-f1de5bc940f4fa05a5e3",
+          "file": "compat.spec.ts",
+          "line": 42,
           "column": 3
         },
         {
@@ -1636,12 +2516,12 @@
                   "workerIndex": 10,
                   "parallelIndex": 1,
                   "status": "passed",
-                  "duration": 2429,
+                  "duration": 2258,
                   "errors": [],
                   "stdout": [],
                   "stderr": [],
                   "retry": 0,
-                  "startTime": "2026-11-05T20:52:33.195Z",
+                  "startTime": "2026-11-05T21:05:29.256Z",
                   "annotations": [],
                   "attachments": [
                     {
@@ -1657,7 +2537,7 @@
           ],
           "id": "6d8778aa2e7a24d8a2df-cbd0ffac36cb1914d17f",
           "file": "compat.spec.ts",
-          "line": 35,
+          "line": 42,
           "column": 3
         },
         {
@@ -1676,12 +2556,12 @@
                   "workerIndex": 10,
                   "parallelIndex": 1,
                   "status": "passed",
-                  "duration": 1742,
+                  "duration": 1813,
                   "errors": [],
                   "stdout": [],
                   "stderr": [],
                   "retry": 0,
-                  "startTime": "2026-11-05T20:52:35.634Z",
+                  "startTime": "2026-11-05T21:05:31.523Z",
                   "annotations": [],
                   "attachments": [
                     {
@@ -1697,7 +2577,7 @@
           ],
           "id": "6d8778aa2e7a24d8a2df-4a9b8a39594733c5bcf3",
           "file": "compat.spec.ts",
-          "line": 35,
+          "line": 42,
           "column": 3
         },
         {
@@ -1716,12 +2596,12 @@
                   "workerIndex": 10,
                   "parallelIndex": 1,
                   "status": "passed",
-                  "duration": 1957,
+                  "duration": 1929,
                   "errors": [],
                   "stdout": [],
                   "stderr": [],
                   "retry": 0,
-                  "startTime": "2026-11-05T20:52:37.387Z",
+                  "startTime": "2026-11-05T21:05:33.345Z",
                   "annotations": [],
                   "attachments": [
                     {
@@ -1737,7 +2617,87 @@
           ],
           "id": "6d8778aa2e7a24d8a2df-c288d0f3a6aa3624ebb9",
           "file": "compat.spec.ts",
-          "line": 35,
+          "line": 42,
+          "column": 3
+        },
+        {
+          "title": "matrix: orders",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 60000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "webkit-mobile",
+              "projectName": "webkit-mobile",
+              "results": [
+                {
+                  "workerIndex": 10,
+                  "parallelIndex": 1,
+                  "status": "passed",
+                  "duration": 1868,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-05T21:05:35.283Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "axe",
+                      "contentType": "application/json",
+                      "body": "W10="
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "6d8778aa2e7a24d8a2df-942de991b24ed030b28d",
+          "file": "compat.spec.ts",
+          "line": 42,
+          "column": 3
+        },
+        {
+          "title": "matrix: profile",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 60000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "webkit-mobile",
+              "projectName": "webkit-mobile",
+              "results": [
+                {
+                  "workerIndex": 10,
+                  "parallelIndex": 1,
+                  "status": "passed",
+                  "duration": 2242,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-05T21:05:37.161Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "axe",
+                      "contentType": "application/json",
+                      "body": "W10="
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "6d8778aa2e7a24d8a2df-f5076b8a54e2aa37d5af",
+          "file": "compat.spec.ts",
+          "line": 42,
           "column": 3
         },
         {
@@ -1756,12 +2716,12 @@
                   "workerIndex": 10,
                   "parallelIndex": 1,
                   "status": "passed",
-                  "duration": 1633,
+                  "duration": 1583,
                   "errors": [],
                   "stdout": [],
                   "stderr": [],
                   "retry": 0,
-                  "startTime": "2026-11-05T20:52:39.355Z",
+                  "startTime": "2026-11-05T21:05:39.411Z",
                   "annotations": [],
                   "attachments": [
                     {
@@ -1777,7 +2737,7 @@
           ],
           "id": "6d8778aa2e7a24d8a2df-133f80c43a416c816fbd",
           "file": "compat.spec.ts",
-          "line": 35,
+          "line": 42,
           "column": 3
         },
         {
@@ -1793,7 +2753,7 @@
                   "description": "Playwright WebKit never moves focus to links with Tab or Alt+Tab, even on a bare <a href> page (docs/compat/webkit-keyboard-baseline.json). Check this flow in real Safari with \"Press Tab to highlight each item\" enabled.",
                   "location": {
                     "file": "C:\\samushao\\ფრონტ დველოპერი\\ფინალური პროექტი\\10x-Shop\\tests\\compat\\compat.spec.ts",
-                    "line": 47,
+                    "line": 58,
                     "column": 8
                   }
                 }
@@ -1806,19 +2766,19 @@
                   "workerIndex": 10,
                   "parallelIndex": 1,
                   "status": "skipped",
-                  "duration": 376,
+                  "duration": 348,
                   "errors": [],
                   "stdout": [],
                   "stderr": [],
                   "retry": 0,
-                  "startTime": "2026-11-05T20:52:40.997Z",
+                  "startTime": "2026-11-05T21:05:41.003Z",
                   "annotations": [
                     {
                       "type": "skip",
                       "description": "Playwright WebKit never moves focus to links with Tab or Alt+Tab, even on a bare <a href> page (docs/compat/webkit-keyboard-baseline.json). Check this flow in real Safari with \"Press Tab to highlight each item\" enabled.",
                       "location": {
                         "file": "C:\\samushao\\ფრონტ დველოპერი\\ფინალური პროექტი\\10x-Shop\\tests\\compat\\compat.spec.ts",
-                        "line": 47,
+                        "line": 58,
                         "column": 8
                       }
                     }
@@ -1831,7 +2791,7 @@
           ],
           "id": "6d8778aa2e7a24d8a2df-0d1c24d08b4af81db539",
           "file": "compat.spec.ts",
-          "line": 46,
+          "line": 57,
           "column": 1
         }
       ]
@@ -1858,12 +2818,12 @@
                   "workerIndex": 1,
                   "parallelIndex": 1,
                   "status": "passed",
-                  "duration": 708,
+                  "duration": 922,
                   "errors": [],
                   "stdout": [],
                   "stderr": [],
                   "retry": 0,
-                  "startTime": "2026-11-05T20:51:23.802Z",
+                  "startTime": "2026-11-05T21:03:44.290Z",
                   "annotations": [],
                   "attachments": []
                 }
@@ -1892,12 +2852,12 @@
                   "workerIndex": 1,
                   "parallelIndex": 1,
                   "status": "passed",
-                  "duration": 500,
+                  "duration": 728,
                   "errors": [],
                   "stdout": [],
                   "stderr": [],
                   "retry": 0,
-                  "startTime": "2026-11-05T20:51:24.720Z",
+                  "startTime": "2026-11-05T21:03:45.458Z",
                   "annotations": [],
                   "attachments": []
                 }
@@ -1926,12 +2886,12 @@
                   "workerIndex": 1,
                   "parallelIndex": 1,
                   "status": "passed",
-                  "duration": 935,
+                  "duration": 1019,
                   "errors": [],
                   "stdout": [],
                   "stderr": [],
                   "retry": 0,
-                  "startTime": "2026-11-05T20:51:25.234Z",
+                  "startTime": "2026-11-05T21:03:46.201Z",
                   "annotations": [],
                   "attachments": []
                 }
@@ -1960,12 +2920,12 @@
                   "workerIndex": 1,
                   "parallelIndex": 1,
                   "status": "passed",
-                  "duration": 470,
+                  "duration": 590,
                   "errors": [],
                   "stdout": [],
                   "stderr": [],
                   "retry": 0,
-                  "startTime": "2026-11-05T20:51:26.187Z",
+                  "startTime": "2026-11-05T21:03:47.233Z",
                   "annotations": [],
                   "attachments": []
                 }
@@ -1994,12 +2954,12 @@
                   "workerIndex": 1,
                   "parallelIndex": 1,
                   "status": "passed",
-                  "duration": 4177,
+                  "duration": 4489,
                   "errors": [],
                   "stdout": [],
                   "stderr": [],
                   "retry": 0,
-                  "startTime": "2026-11-05T20:51:26.668Z",
+                  "startTime": "2026-11-05T21:03:47.843Z",
                   "annotations": [],
                   "attachments": []
                 }
@@ -2028,12 +2988,12 @@
                   "workerIndex": 3,
                   "parallelIndex": 0,
                   "status": "passed",
-                  "duration": 933,
+                  "duration": 1108,
                   "errors": [],
                   "stdout": [],
                   "stderr": [],
                   "retry": 0,
-                  "startTime": "2026-11-05T20:51:37.343Z",
+                  "startTime": "2026-11-05T21:04:09.649Z",
                   "annotations": [],
                   "attachments": []
                 }
@@ -2062,12 +3022,12 @@
                   "workerIndex": 3,
                   "parallelIndex": 0,
                   "status": "passed",
-                  "duration": 1008,
+                  "duration": 1258,
                   "errors": [],
                   "stdout": [],
                   "stderr": [],
                   "retry": 0,
-                  "startTime": "2026-11-05T20:51:38.436Z",
+                  "startTime": "2026-11-05T21:04:10.951Z",
                   "annotations": [],
                   "attachments": []
                 }
@@ -2096,12 +3056,12 @@
                   "workerIndex": 3,
                   "parallelIndex": 0,
                   "status": "passed",
-                  "duration": 801,
+                  "duration": 996,
                   "errors": [],
                   "stdout": [],
                   "stderr": [],
                   "retry": 0,
-                  "startTime": "2026-11-05T20:51:39.455Z",
+                  "startTime": "2026-11-05T21:04:12.222Z",
                   "annotations": [],
                   "attachments": []
                 }
@@ -2130,12 +3090,12 @@
                   "workerIndex": 3,
                   "parallelIndex": 0,
                   "status": "passed",
-                  "duration": 1174,
+                  "duration": 1243,
                   "errors": [],
                   "stdout": [],
                   "stderr": [],
                   "retry": 0,
-                  "startTime": "2026-11-05T20:51:40.266Z",
+                  "startTime": "2026-11-05T21:04:13.230Z",
                   "annotations": [],
                   "attachments": []
                 }
@@ -2164,12 +3124,12 @@
                   "workerIndex": 3,
                   "parallelIndex": 0,
                   "status": "passed",
-                  "duration": 4321,
+                  "duration": 4346,
                   "errors": [],
                   "stdout": [],
                   "stderr": [],
                   "retry": 0,
-                  "startTime": "2026-11-05T20:51:41.453Z",
+                  "startTime": "2026-11-05T21:04:14.487Z",
                   "annotations": [],
                   "attachments": []
                 }
@@ -2198,12 +3158,12 @@
                   "workerIndex": 5,
                   "parallelIndex": 1,
                   "status": "passed",
-                  "duration": 2036,
+                  "duration": 2685,
                   "errors": [],
                   "stdout": [],
                   "stderr": [],
                   "retry": 0,
-                  "startTime": "2026-11-05T20:51:47.162Z",
+                  "startTime": "2026-11-05T21:04:25.800Z",
                   "annotations": [],
                   "attachments": []
                 }
@@ -2232,12 +3192,12 @@
                   "workerIndex": 5,
                   "parallelIndex": 1,
                   "status": "passed",
-                  "duration": 1281,
+                  "duration": 1338,
                   "errors": [],
                   "stdout": [],
                   "stderr": [],
                   "retry": 0,
-                  "startTime": "2026-11-05T20:51:49.746Z",
+                  "startTime": "2026-11-05T21:04:29.337Z",
                   "annotations": [],
                   "attachments": []
                 }
@@ -2266,12 +3226,12 @@
                   "workerIndex": 5,
                   "parallelIndex": 1,
                   "status": "passed",
-                  "duration": 1488,
+                  "duration": 1602,
                   "errors": [],
                   "stdout": [],
                   "stderr": [],
                   "retry": 0,
-                  "startTime": "2026-11-05T20:51:51.046Z",
+                  "startTime": "2026-11-05T21:04:30.698Z",
                   "annotations": [],
                   "attachments": []
                 }
@@ -2300,12 +3260,12 @@
                   "workerIndex": 5,
                   "parallelIndex": 1,
                   "status": "passed",
-                  "duration": 917,
+                  "duration": 938,
                   "errors": [],
                   "stdout": [],
                   "stderr": [],
                   "retry": 0,
-                  "startTime": "2026-11-05T20:51:52.548Z",
+                  "startTime": "2026-11-05T21:04:32.326Z",
                   "annotations": [],
                   "attachments": []
                 }
@@ -2334,12 +3294,12 @@
                   "workerIndex": 5,
                   "parallelIndex": 1,
                   "status": "passed",
-                  "duration": 4762,
+                  "duration": 4654,
                   "errors": [],
                   "stdout": [],
                   "stderr": [],
                   "retry": 0,
-                  "startTime": "2026-11-05T20:51:53.477Z",
+                  "startTime": "2026-11-05T21:04:33.276Z",
                   "annotations": [],
                   "attachments": []
                 }
@@ -2368,12 +3328,12 @@
                   "workerIndex": 7,
                   "parallelIndex": 0,
                   "status": "passed",
-                  "duration": 2329,
+                  "duration": 2468,
                   "errors": [],
                   "stdout": [],
                   "stderr": [],
                   "retry": 0,
-                  "startTime": "2026-11-05T20:52:07.788Z",
+                  "startTime": "2026-11-05T21:04:51.945Z",
                   "annotations": [],
                   "attachments": []
                 }
@@ -2402,12 +3362,12 @@
                   "workerIndex": 7,
                   "parallelIndex": 0,
                   "status": "passed",
-                  "duration": 1792,
+                  "duration": 1819,
                   "errors": [],
                   "stdout": [],
                   "stderr": [],
                   "retry": 0,
-                  "startTime": "2026-11-05T20:52:10.704Z",
+                  "startTime": "2026-11-05T21:04:55.025Z",
                   "annotations": [],
                   "attachments": []
                 }
@@ -2436,12 +3396,12 @@
                   "workerIndex": 7,
                   "parallelIndex": 0,
                   "status": "passed",
-                  "duration": 1666,
+                  "duration": 1352,
                   "errors": [],
                   "stdout": [],
                   "stderr": [],
                   "retry": 0,
-                  "startTime": "2026-11-05T20:52:12.508Z",
+                  "startTime": "2026-11-05T21:04:56.855Z",
                   "annotations": [],
                   "attachments": []
                 }
@@ -2470,12 +3430,12 @@
                   "workerIndex": 7,
                   "parallelIndex": 0,
                   "status": "passed",
-                  "duration": 1409,
+                  "duration": 1259,
                   "errors": [],
                   "stdout": [],
                   "stderr": [],
                   "retry": 0,
-                  "startTime": "2026-11-05T20:52:14.185Z",
+                  "startTime": "2026-11-05T21:04:58.218Z",
                   "annotations": [],
                   "attachments": []
                 }
@@ -2504,12 +3464,12 @@
                   "workerIndex": 7,
                   "parallelIndex": 0,
                   "status": "passed",
-                  "duration": 4884,
+                  "duration": 4666,
                   "errors": [],
                   "stdout": [],
                   "stderr": [],
                   "retry": 0,
-                  "startTime": "2026-11-05T20:52:15.607Z",
+                  "startTime": "2026-11-05T21:04:59.489Z",
                   "annotations": [],
                   "attachments": []
                 }
@@ -2536,14 +3496,14 @@
               "results": [
                 {
                   "workerIndex": 9,
-                  "parallelIndex": 0,
+                  "parallelIndex": 1,
                   "status": "passed",
-                  "duration": 913,
+                  "duration": 733,
                   "errors": [],
                   "stdout": [],
                   "stderr": [],
                   "retry": 0,
-                  "startTime": "2026-11-05T20:52:21.366Z",
+                  "startTime": "2026-11-05T21:05:10.016Z",
                   "annotations": [],
                   "attachments": []
                 }
@@ -2570,14 +3530,14 @@
               "results": [
                 {
                   "workerIndex": 9,
-                  "parallelIndex": 0,
+                  "parallelIndex": 1,
                   "status": "passed",
-                  "duration": 885,
+                  "duration": 935,
                   "errors": [],
                   "stdout": [],
                   "stderr": [],
                   "retry": 0,
-                  "startTime": "2026-11-05T20:52:22.363Z",
+                  "startTime": "2026-11-05T21:05:10.831Z",
                   "annotations": [],
                   "attachments": []
                 }
@@ -2604,14 +3564,14 @@
               "results": [
                 {
                   "workerIndex": 9,
-                  "parallelIndex": 0,
+                  "parallelIndex": 1,
                   "status": "passed",
-                  "duration": 1727,
+                  "duration": 1807,
                   "errors": [],
                   "stdout": [],
                   "stderr": [],
                   "retry": 0,
-                  "startTime": "2026-11-05T20:52:23.260Z",
+                  "startTime": "2026-11-05T21:05:11.776Z",
                   "annotations": [],
                   "attachments": []
                 }
@@ -2638,14 +3598,14 @@
               "results": [
                 {
                   "workerIndex": 9,
-                  "parallelIndex": 0,
+                  "parallelIndex": 1,
                   "status": "passed",
-                  "duration": 986,
+                  "duration": 838,
                   "errors": [],
                   "stdout": [],
                   "stderr": [],
                   "retry": 0,
-                  "startTime": "2026-11-05T20:52:25.001Z",
+                  "startTime": "2026-11-05T21:05:13.598Z",
                   "annotations": [],
                   "attachments": []
                 }
@@ -2672,14 +3632,14 @@
               "results": [
                 {
                   "workerIndex": 9,
-                  "parallelIndex": 0,
+                  "parallelIndex": 1,
                   "status": "passed",
-                  "duration": 4652,
+                  "duration": 5208,
                   "errors": [],
                   "stdout": [],
                   "stderr": [],
                   "retry": 0,
-                  "startTime": "2026-11-05T20:52:25.997Z",
+                  "startTime": "2026-11-05T21:05:14.447Z",
                   "annotations": [],
                   "attachments": []
                 }
@@ -2708,12 +3668,12 @@
                   "workerIndex": 11,
                   "parallelIndex": 0,
                   "status": "passed",
-                  "duration": 960,
+                  "duration": 921,
                   "errors": [],
                   "stdout": [],
                   "stderr": [],
                   "retry": 0,
-                  "startTime": "2026-11-05T20:52:31.261Z",
+                  "startTime": "2026-11-05T21:05:22.217Z",
                   "annotations": [],
                   "attachments": []
                 }
@@ -2742,12 +3702,12 @@
                   "workerIndex": 11,
                   "parallelIndex": 0,
                   "status": "passed",
-                  "duration": 921,
+                  "duration": 1300,
                   "errors": [],
                   "stdout": [],
                   "stderr": [],
                   "retry": 0,
-                  "startTime": "2026-11-05T20:52:32.301Z",
+                  "startTime": "2026-11-05T21:05:23.217Z",
                   "annotations": [],
                   "attachments": []
                 }
@@ -2776,12 +3736,12 @@
                   "workerIndex": 11,
                   "parallelIndex": 0,
                   "status": "passed",
-                  "duration": 1880,
+                  "duration": 1949,
                   "errors": [],
                   "stdout": [],
                   "stderr": [],
                   "retry": 0,
-                  "startTime": "2026-11-05T20:52:33.236Z",
+                  "startTime": "2026-11-05T21:05:24.530Z",
                   "annotations": [],
                   "attachments": []
                 }
@@ -2810,12 +3770,12 @@
                   "workerIndex": 11,
                   "parallelIndex": 0,
                   "status": "passed",
-                  "duration": 1236,
+                  "duration": 1272,
                   "errors": [],
                   "stdout": [],
                   "stderr": [],
                   "retry": 0,
-                  "startTime": "2026-11-05T20:52:35.128Z",
+                  "startTime": "2026-11-05T21:05:26.491Z",
                   "annotations": [],
                   "attachments": []
                 }
@@ -2844,12 +3804,12 @@
                   "workerIndex": 11,
                   "parallelIndex": 0,
                   "status": "passed",
-                  "duration": 4913,
+                  "duration": 5444,
                   "errors": [],
                   "stdout": [],
                   "stderr": [],
                   "retry": 0,
-                  "startTime": "2026-11-05T20:52:36.374Z",
+                  "startTime": "2026-11-05T21:05:27.775Z",
                   "annotations": [],
                   "attachments": []
                 }
@@ -2867,9 +3827,9 @@
   ],
   "errors": [],
   "stats": {
-    "startTime": "2026-11-05T20:51:20.905Z",
-    "duration": 80911.356,
-    "expected": 64,
+    "startTime": "2026-11-05T21:03:41.732Z",
+    "duration": 120261.37800000001,
+    "expected": 88,
     "skipped": 2,
     "unexpected": 0,
     "flaky": 0

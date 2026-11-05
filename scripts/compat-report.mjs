@@ -40,7 +40,7 @@ md += '- **Repeatability and evidence**: intercept DummyJSON requests with a det
 md += '## Page × Browser × Device\n\n';
 md += '| Scenario | ' + projects.join(' | ') + ' |\n| --- | ' + projects.map(() => '---').join(' | ') + ' |\n';
 for (const name of names) md += '| ' + name + ' | ' + projects.map(p => { const r = rows.find(r => r.name === name && r.project === p); return r?.status === 'passed' ? 'PASS' : r?.status === 'failed' ? 'FAIL' : r?.status ?? 'NOT TESTED'; }).join(' | ') + ' |\n';
-md += '\nThe matrix covers Catalog, Product Details, empty Cart, Login, 404, and populated Cart/Checkout/Confirmation within the shopping flow. Home, Journal, Wishlist, Profile, and supporting pages are outside the scope of this run.\n\n';
+md += '\nThe matrix covers Home, Catalog, Best deals, Product Details, empty Cart, Login, Orders, Profile and 404, plus populated Cart, Checkout and Confirmation within the keyboard flow. Orders and Profile are opened as a signed-in demo shopper. Journal and Wishlist pages are outside the scope of this run.\n\n';
 const supplementalPath = 'docs/compat/firefox-recheck.json';
 try {
   const supplemental = JSON.parse(await readFile(supplementalPath, 'utf8'));
@@ -65,7 +65,7 @@ for (const [id, finding] of findings) {
   md += '\n';
 }
 if (!findings.size) md += '- No violations were recorded in the available axe attachments.\n';
-md += '- Exact failure reasons and selectors are recorded in `docs/compat/report/index.html`, `results.json`, and `artifacts/`.\n\n';
+md += '- Every result, including axe output, is stored in `docs/compat/results.json`. The HTML report and failure traces (`docs/compat/report/`, `docs/compat/artifacts/`) are generated locally by the run and are not committed.\n\n';
 md += '## Keyboard Navigation\n\nThe shopping flow uses Tab, Enter, and keyboard typing: Catalog → Product → Add to cart → View cart → Checkout → Login → Return to checkout → Complete all four fields → Place order → Confirmation. No click/focus/fill actions are used to complete this flow. When the only keyboard test error is an axe assertion, the flow reached confirmation and the FAIL refers to accessibility. This is not a complete assessment of every dropdown, focus trap, Shift+Tab interaction, or screen reader.\n\n';
 md += '| Engine | Desktop keyboard flow | Mobile keyboard flow |\n| --- | --- | --- |\n';
 function keyboardStatus(project) {
