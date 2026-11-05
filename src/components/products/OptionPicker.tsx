@@ -24,21 +24,29 @@ function OptionPicker({ product, value, onChange, idPrefix }: OptionPickerProps)
         <legend className="text-sm font-semibold text-slate-900">
           Color: <span className="font-normal text-slate-600">{value.color}</span>
         </legend>
-        <div className="mt-2 flex flex-wrap gap-2">
-          {colors.map((color) => (
-            <label key={color.name} className={`${chip} ${value.color === color.name ? selectedChip : idleChip}`}>
-              <input
-                type="radio"
-                name={`${idPrefix}-color`}
-                value={color.name}
-                checked={value.color === color.name}
-                onChange={() => onChange({ ...value, color: color.name })}
-                className="sr-only"
-              />
-              <span aria-hidden="true" className="size-4 rounded-full border border-slate-300" style={{ backgroundColor: color.swatch }} />
-              {color.name}
-            </label>
-          ))}
+        {/* Round swatches keep every colour on one row; the name is in the legend and tooltip. */}
+        <div className="mt-2 flex flex-nowrap gap-2">
+          {colors.map((color) => {
+            const selected = value.color === color.name;
+            return (
+              <label
+                key={color.name}
+                title={color.name}
+                className={`flex size-11 shrink-0 cursor-pointer items-center justify-center rounded-full border-2 transition has-[:focus-visible]:outline-2 has-[:focus-visible]:outline-offset-2 has-[:focus-visible]:outline-violet-700 ${selected ? "border-violet-700 ring-2 ring-violet-200" : "border-transparent hover:border-violet-300"}`}
+              >
+                <input
+                  type="radio"
+                  name={`${idPrefix}-color`}
+                  value={color.name}
+                  checked={selected}
+                  onChange={() => onChange({ ...value, color: color.name })}
+                  className="sr-only"
+                />
+                <span aria-hidden="true" className="size-8 rounded-full border border-slate-300 shadow-inner" style={{ background: color.swatch }} />
+                <span className="sr-only">{color.name}</span>
+              </label>
+            );
+          })}
         </div>
       </fieldset>
 

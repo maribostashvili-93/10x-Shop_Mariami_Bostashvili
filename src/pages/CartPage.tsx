@@ -6,7 +6,7 @@ import { formatPrice, getFinalPrice } from "../utils/formatPrice";
 import OrderTotals from "../components/cart/OrderTotals";
 import PromoCodeForm from "../components/cart/PromoCodeForm";
 import { Cart } from "../models/Cart";
-import { describeOptions } from "../models/productOptions";
+import { colorFilter, describeOptions } from "../models/productOptions";
 
 function CartPage() {
   const { items, totals, promo, removeFromCart, setQuantity, clearCart } = useCart();
@@ -62,13 +62,16 @@ function CartPage() {
               className="rounded-2xl border border-slate-200 bg-white p-4"
             >
               <div className="flex flex-col gap-4 sm:flex-row">
-                <img
-                  src={product.thumbnail}
-                  alt={product.title}
-                  width={112}
-                  height={112}
-                  className="size-28 rounded-xl bg-slate-100 object-contain"
-                />
+                <div className="size-28 shrink-0 rounded-xl bg-slate-100">
+                  <img
+                    src={product.thumbnail}
+                    alt={product.title}
+                    style={{ filter: colorFilter(options?.color) }}
+                    width={112}
+                    height={112}
+                    className="size-28 object-contain"
+                  />
+                </div>
 
                 <div className="min-w-0 flex-1">
                   <Link

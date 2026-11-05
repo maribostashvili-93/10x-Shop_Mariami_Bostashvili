@@ -6,7 +6,7 @@ import { useWishlist } from "../../hooks/useWishlist";
 import ProductPrice, { StockStatus } from "./ProductPrice";
 import OptionPicker from "./OptionPicker";
 import { Cart } from "../../models/Cart";
-import { defaultOptions } from "../../models/productOptions";
+import { colorFilter, defaultOptions } from "../../models/productOptions";
 import { useJustAdded } from "../../hooks/useJustAdded";
 import type { ProductOptions } from "../../types/cart";
 
@@ -71,20 +71,23 @@ function ProductCard({ product }: ProductCardProps) {
         </div>
       </div>
       <div className="flex flex-1 flex-col p-3">
-        <p className="text-xs font-semibold tracking-wider text-stone-600 uppercase">{product.category.replaceAll("-", " ")}{product.brand ? ` · ${product.brand}` : ""}</p>
-        <h2 className="mt-2 text-base leading-snug font-semibold text-stone-900"><Link to={`/products/${product.id}`} className="hover:text-red-900 focus-visible:outline-2 focus-visible:outline-red-900">{product.title}</Link></h2>
-        <p className="mt-3 flex flex-wrap items-center gap-1.5 text-sm text-stone-600">
+        {/* Fixed line counts keep every card in a row aligned, whatever the text length. */}
+        <p className="truncate text-xs font-semibold tracking-wider text-stone-600 uppercase" title={`${product.category.replaceAll("-", " ")}${product.brand ? ` · ${product.brand}` : ""}`}>{product.category.replaceAll("-", " ")}{product.brand ? ` · ${product.brand}` : ""}</p>
+        <h2 className="mt-2 line-clamp-2 min-h-[2lh] text-base leading-snug font-semibold text-stone-900"><Link to={`/products/${product.id}`} className="hover:text-red-900 focus-visible:outline-2 focus-visible:outline-red-900">{product.title}</Link></h2>
+        <div className="mt-3 flex flex-wrap items-center gap-x-3 gap-y-2 text-sm text-stone-600">
+        <p className="flex items-center gap-1.5">
           <svg aria-hidden="true" viewBox="0 0 24 24" fill="currentColor" className="size-4 text-amber-600"><path d="m12 2.8 2.8 5.7 6.3.9-4.6 4.5 1.1 6.3-5.6-3-5.6 3 1.1-6.3-4.6-4.5 6.3-.9L12 2.8Z" /></svg>
           <span><span className="sr-only">Rating </span>{product.rating.toFixed(1)}</span>
         </p>
-        <div className="mt-2"><StockStatus stock={product.stock} /></div>
-        <div className="mt-auto flex flex-wrap items-end justify-between gap-2 pt-5">
+        <StockStatus stock={product.stock} />
+        </div>
+        <div className="mt-auto flex flex-col gap-3 pt-4">
           <ProductPrice product={product} />
           <button
             type="button"
             onClick={addFromCard}
             disabled={!available}
-            className={`min-h-11 rounded-lg px-4 text-sm font-semibold text-white transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-700 disabled:cursor-not-allowed disabled:bg-slate-200 disabled:text-slate-600 ${cardAdded ? addedClass : "bg-brand-700 hover:bg-brand-800"}`}
+            className={`min-h-11 w-full rounded-lg px-4 text-sm font-semibold text-white transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-700 disabled:cursor-not-allowed disabled:bg-slate-200 disabled:text-slate-600 ${cardAdded ? addedClass : "bg-brand-700 hover:bg-brand-800"}`}
           >
             {addLabel(cardAdded)}
             <span className="sr-only">: {product.title}</span>
@@ -99,7 +102,10 @@ function ProductCard({ product }: ProductCardProps) {
           </button>
         </div>
         <div className="grid gap-6 sm:grid-cols-2">
-          <img src={product.thumbnail} alt={product.title} className="aspect-square w-full rounded-xl bg-slate-100 object-contain p-4" />
+          <div className="self-start rounded-xl bg-slate-100 p-4">
+            {/* The filter previews the chosen colour on the photo only, not on its background. */}
+            <img src={product.thumbnail} alt={`${product.title}, ${options.color}`} style={{ filter: colorFilter(options.color), transition: "filter 200ms ease" }} className="aspect-square w-full object-contain" />
+          </div>
           <div>
             <p className="text-sm text-slate-600">{product.category.replaceAll("-", " ")}{product.brand ? ` · ${product.brand}` : ""}</p>
             <h2 className="mt-2 text-2xl font-semibold">{product.title}</h2>

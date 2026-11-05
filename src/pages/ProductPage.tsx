@@ -10,7 +10,7 @@ import { useAuth } from "../hooks/useAuth";
 import { useCart } from "../hooks/useCart";
 import OptionPicker from "../components/products/OptionPicker";
 import { Cart } from "../models/Cart";
-import { defaultOptions } from "../models/productOptions";
+import { colorFilter, defaultOptions } from "../models/productOptions";
 import { useJustAdded } from "../hooks/useJustAdded";
 import type { ProductOptions } from "../types/cart";
 import ProductCard from "../components/products/ProductCard";
@@ -166,7 +166,8 @@ function ProductPage() {
           <div className="relative flex aspect-square items-center justify-center overflow-hidden rounded-[1.5rem] bg-gradient-to-br from-violet-50 to-violet-200 p-8 sm:p-12">
             <img
               src={activeImage}
-              alt={product.title}
+              alt={`${product.title}, ${options.color}`}
+              style={{ filter: colorFilter(options.color), transition: "filter 200ms ease" }}
               width={600}
               height={600}
               className="relative h-full w-full object-contain drop-shadow-[0_18px_18px_rgba(45,20,80,0.25)]"
