@@ -8,11 +8,14 @@ The CORE scope from the graduation project PRD is implemented. The application i
 
 - Vite, React, strict TypeScript, Tailwind CSS v4, and project scripts.
 - Responsive layout, routing, catalog, product details, login, cart, checkout, and 404 pages.
-- Typed API data with loading, error, empty, and invalid-product states.
+- Catalog grid on `/` from `GET /products?limit=12&skip=0` (1/2–3/4 responsive columns).
+- Discounted price formula and stock status on product cards, product details, cart and checkout.
+- API data read as `unknown` and validated with type guards; typed `ApiError`; loading, error with retry, empty, and not-found states.
 - Search, category and price filtering, sorting, and URL parameters.
-- Local controlled login with React Context authentication state.
+- Local controlled login with per-field validation (password ≥ 6 characters) and React Context authentication state.
 - Protected checkout with redirect-to-login and return navigation.
-- Shared Cart Context with immutable add, remove, and quantity updates.
+- Shared Cart Context with immutable add, remove, quantity and clear-cart updates; Subtotal, Discount and Total.
+- Header Catalog and Cart links with a live cart badge on every screen size.
 - Controlled checkout fields, validation, local order confirmation, and cart clearing.
 - Responsive Tailwind UI with hover, focus, disabled, loading, and error states.
 - Error Boundary, debugging log, and public deployment link in `README.md`.
@@ -31,12 +34,22 @@ Authentication, payments, orders, delivery, and account services remain local/de
 - `npm run build` — passed.
 - `npm run lint` — passed after extracting the reusable `ProductGrid` and simplifying the search filter JSX.
 
+## CORE completion pass
+
+A requirements review against the PRD found and fixed these gaps (details in `DEBUG-LOG.md`, entries 4–7):
+
+- Prices ignored `discountPercentage`; a shared `getFinalPrice` / `getCartTotals` now drives every price.
+- Unknown product IDs showed a generic error; they now render the 404 page, and route changes reset state and cancel stale requests with `AbortController`.
+- The desktop grid stayed at 3 columns because of Tailwind breakpoint ordering; it now shows 1 / 2–3 / 4 columns.
+- Login accepted short passwords; it now validates each field.
+- Illustrative colour/size selectors, tinted "gallery" copies and placeholder reviews were replaced with the real API images and reviews.
+
+Verified locally in the browser: 12 catalog cards, 1 column at 375px without horizontal scroll, 4 columns at 1280px, `/products/99999` and `/products/abc` show 404, the cart shows Subtotal $9.99 / Discount −$1.05 / Total $8.94 for product 1, and login rejects empty and 3-character passwords and returns to checkout.
+
 ## Remaining checks before submission
 
-1. Verify catalog → product → cart → login → checkout → confirmation manually.
-2. Check CORE routes at 375px and desktop widths for horizontal scrolling.
-3. Refresh direct deployed routes such as `/products/5` and `/checkout`.
-4. Confirm the GitHub repository and meaningful commit history.
+1. Refresh direct deployed routes such as `/products/5` and `/checkout` after the next deployment.
+2. Repeat the full shopping flow manually in Chrome and Firefox on the deployed site.
 
 ## Final verification notes
 
@@ -57,8 +70,8 @@ The planned CORE scope was delivered: catalog, product details, simulated auth, 
 - `npm run lint` — passed.
 - `npm run typecheck` — passed.
 - `npm run build` — passed.
-- JavaScript bundle: approximately 358 kB raw / 104 kB gzip.
-- CSS bundle: approximately 60 kB raw / 11 kB gzip.
+- JavaScript bundle: approximately 363 kB raw / 105 kB gzip.
+- CSS bundle: approximately 63 kB raw / 12 kB gzip.
 - Git history contains multiple meaningful `feat:`, `fix:`, `perf:`, and `docs:` commits.
 - Lighthouse numeric results require a real deployed Mobile/Incognito run; no unverified score is claimed in this repository.
 - Chrome and Firefox smoke testing is an external release check and is not provable from the compiler alone.

@@ -32,6 +32,46 @@ This document records real issues found and fixed while building 10X Shop. The p
 - **Fix (commit):** [e489902 feat: add checkout flow and not-found page](https://github.com/maribostashvili-93/10x-Shop_Mariami_Bostashvili/commit/e489902)
 - **What I learned:** Every route should have an intentional failure state and a clear way back into the product.
 
+## 4. Catalog prices ignored the API discount
+
+- **Symptom:** Product cards, product details, the cart and checkout all showed the original `price`, even for products with `discountPercentage` (for example product 1 showed $9.99 instead of $8.94).
+- **Reproduction:** Open `/products/1`, add it to the cart and compare the cart total with `price × (1 − discountPercentage / 100)` from the Network response of `GET /products/1`.
+- **Tool:** Chrome DevTools Network panel (response payload) and source review of every `product.price` usage.
+- **Root cause:** Every component read `product.price` directly; there was no shared price calculation.
+- **Fix:** Added `getFinalPrice`, `getCartTotals` and `formatPrice` in `src/utils/formatPrice.ts` and a `ProductPrice` component. All price displays and the cart/checkout Subtotal, Discount and Total now use them.
+- **Fix (commit):** [655a720 fix: apply discounts and complete CORE cart/login/product requirements](https://github.com/maribostashvili-93/10x-Shop_Mariami_Bostashvili/commit/655a720)
+- **What I learned:** Business rules such as pricing belong in one shared function, not repeated in each component.
+
+## 5. Non-existent product IDs showed a generic error instead of Not Found
+
+- **Symptom:** `/products/99999` and `/products/abc` showed "Could not load product" instead of the Not Found page. Switching from one product to a related product could briefly show stale data and kept the previous quantity.
+- **Reproduction:** Open `/products/99999`; then open `/products/1` and click a related product.
+- **Tool:** Network panel (the API answers `404`), React DevTools (state `product`, `loading`, `quantity` kept between IDs).
+- **Root cause:** `getProduct` threw the same error for 404 and network failures, and `ProductPage` never reset its state or cancelled the previous request when `id` changed.
+- **Fix:** Added `ApiError` with an HTTP status in `src/api/client.ts`; `getProduct` returns `null` for invalid IDs and 404, so the page renders `NotFoundPage`. The page resets its state when the route ID changes and cancels old requests with `AbortController`. A real network failure shows a "Try again" button.
+- **Fix (commit):** [655a720 fix: apply discounts and complete CORE cart/login/product requirements](https://github.com/maribostashvili-93/10x-Shop_Mariami_Bostashvili/commit/655a720)
+- **What I learned:** Separate "not found" from "failed to load"; they need different screens.
+
+## 6. Desktop product grid stayed at three columns
+
+- **Symptom:** At 1280px the catalog grid showed 3 columns instead of the required 4.
+- **Reproduction:** Open `/` at a 1280px viewport and inspect the grid.
+- **Tool:** Chrome DevTools Elements → Computed `grid-template-columns` (three tracks) and the generated CSS.
+- **Root cause:** The grid used `md:grid-cols-3 min-[1025px]:grid-cols-4`. Tailwind v4 emitted the arbitrary `min-[1025px]` rule before the `md` rule, so `md:grid-cols-3` won the cascade.
+- **Fix:** Used the theme breakpoint `lg:grid-cols-4`, which is ordered after `md`. Verified 1 column at 375px, 3 at 1024px and 4 at 1280px.
+- **Fix (commit):** [655a720 fix: apply discounts and complete CORE cart/login/product requirements](https://github.com/maribostashvili-93/10x-Shop_Mariami_Bostashvili/commit/655a720)
+- **What I learned:** Mixing arbitrary and theme breakpoints can change cascade order; verify computed styles, not only class names.
+
+## 7. Login accepted short passwords
+
+- **Symptom:** A one-character password logged the user in, and both fields shared one generic error message.
+- **Reproduction:** Open `/login`, enter `tester` and `123`, submit.
+- **Tool:** Manual form testing and source review of `LoginPage`.
+- **Root cause:** Validation only checked for empty values.
+- **Fix:** Added a `validate` function with per-field errors (required username, password of at least 6 characters), shown next to each field with `aria-invalid` and `aria-describedby`.
+- **Fix (commit):** [655a720 fix: apply discounts and complete CORE cart/login/product requirements](https://github.com/maribostashvili-93/10x-Shop_Mariami_Bostashvili/commit/655a720)
+- **What I learned:** Validation rules should mirror the specification exactly and be tested with empty, short and valid input.
+
 ## Debugging checklist
 
 - Run `npm run typecheck` before investigating runtime behavior.

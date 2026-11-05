@@ -17,15 +17,17 @@ This is a front-end demo. Login and checkout are local simulations: no real auth
 ### CORE
 
 - Responsive storefront layout with header, sidebar, main content area, and footer
-- Product catalog loaded from the DummyJSON API
-- Product cards and product details by route
-- Loading, error, empty, and invalid-product states
-- Local demo login with controlled username and password fields
+- Catalog on `/` loaded with `GET /products?limit=12&skip=0`, rendered by `ProductGrid` → `ProductCard`
+- Discounted prices calculated as `price × (1 − discountPercentage / 100)` and stock status on every card
+- Product cards and product details by route, with an image gallery and API reviews
+- Responsive product grid: 1 column on mobile (≤480px), 2–3 on tablet, 4 on desktop
+- Loading, error (with retry), empty, and not-found states; invalid or unknown product IDs show the 404 page
+- Local demo login with controlled fields and field-level validation (required username, password of at least 6 characters)
 - Shared authentication state through React Context
 - Shared cart state through React Context
 - Add products to cart with stock-aware quantities
 - Update quantities and remove products from the cart
-- Cart subtotal and order summary
+- Cart subtotal, discount and total; clear-cart action; live cart badge in the header
 - Protected checkout flow for signed-in users
 - Checkout fields: full name, email, address, and city
 - Field-level checkout validation
@@ -41,7 +43,7 @@ This is a front-end demo. Login and checkout are local simulations: no real auth
 - Category navigation with SVG icons
 - Product search, category filtering, price ranges, and price/rating sorting through URL parameters
 - New arrivals, rating-based favorites, and discount-based product selections
-- Product detail layout with image previews, description, and review sections
+- Product detail layout with the API image gallery, description, and API customer reviews
 - Lifestyle journal articles with related DummyJSON products below each story
 - Brand and community inspiration sections
 - Expanded footer with product search and navigation
@@ -49,13 +51,13 @@ This is a front-end demo. Login and checkout are local simulations: no real auth
 
 These additional pages do not represent real order history, coupons, addresses, or account services yet.
 
-Community stories and some product review displays are illustrative demo content, not verified customer feedback. New-arrival ordering uses product IDs, and the best-seller section uses ratings rather than sales data.
+Community stories are illustrative demo content. Product reviews come from the DummyJSON API. New-arrival ordering uses product IDs, and the best-seller section uses ratings rather than sales data.
 
 ## Routes
 
 | Route | Purpose |
 | --- | --- |
-| `/` | Storefront home page |
+| `/` | Storefront home page with the CORE catalog grid |
 | `/products` | Product catalog |
 | `/products?q=perfume&category=fragrances&price=under-50` | Search and filter the catalog |
 | `/products/:id` | Product details |
@@ -122,7 +124,7 @@ Run the relevant checks locally before publishing changes. The production build 
 
 ## Demo login
 
-Login is simulated locally. Enter any non-empty username and password. Do not use a real password. There is no external authentication service.
+Login is simulated locally. Enter any non-empty username and a password of at least 6 characters. Do not use a real password. There is no external authentication service.
 
 ### Test account
 
@@ -133,15 +135,15 @@ Use any demo values, for example `demo-user` / `demo-password`. These values are
 Product data is requested from:
 
 ```text
-https://dummyjson.com/products
+https://dummyjson.com/products?limit=12&skip=0
 https://dummyjson.com/products?limit=0
 https://dummyjson.com/products/:id
 https://dummyjson.com/products/categories
 ```
 
-The application shows an error state when the API cannot be reached. No production database or payment provider is connected.
+API responses are read as `unknown` and validated with type guards (`isProduct`) before use; HTTP errors become a typed `ApiError`. The application shows an error state with a retry action when the API cannot be reached. No production database or payment provider is connected.
 
-The catalog is curated from DummyJSON categories including beauty, skincare, fragrances, dresses, bags, eyewear, jewellery, watches, and home decoration. Product names, prices, stock, ratings, and thumbnails come from the API; banner and journal photography are local assets.
+The catalog is curated from DummyJSON categories including beauty, skincare, fragrances, dresses, bags, eyewear, jewellery, watches, and home decoration. Product names, prices, discounts, stock, ratings, images, and reviews come from the API; banner and journal photography are local assets.
 
 ## Deployment
 
@@ -160,6 +162,8 @@ Vercel uses the committed [`vercel.json`](vercel.json) rewrite for this behavior
 - [PLAN.md](PLAN.md) — project plan and implementation scope
 - [REPORT.md](REPORT.md) — completion report and final results
 - [STYLE_GUIDE.md](STYLE_GUIDE.md) — UI and Tailwind conventions
+- [DEBUG-LOG.md](DEBUG-LOG.md) — real bugs, their root causes and fixes
+- [COMPATIBILITY.md](COMPATIBILITY.md) — browser and device test matrix
 
 ## Credits
 
