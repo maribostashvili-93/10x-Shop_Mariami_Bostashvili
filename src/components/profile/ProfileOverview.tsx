@@ -132,17 +132,17 @@ function ProfileOverview({ onEdit }: ProfileOverviewProps) {
           </div>
           <h1 id="profile-name" className="mt-4 text-2xl font-semibold text-slate-900 sm:text-3xl">{displayName}</h1>
           <p className="mt-1 text-sm text-slate-600">@{username}</p>
-          <dl className="mt-5 grid gap-3 sm:grid-cols-2">
+          <ul aria-label="Profile details" className="mt-5 grid gap-3 sm:grid-cols-2">
             {details.map((detail) => (
-              <div key={detail.label} className="flex min-w-0 items-center gap-3 text-sm">
+              <li key={detail.label} className="flex min-w-0 items-center gap-3 text-sm">
                 <span className="flex size-9 shrink-0 items-center justify-center rounded-xl bg-violet-50 text-violet-700"><Icon path={detail.icon} /></span>
-                <div className="min-w-0">
-                  <dt className="text-xs text-slate-600">{detail.label}</dt>
-                  <dd className="truncate font-medium text-slate-900">{detail.value}</dd>
-                </div>
-              </div>
+                <p className="min-w-0">
+                  <span className="block text-xs text-slate-600">{detail.label}</span>
+                  <span className="block truncate font-medium text-slate-900">{detail.value}</span>
+                </p>
+              </li>
             ))}
-          </dl>
+          </ul>
         </div>
       </section>
 
