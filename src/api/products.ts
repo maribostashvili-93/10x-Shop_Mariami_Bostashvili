@@ -83,6 +83,12 @@ export async function getProducts(all = false, signal?: AbortSignal): Promise<Pr
   return parseProductList(data).filter((product) => product.category in featuredCategories);
 }
 
+/** Products from one category, used for "related products". */
+export async function getProductsByCategory(category: string, signal?: AbortSignal): Promise<Product[]> {
+  const data = await fetchJson(`${API_URL}/category/${encodeURIComponent(category)}?limit=0`, signal);
+  return parseProductList(data);
+}
+
 /** Resolves to `null` when the product does not exist, so the page can render Not Found. */
 export async function getProduct(id: string, signal?: AbortSignal): Promise<Product | null> {
   if (!/^\d+$/.test(id)) return null;

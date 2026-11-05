@@ -1,7 +1,10 @@
 import { useEffect, useState, type FormEvent } from "react";
 import { Link, useParams } from "react-router";
-import { getProduct, getProducts } from "../api/products";
-import type { Product } from "../types/product";
+import { getProduct, getProductsByCategory } from "../api/products";
+import type { Product, ProductReview } from "../types/product";
+import ReviewForm from "../components/products/ReviewForm";
+import { averageRating, reviewStorage, type LocalReviews } from "../services/reviewStorage";
+import { useAuth } from "../hooks/useAuth";
 import { useCart } from "../hooks/useCart";
 import { CartToast } from "../components/ui/CartToast";
 import ProductCard from "../components/products/ProductCard";
@@ -28,6 +31,8 @@ function ProductPage() {
   const [message, setMessage] = useState("");
   const [selectedImage, setSelectedImage] = useState(0);
   const [relatedProducts, setRelatedProducts] = useState<Product[]>([]);
+  const [localReviews, setLocalReviews] = useState<LocalReviews>(() => reviewStorage.load());
+  const { user } = useAuth();
 
   const [product, setProduct] = useState<Product | null>(null);
   const [loading, setLoading] = useState(true);
@@ -68,12 +73,9 @@ function ProductPage() {
   useEffect(() => {
     if (!product) return;
     const controller = new AbortController();
-    getProducts(true, controller.signal)
-      .then((products) => {
-        const available = products.filter((item) => item.id !== product.id);
-        const sameCategory = available.filter((item) => item.category === product.category);
-        setRelatedProducts([...sameCategory, ...available.filter((item) => item.category !== product.category)].slice(0, 4));
-      })
+    // Related products: up to four other products from the same category.
+    getProductsByCategory(product.category, controller.signal)
+      .then((products) => setRelatedProducts(products.filter((item) => item.id !== product.id).slice(0, 4)))
       .catch(() => {
         if (!controller.signal.aborted) setRelatedProducts([]);
       });
@@ -105,7 +107,19 @@ function ProductPage() {
 
   const images = product.images && product.images.length > 0 ? product.images : [product.thumbnail];
   const activeImage = images[Math.min(selectedImage, images.length - 1)];
-  const reviews = product.reviews ?? [];
+  const productReviews = localReviews[String(product.id)] ?? [];
+  // Newest local reviews first, followed by the reviews from the API.
+  const reviews: ProductReview[] = [...productReviews, ...(product.reviews ?? [])];
+  const rating = averageRating(reviews, product.rating);
+
+  function addReview({ rating: stars, comment }: { rating: number; comment: string }) {
+    if (!product) return;
+    const review: ProductReview = { rating: stars, comment, date: new Date().toISOString(), reviewerName: user?.username ?? "Guest" };
+    const key = String(product.id);
+    const next = { ...localReviews, [key]: [review, ...(localReviews[key] ?? [])] };
+    setLocalReviews(next);
+    reviewStorage.save(next);
+  }
   const inCart = items.find((item) => item.product.id === product.id)?.quantity ?? 0;
   const available = Math.max(0, product.stock - inCart);
 
@@ -161,7 +175,7 @@ function ProductPage() {
           <p className="mt-6 leading-7 text-stone-600">{product.description}</p>
           <dl className="mt-8 divide-y divide-stone-200 border-y border-stone-200 text-sm">
             <div className="flex justify-between gap-4 py-4"><dt className="text-stone-600">Category</dt><dd className="font-medium text-stone-900">{product.category}</dd></div>
-            <div className="flex justify-between gap-4 py-4"><dt className="text-stone-600">Rating</dt><dd className="font-medium text-stone-900">{product.rating} / 5</dd></div>
+            <div className="flex justify-between gap-4 py-4"><dt className="text-stone-600">Rating</dt><dd className="font-medium text-stone-900">{rating.toFixed(2)} / 5</dd></div>
             <div className="flex justify-between gap-4 py-4"><dt className="text-stone-600">Availability</dt><dd className="font-medium text-stone-900">{product.stock > 0 ? `${product.stock} in stock` : "Out of stock"}</dd></div>
           </dl>
           <form className="mt-6 space-y-4" onSubmit={handleAddToCart}>
@@ -199,9 +213,9 @@ function ProductPage() {
         <div className="flex flex-wrap items-end justify-between gap-4">
           <h2 id="reviews-heading" className="text-xl font-bold text-stone-900">Customer reviews</h2>
           <div className="flex items-center gap-3">
-            <p className="text-3xl font-bold text-stone-900">{product.rating.toFixed(1)}</p>
+            <p className="text-3xl font-bold text-stone-900">{rating.toFixed(1)}</p>
             <div>
-              <Stars rating={product.rating} />
+              <Stars rating={rating} />
               <p className="mt-1 text-xs text-stone-600">{reviews.length} {reviews.length === 1 ? "review" : "reviews"}</p>
             </div>
           </div>
@@ -211,7 +225,7 @@ function ProductPage() {
         ) : (
           <ul className="mt-6 grid gap-6 md:grid-cols-2">
             {reviews.map((review) => (
-              <li key={`${review.reviewerName}-${review.date}`} className="border-b border-stone-100 pb-5">
+              <li key={`${review.reviewerName}-${review.date}-${review.comment.slice(0, 12)}`} className="border-b border-stone-100 pb-5">
                 <div className="flex items-center gap-3">
                   <span aria-hidden="true" className="flex size-9 items-center justify-center rounded-full bg-violet-100 text-xs font-bold text-violet-800">
                     {review.reviewerName.split(" ").map((part) => part[0]).join("").slice(0, 2)}
@@ -227,6 +241,7 @@ function ProductPage() {
             ))}
           </ul>
         )}
+        <ReviewForm onSubmit={addReview} />
       </section>
 
       {relatedProducts.length > 0 && (
