@@ -1,7 +1,7 @@
 import type { Category, Product, ProductReview, ProductsResponse } from "../types/product";
-import { ApiError, fetchJson, isRecord } from "./client";
+import { ApiClient, ApiError, isRecord } from "./client";
 
-const API_URL = "https://dummyjson.com/products";
+const api = new ApiClient("https://dummyjson.com");
 export const CATALOG_PAGE_SIZE = 12;
 
 const featuredCategories: Record<string, string> = {
@@ -65,28 +65,23 @@ export function isProductsResponse(value: unknown): value is ProductsResponse {
   );
 }
 
-function parseProductList(data: unknown): Product[] {
-  if (!isProductsResponse(data)) {
-    throw new Error("Unexpected products response");
-  }
-  return data.products;
-}
+const isCategoryList = (value: unknown): value is Category[] => Array.isArray(value) && value.every(isCategory);
 
 /** CORE catalog request: GET /products?limit=12&skip=0 */
 export async function getCatalogProducts(limit = CATALOG_PAGE_SIZE, skip = 0, signal?: AbortSignal): Promise<Product[]> {
-  const data = await fetchJson(`${API_URL}?limit=${limit}&skip=${skip}`, signal);
-  return parseProductList(data);
+  const data = await api.get(`/products?limit=${limit}&skip=${skip}`, isProductsResponse, { signal });
+  return data.products;
 }
 
 export async function getProducts(all = false, signal?: AbortSignal): Promise<Product[]> {
-  const data = await fetchJson(`${API_URL}${all ? "?limit=0" : ""}`, signal);
-  return parseProductList(data).filter((product) => product.category in featuredCategories);
+  const data = await api.get(`/products${all ? "?limit=0" : ""}`, isProductsResponse, { signal });
+  return data.products.filter((product) => product.category in featuredCategories);
 }
 
 /** Products from one category, used for "related products". */
 export async function getProductsByCategory(category: string, signal?: AbortSignal): Promise<Product[]> {
-  const data = await fetchJson(`${API_URL}/category/${encodeURIComponent(category)}?limit=0`, signal);
-  return parseProductList(data);
+  const data = await api.get(`/products/category/${encodeURIComponent(category)}?limit=0`, isProductsResponse, { signal });
+  return data.products;
 }
 
 /** Resolves to `null` when the product does not exist, so the page can render Not Found. */
@@ -94,20 +89,17 @@ export async function getProduct(id: string, signal?: AbortSignal): Promise<Prod
   if (!/^\d+$/.test(id)) return null;
 
   try {
-    const data = await fetchJson(`${API_URL}/${id}`, signal);
-    return isProduct(data) ? data : null;
+    return await api.get(`/products/${id}`, isProduct, { signal });
   } catch (error) {
-    if (error instanceof ApiError && error.status === 404) return null;
+    if (error instanceof ApiError && (error.isNotFound || error.kind === "invalid-response")) return null;
     throw error;
   }
 }
 
 export async function getCategories(): Promise<Category[]> {
-  const data = await fetchJson(`${API_URL}/categories`);
-  if (!Array.isArray(data)) throw new Error("Unexpected categories response");
+  const data = await api.get("/products/categories", isCategoryList);
 
   return data
-    .filter(isCategory)
     .filter((category) => featuredCategories[category.slug])
     .map((category) => ({ ...category, name: featuredCategories[category.slug] }));
 }
