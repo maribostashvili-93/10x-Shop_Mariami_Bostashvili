@@ -14,6 +14,9 @@ async function mockApi(page: Page) {
     const url = new URL(route.request().url());
     requests.push(`${url.pathname}${url.search}`);
     const match = url.pathname.match(/^\/products\/(\d+)$/);
+    if (url.searchParams.get('select') === 'discountPercentage') {
+      return route.fulfill({ json: { products: products.map((product) => ({ id: product.id, discountPercentage: product.discountPercentage ?? 0 })) } });
+    }
     const body = url.pathname.endsWith('/categories')
       ? [{ slug: 'beauty', name: 'Beauty', url: 'https://dummyjson.com/products/category/beauty' }]
       : match
@@ -61,4 +64,15 @@ test('pricing: cart adds $10 shipping below $100 and applies 10X10', async ({ pa
   await page.getByRole('button', { name: 'Apply' }).click();
   await expect(summary.getByText('Discount (10X10 −10%)').first()).toBeVisible();
   await expect(summary.getByText('$37.00', { exact: true })).toBeVisible();
+});
+
+test('pricing: Best deals lists only products with 15% off or more', async ({ page }) => {
+  const requests = await mockApi(page);
+  await page.goto('/products');
+  await page.getByRole('link', { name: /Best deals/ }).first().click();
+  await expect(page).toHaveURL(/\/products\?deals=1$/);
+  const titles = page.locator('main article.product-card').getByRole('heading', { level: 2 }).getByRole('link');
+  await expect(titles).toHaveText(['Discounted thirty']);
+  await expect(page.getByText('1 product with 15% off or more')).toBeVisible();
+  expect(requests).toContain('/products?limit=12&skip=0&sortBy=discountPercentage&order=desc');
 });

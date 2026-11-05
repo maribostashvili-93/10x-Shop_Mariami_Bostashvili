@@ -37,7 +37,7 @@ This is a front-end demo. Login and checkout are local simulations: no real auth
 
 ### FULL
 
-- **Catalog (`/products`):** one page of 12 products is requested at a time — `/products`, `/products/search?q=` or `/products/category/{slug}` with `limit`, `skip = (page − 1) × 12` and `sortBy`/`order`. Debounced search (`useDebounce(value, 400)`), category filter, five sort options (Default, Price low/high, Rating, Name A→Z), pagination `‹ 1 2 … N ›`, "Showing 13–24 of 194", skeleton, Retry and `AbortController`. `q`, `category`, `sort` and `page` live in the URL, so refresh, Back/Forward and shared links restore the same results
+- **Catalog (`/products`):** one page of 12 products is requested at a time — `/products`, `/products/search?q=` or `/products/category/{slug}` with `limit`, `skip = (page − 1) × 12` and `sortBy`/`order`. Debounced search (`useDebounce(value, 400)`), category filter, five sort options (Default, Price low/high, Rating, Name A→Z), pagination `‹ 1 2 … N ›`, "Showing 13–24 of 194", skeleton, Retry and `AbortController`. `q`, `category`, `sort` and `page` live in the URL, so refresh, Back/Forward and shared links restore the same results. A "Best deals" view (`?deals=1`) lists products with at least 15% off; every product still shows its own discount badge as the specification requires
 - **Product details:** API image gallery, quantity stepper limited by stock, Description/Reviews tabs, review form (rating 1–5, comment of at least 10 characters) saved in `localStorage`, recalculated average rating, and four related products from the same category (`?limit=5`)
 - **Cart:** `useReducer` with typed actions (`ADD_ITEM`, `SET_QTY`, `REMOVE_ITEM`, `CLEAR`, `APPLY_PROMO`, `REMOVE_PROMO`), an immutable `Cart` class that implements `ICart`, a generic `StorageService<T>`, promo code **`10X10`** (−10%; other codes show "Invalid promo code") and shipping: **$10, free from $100**
 - **Checkout:** full name, email, phone, address, city, postal code and country (Georgia by default) with exact validation messages; the button is disabled while the order is placed
@@ -68,6 +68,7 @@ Journal articles are illustrative demo content. Product reviews combine the Dumm
 | `/` | Home: hero, search bar, The Signature Edit, categories, a six-product catalog preview with "View all products", product rails, journal and brands |
 | `/products` | Full catalog with search, category, sort and pagination |
 | `/products?q=phone&sort=price-asc&page=2` | Example of a shareable catalog URL |
+| `/products?deals=1` | Best deals: products with 15% off or more, biggest discount first |
 | `/products/:id` | Product details |
 | `/cart` | Shopping cart with promo code and shipping |
 | `/checkout` | Protected checkout form |

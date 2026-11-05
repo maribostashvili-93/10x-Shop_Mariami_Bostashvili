@@ -1,10 +1,10 @@
 # Compatibility — 10X Shop
 
-Run started (UTC): 2026-11-05T20:15:03.062Z. Duration: 65.1 seconds. Local production build: http://127.0.0.1:4173. Desktop: 1440×900; Mobile: 390×844. Chromium, Firefox, and WebKit are Playwright browser engines; branded Chrome/Firefox/Safari applications and physical phones were not tested. Firefox Mobile uses viewport and touch emulation only.
+Run started (UTC): 2026-11-05T20:29:10.852Z. Duration: 67.1 seconds. Local production build: http://127.0.0.1:4173. Desktop: 1440×900; Mobile: 390×844. Chromium, Firefox, and WebKit are Playwright browser engines; branded Chrome/Firefox/Safari applications and physical phones were not tested. Firefox Mobile uses viewport and touch emulation only.
 
 Matrix and keyboard tests replace DummyJSON responses with one fixed product (QA Beauty Product), using favicon.svg as its image. Pricing regression tests use six products with different discounts and boundary prices. This verifies the UI and shopping flow but does not verify the live API or real product images. Lighthouse uses real network requests; its results apply to the state displayed during each run. Deployed-site checks, when available, are recorded separately in docs/compat/live-results.json and QA-REPORT.md.
 
-Tests: 52 passed, 0 failed, 2 skipped. FAIL includes axe violations and does not always indicate a broken page or keyboard flow.
+Tests: 58 passed, 0 failed, 2 skipped. FAIL includes axe violations and does not always indicate a broken page or keyboard flow.
 
 ## Testing Tools and Methodology
 
@@ -30,6 +30,7 @@ Tests: 52 passed, 0 failed, 2 skipped. FAIL includes axe violations and does not
 | pricing: cards show the discounted price, original price and badge | PASS | PASS | PASS | PASS | PASS | PASS |
 | pricing: sorting is requested from the API and kept in the URL history | PASS | PASS | PASS | PASS | PASS | PASS |
 | pricing: cart adds $10 shipping below $100 and applies 10X10 | PASS | PASS | PASS | PASS | PASS | PASS |
+| pricing: Best deals lists only products with 15% off or more | PASS | PASS | PASS | PASS | PASS | PASS |
 
 The matrix covers Catalog, Product Details, empty Cart, Login, 404, and populated Cart/Checkout/Confirmation within the shopping flow. Home, Journal, Wishlist, Profile, and supporting pages are outside the scope of this run.
 

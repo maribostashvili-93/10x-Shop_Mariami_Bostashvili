@@ -77,6 +77,8 @@ All FULL items of PRD Annex A were checked against the code; the list below matc
 - **T:** `ApiClient.get<T>()` with type guards, `ApiError` and `isApiError`, `AsyncState<T>`, `CartAction` with an exhaustive `never` check, `STORAGE_KEYS as const`, ESLint `no-explicit-any: error`; remaining `as` casts replaced by guards.
 - **TW:** `brand` and `card` tokens in `@theme`, a `dark:` custom variant and a dark theme built from mirrored colour scales.
 
+DummyJSON gives 187 of 194 products a discount of 1–19.6%, so following the annex rule (badge when `discountPercentage ≥ 1`) puts a badge on almost every card. The rule is kept; a separate "Best deals" view (`/products?deals=1`) lists the 48 products with at least 15% off. The API cannot filter by discount, so the view combines a tiny `?select=discountPercentage` request (ids and discounts only) to count the deals with one page sorted by discount.
+
 The price-range filter from the earlier version was removed: the annex lists it as out of scope (bonus), and it cannot be combined with server-side pagination.
 
 ## Lighthouse before and after
