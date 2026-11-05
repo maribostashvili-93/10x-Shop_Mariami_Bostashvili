@@ -12,7 +12,7 @@ test.beforeEach(async ({ page }) => {
 });
 
 async function capture(page: Page, name: string, project: string) {
-  await page.screenshot({ path: `docs/compat/${project}-${name}.png`, fullPage: true, animations: 'disabled' });
+  await page.screenshot({ path: `docs/compat/current/${project}-${name}.png`, fullPage: true, animations: 'disabled' });
 }
 
 async function tabTo(page: Page, target: Locator) {
@@ -41,7 +41,11 @@ for (const [name, path, heading] of [
   });
 }
 
-test('keyboard: catalog → product → cart → login → checkout → confirmation', async ({ page }, info) => {
+test('keyboard: catalog → product → cart → login → checkout → confirmation', async ({ page, browserName }, info) => {
+  test.skip(
+    browserName === 'webkit',
+    'Playwright WebKit never moves focus to links with Tab or Alt+Tab, even on a bare <a href> page (docs/compat/webkit-keyboard-baseline.json). Check this flow in real Safari with "Press Tab to highlight each item" enabled.',
+  );
   await page.goto('/products');
   const productLink = page.getByRole('main').getByRole('heading', { name: product.title, exact: true }).getByRole('link');
   await tabTo(page, productLink);
