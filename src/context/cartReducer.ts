@@ -3,29 +3,31 @@ import type { CartAction, CartState } from "../types/cart";
 
 export const emptyCart: CartState = { items: [], promoCode: null };
 
+/** Pure reducer: no localStorage here; CartProvider persists the result. */
 export function cartReducer(state: CartState, action: CartAction): CartState {
-  const cart = new Cart(state.items);
+  const cart = new Cart(state.items, state.promoCode);
 
   switch (action.type) {
-    case "add":
-      return { ...state, items: [...cart.add(action.product, action.quantity).items] };
-    case "setQuantity":
-      return { ...state, items: [...cart.setQuantity(action.productId, action.quantity).items] };
-    case "remove": {
+    case "ADD_ITEM":
+      return { ...state, items: [...cart.add(action.product, action.qty).items] };
+    case "SET_QTY":
+      return { ...state, items: [...cart.setQuantity(action.productId, action.qty).items] };
+    case "REMOVE_ITEM": {
       const items = [...cart.remove(action.productId).items];
       return { items, promoCode: items.length > 0 ? state.promoCode : null };
     }
-    case "clear":
+    case "CLEAR":
       return emptyCart;
-    case "applyPromo": {
+    case "APPLY_PROMO": {
       const promo = findPromoCode(action.code);
       return promo ? { ...state, promoCode: promo.code } : state;
     }
-    case "removePromo":
+    case "REMOVE_PROMO":
       return { ...state, promoCode: null };
     default: {
-      const unreachable: never = action;
-      return unreachable;
+      // If a new action type is added but not handled, this line stops compiling.
+      const exhaustive: never = action;
+      return exhaustive;
     }
   }
 }

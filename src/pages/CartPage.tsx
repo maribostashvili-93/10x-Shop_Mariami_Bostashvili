@@ -1,4 +1,5 @@
-import { Link } from "react-router";
+import { Link, useLocation } from "react-router";
+import { useToast } from "../hooks/useToast";
 import { useCart } from "../hooks/useCart";
 import ProductPrice from "../components/products/ProductPrice";
 import { formatPrice, getFinalPrice } from "../utils/formatPrice";
@@ -7,21 +8,31 @@ import PromoCodeForm from "../components/cart/PromoCodeForm";
 
 function CartPage() {
   const { items, totals, promo, removeFromCart, setQuantity, clearCart } = useCart();
+  const { showToast } = useToast();
+  const location = useLocation();
+  // Checkout sends shoppers back here with a short explanation when the cart is empty.
+  const notice = typeof location.state === "object" && location.state !== null && "notice" in location.state && typeof location.state.notice === "string" ? location.state.notice : "";
+
+  function removeItem(id: number) {
+    removeFromCart(id);
+    showToast("Removed from cart", "info");
+  }
+
+  function confirmClear() {
+    if (window.confirm("Clear the cart? This cannot be undone.")) clearCart();
+  }
 
   if (items.length === 0) {
     return (
       <section className="py-10">
+        {notice && <p role="status" className="mb-6 rounded-xl border border-amber-200 bg-amber-50 px-4 py-3 text-amber-900">{notice}</p>}
         <h1 className="text-3xl font-semibold text-slate-900">
-          Your cart is empty
+          Your cart is empty.
         </h1>
-
-        <p className="mt-3 text-slate-600">
-          Add some products to start shopping.
-        </p>
 
         <Link
           to="/"
-          className="mt-6 inline-flex min-h-11 items-center rounded-lg bg-red-900 px-5 font-semibold text-white hover:bg-red-950 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-red-900"
+          className="mt-6 inline-flex min-h-11 items-center rounded-lg bg-violet-700 px-5 font-semibold text-white hover:bg-violet-800 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-violet-700"
         >
           Browse products
         </Link>
@@ -96,7 +107,7 @@ function CartPage() {
                     <button
                       type="button"
                       aria-label={`Remove ${product.title} from cart`}
-                      onClick={() => removeFromCart(product.id)}
+                      onClick={() => removeItem(product.id)}
                       className="min-h-11 rounded-lg px-3 text-sm font-semibold text-red-900 hover:bg-red-50 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-red-900"
                     >
                       Remove
@@ -139,7 +150,7 @@ function CartPage() {
           </Link>
           <button
             type="button"
-            onClick={clearCart}
+            onClick={confirmClear}
             className="mt-3 flex min-h-11 w-full items-center justify-center rounded-lg border border-slate-200 px-4 text-sm font-semibold text-slate-700 hover:bg-slate-50 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-violet-700"
           >
             Clear cart

@@ -1,26 +1,29 @@
 import type { CartItem } from "./cart";
 
-export type CheckoutFields = {
+/** Delivery details collected at checkout. No payment data exists in this project. */
+export interface ShippingInfo {
   fullName: string;
   email: string;
+  phone: string;
   address: string;
   city: string;
-};
+  postalCode: string;
+  country: string;
+}
 
 export type OrderStatus = "Processing" | "Shipped" | "Delivered";
 
-export type Order = {
-  id: string;
+/** Plain order data as stored in localStorage (see the Order class for behaviour). */
+export interface OrderData {
+  id: number; // Date.now() when the order was placed
+  number: string; // "10X-00001", sequential with five digits
   username: string;
-  createdAt: string;
   items: CartItem[];
-  customer: CheckoutFields;
+  shipping: ShippingInfo;
+  promoCode: string | null;
   subtotal: number;
   discount: number;
-  promoCode: string | null;
-  promoDiscount: number;
+  shippingCost: number;
   total: number;
-};
-
-/** Data the checkout supplies; id, owner and timestamp are added when the order is placed. */
-export type NewOrder = Omit<Order, "id" | "username" | "createdAt">;
+  placedAt: string; // ISO date
+}

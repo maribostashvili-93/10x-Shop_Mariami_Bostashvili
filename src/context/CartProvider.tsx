@@ -4,6 +4,7 @@ import type { CartItem, CartState } from "../types/cart";
 import { isProduct } from "../api/products";
 import { Cart, findPromoCode } from "../models/Cart";
 import { StorageService } from "../services/StorageService";
+import { STORAGE_KEYS } from "../services/storageKeys";
 import { CartContext } from "./cart-context";
 import { cartReducer, emptyCart } from "./cartReducer";
 
@@ -23,7 +24,7 @@ function isCartState(value: unknown): value is CartState {
   );
 }
 
-const cartStorage = new StorageService<CartState>("10x-cart", isCartState, emptyCart);
+const cartStorage = new StorageService<CartState>(STORAGE_KEYS.cart, isCartState, emptyCart);
 
 export function CartProvider({ children }: { children: ReactNode }) {
   const [state, dispatch] = useReducer(cartReducer, undefined, () => cartStorage.load());
@@ -34,22 +35,22 @@ export function CartProvider({ children }: { children: ReactNode }) {
   }, [state]);
 
   const promo = state.promoCode ? findPromoCode(state.promoCode) : null;
-  const totals = useMemo(() => new Cart(state.items).totals(promo), [state.items, promo]);
+  const totals = useMemo(() => new Cart(state.items, state.promoCode).totals(), [state.items, state.promoCode]);
 
   const value = {
     items: state.items,
     promo,
     totals,
-    addToCart: (product: Product, quantity: number) => dispatch({ type: "add", product, quantity }),
-    removeFromCart: (productId: number) => dispatch({ type: "remove", productId }),
-    setQuantity: (productId: number, quantity: number) => dispatch({ type: "setQuantity", productId, quantity }),
-    clearCart: () => dispatch({ type: "clear" }),
+    addToCart: (product: Product, quantity: number) => dispatch({ type: "ADD_ITEM", product, qty: quantity }),
+    removeFromCart: (productId: number) => dispatch({ type: "REMOVE_ITEM", productId }),
+    setQuantity: (productId: number, quantity: number) => dispatch({ type: "SET_QTY", productId, qty: quantity }),
+    clearCart: () => dispatch({ type: "CLEAR" }),
     applyPromo: (code: string) => {
       if (!findPromoCode(code)) return false;
-      dispatch({ type: "applyPromo", code });
+      dispatch({ type: "APPLY_PROMO", code });
       return true;
     },
-    removePromo: () => dispatch({ type: "removePromo" }),
+    removePromo: () => dispatch({ type: "REMOVE_PROMO" }),
   };
 
   return <CartContext.Provider value={value}>{children}</CartContext.Provider>;

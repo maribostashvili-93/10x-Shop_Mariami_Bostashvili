@@ -13,9 +13,9 @@ export type CartState = {
 
 /** Every change to the cart is one of these typed actions (a discriminated union). */
 export type CartAction =
-  | { type: "add"; product: Product; quantity: number }
-  | { type: "setQuantity"; productId: number; quantity: number }
-  | { type: "remove"; productId: number }
-  | { type: "clear" }
-  | { type: "applyPromo"; code: string }
-  | { type: "removePromo" };
+  | { type: "ADD_ITEM"; product: Product; qty: number }
+  | { type: "SET_QTY"; productId: number; qty: number }
+  | { type: "REMOVE_ITEM"; productId: number }
+  | { type: "CLEAR" }
+  | { type: "APPLY_PROMO"; code: string }
+  | { type: "REMOVE_PROMO" };

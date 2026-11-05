@@ -1,5 +1,6 @@
 import type { ProductReview } from "../types/product";
 import { StorageService } from "./StorageService";
+import { STORAGE_KEYS } from "./storageKeys";
 
 /** Reviews written in this browser, grouped by product ID. */
 export type LocalReviews = Record<string, ProductReview[]>;
@@ -21,7 +22,7 @@ function isLocalReviews(value: unknown): value is LocalReviews {
   );
 }
 
-export const reviewStorage = new StorageService<LocalReviews>("10x-reviews", isLocalReviews, {});
+export const reviewStorage = new StorageService<LocalReviews>(STORAGE_KEYS.reviews, isLocalReviews, {});
 
 export function averageRating(reviews: readonly ProductReview[], fallback: number): number {
   if (reviews.length === 0) return fallback;

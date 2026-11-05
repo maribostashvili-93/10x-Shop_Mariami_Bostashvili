@@ -1,9 +1,10 @@
 import type { OrderStatus } from "../../types/order";
 
+/** Processing — grey, Shipped — blue, Delivered — green. */
 const tones: Record<OrderStatus, string> = {
-  Processing: "bg-amber-50 text-amber-800",
-  Shipped: "bg-sky-50 text-sky-800",
-  Delivered: "bg-brand-100 text-brand-800",
+  Processing: "bg-slate-100 text-slate-700",
+  Shipped: "bg-sky-100 text-sky-800",
+  Delivered: "bg-emerald-100 text-emerald-800",
 };
 
 function OrderStatusBadge({ status }: { status: OrderStatus }) {

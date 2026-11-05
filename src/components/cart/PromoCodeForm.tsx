@@ -24,7 +24,7 @@ function PromoCodeForm() {
     return (
       <div className="flex items-center justify-between gap-3 rounded-xl bg-brand-50 px-4 py-3 text-sm">
         <p role="status" className="font-semibold text-brand-800">
-          {promo.code} applied (−{promo.percent}%)
+          Discount ({promo.code} −{promo.percent}%)
         </p>
         <button type="button" onClick={removePromo} className="min-h-11 rounded-lg px-3 font-semibold text-brand-700 hover:bg-brand-100 focus-visible:outline-2 focus-visible:outline-brand-700">
           Remove
