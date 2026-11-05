@@ -17,7 +17,7 @@ function Layout() {
         <Header />
         <div className="grid min-w-0 flex-1 gap-6 py-4 lg:grid-cols-[230px_minmax(0,1fr)] lg:py-6">
           <Sidebar />
-          <main className="min-w-0 w-full">
+          <main className="min-h-[100dvh] min-w-0 w-full">
             {pathname === "/products" && <ShopSearch />}
             <Suspense fallback={<p role="status" className="py-10 text-slate-600">Loading page...</p>}>
               <Outlet />

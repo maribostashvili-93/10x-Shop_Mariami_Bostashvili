@@ -2,13 +2,15 @@ import { lazy } from "react";
 import { Route, Routes } from "react-router";
 import Layout from "./components/layout/Layout";
 import HomePage from "./pages/HomePage";
+import ProductsPage from "./pages/ProductsPage";
+import ProductPage from "./pages/ProductPage";
+import CartPage from "./pages/CartPage";
 import NotFoundPage from "./pages/NotFoundPage";
 
-// Route-level code splitting: each page is downloaded only when it is first visited.
-// The home page stays in the main bundle because it is the landing route.
-const ProductsPage = lazy(() => import("./pages/ProductsPage"));
-const ProductPage = lazy(() => import("./pages/ProductPage"));
-const CartPage = lazy(() => import("./pages/CartPage"));
+// Route-level code splitting. The main shopping path (catalog, product, cart) stays in
+// the entry bundle: Lighthouse showed that lazy-loading those pages added a chunk
+// round trip before LCP and a layout shift. Less frequent or heavier pages are split
+// out; Login alone carries Formik + Yup (~80 kB) and is only downloaded when needed.
 const CheckoutPage = lazy(() => import("./pages/CheckoutPage"));
 const LoginPage = lazy(() => import("./pages/LoginPage"));
 const OrdersPage = lazy(() => import("./pages/OrdersPage"));
