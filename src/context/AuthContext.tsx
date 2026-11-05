@@ -2,7 +2,7 @@ import { useState, type ReactNode } from "react";
 import type { User } from "../types/user";
 import { StorageService } from "../services/StorageService";
 import { STORAGE_KEYS } from "../services/storageKeys";
-import { profileStorage, type ProfileData } from "../services/profileStorage";
+import { profileStorage, type EditableProfile, type ProfileData } from "../services/profileStorage";
 import { AuthContext } from "./auth-context";
 
 function isUser(value: unknown): value is User | null {
@@ -14,7 +14,21 @@ const userStorage = new StorageService<User | null>(STORAGE_KEYS.user, isUser, n
 
 export function AuthProvider({ children }: { children: ReactNode }) {
   const [user, setUser] = useState<User | null>(() => userStorage.load());
-  const [profile, setProfile] = useState<ProfileData>(() => profileStorage.load());
+  const [profile, setProfile] = useState<ProfileData>(() => {
+    const saved = profileStorage.load();
+    // Shoppers who signed in before "member since" existed get today's date once.
+    if (userStorage.load() && !saved.memberSince) {
+      const withDate = { ...saved, memberSince: new Date().toISOString() };
+      profileStorage.save(withDate);
+      return withDate;
+    }
+    return saved;
+  });
+
+  function saveProfile(next: ProfileData) {
+    setProfile(next);
+    profileStorage.save(next);
+  }
 
   function login(username: string) {
     const trimmedUsername = username.trim();
@@ -22,6 +36,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     const nextUser = { username: trimmedUsername };
     setUser(nextUser);
     userStorage.save(nextUser);
+    if (!profile.memberSince) saveProfile({ ...profile, memberSince: new Date().toISOString() });
   }
 
   function logout() {
@@ -29,9 +44,8 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     userStorage.clear();
   }
 
-  function updateProfile(nextProfile: ProfileData) {
-    setProfile(nextProfile);
-    profileStorage.save(nextProfile);
+  function updateProfile(fields: EditableProfile) {
+    saveProfile({ ...profile, ...fields, updatedAt: new Date().toISOString() });
   }
 
   return (
