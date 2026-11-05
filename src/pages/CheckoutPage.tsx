@@ -5,6 +5,7 @@ import { useCart } from "../hooks/useCart";
 import { getProducts } from "../api/products";
 import type { Product } from "../types/product";
 import ProductCard from "../components/products/ProductCard";
+import { formatPrice, getCartTotals, getFinalPrice } from "../utils/formatPrice";
 
 type CheckoutFields = {
   fullName: string;
@@ -59,7 +60,7 @@ function CheckoutPage() {
         {suggestedProducts.length > 0 && <section className="mt-12 rounded-[1.5rem] bg-[#f4efff] p-5 text-left sm:p-8" aria-labelledby="checkout-recommendations">
           <p className="text-xs font-semibold uppercase tracking-[0.18em] text-violet-700">Keep browsing</p>
           <h2 id="checkout-recommendations" className="mt-2 text-2xl font-semibold text-slate-900">You may also like</h2>
-          <div className="mt-6 grid grid-cols-2 gap-4 lg:grid-cols-4">{suggestedProducts.map((product) => <ProductCard key={product.id} product={product} />)}</div>
+          <div className="mt-6 grid grid-cols-1 gap-4 min-[481px]:grid-cols-2 lg:grid-cols-4">{suggestedProducts.map((product) => <ProductCard key={product.id} product={product} />)}</div>
         </section>}
       </section>
     );
@@ -80,7 +81,7 @@ function CheckoutPage() {
     );
   }
 
-  const total = items.reduce((sum, item) => sum + item.product.price * item.quantity, 0);
+  const { subtotal, discount, total } = getCartTotals(items);
 
   function updateField(field: keyof CheckoutFields, value: string) {
     setFields((current) => ({ ...current, [field]: value }));
@@ -134,14 +135,15 @@ function CheckoutPage() {
             {items.map(({ product, quantity }) => (
               <li key={product.id} className="flex justify-between gap-4 text-sm">
                 <span className="text-slate-600">{product.title} × {quantity}</span>
-                <span className="shrink-0 font-semibold text-slate-900">${(product.price * quantity).toFixed(2)}</span>
+                <span className="shrink-0 font-semibold text-slate-900">{formatPrice(getFinalPrice(product) * quantity)}</span>
               </li>
             ))}
           </ul>
-          <div className="mt-5 flex justify-between gap-4 text-lg font-semibold text-slate-900">
-            <span>Total</span>
-            <span>${total.toFixed(2)}</span>
-          </div>
+          <dl className="mt-5 space-y-2 text-sm">
+            <div className="flex justify-between gap-4"><dt className="text-slate-600">Subtotal</dt><dd className="font-semibold text-slate-900">{formatPrice(subtotal)}</dd></div>
+            <div className="flex justify-between gap-4"><dt className="text-slate-600">Discount</dt><dd className="font-semibold text-violet-700">−{formatPrice(discount)}</dd></div>
+            <div className="flex justify-between gap-4 pt-2 text-lg font-semibold text-slate-900"><dt>Total</dt><dd>{formatPrice(total)}</dd></div>
+          </dl>
           <Link to="/cart" className="mt-5 inline-flex min-h-11 items-center text-sm font-semibold text-red-900 underline focus-visible:outline-2 focus-visible:outline-red-900">
             Edit cart
           </Link>

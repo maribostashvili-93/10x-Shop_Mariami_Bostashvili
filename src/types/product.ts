@@ -1,3 +1,10 @@
+export type ProductReview = {
+  rating: number;
+  comment: string;
+  date: string;
+  reviewerName: string;
+};
+
 export type Product = {
   id: number;
   title: string;
@@ -8,6 +15,8 @@ export type Product = {
   price: number;
   discountPercentage?: number;
   thumbnail: string;
+  images?: string[];
+  reviews?: ProductReview[];
 };
 
 export type Category = {

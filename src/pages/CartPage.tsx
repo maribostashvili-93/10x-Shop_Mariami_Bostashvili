@@ -1,13 +1,11 @@
 import { Link } from "react-router";
 import { useCart } from "../hooks/useCart";
+import ProductPrice from "../components/products/ProductPrice";
+import { formatPrice, getCartTotals, getFinalPrice } from "../utils/formatPrice";
 
 function CartPage() {
-  const { items, removeFromCart, setQuantity } = useCart();
-
-  const total = items.reduce(
-    (sum, item) => sum + item.product.price * item.quantity,
-    0,
-  );
+  const { items, removeFromCart, setQuantity, clearCart } = useCart();
+  const { subtotal, discount, total } = getCartTotals(items);
 
   if (items.length === 0) {
     return (
@@ -58,9 +56,10 @@ function CartPage() {
                     {product.title}
                   </Link>
 
-                  <p className="mt-2 text-sm text-slate-600">
-                    Unit price: ${product.price.toFixed(2)}
-                  </p>
+                  <div className="mt-2 text-sm text-slate-600">
+                    <span className="sr-only">Unit price</span>
+                    <ProductPrice product={product} />
+                  </div>
 
                   <div className="mt-4 flex flex-wrap items-center gap-3">
                     <div
@@ -104,7 +103,7 @@ function CartPage() {
                   </div>
 
                   <p className="mt-4 font-semibold text-slate-900">
-                    Item total: ${(product.price * quantity).toFixed(2)}
+                    Item total: {formatPrice(getFinalPrice(product) * quantity)}
                   </p>
                 </div>
               </div>
@@ -123,21 +122,34 @@ function CartPage() {
             Order summary
           </h2>
 
-          <dl className="mt-6">
+          <dl className="mt-6 space-y-3">
             <div className="flex justify-between gap-4">
               <dt className="text-slate-600">Subtotal</dt>
-              <dd className="font-semibold text-slate-900">
-                ${total.toFixed(2)}
-              </dd>
+              <dd className="font-semibold text-slate-900">{formatPrice(subtotal)}</dd>
+            </div>
+            <div className="flex justify-between gap-4">
+              <dt className="text-slate-600">Discount</dt>
+              <dd className="font-semibold text-violet-700">−{formatPrice(discount)}</dd>
+            </div>
+            <div className="flex justify-between gap-4 border-t border-slate-200 pt-3 text-lg">
+              <dt className="font-semibold text-slate-900">Total</dt>
+              <dd className="font-semibold text-slate-900">{formatPrice(total)}</dd>
             </div>
           </dl>
 
           <Link
             to="/checkout"
-            className="mt-6 flex min-h-11 items-center justify-center rounded-lg bg-red-900 px-4 font-semibold text-white hover:bg-red-950 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-red-900"
+            className="mt-6 flex min-h-11 items-center justify-center rounded-lg bg-violet-700 px-4 font-semibold text-white hover:bg-violet-800 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-violet-700"
           >
             Proceed to checkout
           </Link>
+          <button
+            type="button"
+            onClick={clearCart}
+            className="mt-3 flex min-h-11 w-full items-center justify-center rounded-lg border border-slate-200 px-4 text-sm font-semibold text-slate-700 hover:bg-slate-50 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-violet-700"
+          >
+            Clear cart
+          </button>
         </aside>
       </div>
     </section>

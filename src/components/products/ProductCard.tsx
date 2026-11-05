@@ -4,6 +4,7 @@ import { useCart } from "../../hooks/useCart";
 import { CartToast } from "../ui/CartToast";
 import type { Product } from "../../types/product";
 import { useWishlist } from "../../hooks/useWishlist";
+import ProductPrice, { StockStatus } from "./ProductPrice";
 
 type ProductCardProps = {
   product: Product;
@@ -56,12 +57,13 @@ function ProductCard({ product }: ProductCardProps) {
       <div className="flex flex-1 flex-col p-3">
         <p className="text-xs font-semibold tracking-wider text-stone-500 uppercase">{product.category}</p>
         <h2 className="mt-2 text-base leading-snug font-semibold text-stone-900"><Link to={`/products/${product.id}`} className="hover:text-red-900 focus-visible:outline-2 focus-visible:outline-red-900">{product.title}</Link></h2>
-        <p className="mt-3 flex items-center gap-1.5 text-sm text-stone-600">
+        <p className="mt-3 flex flex-wrap items-center gap-1.5 text-sm text-stone-600">
           <svg aria-hidden="true" viewBox="0 0 24 24" fill="currentColor" className="size-4 text-amber-600"><path d="m12 2.8 2.8 5.7 6.3.9-4.6 4.5 1.1 6.3-5.6-3-5.6 3 1.1-6.3-4.6-4.5 6.3-.9L12 2.8Z" /></svg>
           <span>Rating: {product.rating} / 5</span>
         </p>
-        <div className="mt-auto flex items-end justify-between gap-2 pt-5">
-          <p className="text-lg font-semibold text-stone-950">${product.price.toFixed(2)}</p>
+        <div className="mt-2"><StockStatus stock={product.stock} /></div>
+        <div className="mt-auto flex flex-wrap items-end justify-between gap-2 pt-5">
+          <ProductPrice product={product} />
           <Link to={`/products/${product.id}`} className="inline-flex min-h-11 items-center text-sm font-medium text-red-800 hover:text-red-950 focus-visible:outline-2 focus-visible:outline-red-900">View details</Link>
         </div>
       </div>
@@ -77,7 +79,7 @@ function ProductCard({ product }: ProductCardProps) {
           <div>
             <p className="text-sm text-slate-600">{product.category}</p>
             <h2 className="mt-2 text-2xl font-semibold">{product.title}</h2>
-            <p className="mt-4 text-xl font-semibold">${product.price.toFixed(2)}</p>
+            <div className="mt-4"><ProductPrice product={product} size="lg" /></div>
             <p className="mt-4 text-sm leading-6 text-slate-600">{product.description}</p>
             <p className="mt-4 text-sm">Rating: {product.rating} / 5</p>
             <p className="mt-2 text-sm">{product.stock > 0 ? `${product.stock} in stock` : "Out of stock"}</p>

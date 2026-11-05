@@ -9,6 +9,7 @@ import CollectionShowcase from "../components/products/CollectionShowcase";
 import JournalCards from "../components/products/JournalCards";
 import CommunityStories from "../components/products/CommunityStories";
 import HeroCarousel from "../components/products/HeroCarousel";
+import CatalogSection from "../components/products/CatalogSection";
 
 function ProductRail({ title, eyebrow, products, loading }: { title: string; eyebrow: string; products: Product[]; loading: boolean }) {
   return (
@@ -17,7 +18,7 @@ function ProductRail({ title, eyebrow, products, loading }: { title: string; eye
         <div><p className="text-[10px] font-bold tracking-[0.18em] text-violet-700 uppercase">{eyebrow}</p><h2 id={`${title.toLowerCase().replaceAll(" ", "-")}-heading`} className="mt-1 text-xl font-bold tracking-tight text-stone-900 sm:text-2xl">{title}</h2></div>
         <Link to="/products" className="inline-flex min-h-11 items-center text-sm font-semibold text-violet-700 hover:text-violet-950">View all <span aria-hidden="true" className="ml-1">→</span></Link>
       </div>
-      <div className="mt-4 grid grid-cols-2 gap-3 lg:grid-cols-4">
+      <div className="mt-4 grid grid-cols-1 gap-4 min-[481px]:grid-cols-2 lg:grid-cols-4">
         {loading
           ? Array.from({ length: 4 }, (_, index) => <div key={index} aria-hidden="true" className="aspect-[3/4] animate-pulse rounded-2xl bg-violet-50" />)
           : products.slice(0, 4).map((product) => <ProductCard key={product.id} product={product} />)}
@@ -63,6 +64,7 @@ function HomePage() {
           })}
         </div>
       </section>
+      <CatalogSection />
       <ProductRail title="New arrivals" eyebrow="Just in" loading={loading} products={[...products].sort((a, b) => b.id - a.id)} />
       <ProductRail title="Best sellers" eyebrow="Most wanted" loading={loading} products={[...products].sort((a, b) => b.rating - a.rating)} />
       <ProductRail title="Sale edit" eyebrow="Limited offers" loading={loading} products={[...products].sort((a, b) => (b.discountPercentage ?? 0) - (a.discountPercentage ?? 0))} />

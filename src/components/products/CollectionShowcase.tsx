@@ -1,6 +1,7 @@
 import { Link } from "react-router";
 import CollectionBanner from "./CollectionBanner";
 import type { Product } from "../../types/product";
+import { formatPrice, getFinalPrice } from "../../utils/formatPrice";
 
 export default function CollectionShowcase({ products }: { products: Product[] }) {
   const selected = ["fragrances", "womens-bags", "womens-watches", "womens-jewellery"]
@@ -22,7 +23,7 @@ export default function CollectionShowcase({ products }: { products: Product[] }
               <div className="flex aspect-[4/5] items-center justify-center overflow-hidden rounded-xl bg-violet-50/70 p-3"><img src={product.thumbnail} alt={product.title} loading="lazy" className="h-full w-full object-contain transition-transform motion-safe:group-hover:scale-105" /></div>
               <p className="mt-3 text-[10px] font-medium tracking-wide text-violet-700 uppercase">{product.category.replaceAll("-", " ")}</p>
               <h3 className="mt-1 line-clamp-2 min-h-10 text-xs font-semibold leading-5 text-slate-900">{product.title}</h3>
-              <p className="mt-2 text-sm font-semibold text-slate-900">${product.price.toFixed(2)}</p>
+              <p className="mt-2 text-sm font-semibold text-slate-900">{formatPrice(getFinalPrice(product))}</p>
               <p className="mt-1 text-[10px] text-slate-500">Rated {product.rating.toFixed(1)} / 5</p>
             </Link>
           </article>)}

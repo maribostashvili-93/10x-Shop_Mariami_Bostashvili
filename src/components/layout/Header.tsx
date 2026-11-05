@@ -2,10 +2,11 @@ import { NavLink } from "react-router";
 import { useState } from "react";
 import { useAuth } from "../../hooks/useAuth";
 import { ShoppingPanels } from "./ShoppingPanels";
+import CartLink from "./CartLink";
 
 const links = [
-  { to: "/", label: "Home", end: true },
-  { to: "/products", label: "Products", end: false },
+  { to: "/", label: "Catalog", end: true },
+  { to: "/products", label: "Shop all", end: false },
 ];
 
 function Header() {
@@ -21,10 +22,15 @@ function Header() {
         <span aria-hidden="true" className="flex size-9 items-center justify-center rounded-xl bg-violet-700 text-sm text-white">10X</span>
         10X Shop
       </NavLink>
+      <div className="flex items-center gap-2 lg:hidden">
+      <CartLink />
       <button type="button" aria-expanded={menuOpen} aria-controls="mobile-menu" aria-label={menuOpen ? "Close menu" : "Open menu"} onClick={() => setMenuOpen((open) => !open)} className="flex size-11 items-center justify-center rounded-xl border border-slate-200 bg-white text-red-900 focus-visible:outline-2 focus-visible:outline-red-900 lg:hidden">
         <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" className="size-5"><path d={menuOpen ? "M6 6l12 12M18 6 6 18" : "M4 7h16M4 12h16M4 17h16"} /></svg>
       </button>
+      </div>
       {menuOpen && <nav id="mobile-menu" aria-label="Mobile menu" className="order-3 grid basis-full gap-1 border-t border-stone-200 pt-2 lg:hidden">
+        <NavLink to="/" end onClick={() => setMenuOpen(false)} className="flex min-h-11 items-center rounded-xl px-3 text-sm font-semibold text-slate-700 focus-visible:outline-2 focus-visible:outline-violet-700">Catalog</NavLink>
+        <NavLink to="/cart" onClick={() => setMenuOpen(false)} className="flex min-h-11 items-center rounded-xl px-3 text-sm font-semibold text-slate-700 focus-visible:outline-2 focus-visible:outline-violet-700">Cart</NavLink>
         <NavLink to="/products" onClick={() => setMenuOpen(false)} className="flex min-h-11 items-center rounded-xl px-3 text-sm font-semibold text-slate-700 focus-visible:outline-2 focus-visible:outline-red-900">Shop all products</NavLink>
         <NavLink to="/wishlist" onClick={() => setMenuOpen(false)} className="flex min-h-11 items-center rounded-xl px-3 text-sm font-semibold text-slate-700 focus-visible:outline-2 focus-visible:outline-red-900">My wishlist</NavLink>
         {user ? <button type="button" onClick={() => { logout(); setMenuOpen(false); }} className="min-h-11 rounded-xl px-3 text-left text-sm font-semibold text-red-900 focus-visible:outline-2 focus-visible:outline-red-900">Logout</button> : <NavLink to="/login" onClick={() => setMenuOpen(false)} className="flex min-h-11 items-center rounded-xl px-3 text-sm font-semibold text-red-900 focus-visible:outline-2 focus-visible:outline-red-900">Login</NavLink>}
@@ -35,6 +41,7 @@ function Header() {
             {label}
           </NavLink>
         ))}
+        <CartLink showLabel />
         {user ? (
           <div className="relative">
             <button type="button" onClick={() => setAccountOpen((open) => !open)} aria-expanded={accountOpen} aria-haspopup="menu" className="flex min-h-11 items-center gap-2 rounded-lg bg-violet-50 px-3 text-sm font-semibold text-violet-800 hover:bg-violet-100 focus-visible:outline-2 focus-visible:outline-violet-700"><span className="flex size-7 items-center justify-center rounded-full bg-violet-700 text-xs text-white">{user.username.charAt(0).toUpperCase()}</span>{user.username}<svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" className="size-4"><path d="m6 9 6 6 6-6" /></svg></button>

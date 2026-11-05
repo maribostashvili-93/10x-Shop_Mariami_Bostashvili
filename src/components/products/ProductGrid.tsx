@@ -8,7 +8,8 @@ type ProductGridProps = {
 
 function ProductGrid({ products, className = "" }: ProductGridProps) {
   return (
-    <div className={`grid grid-cols-2 gap-2 sm:gap-4 xl:grid-cols-3 ${className}`}>
+    // Mobile ≤480px: 1 column · Tablet 481–1024px: 2–3 columns · Desktop ≥1024px (lg): 4 columns
+    <div className={`grid grid-cols-1 gap-4 min-[481px]:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 ${className}`}>
       {products.map((product) => (
         <ProductCard key={product.id} product={product} />
       ))}
