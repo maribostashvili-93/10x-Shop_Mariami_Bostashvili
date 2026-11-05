@@ -7,6 +7,8 @@ import { useToast } from "../hooks/useToast";
 import OrderStatusBadge from "../components/orders/OrderStatusBadge";
 import OrderTotals from "../components/cart/OrderTotals";
 import { ORDER_STATUSES } from "../models/Order";
+import { Cart } from "../models/Cart";
+import { describeOptions } from "../models/productOptions";
 import { formatDate, formatPrice, getFinalPrice } from "../utils/formatPrice";
 import NotFoundPage from "./NotFoundPage";
 
@@ -38,14 +40,17 @@ function OrderDetailsPage() {
 
   function reorder() {
     if (!order) return;
+    // Simulate the additions with the Cart class so stock limits match the reducer.
     let added = 0;
-    for (const { product, quantity } of order.items) {
-      const inCart = cartItems.find((item) => item.product.id === product.id)?.quantity ?? 0;
-      const quantityToAdd = Math.min(quantity, Math.max(0, product.stock - inCart));
+    let preview = new Cart(cartItems);
+    for (const { product, quantity, options } of order.items) {
+      const next = preview.add(product, quantity, options);
+      const quantityToAdd = next.quantityOf(product.id) - preview.quantityOf(product.id);
       if (quantityToAdd > 0) {
-        addToCart(product, quantityToAdd);
+        addToCart(product, quantityToAdd, options);
         added += quantityToAdd;
       }
+      preview = next;
     }
     if (added === 0) {
       showToast("These items are already in your cart at the maximum stock.", "info");
@@ -100,12 +105,15 @@ function OrderDetailsPage() {
               </tr>
             </thead>
             <tbody className="divide-y divide-slate-100">
-              {order.items.map(({ product, quantity }) => (
-                <tr key={product.id}>
+              {order.items.map(({ product, quantity, options }) => (
+                <tr key={Cart.lineId({ product, options })}>
                   <td className="py-3">
                     <div className="flex items-center gap-3">
                       <img src={product.thumbnail} alt="" width={48} height={48} loading="lazy" className="size-12 shrink-0 rounded-lg bg-slate-100 object-contain" />
-                      <Link to={`/products/${product.id}`} className="font-semibold text-slate-900 hover:text-brand-800 focus-visible:outline-2 focus-visible:outline-brand-700">{product.title}</Link>
+                      <div>
+                        <Link to={`/products/${product.id}`} className="font-semibold text-slate-900 hover:text-brand-800 focus-visible:outline-2 focus-visible:outline-brand-700">{product.title}</Link>
+                        {options && <p className="text-xs text-slate-600">{describeOptions(options)}</p>}
+                      </div>
                     </div>
                   </td>
                   <td className="py-3 text-right">{quantity}</td>

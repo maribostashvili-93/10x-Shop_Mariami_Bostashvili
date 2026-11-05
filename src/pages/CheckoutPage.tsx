@@ -7,6 +7,7 @@ import { getCatalogProducts } from "../api/products";
 import type { Product } from "../types/product";
 import type { ShippingInfo } from "../types/order";
 import { Cart } from "../models/Cart";
+import { describeOptions } from "../models/productOptions";
 import type { Order } from "../models/Order";
 import ProductCard from "../components/products/ProductCard";
 import OrderTotals from "../components/cart/OrderTotals";
@@ -67,9 +68,12 @@ function CheckoutPage() {
               Delivering to {confirmedOrder.shipping.fullName}, {confirmedOrder.shipping.address}, {confirmedOrder.shipping.city}, {confirmedOrder.shipping.country}.
             </p>
             <ul className="mt-5 space-y-3 border-b border-slate-200 pb-5">
-              {confirmedOrder.items.map(({ product, quantity }) => (
-                <li key={product.id} className="flex justify-between gap-4 text-sm">
-                  <span className="text-slate-600">{product.title} × {quantity}</span>
+              {confirmedOrder.items.map(({ product, quantity, options }) => (
+                <li key={Cart.lineId({ product, options })} className="flex justify-between gap-4 text-sm">
+                  <span className="text-slate-600">
+                    {product.title} × {quantity}
+                    {options && <span className="block text-xs text-slate-500">{describeOptions(options)}</span>}
+                  </span>
                   <span className="shrink-0 font-semibold text-slate-900">{formatPrice(getFinalPrice(product) * quantity)}</span>
                 </li>
               ))}
@@ -211,9 +215,12 @@ function CheckoutPage() {
         <aside aria-labelledby="checkout-summary" className="h-fit rounded-2xl border border-slate-200 bg-white p-6">
           <h2 id="checkout-summary" className="text-xl font-semibold text-slate-900">Order summary</h2>
           <ul className="mt-5 space-y-3 border-b border-slate-200 pb-5">
-            {items.map(({ product, quantity }) => (
-              <li key={product.id} className="flex justify-between gap-4 text-sm">
-                <span className="text-slate-600">{product.title} × {quantity}</span>
+            {items.map(({ product, quantity, options }) => (
+              <li key={Cart.lineId({ product, options })} className="flex justify-between gap-4 text-sm">
+                <span className="text-slate-600">
+                  {product.title} × {quantity}
+                  {options && <span className="block text-xs text-slate-500">{describeOptions(options)}</span>}
+                </span>
                 <span className="shrink-0 font-semibold text-slate-900">{formatPrice(getFinalPrice(product) * quantity)}</span>
               </li>
             ))}

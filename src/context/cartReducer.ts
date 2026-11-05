@@ -9,11 +9,11 @@ export function cartReducer(state: CartState, action: CartAction): CartState {
 
   switch (action.type) {
     case "ADD_ITEM":
-      return { ...state, items: [...cart.add(action.product, action.qty).items] };
+      return { ...state, items: [...cart.add(action.product, action.qty, action.options).items] };
     case "SET_QTY":
-      return { ...state, items: [...cart.setQuantity(action.productId, action.qty).items] };
+      return { ...state, items: [...cart.setQuantity(action.lineId, action.qty).items] };
     case "REMOVE_ITEM": {
-      const items = [...cart.remove(action.productId).items];
+      const items = [...cart.remove(action.lineId).items];
       return { items, promoCode: items.length > 0 ? state.promoCode : null };
     }
     case "CLEAR":

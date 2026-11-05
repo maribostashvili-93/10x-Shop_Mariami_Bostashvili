@@ -1,6 +1,6 @@
 import { useEffect, useMemo, useReducer, type ReactNode } from "react";
 import type { Product } from "../types/product";
-import type { CartItem, CartState } from "../types/cart";
+import type { CartItem, CartState, ProductOptions } from "../types/cart";
 import { isProduct } from "../api/products";
 import { Cart, findPromoCode } from "../models/Cart";
 import { StorageService } from "../services/StorageService";
@@ -8,11 +8,16 @@ import { STORAGE_KEYS } from "../services/storageKeys";
 import { CartContext } from "./cart-context";
 import { cartReducer, emptyCart } from "./cartReducer";
 
+function isOptions(value: unknown): value is ProductOptions {
+  return typeof value === "object" && value !== null && "color" in value && typeof value.color === "string" && "size" in value && typeof value.size === "string";
+}
+
 function isCartItem(value: unknown): value is CartItem {
   return (
     typeof value === "object" && value !== null &&
     "product" in value && isProduct(value.product) &&
-    "quantity" in value && typeof value.quantity === "number" && Number.isInteger(value.quantity) && value.quantity > 0
+    "quantity" in value && typeof value.quantity === "number" && Number.isInteger(value.quantity) && value.quantity > 0 &&
+    (!("options" in value) || value.options === undefined || isOptions(value.options))
   );
 }
 
@@ -41,9 +46,9 @@ export function CartProvider({ children }: { children: ReactNode }) {
     items: state.items,
     promo,
     totals,
-    addToCart: (product: Product, quantity: number) => dispatch({ type: "ADD_ITEM", product, qty: quantity }),
-    removeFromCart: (productId: number) => dispatch({ type: "REMOVE_ITEM", productId }),
-    setQuantity: (productId: number, quantity: number) => dispatch({ type: "SET_QTY", productId, qty: quantity }),
+    addToCart: (product: Product, quantity: number, options?: ProductOptions) => dispatch({ type: "ADD_ITEM", product, qty: quantity, options }),
+    removeFromCart: (lineId: string) => dispatch({ type: "REMOVE_ITEM", lineId }),
+    setQuantity: (lineId: string, quantity: number) => dispatch({ type: "SET_QTY", lineId, qty: quantity }),
     clearCart: () => dispatch({ type: "CLEAR" }),
     applyPromo: (code: string) => {
       if (!findPromoCode(code)) return false;

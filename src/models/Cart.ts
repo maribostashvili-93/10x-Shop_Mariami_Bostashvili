@@ -1,5 +1,5 @@
 import type { Product } from "../types/product";
-import type { CartItem } from "../types/cart";
+import type { CartItem, ProductOptions } from "../types/cart";
 import { getFinalPrice } from "../utils/formatPrice";
 
 export type PromoCode = {
@@ -60,33 +60,43 @@ export class Cart implements ICart {
     return this.items.reduce((count, item) => count + item.quantity, 0);
   }
 
-  quantityOf(productId: number): number {
-    return this.items.find((item) => item.product.id === productId)?.quantity ?? 0;
+  /** One line per product + colour + size, e.g. "12|Black|M". */
+  static lineId(item: Pick<CartItem, "product" | "options">): string {
+    return `${item.product.id}|${item.options?.color ?? ""}|${item.options?.size ?? ""}`;
   }
 
-  add(product: Product, quantity: number): Cart {
-    if (!Number.isInteger(quantity) || quantity < 1 || product.stock < 1) return this;
+  /** Total quantity of a product across all of its colour/size lines. */
+  quantityOf(productId: number): number {
+    return this.items.filter((item) => item.product.id === productId).reduce((sum, item) => sum + item.quantity, 0);
+  }
 
-    const existing = this.items.find((item) => item.product.id === product.id);
+  add(product: Product, quantity: number, options?: ProductOptions): Cart {
+    if (!Number.isInteger(quantity) || quantity < 1 || product.stock < 1) return this;
+    // Stock is shared by every colour/size line of the same product.
+    const allowed = Math.min(quantity, product.stock - this.quantityOf(product.id));
+    if (allowed < 1) return this;
+
+    const id = Cart.lineId({ product, options });
+    const existing = this.items.find((item) => Cart.lineId(item) === id);
     if (existing) {
       return new Cart(this.items.map((item) =>
-        item.product.id === product.id
-          ? { ...item, quantity: Math.min(item.quantity + quantity, item.product.stock) }
-          : item,
+        Cart.lineId(item) === id ? { ...item, quantity: item.quantity + allowed } : item,
       ), this.promo?.code ?? null);
     }
-    return new Cart([...this.items, { product, quantity: Math.min(quantity, product.stock) }], this.promo?.code ?? null);
+    return new Cart([...this.items, { product, quantity: allowed, options }], this.promo?.code ?? null);
   }
 
-  setQuantity(productId: number, quantity: number): Cart {
+  setQuantity(lineId: string, quantity: number): Cart {
     if (!Number.isInteger(quantity) || quantity < 1) return this;
-    return new Cart(this.items.map((item) =>
-      item.product.id === productId ? { ...item, quantity: Math.min(quantity, item.product.stock) } : item,
-    ), this.promo?.code ?? null);
+    return new Cart(this.items.map((item) => {
+      if (Cart.lineId(item) !== lineId) return item;
+      const otherLines = this.quantityOf(item.product.id) - item.quantity;
+      return { ...item, quantity: Math.max(1, Math.min(quantity, item.product.stock - otherLines)) };
+    }), this.promo?.code ?? null);
   }
 
-  remove(productId: number): Cart {
-    return new Cart(this.items.filter((item) => item.product.id !== productId), this.promo?.code ?? null);
+  remove(lineId: string): Cart {
+    return new Cart(this.items.filter((item) => Cart.lineId(item) !== lineId), this.promo?.code ?? null);
   }
 
   /** Σ discounted price × quantity. */

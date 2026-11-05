@@ -8,7 +8,11 @@ import ReviewForm from "../components/products/ReviewForm";
 import { averageRating, reviewStorage, type LocalReviews } from "../services/reviewStorage";
 import { useAuth } from "../hooks/useAuth";
 import { useCart } from "../hooks/useCart";
-import { CartToast } from "../components/ui/CartToast";
+import OptionPicker from "../components/products/OptionPicker";
+import { Cart } from "../models/Cart";
+import { defaultOptions } from "../models/productOptions";
+import { useJustAdded } from "../hooks/useJustAdded";
+import type { ProductOptions } from "../types/cart";
 import ProductCard from "../components/products/ProductCard";
 import ProductPrice, { StockStatus } from "../components/products/ProductPrice";
 import NotFoundPage from "./NotFoundPage";
@@ -34,7 +38,9 @@ function ProductPage() {
   const navigate = useNavigate();
   const location = useLocation();
   const { showToast } = useToast();
-  const [message, setMessage] = useState("");
+  const [chosenOptions, setChosenOptions] = useState<ProductOptions | null>(null);
+  const [justAdded, markAdded] = useJustAdded();
+  const [addedText, setAddedText] = useState("");
   const [selectedImage, setSelectedImage] = useState(0);
   const [relatedProducts, setRelatedProducts] = useState<Product[]>([]);
   const [localReviews, setLocalReviews] = useState<LocalReviews>(() => reviewStorage.load());
@@ -54,7 +60,8 @@ function ProductPage() {
     setLoading(true);
     setError("");
     setQuantity(1);
-    setMessage("");
+    setChosenOptions(null);
+    setAddedText("");
     setSelectedImage(0);
     setActiveTab("description");
     setRelatedProducts([]);
@@ -134,15 +141,17 @@ function ProductPage() {
     if (location.key !== "default") navigate(-1);
     else navigate("/products");
   }
-  const inCart = items.find((item) => item.product.id === product.id)?.quantity ?? 0;
-  const available = Math.max(0, product.stock - inCart);
+  // Stock is shared by every colour/size line of this product.
+  const available = Math.max(0, product.stock - new Cart(items).quantityOf(product.id));
+  const options = chosenOptions ?? defaultOptions(product);
 
   function handleAddToCart(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
     if (!product || available < 1) return;
     const added = Math.min(quantity, available);
-    addToCart(product, added);
-    setMessage(`${added} added to cart ✓`);
+    addToCart(product, added, options);
+    setAddedText(`${added} × ${options.color} · ${options.size} added to cart`);
+    markAdded();
     setQuantity(1);
   }
 
@@ -199,23 +208,24 @@ function ProductPage() {
             <div className="flex justify-between gap-4 py-4"><dt className="text-stone-600">Availability</dt><dd className="font-medium text-stone-900">{product.stock > 0 ? `${product.stock} in stock` : "Out of stock"}</dd></div>
           </dl>
           <form className="mt-6 space-y-4" onSubmit={handleAddToCart}>
+            <OptionPicker product={product} value={options} onChange={setChosenOptions} idPrefix={`product-${product.id}`} />
             <p id="quantity-label" className="block text-sm font-medium text-slate-900">Quantity</p>
             <div className="flex flex-wrap gap-3">
               <div role="group" aria-labelledby="quantity-label" className="flex items-center rounded-lg border border-slate-300">
-                <button type="button" onClick={() => { setQuantity((value) => Math.max(1, value - 1)); setMessage(""); }} disabled={quantity <= 1 || available < 1} aria-label="Decrease quantity" className="flex size-11 items-center justify-center text-lg hover:bg-slate-50 focus-visible:outline-2 focus-visible:outline-violet-700 disabled:cursor-not-allowed disabled:opacity-40">−</button>
+                <button type="button" onClick={() => setQuantity((value) => Math.max(1, value - 1))} disabled={quantity <= 1 || available < 1} aria-label="Decrease quantity" className="flex size-11 items-center justify-center text-lg hover:bg-slate-50 focus-visible:outline-2 focus-visible:outline-violet-700 disabled:cursor-not-allowed disabled:opacity-40">−</button>
                 <output aria-live="polite" className="min-w-10 text-center font-semibold text-slate-900">{available < 1 ? 0 : quantity}</output>
-                <button type="button" onClick={() => { setQuantity((value) => Math.min(available, value + 1)); setMessage(""); }} disabled={quantity >= available} aria-label="Increase quantity" className="flex size-11 items-center justify-center text-lg hover:bg-slate-50 focus-visible:outline-2 focus-visible:outline-violet-700 disabled:cursor-not-allowed disabled:opacity-40">+</button>
+                <button type="button" onClick={() => setQuantity((value) => Math.min(available, value + 1))} disabled={quantity >= available} aria-label="Increase quantity" className="flex size-11 items-center justify-center text-lg hover:bg-slate-50 focus-visible:outline-2 focus-visible:outline-violet-700 disabled:cursor-not-allowed disabled:opacity-40">+</button>
               </div>
               <button
                 type="submit"
                 disabled={available < 1}
-                className="min-h-11 rounded-lg bg-violet-700 px-6 font-semibold text-white hover:bg-violet-800 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-violet-700 disabled:cursor-not-allowed disabled:opacity-50"
+                className={`min-h-11 rounded-lg px-6 font-semibold text-white transition-colors ${justAdded ? "bg-emerald-600 hover:bg-emerald-700" : "bg-violet-700 hover:bg-violet-800"} focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-violet-700 disabled:cursor-not-allowed disabled:opacity-50`}
               >
-                {product.stock === 0 ? "Out of stock" : "Add to cart"}
+                {product.stock === 0 ? "Out of stock" : justAdded ? "Added ✓" : "Add to cart"}
               </button>
             </div>
             {product.stock > 0 && available < 1 && <p role="status" className="text-sm text-slate-600">You already have all {product.stock} available in your cart.</p>}
-            <CartToast message={message} onClose={() => setMessage("")} />
+            <p role="status" className="text-sm text-emerald-700">{justAdded ? addedText : ""}</p>
           </form>
         </div>
       </div>

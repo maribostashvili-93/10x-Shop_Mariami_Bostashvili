@@ -1,10 +1,14 @@
 import { Link } from "react-router";
 import { useRef, useState } from "react";
 import { useCart } from "../../hooks/useCart";
-import { CartToast } from "../ui/CartToast";
 import type { Product } from "../../types/product";
 import { useWishlist } from "../../hooks/useWishlist";
 import ProductPrice, { StockStatus } from "./ProductPrice";
+import OptionPicker from "./OptionPicker";
+import { Cart } from "../../models/Cart";
+import { defaultOptions } from "../../models/productOptions";
+import { useJustAdded } from "../../hooks/useJustAdded";
+import type { ProductOptions } from "../../types/cart";
 
 type ProductCardProps = {
   product: Product;
@@ -15,16 +19,29 @@ function ProductCard({ product }: ProductCardProps) {
   const { products: favorites, toggle } = useWishlist();
   const saved = favorites.some((item) => item.id === product.id);
   const { items, addToCart } = useCart();
-  const [message, setMessage] = useState("");
-  const inCart = items.find((item) => item.product.id === product.id)?.quantity ?? 0;
-  const available = product.stock > inCart;
+  const [options, setOptions] = useState<ProductOptions>(() => defaultOptions(product));
+  const [cardAdded, markCardAdded] = useJustAdded();
+  const [previewAdded, markPreviewAdded] = useJustAdded();
+  // Stock is shared by every colour/size line of this product.
+  const available = product.stock > new Cart(items).quantityOf(product.id);
   const actionClass = "flex size-11 items-center justify-center rounded-full bg-white text-red-900 shadow-sm hover:bg-red-900 hover:text-white focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-red-900 disabled:cursor-not-allowed disabled:opacity-50";
 
-  function addProduct() {
+  /** Quick add from the card uses the first colour and size. */
+  function addFromCard() {
     if (!available) return;
-    addToCart(product, 1);
-    setMessage("Added to cart ✓");
+    addToCart(product, 1, defaultOptions(product));
+    markCardAdded();
   }
+
+  /** Quick view adds the colour and size the shopper picked. */
+  function addFromPreview() {
+    if (!available) return;
+    addToCart(product, 1, options);
+    markPreviewAdded();
+  }
+
+  const addedClass = "bg-emerald-600 hover:bg-emerald-700";
+  const addLabel = (added: boolean) => (product.stock === 0 ? "Out of stock" : added ? "Added ✓" : available ? "Add to cart" : "Max in cart");
 
   return (
     <article
@@ -48,7 +65,7 @@ function ProductCard({ product }: ProductCardProps) {
               <svg aria-hidden="true" viewBox="0 0 24 24" fill={saved ? "currentColor" : "none"} stroke="currentColor" strokeWidth="1.8" className="size-5"><path d="M12 21 3.5 12.5a5.5 5.5 0 0 1 8.5-7 5.5 5.5 0 0 1 8.5 7Z" /></svg>
             </button>
           )}
-          <button type="button" onClick={() => { setMessage(""); dialog.current?.showModal(); }} aria-label={`Quick view ${product.title}`} title="Quick view" className={actionClass}>
+          <button type="button" onClick={() => dialog.current?.showModal()} aria-label={`Quick view ${product.title}`} title="Quick view" className={actionClass}>
             <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" className="size-5"><path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7S2 12 2 12Z"/><circle cx="12" cy="12" r="3"/></svg>
           </button>
         </div>
@@ -65,16 +82,16 @@ function ProductCard({ product }: ProductCardProps) {
           <ProductPrice product={product} />
           <button
             type="button"
-            onClick={addProduct}
+            onClick={addFromCard}
             disabled={!available}
-            className="min-h-11 rounded-lg bg-brand-700 px-4 text-sm font-semibold text-white hover:bg-brand-800 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-700 disabled:cursor-not-allowed disabled:bg-slate-200 disabled:text-slate-600"
+            className={`min-h-11 rounded-lg px-4 text-sm font-semibold text-white transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-700 disabled:cursor-not-allowed disabled:bg-slate-200 disabled:text-slate-600 ${cardAdded ? addedClass : "bg-brand-700 hover:bg-brand-800"}`}
           >
-            {product.stock === 0 ? "Out of stock" : available ? "Add to cart" : "Max in cart"}
+            {addLabel(cardAdded)}
             <span className="sr-only">: {product.title}</span>
           </button>
+          <span role="status" className="sr-only">{cardAdded ? `${product.title} added to cart` : ""}</span>
         </div>
       </div>
-      <CartToast message={message} onClose={() => setMessage("")} />
       <dialog ref={dialog} aria-label={`${product.title} quick view`} onClick={(event) => { if (event.target === event.currentTarget) dialog.current?.close(); }} className="fixed inset-0 m-auto max-h-[90dvh] w-[calc(100%-2rem)] max-w-3xl overflow-y-auto rounded-2xl bg-white p-6 text-slate-900 shadow-xl backdrop:bg-black/50 sm:p-8">
         <div className="mb-4 flex justify-end">
           <button type="button" autoFocus onClick={() => dialog.current?.close()} aria-label="Close quick view" className={actionClass}>
@@ -84,14 +101,27 @@ function ProductCard({ product }: ProductCardProps) {
         <div className="grid gap-6 sm:grid-cols-2">
           <img src={product.thumbnail} alt={product.title} className="aspect-square w-full rounded-xl bg-slate-100 object-contain p-4" />
           <div>
-            <p className="text-sm text-slate-600">{product.category}</p>
+            <p className="text-sm text-slate-600">{product.category.replaceAll("-", " ")}{product.brand ? ` · ${product.brand}` : ""}</p>
             <h2 className="mt-2 text-2xl font-semibold">{product.title}</h2>
             <div className="mt-4"><ProductPrice product={product} size="lg" /></div>
             <p className="mt-4 text-sm leading-6 text-slate-600">{product.description}</p>
-            <p className="mt-4 text-sm">Rating: {product.rating} / 5</p>
-            <p className="mt-2 text-sm">{product.stock > 0 ? `${product.stock} in stock` : "Out of stock"}</p>
-            <button type="button" onClick={addProduct} disabled={!available} className="mt-6 min-h-11 w-full rounded-lg bg-red-900 px-5 font-semibold text-white hover:bg-red-950 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-red-900 disabled:cursor-not-allowed disabled:opacity-50">{available ? "Add to cart" : "No more stock available"}</button>
-            <Link to={`/products/${product.id}`} onClick={() => dialog.current?.close()} className="mt-3 inline-flex min-h-11 items-center text-sm font-semibold text-red-900 underline focus-visible:outline-2 focus-visible:outline-red-900">View full details</Link>
+            <p className="mt-4 flex flex-wrap items-center gap-3 text-sm text-slate-700">
+              <span><span aria-hidden="true" className="text-amber-500">★</span> {product.rating.toFixed(1)}</span>
+              <StockStatus stock={product.stock} />
+            </p>
+            <div className="mt-5">
+              <OptionPicker product={product} value={options} onChange={setOptions} idPrefix={`quick-view-${product.id}`} />
+            </div>
+            <button
+              type="button"
+              onClick={addFromPreview}
+              disabled={!available}
+              className={`mt-6 min-h-11 w-full rounded-lg px-5 font-semibold text-white transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-violet-700 disabled:cursor-not-allowed disabled:opacity-50 ${previewAdded ? addedClass : "bg-violet-700 hover:bg-violet-800"}`}
+            >
+              {addLabel(previewAdded)}
+            </button>
+            <p role="status" className="mt-2 text-sm text-emerald-700">{previewAdded ? `Added: ${options.color} · ${options.size}` : ""}</p>
+            <Link to={`/products/${product.id}`} onClick={() => dialog.current?.close()} className="mt-1 inline-flex min-h-11 items-center text-sm font-semibold text-violet-700 underline focus-visible:outline-2 focus-visible:outline-violet-700">View full details</Link>
           </div>
         </div>
       </dialog>
