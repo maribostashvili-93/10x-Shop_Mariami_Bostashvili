@@ -104,7 +104,7 @@ function LoginPage() {
         <p role="status" className="text-sm text-emerald-700">{successMessage}</p>
       </form>
 
-      <Link to="/" className="mt-6 inline-flex min-h-11 items-center text-sm font-semibold text-brand-700 hover:text-brand-800 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-700">
+      <Link to="/products" className="mt-6 inline-flex min-h-11 items-center text-sm font-semibold text-brand-700 hover:text-brand-800 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-700">
         <span aria-hidden="true" className="mr-1">←</span> Back to catalog
       </Link>
     </section>

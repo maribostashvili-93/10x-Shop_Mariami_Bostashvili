@@ -87,7 +87,7 @@ function CheckoutPage() {
               View order
             </Link>
             <Link
-              to="/"
+              to="/products"
               className="inline-flex min-h-14 items-center rounded-xl bg-violet-700 px-7 text-lg font-semibold text-white transition-colors hover:bg-violet-800 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-violet-700"
             >
               Continue shopping

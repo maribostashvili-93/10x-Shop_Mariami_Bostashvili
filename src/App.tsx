@@ -1,12 +1,13 @@
 import { lazy } from "react";
-import { Navigate, Route, Routes, useLocation } from "react-router";
+import { Route, Routes } from "react-router";
 import Layout from "./components/layout/Layout";
+import HomePage from "./pages/HomePage";
 import CatalogPage from "./pages/CatalogPage";
 import ProductPage from "./pages/ProductPage";
 import CartPage from "./pages/CartPage";
 import NotFoundPage from "./pages/NotFoundPage";
 
-// Route-level code splitting. The main shopping path (catalog, product, cart) stays in
+// Route-level code splitting. The main shopping path (home, catalog, product, cart) stays in
 // the entry bundle: Lighthouse showed that lazy-loading those pages added a chunk
 // round trip before LCP and a layout shift. Less frequent or heavier pages are split
 // out; Login alone carries Formik + Yup (~80 kB) and is only downloaded when needed.
@@ -18,18 +19,12 @@ const ProfilePage = lazy(() => import("./pages/ProfilePage"));
 const WishlistPage = lazy(() => import("./pages/WishlistPage"));
 const JournalPage = lazy(() => import("./pages/JournalPage"));
 
-/** Older links such as /products?category=fragrances now open the catalog on /. */
-function LegacyProductsRedirect() {
-  const { search } = useLocation();
-  return <Navigate to={`/${search}`} replace />;
-}
-
 function App() {
   return (
     <Routes>
       <Route element={<Layout />}>
-        <Route path="/" element={<CatalogPage />} />
-        <Route path="/products" element={<LegacyProductsRedirect />} />
+        <Route path="/" element={<HomePage />} />
+        <Route path="/products" element={<CatalogPage />} />
         <Route path="/products/:id" element={<ProductPage />} />
         <Route path="/cart" element={<CartPage />} />
         <Route path="/checkout" element={<CheckoutPage />} />

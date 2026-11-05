@@ -132,7 +132,7 @@ function ProductPage() {
   function goBack() {
     // Return to the previous catalog view (its filters live in the URL); fall back to the catalog.
     if (location.key !== "default") navigate(-1);
-    else navigate("/");
+    else navigate("/products");
   }
   const inCart = items.find((item) => item.product.id === product.id)?.quantity ?? 0;
   const available = Math.max(0, product.stock - inCart);
@@ -184,7 +184,7 @@ function ProductPage() {
         <div className="flex flex-col justify-center py-2">
           <p className="text-xs font-semibold tracking-[0.2em] text-violet-700 uppercase">
             {product.brand && <span>{product.brand} · </span>}
-            <Link to={`/?category=${product.category}`} className="hover:underline focus-visible:outline-2 focus-visible:outline-violet-700">{product.category.replaceAll("-", " ")}</Link>
+            <Link to={`/products?category=${product.category}`} className="hover:underline focus-visible:outline-2 focus-visible:outline-violet-700">{product.category.replaceAll("-", " ")}</Link>
           </p>
           <h1 className="mt-3 text-3xl font-semibold tracking-tight text-stone-900 sm:text-4xl">{product.title}</h1>
           <p className="mt-3 flex items-center gap-1 text-sm text-stone-600">
@@ -287,7 +287,7 @@ function ProductPage() {
         <section className="mt-12 rounded-[2rem] bg-violet-50 p-5 sm:p-8" aria-labelledby="related-products">
           <div className="flex items-end justify-between gap-4">
             <div><p className="text-xs font-semibold uppercase tracking-[0.18em] text-violet-700">You may also like</p><h2 id="related-products" className="mt-2 text-2xl font-semibold text-slate-900 sm:text-3xl">Shop similar pieces</h2></div>
-            <Link to={`/?category=${product.category}`} className="hidden min-h-11 items-center text-sm font-semibold text-violet-700 hover:text-violet-900 sm:inline-flex">View all</Link>
+            <Link to={`/products?category=${product.category}`} className="hidden min-h-11 items-center text-sm font-semibold text-violet-700 hover:text-violet-900 sm:inline-flex">View all</Link>
           </div>
           <div className="mt-6 grid grid-cols-1 gap-4 min-[481px]:grid-cols-2 lg:grid-cols-4">{relatedProducts.map((item) => <ProductCard key={item.id} product={item} />)}</div>
         </section>

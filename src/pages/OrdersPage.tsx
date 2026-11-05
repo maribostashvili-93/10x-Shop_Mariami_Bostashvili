@@ -23,7 +23,7 @@ function OrdersPage() {
       {orders.length === 0 ? (
         <div className="mt-8 rounded-card bg-white p-6">
           <p className="font-semibold text-slate-900">You have no orders yet.</p>
-          <Link to="/" className="mt-5 inline-flex min-h-11 items-center rounded-lg bg-brand-700 px-5 font-semibold text-white hover:bg-brand-800 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-700">
+          <Link to="/products" className="mt-5 inline-flex min-h-11 items-center rounded-lg bg-brand-700 px-5 font-semibold text-white hover:bg-brand-800 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-700">
             Browse products
           </Link>
         </div>

@@ -39,7 +39,7 @@ export function ShopByCategory() {
           <p className="text-[10px] font-bold tracking-[0.18em] text-violet-700 uppercase">Discover the edit</p>
           <h2 id="shop-categories-heading" className="mt-1 text-xl font-bold text-stone-900 sm:text-2xl">Shop by category</h2>
         </div>
-        <a href="#catalog-heading" className="inline-flex min-h-11 items-center text-sm font-semibold text-violet-700">See all <span aria-hidden="true" className="ml-1">→</span></a>
+        <Link to="/products" className="inline-flex min-h-11 items-center text-sm font-semibold text-violet-700">See all <span aria-hidden="true" className="ml-1">→</span></Link>
       </div>
       <div className="mt-4 flex snap-x gap-3 overflow-x-auto pb-2 lg:grid lg:grid-cols-6">
         {categories.length === 0 && Array.from({ length: 6 }, (_, index) => (
@@ -50,7 +50,7 @@ export function ShopByCategory() {
           </div>
         ))}
         {categories.slice(0, 6).map((category) => (
-          <Link key={category.slug} to={`/?category=${category.slug}`} className="group min-w-28 snap-start text-center focus-visible:rounded-2xl focus-visible:outline-2 focus-visible:outline-violet-700 lg:min-w-0">
+          <Link key={category.slug} to={`/products?category=${category.slug}`} className="group min-w-28 snap-start text-center focus-visible:rounded-2xl focus-visible:outline-2 focus-visible:outline-violet-700 lg:min-w-0">
             <span className="mx-auto flex size-20 items-center justify-center rounded-3xl border border-violet-100 bg-white text-violet-700 shadow-sm transition-colors group-hover:bg-violet-100 [&_svg]:size-8"><CategoryIcon slug={category.slug} /></span>
             <span className="mt-3 block text-xs font-semibold text-slate-800">{category.name}</span>
             <span className="mt-1 block text-[10px] text-violet-700">Explore collection →</span>
@@ -108,7 +108,7 @@ export function TopBrands() {
     <section className="mt-10 rounded-3xl bg-white p-5 shadow-[0_10px_30px_rgba(98,61,140,0.05)] sm:p-8" aria-labelledby="top-brands-heading">
       <div className="flex items-center justify-between">
         <h2 id="top-brands-heading" className="text-xl font-bold text-stone-900">Top brands</h2>
-        <a href="#catalog-heading" className="inline-flex min-h-11 items-center text-sm font-semibold text-violet-700">View all <span aria-hidden="true" className="ml-1">→</span></a>
+        <Link to="/products" className="inline-flex min-h-11 items-center text-sm font-semibold text-violet-700">View all <span aria-hidden="true" className="ml-1">→</span></Link>
       </div>
       <div className="mt-6 grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-6">
         {BRANDS.map((brand) => (

@@ -31,7 +31,7 @@ function CartPage() {
         </h1>
 
         <Link
-          to="/"
+          to="/products"
           className="mt-6 inline-flex min-h-11 items-center rounded-lg bg-violet-700 px-5 font-semibold text-white hover:bg-violet-800 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-violet-700"
         >
           Browse products

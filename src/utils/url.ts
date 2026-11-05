@@ -10,7 +10,7 @@ export const SORT_OPTIONS = [
 
 export type SortOption = (typeof SORT_OPTIONS)[number]["value"];
 
-/** Catalog state lives in the URL: ?q=, ?category=, ?sort= and ?page=. */
+/** Catalog (/products) state lives in the URL: ?q=, ?category=, ?sort= and ?page=. */
 export type CatalogParams = {
   q: string;
   category: string;
@@ -42,7 +42,7 @@ export function buildCatalogUrl(params: Partial<CatalogParams>): string {
   if (params.sort) search.set("sort", params.sort);
   if (params.page && params.page > 1) search.set("page", String(params.page));
   const query = search.toString();
-  return query ? `/?${query}` : "/";
+  return query ? `/products?${query}` : "/products";
 }
 
 /** "price-asc" → { sortBy: "price", order: "asc" } for the DummyJSON API. */

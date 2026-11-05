@@ -28,7 +28,7 @@ export default function CollectionShowcase() {
           <p className="text-[10px] font-semibold tracking-[0.18em] text-violet-700 uppercase">The signature edit</p>
           <h2 id="signature-edit-heading" className="mt-3 text-2xl font-semibold leading-tight tracking-tight text-slate-900">Little details.<br />Lasting impressions.</h2>
           <p className="mt-3 text-sm leading-6 text-slate-500">Discover fragrances, timeless accessories and thoughtful everyday pieces.</p>
-          <a href="#catalog-heading" className="mt-5 inline-flex min-h-11 w-fit items-center gap-3 rounded-xl bg-violet-700 px-4 text-xs font-semibold text-white hover:bg-violet-800 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-violet-700">Explore the collection <span aria-hidden="true">→</span></a>
+          <Link to="/products" className="mt-5 inline-flex min-h-11 w-fit items-center gap-3 rounded-xl bg-violet-700 px-4 text-xs font-semibold text-white hover:bg-violet-800 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-violet-700">Explore the collection <span aria-hidden="true">→</span></Link>
         </div>
         <div className="grid grid-cols-2 gap-3 sm:grid-cols-4">
           {!selected && Array.from({ length: 4 }, (_, index) => (

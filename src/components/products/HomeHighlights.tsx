@@ -21,7 +21,7 @@ export function HomeHighlights({ products, categories }: { products: Product[]; 
             <p className="text-xs font-semibold tracking-widest text-red-100 uppercase">Discover 10X Shop</p>
             <h2 id="collection-stats" className="mt-3 text-2xl font-semibold">Everyday finds. More possibilities.</h2>
             <p className="mt-3 text-sm leading-6 text-red-50">Explore beauty, home and everyday essentials in one place.</p>
-            <Link to="/" className="mt-5 inline-flex min-h-11 items-center rounded-lg bg-white px-5 text-sm font-semibold text-red-900 hover:bg-red-50 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white">Explore products</Link>
+            <Link to="/products" className="mt-5 inline-flex min-h-11 items-center rounded-lg bg-white px-5 text-sm font-semibold text-red-900 hover:bg-red-50 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white">Explore products</Link>
           </div>
           <dl className="grid grid-cols-3 gap-4 text-center">
             {[[String(products.length), "Loaded products"], [String(categories.length), "Categories"], [average.toFixed(1), "Avg. product rating"]].map(([value, label]) => (
@@ -49,7 +49,7 @@ export function HomeHighlights({ products, categories }: { products: Product[]; 
       </section>
 
       <section aria-labelledby="top-rated">
-        <div className="flex flex-wrap items-center justify-between gap-4"><h2 id="top-rated" className="text-2xl font-semibold text-slate-900">Top-rated products</h2><Link to="/" className="inline-flex min-h-11 items-center font-semibold text-red-900 underline">View all</Link></div>
+        <div className="flex flex-wrap items-center justify-between gap-4"><h2 id="top-rated" className="text-2xl font-semibold text-slate-900">Top-rated products</h2><Link to="/products" className="inline-flex min-h-11 items-center font-semibold text-red-900 underline">View all</Link></div>
         <p className="mt-2 text-sm text-slate-600">Customer favorites by product rating.</p>
         <div className="mt-6 flex snap-x gap-3 overflow-x-auto pb-2 md:grid md:grid-cols-2 xl:grid-cols-3">{rated.slice(0, 6).map((product) => <div key={product.id} className="product-slide min-w-0 snap-start"><ProductCard product={product} /></div>)}</div>
       </section>

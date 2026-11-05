@@ -43,7 +43,8 @@ function Header() {
 
         {menuOpen && (
           <nav id="mobile-menu" aria-label="Mobile menu" className="order-3 grid basis-full gap-1 border-t border-stone-200 pt-2 lg:hidden">
-            <NavLink to="/" end onClick={closeMenu} className={mobileLinkClass}>Catalog</NavLink>
+            <NavLink to="/" end onClick={closeMenu} className={mobileLinkClass}>Home</NavLink>
+            <NavLink to="/products" onClick={closeMenu} className={mobileLinkClass}>Catalog</NavLink>
             <NavLink to="/cart" onClick={closeMenu} className={mobileLinkClass}>Cart</NavLink>
             <NavLink to="/wishlist" onClick={closeMenu} className={mobileLinkClass}>Wishlist</NavLink>
             {user && <NavLink to="/orders" onClick={closeMenu} className={mobileLinkClass}>Orders</NavLink>}
@@ -60,7 +61,8 @@ function Header() {
         )}
 
         <nav aria-label="Main navigation" className="hidden flex-wrap items-center gap-1 sm:gap-2 lg:flex">
-          <NavLink to="/" end className={linkClass}>Catalog</NavLink>
+          <NavLink to="/" end className={linkClass}>Home</NavLink>
+          <NavLink to="/products" className={linkClass}>Catalog</NavLink>
           <CartLink showLabel />
           {user && <NavLink to="/orders" className={linkClass}>Orders</NavLink>}
           {user

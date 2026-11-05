@@ -11,7 +11,7 @@ function NotFoundPage() {
         The page you are looking for does not exist.
       </p>
       <Link
-        to="/"
+        to="/products"
         className="mt-8 inline-flex min-h-11 items-center justify-center rounded-lg bg-red-900 px-5 font-semibold text-white transition-colors hover:bg-red-950 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-red-900"
       >
         Go to catalog

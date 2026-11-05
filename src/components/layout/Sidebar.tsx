@@ -6,7 +6,8 @@ import { getCategories } from "../../api/products";
 import type { Category } from "../../types/product";
 
 const links = [
-  { to: "/", label: "Catalog", path: "m3 10 9-7 9 7M5 9v12h14V9M9 21v-8h6v8" },
+  { to: "/", label: "Home", path: "m3 10 9-7 9 7M5 9v12h14V9M9 21v-8h6v8" },
+  { to: "/products", label: "Catalog", path: "M3 3h7v7H3zM14 3h7v7h-7zM3 14h7v7H3zM14 14h7v7h-7z" },
 ];
 
 const accountLinks = [
@@ -40,15 +41,15 @@ export function Sidebar() {
         <nav aria-label="Product categories" className="mt-2 grid gap-1">
           {categories.slice(0, 9).map((category) => {
             // NavLink only compares the path, so the selected category is read from ?category=.
-            const selected = pathname === "/" && activeCategory === category.slug;
-            return <Link key={category.slug} to={`/?category=${category.slug}`} aria-current={selected ? "page" : undefined} className={`flex min-h-10 items-center rounded-xl px-3 text-sm font-medium transition ${selected ? "bg-purple-100 text-purple-800" : "text-slate-600 hover:bg-pink-50 hover:text-purple-800"}`}>{category.name}</Link>;
+            const selected = pathname === "/products" && activeCategory === category.slug;
+            return <Link key={category.slug} to={`/products?category=${category.slug}`} aria-current={selected ? "page" : undefined} className={`flex min-h-10 items-center rounded-xl px-3 text-sm font-medium transition ${selected ? "bg-purple-100 text-purple-800" : "text-slate-600 hover:bg-pink-50 hover:text-purple-800"}`}>{category.name}</Link>;
           })}
         </nav>
       </div>
       <div className="keep-light mt-6 hidden rounded-2xl bg-gradient-to-br from-[#21134f] via-[#6036a8] to-[#e06aa8] p-5 text-white lg:block">
         <p className="text-xs text-purple-100">The 10X collection</p>
         <p className="mt-3 text-xl font-semibold">Find your everyday favorites</p>
-        <Link to="/" className="mt-5 inline-flex min-h-11 items-center rounded-lg bg-white px-4 text-sm font-semibold text-red-900 hover:bg-red-50 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white">Shop now</Link>
+        <Link to="/products" className="mt-5 inline-flex min-h-11 items-center rounded-lg bg-white px-4 text-sm font-semibold text-red-900 hover:bg-red-50 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white">Shop now</Link>
       </div>
     </aside>
   );

@@ -5,9 +5,9 @@ import watch from "../../assets/collection-watch.webp";
 import headphones from "../../assets/collection-headphones.webp";
 
 const slides = [
-  { image: backpack, label: "Everyday elegance", title: "Ready for wherever life takes you.", text: "Explore bags and accessories with a little more personality.", action: "Explore bags", to: "/?category=womens-bags", alt: "Purple backpack surrounded by floating pens" },
-  { image: watch, label: "The timepiece edit", title: "Make every moment yours.", text: "Discover watches that put the finishing touch on your everyday style.", action: "Discover watches", to: "/?category=womens-watches", alt: "Purple watch with a leather strap" },
-  { image: headphones, label: "A different rhythm", title: "Find your everyday favorites.", text: "Discover our curated collection of thoughtful everyday accessories.", action: "Explore the collection", to: "/", alt: "Purple headphones floating among soft sound waves" },
+  { image: backpack, label: "Everyday elegance", title: "Ready for wherever life takes you.", text: "Explore bags and accessories with a little more personality.", action: "Explore bags", to: "/products?category=womens-bags", alt: "Purple backpack surrounded by floating pens" },
+  { image: watch, label: "The timepiece edit", title: "Make every moment yours.", text: "Discover watches that put the finishing touch on your everyday style.", action: "Discover watches", to: "/products?category=womens-watches", alt: "Purple watch with a leather strap" },
+  { image: headphones, label: "A different rhythm", title: "Find your everyday favorites.", text: "Discover our curated collection of thoughtful everyday accessories.", action: "Explore the collection", to: "/products", alt: "Purple headphones floating among soft sound waves" },
 ];
 
 export default function CollectionBanner() {
