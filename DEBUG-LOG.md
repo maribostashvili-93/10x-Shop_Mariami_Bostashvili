@@ -114,6 +114,26 @@ This document records real issues found and fixed while building 10X Shop. The p
 - **Fix (commit):** [5f64942 fix: avoid a duplicate history entry when searching after a filter change](https://github.com/maribostashvili-93/10x-Shop_Mariami_Bostashvili/commit/5f64942)
 - **What I learned:** Router navigation to the same URL still adds history; automated history tests catch this quickly.
 
+## 12. Every sidebar category looked selected on product pages
+
+- **Symptom:** On `/products/6` all nine category links in the sidebar had the selected (filled) style at the same time.
+- **Reproduction:** Open any product page on a desktop-width window and look at "Shop by category".
+- **Tool:** Browser screenshot during a visual check, then React DevTools on the `NavLink` elements (all reported `isActive: true`).
+- **Root cause:** The links pointed to `/products?category=…`, and `NavLink` compares only the path. Every product URL starts with `/products`, so all of them matched.
+- **Fix:** Category links now go to `/?category=…` and are plain `Link`s whose selected state (and `aria-current`) comes from the `category` search parameter on the catalog page.
+- **Fix (commit):** [6d3e66f feat: move the catalog to / with server-side search, filters and paging](https://github.com/maribostashvili-93/10x-Shop_Mariami_Bostashvili/commit/6d3e66f)
+- **What I learned:** `NavLink` active state ignores the query string; filters stored in the URL need their own comparison.
+
+## 13. Grey helper text failed contrast in the dark theme
+
+- **Symptom:** Lighthouse Accessibility dropped from 100 to 96 on the catalog and login pages.
+- **Reproduction:** Build, start the preview server and run `node scripts/compat-lighthouse.mjs`; the report lists `color-contrast` failures on `text-slate-500` text in the footer.
+- **Tool:** Lighthouse accessibility audit (failing nodes with measured ratio 3.81:1 on background `#17141f`).
+- **Root cause:** Lighthouse's headless Chrome prefers the dark colour scheme, so the dark theme was audited. The dark theme mirrors each colour scale (50 ↔ 950 …), which leaves shade 500 unchanged; slate-500 is readable on white (4.8:1) but not on the dark surface.
+- **Fix:** In the dark theme the 500 shades use the lighter 400 values. Accessibility is back to 100 on all audited pages.
+- **Fix (commit):** [0b4f1de fix: keep 4.5:1 text contrast for 500 shades in the dark theme](https://github.com/maribostashvili-93/10x-Shop_Mariami_Bostashvili/commit/0b4f1de)
+- **What I learned:** Every theme needs its own contrast check; an automated audit may not run in the theme you expect.
+
 ## Debugging checklist
 
 - Run `npm run typecheck` before investigating runtime behavior.

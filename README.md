@@ -37,52 +37,47 @@ This is a front-end demo. Login and checkout are local simulations: no real auth
 
 ### FULL
 
-- **Catalog:** debounced live search (`useDebounce(value, 400)`), category and price filters, sorting (default, price, rating, Name A–Z), pagination with 12 products per page; `q`, `category`, `price`, `sort` and `page` are kept in the URL, so refresh, Back/Forward and shared links work
-- **Product details:** API image gallery, API reviews plus a review form (rating 1–5, comment of at least 10 characters) saved in `localStorage`, recalculated average rating, and four related products from the same category
-- **Cart:** `useReducer` with typed actions, an immutable `Cart` class, a generic `StorageService<T>` that persists the cart, stock limits, and promo code **`10X10`** (−10%; other codes show "Invalid promo code")
-- **Orders:** `/orders` and `/orders/:id` with locally stored orders per user, simulated status (Processing → Shipped → Delivered) and Reorder
+- **Catalog (`/`):** one page of 12 products is requested at a time — `/products`, `/products/search?q=` or `/products/category/{slug}` with `limit`, `skip = (page − 1) × 12` and `sortBy`/`order`. Debounced search (`useDebounce(value, 400)`), category filter, five sort options (Default, Price low/high, Rating, Name A→Z), pagination `‹ 1 2 … N ›`, "Showing 13–24 of 194", skeleton, Retry and `AbortController`. `q`, `category`, `sort` and `page` live in the URL, so refresh, Back/Forward and shared links restore the same results
+- **Product details:** API image gallery, quantity stepper limited by stock, Description/Reviews tabs, review form (rating 1–5, comment of at least 10 characters) saved in `localStorage`, recalculated average rating, and four related products from the same category (`?limit=5`)
+- **Cart:** `useReducer` with typed actions (`ADD_ITEM`, `SET_QTY`, `REMOVE_ITEM`, `CLEAR`, `APPLY_PROMO`, `REMOVE_PROMO`), an immutable `Cart` class that implements `ICart`, a generic `StorageService<T>`, promo code **`10X10`** (−10%; other codes show "Invalid promo code") and shipping: **$10, free from $100**
+- **Checkout:** full name, email, phone, address, city, postal code and country (Georgia by default) with exact validation messages; the button is disabled while the order is placed
+- **Orders:** `/orders` and `/orders/:id`, sequential numbers (`10X-00001`), an `Order` class with `create()`, `getStatus()` and `toJSON()`, simulated status (Processing < 1 min, Shipped 1–3 min, Delivered after 3 min) and Reorder
 - **Login:** Formik (`useFormik`) with a Yup validation schema, field errors, loading/disabled state and success feedback
-- **Profile:** profile overview and local account settings that pre-fill checkout
-- **TypeScript:** generic `ApiClient.get<T>()` with runtime type guards, `ApiError`, discriminated unions for cart actions and loading states, utility types (`Omit`, `Partial`, `Pick`)
-- **Optimization:** route-level code splitting with `React.lazy`/`Suspense`, lazy images, deferred hero slides, Lighthouse before/after reports in `docs/lighthouse/`
-- **Tailwind:** custom `brand` colour and `card` radius design tokens in `@theme`, used across the orders, cart and catalog components
+- **Profile:** edit first name, last name, email and phone; light/dark theme; "Clear local data" (cart, orders, reviews); log out
+- **UX:** shared toast notifications, light/dark theme saved as `shop_theme`
+- **TypeScript:** generic `ApiClient.get<T>()` with runtime type guards, `ApiError` and `isApiError`, `AsyncState<T>` and `CartAction` discriminated unions, `STORAGE_KEYS as const`, utility types (`Omit`, `Partial`, `Pick`)
+- **Optimization:** route-level code splitting with `React.lazy`/`Suspense`, sized lazy images, deferred hero slides, Lighthouse before/after reports in `docs/lighthouse/`
+- **Tailwind:** custom `brand` colour and `card` radius tokens in `@theme`, a `dark:` custom variant and a dark theme built from mirrored colour scales
 
 ### Additional interface work
 
 - Wishlist state and wishlist page
-- Mobile bottom navigation and a desktop sidebar
-- Featured collection carousels with animated dot controls and category links
-- Category navigation with SVG icons
-- Product search, category filtering, price ranges, and price/rating sorting through URL parameters
-- New arrivals, rating-based favorites, and discount-based product selections
-- Product detail layout with the API image gallery, description, and API customer reviews
+- Mobile bottom navigation and a desktop sidebar with curated categories
+- Featured collection carousels with animated dot controls
 - Lifestyle journal articles with related DummyJSON products below each story
-- Brand and community inspiration sections
-- Expanded footer with product search and navigation
-- Profile page and local account settings that pre-fill checkout
 
-Profile, cart, reviews and orders are stored only in the browser (`localStorage`); there is no real account, payment or delivery service.
+Cart, profile, reviews, orders and theme are stored only in the browser (`localStorage`: `shop_cart`, `shop_profile`, `shop_reviews`, `shop_orders`, `shop_theme`, `shop_user` with the username only). There is no real account, payment or delivery service.
 
-Community stories are illustrative demo content. Product reviews combine the DummyJSON API reviews with reviews written in this browser. New-arrival ordering uses product IDs, and the best-seller section uses ratings rather than sales data.
+Journal articles are illustrative demo content. Product reviews combine the DummyJSON API reviews with reviews written in this browser.
 
 ## Routes
 
 | Route | Purpose |
 | --- | --- |
-| `/` | Storefront home page with the CORE catalog grid |
-| `/products` | Product catalog |
-| `/products?q=perfume&category=fragrances&price=under-50` | Search and filter the catalog |
+| `/` | Catalog with search, category, sort and pagination |
+| `/?q=phone&sort=price-asc&page=2` | Example of a shareable catalog URL |
 | `/products/:id` | Product details |
-| `/journal/:slug` | Lifestyle article with related products |
-| `/wishlist` | Local wishlist |
-| `/cart` | Shopping cart with promo code |
-| `/orders` | Order history (signed-in users) |
-| `/orders/:id` | Order details, status and Reorder |
-| `/profile` | Local profile overview |
-| `/account-settings` | Local delivery details used by checkout |
+| `/cart` | Shopping cart with promo code and shipping |
 | `/checkout` | Protected checkout form |
 | `/login` | Local demo login |
+| `/orders` | Order history (signed-in users) |
+| `/orders/:id` | Order details, status and Reorder |
+| `/profile` | Profile, theme and local data |
+| `/wishlist` | Local wishlist |
+| `/journal/:slug` | Lifestyle article with related products |
 | `*` | Not-found page |
+
+Older `/products?…` links redirect to the catalog with the same query.
 
 ## Tech stack
 
@@ -148,22 +143,23 @@ Login is simulated locally. Enter any non-empty username and a password of at le
 
 ### Test account
 
-Use any demo values, for example `demo-user` / `demo-password`. These values are local only and are not real credentials.
+Any username works, for example `emilys` / `emilyspass`. The password must have at least 6 characters. These values are checked only in the browser and are never sent anywhere.
 
 ## API
 
 Product data is requested from:
 
 ```text
-https://dummyjson.com/products?limit=12&skip=0
-https://dummyjson.com/products?limit=0
-https://dummyjson.com/products/:id
-https://dummyjson.com/products/categories
+GET https://dummyjson.com/products?limit=12&skip=0&sortBy=price&order=asc
+GET https://dummyjson.com/products/search?q=phone&limit=12&skip=0
+GET https://dummyjson.com/products/category/{slug}?limit=12&skip=0
+GET https://dummyjson.com/products/categories
+GET https://dummyjson.com/products/{id}
 ```
 
 API responses are read as `unknown` and validated with type guards (`isProduct`) before use; HTTP errors become a typed `ApiError`. The application shows an error state with a retry action when the API cannot be reached. No production database or payment provider is connected.
 
-The catalog is curated from DummyJSON categories including beauty, skincare, fragrances, dresses, bags, eyewear, jewellery, watches, and home decoration. Product names, prices, discounts, stock, ratings, images, and reviews come from the API; banner and journal photography are local assets.
+Product names, prices, discounts, stock, ratings, images, and reviews come from the API; banner and journal photography are local assets.
 
 ## Deployment
 

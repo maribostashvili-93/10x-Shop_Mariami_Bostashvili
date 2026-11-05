@@ -65,36 +65,40 @@ Verified locally in the browser: 12 catalog cards, 1 column at 375px without hor
 
 ## FULL delivered
 
-- Catalog: debounced search, category/price filters, five sort options, pagination (12 per page) and full URL state.
-- Product: review form (rating 1–5, comment ≥ 10 characters) stored in `localStorage`, recalculated average rating, same-category related products.
-- Cart: `useReducer` with a discriminated-union action type, immutable `Cart` class, generic `StorageService<T>`, promo code `10X10` (−10%) with "Invalid promo code" feedback.
-- Orders: `/orders` and `/orders/:id`, orders stored per user, simulated Processing → Shipped → Delivered status, Reorder respecting stock.
-- Login: Formik + Yup with loading/disabled states and success/error feedback.
-- TypeScript: generic `ApiClient` class with runtime type guards and `ApiError`; generics in `StorageService<T>`, `paginate<T>()` and `useDebounce<T>()`.
-- Tailwind: custom `brand` colour and `card` radius tokens in `@theme`.
+All FULL items of PRD Annex A were checked against the code; the list below matches the annex sections.
 
-Not implemented: dark mode (BONUS), payment and real authentication (out of scope by the PRD).
+- **P2 Catalog (`/`):** server-side requests (`/products`, `/products/search`, `/products/category/{slug}`) with `limit=12`, `skip = (page − 1) × 12` and `sortBy`/`order`; debounced search (one request per pause in typing), category filter, five sort options, pagination with "Showing 13–24 of 194", skeleton, Retry, `AbortController`; `q`, `category`, `sort` and `page` in the URL.
+- **P3 Product:** gallery, stock-limited stepper, Description/Reviews tabs, review form (exact messages "Please select a rating" and "Comment must be at least 10 characters") stored as `shop_reviews`, recalculated average, related products from `/products/category/{slug}?limit=5`.
+- **P4 Cart:** `useReducer` with `ADD_ITEM`/`SET_QTY`/`REMOVE_ITEM`/`CLEAR`/`APPLY_PROMO`/`REMOVE_PROMO`, `Cart implements ICart`, `StorageService<T>` (`shop_cart`), promo `10X10` shown as "Discount (10X10 −10%)", shipping $10 and free from $100, confirmation before clearing.
+- **P5 Checkout:** phone, postal code and country fields with the exact messages from the annex; empty cart redirects to `/cart`; "Place order" disabled while submitting; "Thank you! Your order has been placed."
+- **P6 Orders:** `Order` class (`create`, `getStatus`, `toJSON`), numbers `10X-00001`, status Processing < 1 min / Shipped 1–3 min / Delivered > 3 min refreshed every 30 s, grey/blue/green badges, Reorder with toast, orders kept after logout/login.
+- **P7 Profile:** first/last name, email, phone with validation; light/dark theme (`shop_theme`, shared `ThemeContext`); "Clear local data" keeps session and theme.
+- **P0/P1:** toast notifications, lazy routes, Formik + Yup login, "Log In" and "Back to catalog", Log out returns to the catalog.
+- **T:** `ApiClient.get<T>()` with type guards, `ApiError` and `isApiError`, `AsyncState<T>`, `CartAction` with an exhaustive `never` check, `STORAGE_KEYS as const`, ESLint `no-explicit-any: error`; remaining `as` casts replaced by guards.
+- **TW:** `brand` and `card` tokens in `@theme`, a `dark:` custom variant and a dark theme built from mirrored colour scales.
+
+The price-range filter from the earlier version was removed: the annex lists it as out of scope (bonus), and it cannot be combined with server-side pagination.
 
 ## Lighthouse before and after
 
-Production build on a local Vite preview server, Lighthouse 13 with default throttling. Reports: `docs/lighthouse/before/` and `docs/lighthouse/after/`; script: `scripts/lighthouse-perf.mjs`.
+Production build on a local Vite preview server, Lighthouse 13 with default throttling. Reports: `docs/lighthouse/before/` and `docs/lighthouse/after/`; script: `scripts/lighthouse-perf.mjs`. Lighthouse's headless Chrome reports `prefers-color-scheme: dark`, so the "after" run audits the dark theme.
 
 | Page | Mode | Performance | Accessibility | Best Practices | LCP | CLS |
 | --- | --- | --- | --- | --- | --- | --- |
-| Catalog | mobile | 87 → 97 | 100 → 100 | 100 → 100 | 3.8 s → 2.6 s | 0 → 0 |
-| Product | mobile | 95 → 88 | 100 → 100 | 100 → 100 | 2.9 s → 2.9 s | 0 → 0 |
-| Cart | mobile | 100 → 99 | 100 → 100 | 100 → 100 | 0.8 s → 0.8 s | 0 → 0 |
-| Catalog | desktop | 76 → 70 | 100 → 100 | 100 → 100 | 5.0 s → 3.6 s | 0.06 → 0.06 |
-| Product | desktop | 78 → 81 | 100 → 100 | 100 → 100 | 2.9 s → 3.0 s | 0.15 → 0.016 |
-| Cart | desktop | 97 → 98 | 100 → 100 | 100 → 100 | 0.8 s → 0.8 s | 0.083 → 0.016 |
+| Catalog | mobile | 87 → 94 | 100 → 100 | 100 → 100 | 3.8 s → 2.7 s | 0 → 0 |
+| Product | mobile | 95 → 95 | 100 → 100 | 100 → 100 | 2.9 s → 2.7 s | 0 → 0 |
+| Cart | mobile | 100 → 100 | 100 → 100 | 100 → 100 | 0.8 s → 0.8 s | 0 → 0 |
+| Catalog | desktop | 76 → 85 | 100 → 100 | 100 → 100 | 5.0 s → 2.6 s | 0.06 → 0.018 |
+| Product | desktop | 78 → 81 | 100 → 100 | 100 → 100 | 2.9 s → 2.8 s | 0.15 → 0.018 |
+| Cart | desktop | 97 → 99 | 100 → 100 | 100 → 100 | 0.8 s → 0.8 s | 0.083 → 0.018 |
 
 What changed between the runs:
 
-1. Route-level code splitting. The first attempt lazy-loaded every page and made results worse (mobile product CLS 0.661, desktop cart 97 → 85) because the chunk request delayed rendering and the fallback moved the footer. Catalog, product and cart were moved back into the entry chunk and the main area now reserves its height. See `DEBUG-LOG.md` entry 10.
-2. Hidden hero slides no longer download their images before they are shown, which cut mobile catalog LCP from 3.8 s to 2.6 s.
-3. The entry JavaScript chunk shrank from 362 kB to 326 kB; Formik + Yup (~80 kB) load only with the login page.
+1. The catalog requests one page of 12 products instead of all 194 (`limit=0`), which lowered desktop catalog LCP from 5.0 s to 2.6 s and raised its score from 76 to 85.
+2. Route-level code splitting. Lazy-loading every page at first made results worse (mobile product CLS 0.661); catalog, product and cart stay in the entry chunk and the main area reserves its height (`DEBUG-LOG.md` entry 10).
+3. Hidden hero slides download their photo only when shown, and card images have width and height.
 
-Desktop catalog performance stays below 85: its score varies between runs on this machine (total blocking time 80–320 ms) and the hero image is still the LCP element. Local Lighthouse runs are not a substitute for an audit of the deployed site.
+FULL targets (Performance ≥ 85, Accessibility ≥ 90, Best Practices ≥ 90, CLS < 0.1) are met on every measured page except product details on desktop (81). Local runs are not a substitute for an audit of the deployed site.
 
 ## Out of scope
 
@@ -109,7 +113,7 @@ The planned CORE scope was delivered: catalog, product details, simulated auth, 
 - `npm run lint` — passed.
 - `npm run typecheck` — passed.
 - `npm run build` — passed.
-- JavaScript entry chunk: approximately 326 kB raw / 95 kB gzip; route chunks are loaded on demand (login chunk ~81 kB with Formik + Yup).
+- JavaScript entry chunk: approximately 294 kB raw / 87 kB gzip (annex target ≤ 250 kB gzip); route chunks load on demand (login chunk ~81 kB with Formik + Yup).
 - CSS bundle: approximately 63 kB raw / 12 kB gzip.
 - Git history contains multiple meaningful `feat:`, `fix:`, `perf:`, and `docs:` commits.
 - Lighthouse before/after results for the local production build are in the "Lighthouse before and after" section.
