@@ -8,6 +8,9 @@ import Pagination from "../components/products/Pagination";
 import CatalogToolbar from "../components/products/CatalogToolbar";
 import HeroCarousel from "../components/products/HeroCarousel";
 import JournalCards from "../components/products/JournalCards";
+import CollectionShowcase from "../components/products/CollectionShowcase";
+import CommunityStories from "../components/products/CommunityStories";
+import { FeatureStrip, ProductRail, ShopByCategory, TopBrands } from "../components/products/HomeSections";
 import { PAGE_SIZE, buildCatalogUrl, parseCatalogParams, type CatalogParams } from "../utils/url";
 
 const gridClass = "grid grid-cols-1 gap-4 min-[481px]:grid-cols-2 md:grid-cols-3 lg:grid-cols-4";
@@ -60,6 +63,8 @@ function CatalogPage() {
   }
 
   const hasFilters = Boolean(params.q || params.category || params.sort);
+  // Storefront sections appear on the unfiltered first page; filtered results show the catalog only.
+  const showHome = !hasFilters && params.page === 1;
   const data = state.status === "success" ? state.data : null;
   const totalPages = data ? Math.max(1, Math.ceil(data.total / PAGE_SIZE)) : 1;
   const firstShown = data && data.products.length > 0 ? data.skip + 1 : 0;
@@ -67,9 +72,16 @@ function CatalogPage() {
 
   return (
     <div>
-      {!hasFilters && params.page === 1 && <HeroCarousel />}
+      {showHome && (
+        <>
+          <HeroCarousel />
+          <FeatureStrip />
+          <div className="mt-8"><CollectionShowcase /></div>
+          <ShopByCategory />
+        </>
+      )}
 
-      <section aria-labelledby="catalog-heading" className="mt-8">
+      <section aria-labelledby="catalog-heading" className="mt-10 scroll-mt-24">
         <div className="mb-4 flex flex-wrap items-end justify-between gap-2">
           <h1 id="catalog-heading" className="text-2xl font-semibold text-slate-900 sm:text-3xl">Catalog</h1>
           <p aria-live="polite" className="text-sm text-slate-600">
@@ -112,7 +124,16 @@ function CatalogPage() {
         )}
       </section>
 
-      {!hasFilters && params.page === 1 && <JournalCards />}
+      {showHome && (
+        <>
+          <ProductRail title="New arrivals" eyebrow="Just in" sortBy="id" viewAllTo="/" />
+          <ProductRail title="Best sellers" eyebrow="Most wanted" sortBy="rating" viewAllTo="/?sort=rating-desc" />
+          <ProductRail title="Sale edit" eyebrow="Limited offers" sortBy="discountPercentage" viewAllTo="/" />
+          <JournalCards />
+          <TopBrands />
+          <CommunityStories />
+        </>
+      )}
     </div>
   );
 }

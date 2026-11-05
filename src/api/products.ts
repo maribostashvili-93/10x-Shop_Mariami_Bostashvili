@@ -97,6 +97,12 @@ export async function fetchCatalog(params: CatalogParams, signal?: AbortSignal):
   return api.get(path, isProductsResponse, { signal });
 }
 
+/** A small sorted list for home page rails, e.g. the 4 best-rated products. */
+export async function getSortedProducts(sortBy: "id" | "rating" | "discountPercentage", order: "asc" | "desc", limit = 4, signal?: AbortSignal): Promise<Product[]> {
+  const data = await api.get(`/products?limit=${limit}&sortBy=${sortBy}&order=${order}`, isProductsResponse, { signal });
+  return data.products;
+}
+
 /** Products from one category, used for "related products". */
 export async function getProductsByCategory(category: string, limit = 5, signal?: AbortSignal): Promise<Product[]> {
   const data = await api.get(`/products/category/${encodeURIComponent(category)}?limit=${limit}`, isProductsResponse, { signal });
