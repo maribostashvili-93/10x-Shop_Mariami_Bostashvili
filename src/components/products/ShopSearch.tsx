@@ -11,7 +11,7 @@ export default function ShopSearch({ showCategories = true }: { showCategories?:
   const [categoryOpen, setCategoryOpen] = useState(false);
   const [params] = useSearchParams();
   const navigate = useNavigate();
-  const { pathname } = useLocation();
+  const { pathname, search } = useLocation();
   const onCatalog = pathname === "/products";
   const urlQuery = params.get("q") ?? "";
   const [query, setQuery] = useState(urlQuery);
@@ -52,7 +52,9 @@ export default function ShopSearch({ showCategories = true }: { showCategories?:
     <section aria-label="Search and filter products" className="mb-7 space-y-3">
       <form role="search" onSubmit={(event) => {
         event.preventDefault();
-        navigate(catalogUrl({ q: query.trim() }));
+        const url = catalogUrl({ q: query.trim() });
+        // Price and category already update the URL; avoid a duplicate history entry.
+        if (url !== `${pathname}${search}`) navigate(url);
       }} className="relative z-10 grid w-full min-w-0 max-w-full grid-cols-1 items-stretch gap-1 overflow-visible rounded-[2rem] border border-violet-100 bg-white p-2 shadow-[0_8px_30px_rgba(91,33,182,0.08)] lg:grid-cols-2 xl:grid-cols-[minmax(0,1.2fr)_minmax(0,1fr)_minmax(0,1fr)_minmax(120px,auto)] xl:items-center xl:gap-0.5 xl:rounded-full xl:p-1">
         {[
           { name: "q", label: "Find your next favorite", path: "M21 21l-5-5M18 10a8 8 0 1 1-16 0 8 8 0 0 1 16 0" },
