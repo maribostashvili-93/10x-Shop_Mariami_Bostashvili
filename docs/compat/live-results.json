@@ -1,5 +1,5 @@
 {
-  "startedAt": "2026-11-05T12:55:28.513Z",
+  "startedAt": "2026-11-05T23:56:31.696Z",
   "baseURL": "https://10x-shop-mariami-bostashvili-mt61.vercel.app",
   "browser": "Chromium",
   "api": "real network; no interception",
@@ -19,34 +19,42 @@
     },
     {
       "name": "desktop-product-deep-link-refresh",
-      "status": "FAIL",
+      "status": "PASS",
       "viewport": {
         "width": 1440,
         "height": 900
       },
-      "screenshot": "docs/compat/live/desktop-product-deep-link-refresh-failed.png",
-      "error": "expect(received).toBe(expected) // Object.is equality\n\nExpected: 200\nReceived: 404"
+      "screenshot": "docs/compat/live/desktop-product-deep-link-refresh.png",
+      "detail": {
+        "httpStatus": 200,
+        "title": "Red Nail Polish",
+        "url": "https://10x-shop-mariami-bostashvili-mt61.vercel.app/products/5",
+        "reload": "PASS"
+      }
     },
     {
       "name": "desktop-guest-checkout-refresh",
-      "status": "BLOCKED",
+      "status": "PASS",
       "viewport": {
         "width": 1440,
         "height": 900
       },
-      "screenshot": "docs/compat/live/desktop-guest-checkout-refresh-failed.png",
-      "error": "expect(received).toBe(expected) // Object.is equality\n\nExpected: 200\nReceived: 404"
+      "screenshot": "docs/compat/live/desktop-guest-checkout-refresh.png",
+      "detail": {
+        "redirectedTo": "https://10x-shop-mariami-bostashvili-mt61.vercel.app/login",
+        "reload": "PASS"
+      }
     },
     {
       "name": "live-discount-consistency",
-      "status": "FAIL",
+      "status": "PASS",
       "screenshot": "docs/compat/live/desktop-checkout.png",
       "detail": {
         "title": "Essence Mascara Lash Princess",
         "price": 9.99,
         "discountPercentage": 10.48,
-        "expectedTotal": "8.94",
-        "actualTotal": "9.99"
+        "expectedTotal": "18.94",
+        "actualTotal": "18.94"
       }
     },
     {
@@ -59,7 +67,7 @@
       "screenshot": "docs/compat/live/desktop-shopping-flow.png",
       "detail": {
         "title": "Essence Mascara Lash Princess",
-        "summary": "Order summary\nEssence Mascara Lash Princess × 1\n$9.99\nTotal\n$9.99\nEdit cart",
+        "summary": "Order summary\nEssence Mascara Lash Princess × 1\nOriginal · 30 ml\n$8.94\nSubtotal\n$8.94\nShipping\n$10.00\nTotal\n$18.94\n\nAdd $91.06 more for free shipping (orders from $100.00).\n\nEdit cart",
         "confirmation": "PASS",
         "clearedCart": "PASS",
         "checkout": "local demo simulation; no real payment"
@@ -67,31 +75,75 @@
     },
     {
       "name": "mobile-product-deep-link-refresh",
-      "status": "FAIL",
+      "status": "PASS",
       "viewport": {
         "width": 375,
         "height": 812
       },
-      "screenshot": "docs/compat/live/mobile-product-deep-link-refresh-failed.png",
-      "error": "expect(received).toBe(expected) // Object.is equality\n\nExpected: 200\nReceived: 404"
+      "screenshot": "docs/compat/live/mobile-product-deep-link-refresh.png",
+      "detail": {
+        "title": "Red Nail Polish",
+        "reload": "PASS",
+        "horizontalOverflow": false
+      }
     }
   ],
   "networkFailures": [
     {
-      "check": "desktop-product-deep-link-refresh",
-      "url": "https://10x-shop-mariami-bostashvili-mt61.vercel.app/products/5",
-      "status": 404
+      "check": "desktop-shopping-flow",
+      "url": "https://dummyjson.com/products/categories",
+      "error": "net::ERR_ABORTED"
     },
     {
-      "check": "desktop-guest-checkout-refresh",
-      "url": "https://10x-shop-mariami-bostashvili-mt61.vercel.app/checkout",
-      "status": 404
+      "check": "desktop-shopping-flow",
+      "url": "https://dummyjson.com/products/category/fragrances?limit=1",
+      "error": "net::ERR_ABORTED"
     },
     {
-      "check": "mobile-product-deep-link-refresh",
-      "url": "https://10x-shop-mariami-bostashvili-mt61.vercel.app/products/5",
-      "status": 404
+      "check": "desktop-shopping-flow",
+      "url": "https://dummyjson.com/products/category/womens-bags?limit=1",
+      "error": "net::ERR_ABORTED"
+    },
+    {
+      "check": "desktop-shopping-flow",
+      "url": "https://dummyjson.com/products/category/womens-watches?limit=1",
+      "error": "net::ERR_ABORTED"
+    },
+    {
+      "check": "desktop-shopping-flow",
+      "url": "https://dummyjson.com/products/category/womens-jewellery?limit=1",
+      "error": "net::ERR_ABORTED"
+    },
+    {
+      "check": "desktop-shopping-flow",
+      "url": "https://dummyjson.com/products?limit=6&skip=0",
+      "error": "net::ERR_ABORTED"
+    },
+    {
+      "check": "desktop-shopping-flow",
+      "url": "https://dummyjson.com/products?limit=4&sortBy=id&order=desc",
+      "error": "net::ERR_ABORTED"
+    },
+    {
+      "check": "desktop-shopping-flow",
+      "url": "https://dummyjson.com/products?limit=4&sortBy=rating&order=desc",
+      "error": "net::ERR_ABORTED"
+    },
+    {
+      "check": "desktop-shopping-flow",
+      "url": "https://dummyjson.com/products?limit=4&sortBy=discountPercentage&order=desc",
+      "error": "net::ERR_ABORTED"
+    },
+    {
+      "check": "desktop-shopping-flow",
+      "url": "https://dummyjson.com/products?limit=12&skip=0",
+      "error": "net::ERR_ABORTED"
+    },
+    {
+      "check": "desktop-shopping-flow",
+      "url": "https://dummyjson.com/products/categories",
+      "error": "net::ERR_ABORTED"
     }
   ],
-  "finishedAt": "2026-11-05T12:55:34.983Z"
+  "finishedAt": "2026-11-05T23:56:42.389Z"
 }

@@ -24,7 +24,7 @@ const summary = [];
 try {
   for (const mode of ['mobile', 'desktop']) {
     for (const [name, path] of pages) {
-      const run = await lighthouse(`http://127.0.0.1:${port}${path}`, {
+      const audit = () => lighthouse(`http://127.0.0.1:${port}${path}`, {
         port: chrome.port,
         onlyCategories: ['performance', 'accessibility', 'best-practices'],
         output: ['html', 'json'],
@@ -32,7 +32,14 @@ try {
           ? { formFactor: 'desktop', screenEmulation: { mobile: false, width: 1440, height: 900, deviceScaleFactor: 1, disabled: false }, throttlingMethod: 'simulate' }
           : {}),
       });
+      let run = await audit();
+      // A broken trace (e.g. NO_NAVSTART) scores 0 without measuring anything; try that page once more.
+      if (run?.lhr.runtimeError) {
+        console.warn(`${name}/${mode}: ${run.lhr.runtimeError.code}, running again`);
+        run = await audit();
+      }
       if (!run) throw new Error(`Lighthouse returned no result for ${path}`);
+      if (run.lhr.runtimeError) throw new Error(`${name}/${mode}: ${run.lhr.runtimeError.code}`);
       await writeFile(`docs/lighthouse/${label}/${name}-${mode}.html`, run.report[0]);
       await writeFile(`docs/lighthouse/${label}/${name}-${mode}.json`, run.report[1]);
       const { categories, audits } = run.lhr;

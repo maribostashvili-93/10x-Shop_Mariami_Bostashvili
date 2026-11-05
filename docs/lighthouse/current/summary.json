@@ -1,0 +1,62 @@
+[
+  {
+    "page": "catalog",
+    "mode": "mobile",
+    "performance": 89,
+    "accessibility": 100,
+    "bestPractices": 100,
+    "lcp": "3.7 s",
+    "cls": "0",
+    "tbt": "100 ms"
+  },
+  {
+    "page": "product",
+    "mode": "mobile",
+    "performance": 94,
+    "accessibility": 100,
+    "bestPractices": 100,
+    "lcp": "3.0 s",
+    "cls": "0",
+    "tbt": "100 ms"
+  },
+  {
+    "page": "cart",
+    "mode": "mobile",
+    "performance": 100,
+    "accessibility": 100,
+    "bestPractices": 100,
+    "lcp": "0.9 s",
+    "cls": "0",
+    "tbt": "60 ms"
+  },
+  {
+    "page": "catalog",
+    "mode": "desktop",
+    "performance": 80,
+    "accessibility": 100,
+    "bestPractices": 100,
+    "lcp": "3.2 s",
+    "cls": "0.013",
+    "tbt": "100 ms"
+  },
+  {
+    "page": "product",
+    "mode": "desktop",
+    "performance": 83,
+    "accessibility": 100,
+    "bestPractices": 100,
+    "lcp": "2.9 s",
+    "cls": "0.013",
+    "tbt": "60 ms"
+  },
+  {
+    "page": "cart",
+    "mode": "desktop",
+    "performance": 98,
+    "accessibility": 100,
+    "bestPractices": 100,
+    "lcp": "0.9 s",
+    "cls": "0.013",
+    "tbt": "50 ms"
+  }
+]

@@ -70,29 +70,33 @@ try {
     await productLink.click();
     const productData = await (await productResponse).json();
     await page.getByRole('main').getByRole('button', { name: 'Add to cart', exact: true }).click();
-    await page.getByRole('link', { name: 'View cart', exact: true }).click();
+    // Adding confirms on the button itself ("Added ✓"); the header Cart link leads on.
+    await expect(page.getByRole('main').getByRole('button', { name: 'Added ✓' })).toBeVisible();
+    await page.getByRole('banner').getByRole('link', { name: /^Cart/ }).click();
     await expect(page).toHaveURL(/\/cart$/);
     await page.getByRole('link', { name: 'Proceed to checkout' }).click();
     await expect(page).toHaveURL(/\/login$/);
     await page.getByLabel('Username', { exact: true }).fill('qa-live-demo');
     await page.getByLabel('Password', { exact: true }).fill('demo-password');
-    await page.getByRole('button', { name: 'Login', exact: true }).click();
+    await page.getByRole('button', { name: 'Log In', exact: true }).click();
     await expect(page.getByRole('heading', { name: 'Complete your order' })).toBeVisible();
-    await expect(page.getByText('Enter your details to place this local demo order.', { exact: true })).toBeVisible();
+    await expect(page.getByText('Enter your delivery details to place this local demo order.', { exact: true })).toBeVisible();
     const summary = await page.locator('main aside').innerText();
     await page.screenshot({ path: 'docs/compat/live/desktop-checkout.png', fullPage: true, animations: 'disabled' });
-    const expectedTotal = (Math.round(productData.price * (1 - (productData.discountPercentage ?? 0) / 100) * 100) / 100).toFixed(2);
-    const actualTotal = summary.match(/\nTotal\n\$(\d+\.\d+)/)?.[1];
+    // Total = discounted price + $10 shipping below $100 (free from $100).
+    const discounted = Math.round(productData.price * (1 - (productData.discountPercentage ?? 0) / 100) * 100) / 100;
+    const expectedTotal = (discounted + (discounted >= 100 ? 0 : 10)).toFixed(2);
+    const actualTotal = summary.replaceAll(',', '').match(/\nTotal\s*\$(\d+\.\d+)/)?.[1];
     results.checks.push({ name: 'live-discount-consistency', status: actualTotal === expectedTotal ? 'PASS' : 'FAIL', screenshot: 'docs/compat/live/desktop-checkout.png', detail: { title, price: productData.price, discountPercentage: productData.discountPercentage, expectedTotal, actualTotal } });
-    for (const [label, value] of [['Full name', 'QA Test Customer'], ['Email', 'qa@example.com'], ['Address', '10 Test Street'], ['City', 'Tbilisi']]) {
+    for (const [label, value] of [['Full name', 'QA Test Customer'], ['Email', 'qa@example.com'], ['Phone', '+995 555 123 456'], ['Address', '10 Test Street'], ['City', 'Tbilisi'], ['Postal code', '0101']]) {
       await page.getByLabel(label, { exact: false }).fill(value);
     }
     await page.getByRole('button', { name: 'Place order' }).click();
-    await expect(page.getByRole('heading', { name: 'Thank you for your order' })).toBeVisible();
+    await expect(page.getByRole('heading', { name: 'Thank you! Your order has been placed.' })).toBeVisible();
     await page.screenshot({ path: 'docs/compat/live/desktop-confirmation.png', fullPage: true, animations: 'disabled' });
     await page.getByRole('link', { name: 'Continue shopping', exact: true }).click();
-    await page.getByRole('link', { name: 'Shopping bag', exact: true }).click();
-    await expect(page.getByRole('heading', { name: 'Your cart is empty', exact: true })).toBeVisible();
+    await page.getByRole('banner').getByRole('link', { name: /^Cart/ }).click();
+    await expect(page.getByText('Your cart is empty.', { exact: true })).toBeVisible();
     return { title, summary, confirmation: 'PASS', clearedCart: 'PASS', checkout: 'local demo simulation; no real payment' };
   });
   await check('mobile-product-deep-link-refresh', { width: 375, height: 812 }, async page => {

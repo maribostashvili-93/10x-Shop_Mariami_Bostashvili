@@ -54,6 +54,25 @@ for (const [name, path, heading, signedIn] of MATRIX) {
   });
 }
 
+test('dark: every matrix page passes axe in the dark theme', async ({ page }, info) => {
+  // The theme is saved as shop_theme; the signed-in user lets Orders and Profile render.
+  await page.addInitScript(() => {
+    localStorage.setItem('shop_theme', JSON.stringify('dark'));
+    localStorage.setItem('shop_user', JSON.stringify({ username: 'compat-user' }));
+  });
+  const found: Record<string, unknown[]> = {};
+  for (const [name, path, heading] of MATRIX) {
+    await page.goto(path);
+    await expect(page.locator('html')).toHaveAttribute('data-theme', 'dark');
+    await expect(page.getByRole('heading', { name: heading, exact: true })).toBeVisible();
+    if (name === 'home' || name === 'catalog') await capture(page, `${name}-dark`, info.project.name);
+    const results = await new AxeBuilder({ page }).withTags(['wcag2a', 'wcag2aa', 'wcag21a', 'wcag21aa']).analyze();
+    if (results.violations.length) found[name] = results.violations;
+  }
+  await info.attach('axe', { body: JSON.stringify(Object.values(found).flat(), null, 2), contentType: 'application/json' });
+  expect.soft(found, 'WCAG A/AA axe violations in the dark theme').toEqual({});
+});
+
 test('keyboard: catalog → product → cart → login → checkout → confirmation', async ({ page, browserName }, info) => {
   test.skip(
     browserName === 'webkit',
