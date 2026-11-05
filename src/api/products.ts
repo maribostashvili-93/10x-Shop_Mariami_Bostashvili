@@ -1,4 +1,5 @@
 import type { Category, Product, ProductReview, ProductsResponse } from "../types/product";
+import { PAGE_SIZE, toApiSort, type CatalogParams } from "../utils/url";
 import { ApiClient, ApiError, isRecord } from "./client";
 
 const api = new ApiClient("https://dummyjson.com");
@@ -74,14 +75,31 @@ export async function getCatalogProducts(limit = CATALOG_PAGE_SIZE, skip = 0, si
   return data.products;
 }
 
-export async function getProducts(all = false, signal?: AbortSignal): Promise<Product[]> {
-  const data = await api.get(`/products${all ? "?limit=0" : ""}`, isProductsResponse, { signal });
-  return data.products.filter((product) => product.category in featuredCategories);
+/**
+ * FULL catalog request. Only one page (12 products) is downloaded at a time:
+ *   ?q=       -> GET /products/search?q=…
+ *   ?category -> GET /products/category/{slug}
+ *   otherwise -> GET /products
+ * Sorting is sent to the API as sortBy/order; skip = (page − 1) × 12.
+ */
+export async function fetchCatalog(params: CatalogParams, signal?: AbortSignal): Promise<ProductsResponse> {
+  const query = new URLSearchParams({ limit: String(PAGE_SIZE), skip: String((params.page - 1) * PAGE_SIZE) });
+  const sort = toApiSort(params.sort);
+  if (sort) {
+    query.set("sortBy", sort.sortBy);
+    query.set("order", sort.order);
+  }
+  const path = params.q
+    ? `/products/search?q=${encodeURIComponent(params.q)}&${query}`
+    : params.category
+      ? `/products/category/${encodeURIComponent(params.category)}?${query}`
+      : `/products?${query}`;
+  return api.get(path, isProductsResponse, { signal });
 }
 
 /** Products from one category, used for "related products". */
-export async function getProductsByCategory(category: string, signal?: AbortSignal): Promise<Product[]> {
-  const data = await api.get(`/products/category/${encodeURIComponent(category)}?limit=0`, isProductsResponse, { signal });
+export async function getProductsByCategory(category: string, limit = 5, signal?: AbortSignal): Promise<Product[]> {
+  const data = await api.get(`/products/category/${encodeURIComponent(category)}?limit=${limit}`, isProductsResponse, { signal });
   return data.products;
 }
 
@@ -97,6 +115,12 @@ export async function getProduct(id: string, signal?: AbortSignal): Promise<Prod
   }
 }
 
+/** Every DummyJSON category, for the catalog filter. */
+export async function getAllCategories(signal?: AbortSignal): Promise<Category[]> {
+  return api.get("/products/categories", isCategoryList, { signal });
+}
+
+/** A curated subset with friendlier names, used in the sidebar. */
 export async function getCategories(): Promise<Category[]> {
   const data = await api.get("/products/categories", isCategoryList);
 

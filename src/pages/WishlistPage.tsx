@@ -14,7 +14,7 @@ export default function WishlistPage() {
       ) : (
         <div className="mt-6 rounded-2xl bg-white p-6">
           <p className="text-slate-600">Your wishlist is empty. Save products using the heart button.</p>
-          <Link to="/products" className="mt-4 inline-flex min-h-11 items-center font-semibold text-red-900 underline">Browse products</Link>
+          <Link to="/" className="mt-4 inline-flex min-h-11 items-center font-semibold text-red-900 underline">Browse products</Link>
         </div>
       )}
     </section>

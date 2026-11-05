@@ -1,4 +1,5 @@
 import { StorageService } from "./StorageService";
+import { isRecord } from "../api/client";
 import { STORAGE_KEYS } from "./storageKeys";
 
 /** Editable profile details, stored only in this browser. */
@@ -12,9 +13,7 @@ export type ProfileData = {
 export const emptyProfile: ProfileData = { firstName: "", lastName: "", email: "", phone: "" };
 
 function isProfileData(value: unknown): value is ProfileData {
-  if (typeof value !== "object" || value === null) return false;
-  const profile = value as Record<string, unknown>;
-  return (["firstName", "lastName", "email", "phone"] as const).every((key) => typeof profile[key] === "string");
+  return isRecord(value) && (["firstName", "lastName", "email", "phone"] as const).every((key) => typeof value[key] === "string");
 }
 
 export const profileStorage = new StorageService<ProfileData>(STORAGE_KEYS.profile, isProfileData, emptyProfile);

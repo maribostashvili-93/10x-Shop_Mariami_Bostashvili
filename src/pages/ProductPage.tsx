@@ -81,7 +81,7 @@ function ProductPage() {
     if (!product) return;
     const controller = new AbortController();
     // Related products: up to four other products from the same category.
-    getProductsByCategory(product.category, controller.signal)
+    getProductsByCategory(product.category, 5, controller.signal)
       .then((products) => setRelatedProducts(products.filter((item) => item.id !== product.id).slice(0, 4)))
       .catch(() => {
         if (!controller.signal.aborted) setRelatedProducts([]);

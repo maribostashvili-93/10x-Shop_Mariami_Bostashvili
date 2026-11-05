@@ -14,8 +14,8 @@ export default function EditorialSlider({ products }: { products: Product[] }) {
 
   function goTo(index: number) {
     const element = track.current;
-    const slide = element?.children[index] as HTMLElement | undefined;
-    if (!element || !slide) return;
+    const slide = element?.children[index];
+    if (!element || !(slide instanceof HTMLElement)) return;
     element.scrollTo({ left: slide.offsetLeft - element.offsetLeft, behavior: window.matchMedia("(prefers-reduced-motion: reduce)").matches ? "instant" : "smooth" });
   }
 
@@ -25,7 +25,7 @@ export default function EditorialSlider({ products }: { products: Product[] }) {
     <aside aria-label="Shopping inspiration" aria-roledescription="carousel" className="mt-6 min-w-0">
       <div ref={track} onScroll={(event) => {
         const element = event.currentTarget;
-        const slides = Array.from(element.children) as HTMLElement[];
+        const slides = Array.from(element.children).filter((child): child is HTMLElement => child instanceof HTMLElement);
         const closest = slides.reduce((best, slide, index) => Math.abs(slide.offsetLeft - element.offsetLeft - element.scrollLeft) < Math.abs(slides[best].offsetLeft - element.offsetLeft - element.scrollLeft) ? index : best, 0);
         setActive(closest);
       }} className="relative flex snap-x snap-mandatory gap-3 overflow-x-auto rounded-2xl [scrollbar-width:none]">

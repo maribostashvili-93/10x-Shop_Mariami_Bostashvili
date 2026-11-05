@@ -1,48 +1,42 @@
-import { Link, useSearchParams } from "react-router";
-
 type PaginationProps = {
   page: number;
   totalPages: number;
+  onChange: (page: number) => void;
 };
 
-const base = "flex min-h-11 min-w-11 items-center justify-center rounded-lg px-3 text-sm font-semibold focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-700";
+const base = "flex min-h-11 min-w-11 items-center justify-center rounded-lg px-3 text-sm font-semibold focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-700 disabled:cursor-not-allowed disabled:opacity-40";
 
-/** Page links keep every other URL parameter (q, category, price, sort) intact. */
-function Pagination({ page, totalPages }: PaginationProps) {
-  const [params] = useSearchParams();
+/** Page numbers with gaps: 1 … 4 5 6 … 17. */
+function pageNumbers(page: number, totalPages: number): (number | "gap")[] {
+  const pages = new Set([1, totalPages, page - 1, page, page + 1].filter((value) => value >= 1 && value <= totalPages));
+  const sorted = [...pages].sort((a, b) => a - b);
+  return sorted.flatMap((value, index) => (index > 0 && value - sorted[index - 1] > 1 ? ["gap" as const, value] : [value]));
+}
+
+/** ‹ 1 2 3 … N › — the current page is highlighted; ‹ and › are disabled at the edges. */
+function Pagination({ page, totalPages, onChange }: PaginationProps) {
   if (totalPages <= 1) return null;
-
-  const hrefFor = (target: number) => {
-    const next = new URLSearchParams(params);
-    if (target <= 1) next.delete("page");
-    else next.set("page", String(target));
-    const query = next.toString();
-    return `/products${query ? `?${query}` : ""}`;
-  };
 
   return (
     <nav aria-label="Pagination" className="mt-8 flex flex-wrap items-center justify-center gap-2">
-      {page > 1 ? (
-        <Link to={hrefFor(page - 1)} className={`${base} border border-slate-200 bg-white text-slate-700 hover:bg-brand-50`}>Previous</Link>
-      ) : (
-        <span aria-disabled="true" className={`${base} border border-slate-100 text-slate-400`}>Previous</span>
+      <button type="button" onClick={() => onChange(page - 1)} disabled={page <= 1} aria-label="Previous page" className={`${base} border border-slate-200 bg-white text-slate-700 hover:bg-brand-50`}>‹</button>
+      {pageNumbers(page, totalPages).map((value, index) =>
+        value === "gap" ? (
+          <span key={`gap-${index}`} aria-hidden="true" className="px-1 text-slate-500">…</span>
+        ) : (
+          <button
+            key={value}
+            type="button"
+            onClick={() => onChange(value)}
+            aria-current={value === page ? "page" : undefined}
+            aria-label={`Page ${value}`}
+            className={`${base} ${value === page ? "bg-brand-700 text-white" : "border border-slate-200 bg-white text-slate-700 hover:bg-brand-50"}`}
+          >
+            {value}
+          </button>
+        ),
       )}
-      {Array.from({ length: totalPages }, (_, index) => index + 1).map((number) => (
-        <Link
-          key={number}
-          to={hrefFor(number)}
-          aria-current={number === page ? "page" : undefined}
-          aria-label={`Page ${number}`}
-          className={`${base} ${number === page ? "bg-brand-700 text-white" : "border border-slate-200 bg-white text-slate-700 hover:bg-brand-50"}`}
-        >
-          {number}
-        </Link>
-      ))}
-      {page < totalPages ? (
-        <Link to={hrefFor(page + 1)} className={`${base} border border-slate-200 bg-white text-slate-700 hover:bg-brand-50`}>Next</Link>
-      ) : (
-        <span aria-disabled="true" className={`${base} border border-slate-100 text-slate-400`}>Next</span>
-      )}
+      <button type="button" onClick={() => onChange(page + 1)} disabled={page >= totalPages} aria-label="Next page" className={`${base} border border-slate-200 bg-white text-slate-700 hover:bg-brand-50`}>›</button>
     </nav>
   );
 }

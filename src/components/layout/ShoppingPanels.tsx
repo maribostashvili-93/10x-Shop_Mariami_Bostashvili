@@ -10,7 +10,7 @@ export function ShoppingPanels() {
   useEffect(() => {
     if (!open) return;
     function dismiss(event: PointerEvent) {
-      if (!container.current?.contains(event.target as Node)) setOpen(false);
+      if (!(event.target instanceof Node) || !container.current?.contains(event.target)) setOpen(false);
     }
     function escape(event: KeyboardEvent) {
       if (event.key === "Escape") setOpen(false);

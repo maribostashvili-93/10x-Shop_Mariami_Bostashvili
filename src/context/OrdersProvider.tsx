@@ -1,6 +1,7 @@
 import { useEffect, useMemo, useState, type ReactNode } from "react";
 import type { OrderData, ShippingInfo } from "../types/order";
 import { isProduct } from "../api/products";
+import { isRecord } from "../api/client";
 import type { Cart } from "../models/Cart";
 import { Order } from "../models/Order";
 import { StorageService } from "../services/StorageService";
@@ -11,14 +12,12 @@ import { OrdersContext } from "./orders-context";
 const SHIPPING_FIELDS = ["fullName", "email", "phone", "address", "city", "postalCode", "country"] as const;
 
 function isShippingInfo(value: unknown): value is ShippingInfo {
-  if (typeof value !== "object" || value === null) return false;
-  const shipping = value as Record<string, unknown>;
-  return SHIPPING_FIELDS.every((key) => typeof shipping[key] === "string");
+  return isRecord(value) && SHIPPING_FIELDS.every((key) => typeof value[key] === "string");
 }
 
 function isOrderData(value: unknown): value is OrderData {
-  if (typeof value !== "object" || value === null) return false;
-  const order = value as Record<string, unknown>;
+  if (!isRecord(value)) return false;
+  const order = value;
   return (
     typeof order.id === "number" &&
     typeof order.number === "string" &&

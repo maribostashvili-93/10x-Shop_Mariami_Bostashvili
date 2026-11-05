@@ -1,8 +1,7 @@
 import { lazy } from "react";
-import { Route, Routes } from "react-router";
+import { Navigate, Route, Routes, useLocation } from "react-router";
 import Layout from "./components/layout/Layout";
-import HomePage from "./pages/HomePage";
-import ProductsPage from "./pages/ProductsPage";
+import CatalogPage from "./pages/CatalogPage";
 import ProductPage from "./pages/ProductPage";
 import CartPage from "./pages/CartPage";
 import NotFoundPage from "./pages/NotFoundPage";
@@ -19,12 +18,18 @@ const ProfilePage = lazy(() => import("./pages/ProfilePage"));
 const WishlistPage = lazy(() => import("./pages/WishlistPage"));
 const JournalPage = lazy(() => import("./pages/JournalPage"));
 
+/** Older links such as /products?category=fragrances now open the catalog on /. */
+function LegacyProductsRedirect() {
+  const { search } = useLocation();
+  return <Navigate to={`/${search}`} replace />;
+}
+
 function App() {
   return (
     <Routes>
       <Route element={<Layout />}>
-        <Route path="/" element={<HomePage />} />
-        <Route path="/products" element={<ProductsPage />} />
+        <Route path="/" element={<CatalogPage />} />
+        <Route path="/products" element={<LegacyProductsRedirect />} />
         <Route path="/products/:id" element={<ProductPage />} />
         <Route path="/cart" element={<CartPage />} />
         <Route path="/checkout" element={<CheckoutPage />} />

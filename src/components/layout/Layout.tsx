@@ -1,6 +1,5 @@
 import { Outlet, useLocation } from "react-router";
 import { Suspense, useEffect } from "react";
-import ShopSearch from "../products/ShopSearch";
 import Header from "./Header";
 import Footer from "./Footer";
 import MobileBottomNav from "./MobileBottomNav";
@@ -18,7 +17,6 @@ function Layout() {
         <div className="grid min-w-0 flex-1 gap-6 py-4 lg:grid-cols-[230px_minmax(0,1fr)] lg:py-6">
           <Sidebar />
           <main className="min-h-[100dvh] min-w-0 w-full">
-            {pathname === "/products" && <ShopSearch />}
             <Suspense fallback={<p role="status" className="py-10 text-slate-600">Loading page...</p>}>
               <Outlet />
             </Suspense>
