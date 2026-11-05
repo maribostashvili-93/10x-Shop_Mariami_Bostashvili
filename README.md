@@ -51,6 +51,7 @@ This is a front-end demo. Login and checkout are local simulations: no real auth
 
 ### Additional interface work
 
+- Storefront sections on the unfiltered catalog page: hero carousel, feature strip, The Signature Edit with collection banners, Shop by category, New arrivals, Best sellers, Sale edit, journal, Top brands and community stories (each loads only the few products it shows)
 - Wishlist state and wishlist page
 - Mobile bottom navigation and a desktop sidebar with curated categories
 - Featured collection carousels with animated dot controls

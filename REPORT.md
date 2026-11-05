@@ -85,20 +85,20 @@ Production build on a local Vite preview server, Lighthouse 13 with default thro
 
 | Page | Mode | Performance | Accessibility | Best Practices | LCP | CLS |
 | --- | --- | --- | --- | --- | --- | --- |
-| Catalog | mobile | 87 → 94 | 100 → 100 | 100 → 100 | 3.8 s → 2.7 s | 0 → 0 |
-| Product | mobile | 95 → 95 | 100 → 100 | 100 → 100 | 2.9 s → 2.7 s | 0 → 0 |
+| Catalog | mobile | 87 → 92 | 100 → 100 | 100 → 100 | 3.8 s → 3.2 s | 0 → 0 |
+| Product | mobile | 95 → 95 | 100 → 100 | 100 → 100 | 2.9 s → 2.9 s | 0 → 0 |
 | Cart | mobile | 100 → 100 | 100 → 100 | 100 → 100 | 0.8 s → 0.8 s | 0 → 0 |
-| Catalog | desktop | 76 → 85 | 100 → 100 | 100 → 100 | 5.0 s → 2.6 s | 0.06 → 0.018 |
-| Product | desktop | 78 → 81 | 100 → 100 | 100 → 100 | 2.9 s → 2.8 s | 0.15 → 0.018 |
+| Catalog | desktop | 76 → 80 | 100 → 100 | 100 → 100 | 5.0 s → 3.1 s | 0.06 → 0.018 |
+| Product | desktop | 78 → 83 | 100 → 100 | 100 → 100 | 2.9 s → 2.9 s | 0.15 → 0.018 |
 | Cart | desktop | 97 → 99 | 100 → 100 | 100 → 100 | 0.8 s → 0.8 s | 0.083 → 0.018 |
 
 What changed between the runs:
 
-1. The catalog requests one page of 12 products instead of all 194 (`limit=0`), which lowered desktop catalog LCP from 5.0 s to 2.6 s and raised its score from 76 to 85.
+1. The catalog requests one page of 12 products instead of all 194 (`limit=0`). Home sections that used the full list now make small requests: one product per category for The Signature Edit (`?limit=1`) and `?limit=4&sortBy=…` for the rails.
 2. Route-level code splitting. Lazy-loading every page at first made results worse (mobile product CLS 0.661); catalog, product and cart stay in the entry chunk and the main area reserves its height (`DEBUG-LOG.md` entry 10).
-3. Hidden hero slides download their photo only when shown, and card images have width and height.
+3. Hidden hero slides download their photo only when shown; card images have width and height; restored home sections keep their size while loading (`DEBUG-LOG.md` entry 14).
 
-FULL targets (Performance ≥ 85, Accessibility ≥ 90, Best Practices ≥ 90, CLS < 0.1) are met on every measured page except product details on desktop (81). Local runs are not a substitute for an audit of the deployed site.
+FULL targets (Performance ≥ 85, Accessibility ≥ 90, Best Practices ≥ 90, CLS < 0.1) are met on mobile for every page and on desktop for the cart. Desktop catalog (80) and desktop product (83) stay below 85: the catalog page deliberately keeps the image-led storefront sections (hero, collection banners, journal), and without them it measured 85. Local runs vary by several points between runs and are not a substitute for an audit of the deployed site.
 
 ## Out of scope
 

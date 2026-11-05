@@ -134,6 +134,16 @@ This document records real issues found and fixed while building 10X Shop. The p
 - **Fix (commit):** [0b4f1de fix: keep 4.5:1 text contrast for 500 shades in the dark theme](https://github.com/maribostashvili-93/10x-Shop_Mariami_Bostashvili/commit/0b4f1de)
 - **What I learned:** Every theme needs its own contrast check; an automated audit may not run in the theme you expect.
 
+## 14. Restored home sections pushed the catalog down while loading
+
+- **Symptom:** After the storefront sections returned to the catalog page, Lighthouse reported CLS 0.122 (mobile) and 0.125 (desktop) on `/`, above the 0.1 target.
+- **Reproduction:** `npm run build && node scripts/lighthouse-perf.mjs after`, then open the catalog report's "Layout shifts" audit.
+- **Tool:** Lighthouse layout-shift audit; the shifted node was `main > div > section.mt-10` (the category and catalog sections).
+- **Root cause:** The Signature Edit returned `null` until its four products arrived and the category row was empty until categories loaded. When the data came, both sections grew and moved everything below them.
+- **Fix:** Both sections render immediately with placeholders of their final size (skeleton product cards and category tiles), and the showcase images have width and height. CLS went back to 0 (mobile) and 0.018 (desktop).
+- **Fix (commit):** [e413d2b feat: restore storefront home sections with lightweight requests](https://github.com/maribostashvili-93/10x-Shop_Mariami_Bostashvili/commit/e413d2b)
+- **What I learned:** A component that renders nothing while loading still causes layout shift when it appears; reserve the space instead.
+
 ## Debugging checklist
 
 - Run `npm run typecheck` before investigating runtime behavior.
