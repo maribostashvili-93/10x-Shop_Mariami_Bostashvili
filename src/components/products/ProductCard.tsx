@@ -23,14 +23,14 @@ function ProductCard({ product }: ProductCardProps) {
   function addProduct() {
     if (!available) return;
     addToCart(product, 1);
-    setMessage("Added to cart.");
+    setMessage("Added to cart ✓");
   }
 
   return (
     <article
       className="product-card group flex h-full flex-col overflow-hidden rounded-2xl bg-white p-3 shadow-[0_2px_16px_rgba(68,35,35,0.04)] transition-shadow duration-200 hover:shadow-[0_12px_30px_rgba(68,35,35,0.1)] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-red-900"
     >
-      <div className="relative flex aspect-square items-center justify-center overflow-hidden rounded-xl bg-[#faf8ff] p-6">
+      <div className="relative flex aspect-square items-center justify-center overflow-hidden rounded-xl bg-[#faf8ff] dark:bg-[#211c2e] p-6">
         <Link to={`/products/${product.id}`} className="flex h-full w-full items-center justify-center rounded-lg focus-visible:outline-2 focus-visible:outline-red-900">
         <img
           src={product.thumbnail}
@@ -46,25 +46,30 @@ function ProductCard({ product }: ProductCardProps) {
               <svg aria-hidden="true" viewBox="0 0 24 24" fill={saved ? "currentColor" : "none"} stroke="currentColor" strokeWidth="1.8" className="size-5"><path d="M12 21 3.5 12.5a5.5 5.5 0 0 1 8.5-7 5.5 5.5 0 0 1 8.5 7Z" /></svg>
             </button>
           )}
-          <button type="button" onClick={addProduct} disabled={!available} aria-label={`Add ${product.title} to cart`} title={available ? "Add to cart" : "No more stock available"} className={actionClass}>
-            <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" className="size-5"><path d="M3 3h2l2.5 12h11L21 7H6"/><circle cx="9" cy="20" r="1"/><circle cx="18" cy="20" r="1"/></svg>
-          </button>
           <button type="button" onClick={() => { setMessage(""); dialog.current?.showModal(); }} aria-label={`Quick view ${product.title}`} title="Quick view" className={actionClass}>
             <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" className="size-5"><path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7S2 12 2 12Z"/><circle cx="12" cy="12" r="3"/></svg>
           </button>
         </div>
       </div>
       <div className="flex flex-1 flex-col p-3">
-        <p className="text-xs font-semibold tracking-wider text-stone-500 uppercase">{product.category}</p>
+        <p className="text-xs font-semibold tracking-wider text-stone-600 uppercase">{product.category.replaceAll("-", " ")}{product.brand ? ` · ${product.brand}` : ""}</p>
         <h2 className="mt-2 text-base leading-snug font-semibold text-stone-900"><Link to={`/products/${product.id}`} className="hover:text-red-900 focus-visible:outline-2 focus-visible:outline-red-900">{product.title}</Link></h2>
         <p className="mt-3 flex flex-wrap items-center gap-1.5 text-sm text-stone-600">
           <svg aria-hidden="true" viewBox="0 0 24 24" fill="currentColor" className="size-4 text-amber-600"><path d="m12 2.8 2.8 5.7 6.3.9-4.6 4.5 1.1 6.3-5.6-3-5.6 3 1.1-6.3-4.6-4.5 6.3-.9L12 2.8Z" /></svg>
-          <span>Rating: {product.rating} / 5</span>
+          <span><span className="sr-only">Rating </span>{product.rating.toFixed(1)}</span>
         </p>
         <div className="mt-2"><StockStatus stock={product.stock} /></div>
         <div className="mt-auto flex flex-wrap items-end justify-between gap-2 pt-5">
           <ProductPrice product={product} />
-          <Link to={`/products/${product.id}`} className="inline-flex min-h-11 items-center text-sm font-medium text-red-800 hover:text-red-950 focus-visible:outline-2 focus-visible:outline-red-900">View details</Link>
+          <button
+            type="button"
+            onClick={addProduct}
+            disabled={!available}
+            className="min-h-11 rounded-lg bg-brand-700 px-4 text-sm font-semibold text-white hover:bg-brand-800 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-700 disabled:cursor-not-allowed disabled:bg-slate-200 disabled:text-slate-600"
+          >
+            {product.stock === 0 ? "Out of stock" : available ? "Add to cart" : "Max in cart"}
+            <span className="sr-only">: {product.title}</span>
+          </button>
         </div>
       </div>
       <CartToast message={message} onClose={() => setMessage("")} />

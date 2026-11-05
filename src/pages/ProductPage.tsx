@@ -1,5 +1,7 @@
 import { useEffect, useState, type FormEvent } from "react";
-import { Link, useParams } from "react-router";
+import { Link, useLocation, useNavigate, useParams } from "react-router";
+import { useToast } from "../hooks/useToast";
+import { formatDate } from "../utils/formatPrice";
 import { getProduct, getProductsByCategory } from "../api/products";
 import type { Product, ProductReview } from "../types/product";
 import ReviewForm from "../components/products/ReviewForm";
@@ -28,6 +30,10 @@ function ProductPage() {
   const { id } = useParams();
   const { items, addToCart } = useCart();
   const [quantity, setQuantity] = useState(1);
+  const [activeTab, setActiveTab] = useState<"description" | "reviews">("description");
+  const navigate = useNavigate();
+  const location = useLocation();
+  const { showToast } = useToast();
   const [message, setMessage] = useState("");
   const [selectedImage, setSelectedImage] = useState(0);
   const [relatedProducts, setRelatedProducts] = useState<Product[]>([]);
@@ -50,6 +56,7 @@ function ProductPage() {
     setQuantity(1);
     setMessage("");
     setSelectedImage(0);
+    setActiveTab("description");
     setRelatedProducts([]);
   }
 
@@ -119,6 +126,13 @@ function ProductPage() {
     const next = { ...localReviews, [key]: [review, ...(localReviews[key] ?? [])] };
     setLocalReviews(next);
     reviewStorage.save(next);
+    showToast("Review added ✓");
+  }
+
+  function goBack() {
+    // Return to the previous catalog view (its filters live in the URL); fall back to the catalog.
+    if (location.key !== "default") navigate(-1);
+    else navigate("/");
   }
   const inCart = items.find((item) => item.product.id === product.id)?.quantity ?? 0;
   const available = Math.max(0, product.stock - inCart);
@@ -128,15 +142,15 @@ function ProductPage() {
     if (!product || available < 1) return;
     const added = Math.min(quantity, available);
     addToCart(product, added);
-    setMessage(`${added} added to cart.`);
+    setMessage(`${added} added to cart ✓`);
     setQuantity(1);
   }
 
   return (
     <div className="pb-10 sm:pb-16">
-      <Link to="/products" className="inline-flex min-h-11 items-center text-sm font-medium text-stone-600 transition hover:text-violet-800 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-violet-700">
-        <span aria-hidden="true" className="mr-1">←</span> Back to products
-      </Link>
+      <button type="button" onClick={goBack} className="inline-flex min-h-11 items-center text-sm font-medium text-stone-600 transition hover:text-violet-800 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-violet-700">
+        <span aria-hidden="true" className="mr-1">←</span> Back to catalog
+      </button>
 
       <div className="mt-8 grid gap-8 overflow-hidden rounded-[2rem] border border-violet-100 bg-white p-4 shadow-[0_18px_50px_rgba(76,29,149,0.08)] sm:p-6 md:grid-cols-2 md:gap-8 md:p-6 lg:gap-10">
         <div>
@@ -168,50 +182,75 @@ function ProductPage() {
         </div>
 
         <div className="flex flex-col justify-center py-2">
-          <p className="text-xs font-semibold tracking-[0.2em] text-violet-700 uppercase">{product.category.replaceAll("-", " ")}</p>
+          <p className="text-xs font-semibold tracking-[0.2em] text-violet-700 uppercase">
+            {product.brand && <span>{product.brand} · </span>}
+            <Link to={`/?category=${product.category}`} className="hover:underline focus-visible:outline-2 focus-visible:outline-violet-700">{product.category.replaceAll("-", " ")}</Link>
+          </p>
           <h1 className="mt-3 text-3xl font-semibold tracking-tight text-stone-900 sm:text-4xl">{product.title}</h1>
+          <p className="mt-3 flex items-center gap-1 text-sm text-stone-600">
+            <span aria-hidden="true" className="text-amber-500">★</span>
+            <span><span className="sr-only">Rating </span>{rating.toFixed(1)} · {reviews.length} {reviews.length === 1 ? "review" : "reviews"}</span>
+          </p>
           <div className="mt-4"><ProductPrice product={product} size="lg" /></div>
           <div className="mt-3"><StockStatus stock={product.stock} /></div>
-          <p className="mt-6 leading-7 text-stone-600">{product.description}</p>
           <dl className="mt-8 divide-y divide-stone-200 border-y border-stone-200 text-sm">
             <div className="flex justify-between gap-4 py-4"><dt className="text-stone-600">Category</dt><dd className="font-medium text-stone-900">{product.category}</dd></div>
             <div className="flex justify-between gap-4 py-4"><dt className="text-stone-600">Rating</dt><dd className="font-medium text-stone-900">{rating.toFixed(2)} / 5</dd></div>
             <div className="flex justify-between gap-4 py-4"><dt className="text-stone-600">Availability</dt><dd className="font-medium text-stone-900">{product.stock > 0 ? `${product.stock} in stock` : "Out of stock"}</dd></div>
           </dl>
           <form className="mt-6 space-y-4" onSubmit={handleAddToCart}>
-            <label htmlFor="quantity" className="block text-sm font-medium text-slate-900">Quantity</label>
+            <p id="quantity-label" className="block text-sm font-medium text-slate-900">Quantity</p>
             <div className="flex flex-wrap gap-3">
-              <input
-                id="quantity"
-                type="number"
-                min={1}
-                max={Math.max(1, available)}
-                required
-                value={quantity}
-                onChange={(event) => {
-                  setQuantity(event.target.valueAsNumber);
-                  setMessage("");
-                }}
-                disabled={available < 1}
-                className="min-h-11 w-24 rounded-lg border border-slate-300 px-3 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-violet-700 disabled:opacity-50"
-              />
+              <div role="group" aria-labelledby="quantity-label" className="flex items-center rounded-lg border border-slate-300">
+                <button type="button" onClick={() => { setQuantity((value) => Math.max(1, value - 1)); setMessage(""); }} disabled={quantity <= 1 || available < 1} aria-label="Decrease quantity" className="flex size-11 items-center justify-center text-lg hover:bg-slate-50 focus-visible:outline-2 focus-visible:outline-violet-700 disabled:cursor-not-allowed disabled:opacity-40">−</button>
+                <output aria-live="polite" className="min-w-10 text-center font-semibold text-slate-900">{available < 1 ? 0 : quantity}</output>
+                <button type="button" onClick={() => { setQuantity((value) => Math.min(available, value + 1)); setMessage(""); }} disabled={quantity >= available} aria-label="Increase quantity" className="flex size-11 items-center justify-center text-lg hover:bg-slate-50 focus-visible:outline-2 focus-visible:outline-violet-700 disabled:cursor-not-allowed disabled:opacity-40">+</button>
+              </div>
               <button
                 type="submit"
-                disabled={!Number.isInteger(quantity) || quantity < 1 || available < 1}
+                disabled={available < 1}
                 className="min-h-11 rounded-lg bg-violet-700 px-6 font-semibold text-white hover:bg-violet-800 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-violet-700 disabled:cursor-not-allowed disabled:opacity-50"
               >
-                Add to cart
+                {product.stock === 0 ? "Out of stock" : "Add to cart"}
               </button>
             </div>
-            {product.stock > 0 && available < 1 && <p className="text-sm text-slate-600">All available stock is in your cart.</p>}
+            {product.stock > 0 && available < 1 && <p role="status" className="text-sm text-slate-600">You already have all {product.stock} available in your cart.</p>}
             <CartToast message={message} onClose={() => setMessage("")} />
           </form>
         </div>
       </div>
 
-      <section className="mx-auto mt-12 max-w-5xl rounded-[1.5rem] bg-white p-5 shadow-[0_10px_30px_rgba(67,36,30,0.05)] sm:p-8" aria-labelledby="reviews-heading">
-        <div className="flex flex-wrap items-end justify-between gap-4">
-          <h2 id="reviews-heading" className="text-xl font-bold text-stone-900">Customer reviews</h2>
+      <section className="mx-auto mt-12 max-w-5xl rounded-[1.5rem] bg-white p-5 shadow-[0_10px_30px_rgba(67,36,30,0.05)] sm:p-8">
+        <div role="tablist" aria-label="Product information" className="flex gap-2 border-b border-stone-200">
+          {(["description", "reviews"] as const).map((tab) => (
+            <button
+              key={tab}
+              type="button"
+              role="tab"
+              id={`tab-${tab}`}
+              aria-selected={activeTab === tab}
+              aria-controls={`panel-${tab}`}
+              tabIndex={activeTab === tab ? 0 : -1}
+              onClick={() => setActiveTab(tab)}
+              onKeyDown={(event) => {
+                if (event.key === "ArrowRight" || event.key === "ArrowLeft") {
+                  const next = tab === "description" ? "reviews" : "description";
+                  setActiveTab(next);
+                  document.getElementById(`tab-${next}`)?.focus();
+                }
+              }}
+              className={`-mb-px min-h-11 border-b-2 px-4 text-sm font-semibold focus-visible:outline-2 focus-visible:outline-violet-700 ${activeTab === tab ? "border-violet-700 text-violet-800" : "border-transparent text-stone-600 hover:text-violet-800"}`}
+            >
+              {tab === "description" ? "Description" : `Reviews (${reviews.length})`}
+            </button>
+          ))}
+        </div>
+
+        <div role="tabpanel" id="panel-description" aria-labelledby="tab-description" hidden={activeTab !== "description"} className="pt-6">
+          <p className="leading-7 text-stone-600">{product.description}</p>
+        </div>
+
+        <div role="tabpanel" id="panel-reviews" aria-labelledby="tab-reviews" hidden={activeTab !== "reviews"} className="pt-6">
           <div className="flex items-center gap-3">
             <p className="text-3xl font-bold text-stone-900">{rating.toFixed(1)}</p>
             <div>
@@ -219,7 +258,6 @@ function ProductPage() {
               <p className="mt-1 text-xs text-stone-600">{reviews.length} {reviews.length === 1 ? "review" : "reviews"}</p>
             </div>
           </div>
-        </div>
         {reviews.length === 0 ? (
           <p className="mt-6 text-sm text-stone-600">There are no reviews for this product yet.</p>
         ) : (
@@ -232,7 +270,7 @@ function ProductPage() {
                   </span>
                   <div>
                     <p className="text-sm font-semibold text-stone-900">{review.reviewerName}</p>
-                    <p className="text-xs text-stone-600">{new Date(review.date).toLocaleDateString("en-US", { year: "numeric", month: "short", day: "numeric" })}</p>
+                    <p className="text-xs text-stone-600">{formatDate(review.date)}</p>
                   </div>
                 </div>
                 <div className="mt-3"><Stars rating={review.rating} /></div>
@@ -241,14 +279,15 @@ function ProductPage() {
             ))}
           </ul>
         )}
-        <ReviewForm onSubmit={addReview} />
+          <ReviewForm onSubmit={addReview} />
+        </div>
       </section>
 
       {relatedProducts.length > 0 && (
         <section className="mt-12 rounded-[2rem] bg-violet-50 p-5 sm:p-8" aria-labelledby="related-products">
           <div className="flex items-end justify-between gap-4">
             <div><p className="text-xs font-semibold uppercase tracking-[0.18em] text-violet-700">You may also like</p><h2 id="related-products" className="mt-2 text-2xl font-semibold text-slate-900 sm:text-3xl">Shop similar pieces</h2></div>
-            <Link to="/products" className="hidden min-h-11 items-center text-sm font-semibold text-violet-700 hover:text-violet-900 sm:inline-flex">View all</Link>
+            <Link to={`/?category=${product.category}`} className="hidden min-h-11 items-center text-sm font-semibold text-violet-700 hover:text-violet-900 sm:inline-flex">View all</Link>
           </div>
           <div className="mt-6 grid grid-cols-1 gap-4 min-[481px]:grid-cols-2 lg:grid-cols-4">{relatedProducts.map((item) => <ProductCard key={item.id} product={item} />)}</div>
         </section>

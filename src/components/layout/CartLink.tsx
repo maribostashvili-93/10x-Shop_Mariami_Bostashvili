@@ -27,11 +27,16 @@ function CartLink({ showLabel = false, className = "", onClick }: CartLinkProps)
       </svg>
       {/* Accessible name ("Cart 2 items") is built from the visible text so it matches what users see. */}
       <span className={showLabel ? "" : "sr-only"}>Cart</span>
-      <span className="absolute -top-1 -right-1 flex min-w-5 items-center justify-center rounded-full bg-violet-950 px-1 text-[11px] leading-5 text-white">
-        <span className="sr-only">&nbsp;</span>
-        {count > 99 ? "99+" : count}
-        <span className="sr-only">&nbsp;{count === 1 ? "item" : "items"}</span>
-      </span>
+      {/* Badge = total quantity; hidden when the cart is empty. */}
+      {count > 0 ? (
+        <span className="absolute -top-1 -right-1 flex min-w-5 items-center justify-center rounded-full bg-violet-950 px-1 text-[11px] leading-5 text-white">
+          <span className="sr-only">&nbsp;</span>
+          {count > 99 ? "99+" : count}
+          <span className="sr-only">&nbsp;{count === 1 ? "item" : "items"}</span>
+        </span>
+      ) : (
+        <span className="sr-only">, empty</span>
+      )}
     </NavLink>
   );
 }

@@ -1,6 +1,6 @@
 import { useFormik } from "formik";
 import * as Yup from "yup";
-import { useLocation, useNavigate } from "react-router";
+import { Link, useLocation, useNavigate } from "react-router";
 import { useAuth } from "../hooks/useAuth";
 import FormField from "../components/ui/FormField";
 
@@ -12,10 +12,10 @@ type LoginFields = {
 const MIN_PASSWORD_LENGTH = 6;
 
 const loginSchema: Yup.ObjectSchema<LoginFields> = Yup.object({
-  username: Yup.string().trim().required("Username is required."),
+  username: Yup.string().trim().required("Username is required"),
   password: Yup.string()
-    .required("Password is required.")
-    .min(MIN_PASSWORD_LENGTH, `Password must be at least ${MIN_PASSWORD_LENGTH} characters.`),
+    .required("Password is required")
+    .min(MIN_PASSWORD_LENGTH, `Password must be at least ${MIN_PASSWORD_LENGTH} characters`),
 });
 
 function getRedirectTarget(state: unknown): string {
@@ -98,11 +98,15 @@ function LoginPage() {
           className="flex min-h-11 w-full items-center justify-center gap-2 rounded-lg bg-brand-700 px-4 font-semibold text-white transition-colors hover:bg-brand-800 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-700 disabled:cursor-wait disabled:opacity-70"
         >
           {formik.isSubmitting && <span aria-hidden="true" className="size-4 animate-spin rounded-full border-2 border-white/40 border-t-white" />}
-          {formik.isSubmitting ? "Signing in..." : "Login"}
+          {formik.isSubmitting ? "Signing in..." : "Log In"}
         </button>
 
         <p role="status" className="text-sm text-emerald-700">{successMessage}</p>
       </form>
+
+      <Link to="/" className="mt-6 inline-flex min-h-11 items-center text-sm font-semibold text-brand-700 hover:text-brand-800 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-700">
+        <span aria-hidden="true" className="mr-1">←</span> Back to catalog
+      </Link>
     </section>
   );
 }

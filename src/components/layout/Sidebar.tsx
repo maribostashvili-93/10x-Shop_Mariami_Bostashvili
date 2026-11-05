@@ -1,5 +1,6 @@
 import { Link, NavLink } from "react-router";
 import { useAuth } from "../../hooks/useAuth";
+import { useLogout } from "../../hooks/useLogout";
 import { useEffect, useState } from "react";
 import { getCategories } from "../../api/products";
 import type { Category } from "../../types/product";
@@ -13,11 +14,11 @@ const accountLinks = [
   { to: "/profile", label: "My Profile", path: "M16 7a4 4 0 1 1-8 0 4 4 0 0 1 8 0ZM4 21v-3a8 8 0 0 1 16 0v3" },
   { to: "/orders", label: "My Orders", path: "M6 4h12v17H6zM9 3h6v4H9zM9 11h6M9 15h6" },
   { to: "/wishlist", label: "My Wishlist", path: "M12 21 3.5 12.5a5.5 5.5 0 0 1 8.5-7 5.5 5.5 0 0 1 8.5 7z" },
-  { to: "/account-settings", label: "Account Settings", path: "M12 15a3 3 0 1 0 0-6 3 3 0 0 0 0 6ZM19 12a7 7 0 0 0-.1-1.2l2-1.6-2-3.4-2.4 1a7 7 0 0 0-2-1.2L14 3h-4l-.5 2.6a7 7 0 0 0-2 1.2l-2.4-1-2 3.4 2 1.6a7 7 0 0 0 0 2.4l-2 1.6 2 3.4 2.4-1a7 7 0 0 0 2 1.2L10 21h4l.5-2.6a7 7 0 0 0 2-1.2l2.4 1 2-3.4-2-1.6c.1-.4.1-.8.1-1.2Z" },
 ];
 
 export function Sidebar() {
-  const { user, logout } = useAuth();
+  const { user } = useAuth();
+  const logout = useLogout();
   const [categories, setCategories] = useState<Category[]>([]);
   useEffect(() => { getCategories().then(setCategories).catch(() => setCategories([])); }, []);
   return (
@@ -29,7 +30,7 @@ export function Sidebar() {
             {label}
           </NavLink>
         ))}
-        {user ? <button type="button" onClick={logout} className="min-h-11 rounded-xl px-3 text-left text-sm font-semibold text-red-900 hover:bg-red-50 focus-visible:outline-2 focus-visible:outline-red-900">Logout</button> : <NavLink to="/login" className={({ isActive }) => `flex min-h-11 items-center rounded-xl px-3 text-sm font-semibold focus-visible:outline-2 focus-visible:outline-red-900 ${isActive ? "bg-red-900 text-white" : "text-slate-600 hover:bg-red-50"}`}>Login</NavLink>}
+        {user ? <button type="button" onClick={logout} className="min-h-11 rounded-xl px-3 text-left text-sm font-semibold text-red-900 hover:bg-red-50 focus-visible:outline-2 focus-visible:outline-red-900">Log out</button> : <NavLink to="/login" className={({ isActive }) => `flex min-h-11 items-center rounded-xl px-3 text-sm font-semibold focus-visible:outline-2 focus-visible:outline-red-900 ${isActive ? "bg-red-900 text-white" : "text-slate-600 hover:bg-red-50"}`}>Log in</NavLink>}
       </nav>
       {user && <ul aria-label="Account navigation" className="mt-3 grid gap-1 border-t border-slate-200 pt-3">{accountLinks.map(({ to, label, path }) => <li key={to}><NavLink to={to} className={({ isActive }) => `flex min-h-11 w-full items-center gap-3 rounded-xl px-3 py-2 text-left text-sm font-medium focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-violet-700 ${isActive ? "bg-violet-100 text-violet-800" : "text-slate-600 hover:bg-violet-50 hover:text-violet-800"}`}><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" className="size-4 shrink-0"><path d={path}/></svg><span>{label}</span></NavLink></li>)}</ul>}
       <div className="mt-5 border-t border-purple-100 pt-4">
@@ -38,7 +39,7 @@ export function Sidebar() {
           {categories.slice(0, 9).map((category) => <NavLink key={category.slug} to={`/products?category=${category.slug}`} className={({ isActive }) => `flex min-h-10 items-center rounded-xl px-3 text-sm font-medium transition ${isActive ? "bg-purple-100 text-purple-800" : "text-slate-600 hover:bg-pink-50 hover:text-purple-800"}`}>{category.name}</NavLink>)}
         </nav>
       </div>
-      <div className="mt-6 hidden rounded-2xl bg-gradient-to-br from-[#21134f] via-[#6036a8] to-[#e06aa8] p-5 text-white lg:block">
+      <div className="keep-light mt-6 hidden rounded-2xl bg-gradient-to-br from-[#21134f] via-[#6036a8] to-[#e06aa8] p-5 text-white lg:block">
         <p className="text-xs text-purple-100">The 10X collection</p>
         <p className="mt-3 text-xl font-semibold">Find your everyday favorites</p>
         <Link to="/products" className="mt-5 inline-flex min-h-11 items-center rounded-lg bg-white px-4 text-sm font-semibold text-red-900 hover:bg-red-50 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white">Shop now</Link>

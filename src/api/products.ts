@@ -44,6 +44,7 @@ export function isProduct(value: unknown): value is Product {
     typeof value.rating === "number" &&
     typeof value.stock === "number" &&
     typeof value.thumbnail === "string" &&
+    (value.brand === undefined || typeof value.brand === "string") &&
     (value.discountPercentage === undefined || typeof value.discountPercentage === "number") &&
     isOptionalArrayOf(value.images, isString) &&
     isOptionalArrayOf(value.reviews, isReview)

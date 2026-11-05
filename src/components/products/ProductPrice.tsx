@@ -23,8 +23,8 @@ function ProductPrice({ product, size = "sm" }: ProductPriceProps) {
             <span className="sr-only">Original price </span>
             {formatPrice(product.price)}
           </span>
-          <span className="rounded-full bg-violet-100 px-2 py-0.5 text-xs font-semibold text-violet-800">
-            -{Math.round(product.discountPercentage ?? 0)}%
+          <span className="rounded-full bg-emerald-100 px-2 py-0.5 text-xs font-semibold text-emerald-800">
+            −{Math.round(product.discountPercentage ?? 0)}%
           </span>
         </>
       )}
@@ -32,9 +32,10 @@ function ProductPrice({ product, size = "sm" }: ProductPriceProps) {
   );
 }
 
+/** In stock (> 5), "Only N left!" (1–5, orange) or "Out of stock" (0, red). */
 export function StockStatus({ stock }: { stock: number }) {
-  const label = stock === 0 ? "Out of stock" : stock <= 5 ? `Only ${stock} left` : "In stock";
-  const tone = stock === 0 ? "bg-slate-100 text-slate-600" : stock <= 5 ? "bg-amber-50 text-amber-800" : "bg-violet-50 text-violet-800";
+  const label = stock === 0 ? "Out of stock" : stock <= 5 ? `Only ${stock} left!` : "In stock";
+  const tone = stock === 0 ? "bg-rose-50 text-rose-700" : stock <= 5 ? "bg-orange-50 text-orange-800" : "bg-emerald-50 text-emerald-800";
 
   return <span className={`inline-flex items-center rounded-full px-2 py-0.5 text-xs font-semibold ${tone}`}>{label}</span>;
 }

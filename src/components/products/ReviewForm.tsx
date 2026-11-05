@@ -17,8 +17,8 @@ function ReviewForm({ onSubmit }: ReviewFormProps) {
   function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
     const nextErrors: ReviewErrors = {};
-    if (rating < 1 || rating > 5) nextErrors.rating = "Choose a rating from 1 to 5.";
-    if (comment.trim().length < MIN_COMMENT_LENGTH) nextErrors.comment = `Write at least ${MIN_COMMENT_LENGTH} characters.`;
+    if (rating < 1 || rating > 5) nextErrors.rating = "Please select a rating";
+    if (comment.trim().length < MIN_COMMENT_LENGTH) nextErrors.comment = `Comment must be at least ${MIN_COMMENT_LENGTH} characters`;
     setErrors(nextErrors);
     if (Object.keys(nextErrors).length > 0) return;
 
