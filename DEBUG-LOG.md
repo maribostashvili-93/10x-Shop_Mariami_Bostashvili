@@ -94,6 +94,26 @@ This document records real issues found and fixed while building 10X Shop. The p
 - **Fix (commit):** [192c198 fix: close remaining CORE gaps and remove placeholder pages](https://github.com/maribostashvili-93/10x-Shop_Mariami_Bostashvili/commit/192c198)
 - **What I learned:** Build links from explicit route constants, and do not show navigation for features that do not exist yet.
 
+## 10. Lazy-loading every route made performance worse
+
+- **Symptom:** After adding `React.lazy` to all pages, Lighthouse reported mobile product CLS 0.661 (before: 0) and desktop cart performance dropped from 97 to 85.
+- **Reproduction:** `npm run build && node scripts/lighthouse-perf.mjs after` with all routes lazy.
+- **Tool:** Lighthouse layout-shift and LCP breakdown audits; the shifted element was the `footer`.
+- **Root cause:** While a page chunk downloaded, the short Suspense fallback let the footer rise into view; when the page rendered, the footer was pushed down. The extra chunk request also delayed LCP on the cart page.
+- **Fix:** Keep catalog, product and cart in the entry chunk, lazy-load only less frequent or heavier pages, and give `main` a minimum height. Result: CLS 0–0.06 on all measured pages, mobile catalog 87 → 97.
+- **Fix (commit):** [cda0eaa perf: tune code splitting and hero loading using Lighthouse results](https://github.com/maribostashvili-93/10x-Shop_Mariami_Bostashvili/commit/cda0eaa)
+- **What I learned:** An optimisation has to be measured; splitting code is not automatically faster.
+
+## 11. Back button did nothing after filtering and searching
+
+- **Symptom:** After choosing a price range and pressing Search, the first Back press stayed on the same results.
+- **Reproduction:** Open `/products?q=Discounted&sort=price-asc`, choose "Under $50", press Search, then press Back.
+- **Tool:** Playwright pricing regression test (`tests/compat/pricing.spec.ts`) failing in all six browser projects.
+- **Root cause:** The price select already updates the URL; pressing Search navigated to the identical URL and created a duplicate history entry.
+- **Fix:** Search only navigates when the resulting URL differs from the current one.
+- **Fix (commit):** [5f64942 fix: avoid a duplicate history entry when searching after a filter change](https://github.com/maribostashvili-93/10x-Shop_Mariami_Bostashvili/commit/5f64942)
+- **What I learned:** Router navigation to the same URL still adds history; automated history tests catch this quickly.
+
 ## Debugging checklist
 
 - Run `npm run typecheck` before investigating runtime behavior.

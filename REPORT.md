@@ -63,9 +63,42 @@ Verified locally in the browser: 12 catalog cards, 1 column at 375px without hor
 - Catalog rendering now uses a dedicated prop-driven `ProductGrid` component with stable product keys and responsive Tailwind columns.
 - The lint issue was found by running ESLint, traced to an unreachable nested category expression in `ShopSearch`, and fixed by keeping the price select limited to price options.
 
-## Out of scope for CORE
+## FULL delivered
 
-Real authentication, payment processing, delivery, persistent orders, profile services, Formik/Yup, lazy loading, Lighthouse optimization, and dark mode are FULL/BONUS extensions.
+- Catalog: debounced search, category/price filters, five sort options, pagination (12 per page) and full URL state.
+- Product: review form (rating 1–5, comment ≥ 10 characters) stored in `localStorage`, recalculated average rating, same-category related products.
+- Cart: `useReducer` with a discriminated-union action type, immutable `Cart` class, generic `StorageService<T>`, promo code `10X10` (−10%) with "Invalid promo code" feedback.
+- Orders: `/orders` and `/orders/:id`, orders stored per user, simulated Processing → Shipped → Delivered status, Reorder respecting stock.
+- Login: Formik + Yup with loading/disabled states and success/error feedback.
+- TypeScript: generic `ApiClient` class with runtime type guards and `ApiError`; generics in `StorageService<T>`, `paginate<T>()` and `useDebounce<T>()`.
+- Tailwind: custom `brand` colour and `card` radius tokens in `@theme`.
+
+Not implemented: dark mode (BONUS), payment and real authentication (out of scope by the PRD).
+
+## Lighthouse before and after
+
+Production build on a local Vite preview server, Lighthouse 13 with default throttling. Reports: `docs/lighthouse/before/` and `docs/lighthouse/after/`; script: `scripts/lighthouse-perf.mjs`.
+
+| Page | Mode | Performance | Accessibility | Best Practices | LCP | CLS |
+| --- | --- | --- | --- | --- | --- | --- |
+| Catalog | mobile | 87 → 97 | 100 → 100 | 100 → 100 | 3.8 s → 2.6 s | 0 → 0 |
+| Product | mobile | 95 → 88 | 100 → 100 | 100 → 100 | 2.9 s → 2.9 s | 0 → 0 |
+| Cart | mobile | 100 → 99 | 100 → 100 | 100 → 100 | 0.8 s → 0.8 s | 0 → 0 |
+| Catalog | desktop | 76 → 70 | 100 → 100 | 100 → 100 | 5.0 s → 3.6 s | 0.06 → 0.06 |
+| Product | desktop | 78 → 81 | 100 → 100 | 100 → 100 | 2.9 s → 3.0 s | 0.15 → 0.016 |
+| Cart | desktop | 97 → 98 | 100 → 100 | 100 → 100 | 0.8 s → 0.8 s | 0.083 → 0.016 |
+
+What changed between the runs:
+
+1. Route-level code splitting. The first attempt lazy-loaded every page and made results worse (mobile product CLS 0.661, desktop cart 97 → 85) because the chunk request delayed rendering and the fallback moved the footer. Catalog, product and cart were moved back into the entry chunk and the main area now reserves its height. See `DEBUG-LOG.md` entry 10.
+2. Hidden hero slides no longer download their images before they are shown, which cut mobile catalog LCP from 3.8 s to 2.6 s.
+3. The entry JavaScript chunk shrank from 362 kB to 326 kB; Formik + Yup (~80 kB) load only with the login page.
+
+Desktop catalog performance stays below 85: its score varies between runs on this machine (total blocking time 80–320 ms) and the hero image is still the LCP element. Local Lighthouse runs are not a substitute for an audit of the deployed site.
+
+## Out of scope
+
+Real authentication, payment processing, delivery and server-side data are out of scope by the PRD. Dark mode was not implemented.
 
 ## Planned vs delivered
 
@@ -76,10 +109,10 @@ The planned CORE scope was delivered: catalog, product details, simulated auth, 
 - `npm run lint` — passed.
 - `npm run typecheck` — passed.
 - `npm run build` — passed.
-- JavaScript bundle: approximately 363 kB raw / 105 kB gzip.
+- JavaScript entry chunk: approximately 326 kB raw / 95 kB gzip; route chunks are loaded on demand (login chunk ~81 kB with Formik + Yup).
 - CSS bundle: approximately 63 kB raw / 12 kB gzip.
 - Git history contains multiple meaningful `feat:`, `fix:`, `perf:`, and `docs:` commits.
-- Lighthouse numeric results require a real deployed Mobile/Incognito run; no unverified score is claimed in this repository.
+- Lighthouse before/after results for the local production build are in the "Lighthouse before and after" section.
 - Chrome and Firefox smoke testing is an external release check and is not provable from the compiler alone.
 
 ## Three difficult problems and solutions

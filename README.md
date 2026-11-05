@@ -35,6 +35,18 @@ This is a front-end demo. Login and checkout are local simulations: no real auth
 - Responsive Tailwind UI with hover, focus, and disabled states
 - 404 page for unknown routes
 
+### FULL
+
+- **Catalog:** debounced live search (`useDebounce(value, 400)`), category and price filters, sorting (default, price, rating, Name A–Z), pagination with 12 products per page; `q`, `category`, `price`, `sort` and `page` are kept in the URL, so refresh, Back/Forward and shared links work
+- **Product details:** API image gallery, API reviews plus a review form (rating 1–5, comment of at least 10 characters) saved in `localStorage`, recalculated average rating, and four related products from the same category
+- **Cart:** `useReducer` with typed actions, an immutable `Cart` class, a generic `StorageService<T>` that persists the cart, stock limits, and promo code **`10X10`** (−10%; other codes show "Invalid promo code")
+- **Orders:** `/orders` and `/orders/:id` with locally stored orders per user, simulated status (Processing → Shipped → Delivered) and Reorder
+- **Login:** Formik (`useFormik`) with a Yup validation schema, field errors, loading/disabled state and success feedback
+- **Profile:** profile overview and local account settings that pre-fill checkout
+- **TypeScript:** generic `ApiClient.get<T>()` with runtime type guards, `ApiError`, discriminated unions for cart actions and loading states, utility types (`Omit`, `Partial`, `Pick`)
+- **Optimization:** route-level code splitting with `React.lazy`/`Suspense`, lazy images, deferred hero slides, Lighthouse before/after reports in `docs/lighthouse/`
+- **Tailwind:** custom `brand` colour and `card` radius design tokens in `@theme`, used across the orders, cart and catalog components
+
 ### Additional interface work
 
 - Wishlist state and wishlist page
@@ -49,9 +61,9 @@ This is a front-end demo. Login and checkout are local simulations: no real auth
 - Expanded footer with product search and navigation
 - Profile page and local account settings that pre-fill checkout
 
-Profile and account settings are stored only in the browser; there is no order history, coupon, or account service.
+Profile, cart, reviews and orders are stored only in the browser (`localStorage`); there is no real account, payment or delivery service.
 
-Community stories are illustrative demo content. Product reviews come from the DummyJSON API. New-arrival ordering uses product IDs, and the best-seller section uses ratings rather than sales data.
+Community stories are illustrative demo content. Product reviews combine the DummyJSON API reviews with reviews written in this browser. New-arrival ordering uses product IDs, and the best-seller section uses ratings rather than sales data.
 
 ## Routes
 
@@ -63,7 +75,9 @@ Community stories are illustrative demo content. Product reviews come from the D
 | `/products/:id` | Product details |
 | `/journal/:slug` | Lifestyle article with related products |
 | `/wishlist` | Local wishlist |
-| `/cart` | Shopping cart |
+| `/cart` | Shopping cart with promo code |
+| `/orders` | Order history (signed-in users) |
+| `/orders/:id` | Order details, status and Reorder |
 | `/profile` | Local profile overview |
 | `/account-settings` | Local delivery details used by checkout |
 | `/checkout` | Protected checkout form |
@@ -77,25 +91,29 @@ Community stories are illustrative demo content. Product reviews come from the D
 - Vite
 - React Router
 - Tailwind CSS v4
+- Formik and Yup (login form)
 - DummyJSON Products API
+- Playwright, axe-core and Lighthouse (testing and audits)
 - ESLint
 
 ## Project structure
 
 ```text
 src/
-  api/          DummyJSON API requests
-  components/   Layout, navigation, product, and UI components
+  api/          ApiClient class and DummyJSON product requests
+  components/   Layout, navigation, product, cart, order, and UI components
   assets/       Local photography and collection banners
   data/         Lifestyle journal content and image references
-  context/      Authentication, cart, and wishlist state
-  hooks/        Context hooks used by pages and components
-  pages/        Home, catalog, product, cart, checkout, login, and 404 pages
+  context/      Auth, cart (useReducer), orders, and wishlist providers
+  hooks/        useCart, useAuth, useOrders, useDebounce, useNow, useWishlist
+  models/       Cart class and promo codes
+  services/     Generic StorageService<T> and review storage
+  pages/        All route pages (catalog, product, cart, checkout, login, orders, profile, 404)
   types/        Product, cart, user, and API types
   utils/        Shared utility functions
 ```
 
-The main data flow is: pages request products from the API, product components render typed data, and Context providers share authentication, cart, and wishlist state across routes. Checkout reads cart state, validates the local form, clears the cart, and displays a confirmation state.
+The main data flow is: pages request products from the API, product components render typed data, and Context providers share authentication, cart, and wishlist state across routes. Checkout reads cart state, validates the local form, saves the order, clears the cart, and displays a confirmation with a link to the order.
 
 ## Getting started
 
