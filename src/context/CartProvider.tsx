@@ -1,50 +1,56 @@
-import { useState, type ReactNode } from "react";
+import { useEffect, useMemo, useReducer, type ReactNode } from "react";
 import type { Product } from "../types/product";
-import type { CartItem } from "../types/cart";
+import type { CartItem, CartState } from "../types/cart";
+import { isProduct } from "../api/products";
+import { Cart, findPromoCode } from "../models/Cart";
+import { StorageService } from "../services/StorageService";
 import { CartContext } from "./cart-context";
+import { cartReducer, emptyCart } from "./cartReducer";
+
+function isCartItem(value: unknown): value is CartItem {
+  return (
+    typeof value === "object" && value !== null &&
+    "product" in value && isProduct(value.product) &&
+    "quantity" in value && typeof value.quantity === "number" && Number.isInteger(value.quantity) && value.quantity > 0
+  );
+}
+
+function isCartState(value: unknown): value is CartState {
+  return (
+    typeof value === "object" && value !== null &&
+    "items" in value && Array.isArray(value.items) && value.items.every(isCartItem) &&
+    "promoCode" in value && (value.promoCode === null || typeof value.promoCode === "string")
+  );
+}
+
+const cartStorage = new StorageService<CartState>("10x-cart", isCartState, emptyCart);
 
 export function CartProvider({ children }: { children: ReactNode }) {
-  const [items, setItems] = useState<CartItem[]>([]);
+  const [state, dispatch] = useReducer(cartReducer, undefined, () => cartStorage.load());
 
-  function addToCart(product: Product, quantity: number) {
-    if (!Number.isInteger(quantity) || quantity < 1 || product.stock < 1) return;
+  // Persist every change; logging out does not touch the cart.
+  useEffect(() => {
+    cartStorage.save(state);
+  }, [state]);
 
-    setItems((currentItems) => {
-      const existingItem = currentItems.find((item) => item.product.id === product.id);
+  const promo = state.promoCode ? findPromoCode(state.promoCode) : null;
+  const totals = useMemo(() => new Cart(state.items).totals(promo), [state.items, promo]);
 
-      if (existingItem) {
-        return currentItems.map((item) =>
-          item.product.id === product.id
-            ? { ...item, quantity: Math.min(item.quantity + quantity, item.product.stock) }
-            : item
-        );
-      }
+  const value = {
+    items: state.items,
+    promo,
+    totals,
+    addToCart: (product: Product, quantity: number) => dispatch({ type: "add", product, quantity }),
+    removeFromCart: (productId: number) => dispatch({ type: "remove", productId }),
+    setQuantity: (productId: number, quantity: number) => dispatch({ type: "setQuantity", productId, quantity }),
+    clearCart: () => dispatch({ type: "clear" }),
+    applyPromo: (code: string) => {
+      if (!findPromoCode(code)) return false;
+      dispatch({ type: "applyPromo", code });
+      return true;
+    },
+    removePromo: () => dispatch({ type: "removePromo" }),
+  };
 
-      return [...currentItems, { product, quantity: Math.min(quantity, product.stock) }];
-    });
-  }
-
-  function removeFromCart(id: number) {
-    setItems((currentItems) => currentItems.filter((item) => item.product.id !== id));
-  }
-
-  function setQuantity(id: number, quantity: number) {
-    if (!Number.isInteger(quantity) || quantity < 1) return;
-
-    setItems((currentItems) => currentItems.map((item) =>
-      item.product.id === id
-        ? { ...item, quantity: Math.min(quantity, item.product.stock) }
-        : item
-    ));
-  }
-
-  function clearCart() {
-    setItems([]);
-  }
-
-  return (
-    <CartContext.Provider value={{ items, addToCart, removeFromCart, setQuantity, clearCart }}>
-      {children}
-    </CartContext.Provider>
-  );
+  return <CartContext.Provider value={value}>{children}</CartContext.Provider>;
 }

@@ -1,11 +1,12 @@
 import { Link } from "react-router";
 import { useCart } from "../hooks/useCart";
 import ProductPrice from "../components/products/ProductPrice";
-import { formatPrice, getCartTotals, getFinalPrice } from "../utils/formatPrice";
+import { formatPrice, getFinalPrice } from "../utils/formatPrice";
+import OrderTotals from "../components/cart/OrderTotals";
+import PromoCodeForm from "../components/cart/PromoCodeForm";
 
 function CartPage() {
-  const { items, removeFromCart, setQuantity, clearCart } = useCart();
-  const { subtotal, discount, total } = getCartTotals(items);
+  const { items, totals, promo, removeFromCart, setQuantity, clearCart } = useCart();
 
   if (items.length === 0) {
     return (
@@ -122,20 +123,13 @@ function CartPage() {
             Order summary
           </h2>
 
-          <dl className="mt-6 space-y-3">
-            <div className="flex justify-between gap-4">
-              <dt className="text-slate-600">Subtotal</dt>
-              <dd className="font-semibold text-slate-900">{formatPrice(subtotal)}</dd>
-            </div>
-            <div className="flex justify-between gap-4">
-              <dt className="text-slate-600">Discount</dt>
-              <dd className="font-semibold text-violet-700">−{formatPrice(discount)}</dd>
-            </div>
-            <div className="flex justify-between gap-4 border-t border-slate-200 pt-3 text-lg">
-              <dt className="font-semibold text-slate-900">Total</dt>
-              <dd className="font-semibold text-slate-900">{formatPrice(total)}</dd>
-            </div>
-          </dl>
+          <div className="mt-6">
+            <PromoCodeForm />
+          </div>
+
+          <div className="mt-6">
+            <OrderTotals {...totals} promoCode={promo?.code ?? null} />
+          </div>
 
           <Link
             to="/checkout"

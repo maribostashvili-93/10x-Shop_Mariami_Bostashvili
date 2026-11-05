@@ -2,6 +2,15 @@
 
 /* One violet accent family across existing storefront components. */
 @theme {
+  /* Brand design tokens: generate bg-brand-*, text-brand-*, border-brand-* utilities. */
+  --color-brand-50: #f5f3ff;
+  --color-brand-100: #ede9fe;
+  --color-brand-200: #ddd6fe;
+  --color-brand-500: #8b5cf6;
+  --color-brand-700: #6d28d9;
+  --color-brand-800: #5b21b6;
+  --color-brand-950: #2e1065;
+  --radius-card: 1.25rem;
   --color-red-50: #f5f3ff;
   --color-red-100: #ede9fe;
   --color-red-200: #ddd6fe;

@@ -14,6 +14,7 @@ function Header() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [accountOpen, setAccountOpen] = useState(false);
   const accountLinks = [
+    { to: "/orders", label: "My Orders" },
     { to: "/wishlist", label: "My Wishlist" },
     { to: "/account-settings", label: "Account Settings" },
   ];

@@ -6,6 +6,7 @@ import App from './App.tsx'
 import { AuthProvider } from './context/AuthContext'
 import { CartProvider } from './context/CartProvider'
 import { WishlistProvider } from './context/WishlistProvider'
+import { OrdersProvider } from './context/OrdersProvider'
 import ErrorBoundary from './components/ui/ErrorBoundary'
 
 createRoot(document.getElementById('root')!).render(
@@ -14,9 +15,11 @@ createRoot(document.getElementById('root')!).render(
       <BrowserRouter>
         <AuthProvider>
           <CartProvider>
-            <WishlistProvider>
-              <App />
-            </WishlistProvider>
+            <OrdersProvider>
+              <WishlistProvider>
+                <App />
+              </WishlistProvider>
+            </OrdersProvider>
           </CartProvider>
         </AuthProvider>
       </BrowserRouter>

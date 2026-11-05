@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import { Link } from "react-router";
 import { useCart } from "../../hooks/useCart";
 import { useWishlist } from "../../hooks/useWishlist";
-import { formatPrice, getCartTotals, getFinalPrice } from "../../utils/formatPrice";
+import { formatPrice, getFinalPrice } from "../../utils/formatPrice";
 
 export function ShoppingPanels() {
   const [open, setOpen] = useState(false);
@@ -24,10 +24,10 @@ export function ShoppingPanels() {
   }, [open]);
   const dialog = { current: { close: () => setOpen(false) } };
   const [mode, setMode] = useState<"cart" | "wishlist">("wishlist");
-  const { items, addToCart, removeFromCart, setQuantity } = useCart();
+  const { items, totals, addToCart, removeFromCart, setQuantity } = useCart();
   const { products, toggle } = useWishlist();
   const count = items.reduce((sum, item) => sum + item.quantity, 0);
-  const { total } = getCartTotals(items);
+  const { total } = totals;
   const entries = mode === "cart" ? items : products.map((product) => ({ product, quantity: 1 }));
   const control = "flex size-11 shrink-0 items-center justify-center rounded-full bg-white text-red-900 hover:bg-red-50 focus-visible:outline-2 focus-visible:outline-red-900 disabled:opacity-40";
   return (

@@ -4,23 +4,11 @@ import { useAuth } from "../hooks/useAuth";
 import { useCart } from "../hooks/useCart";
 import { getProducts } from "../api/products";
 import type { Product } from "../types/product";
-import type { CartItem } from "../types/cart";
+import type { CheckoutFields, Order } from "../types/order";
 import ProductCard from "../components/products/ProductCard";
-import { formatPrice, getCartTotals, getFinalPrice } from "../utils/formatPrice";
-
-type CheckoutFields = {
-  fullName: string;
-  email: string;
-  address: string;
-  city: string;
-};
-
-type ConfirmedOrder = CheckoutFields & {
-  items: CartItem[];
-  subtotal: number;
-  discount: number;
-  total: number;
-};
+import OrderTotals from "../components/cart/OrderTotals";
+import { useOrders } from "../hooks/useOrders";
+import { formatPrice, getFinalPrice } from "../utils/formatPrice";
 
 type CheckoutErrors = Partial<Record<keyof CheckoutFields, string>>;
 
@@ -33,12 +21,13 @@ const initialFields: CheckoutFields = {
 
 function CheckoutPage() {
   const { user } = useAuth();
-  const { items, clearCart } = useCart();
+  const { items, totals, promo, clearCart } = useCart();
+  const { placeOrder } = useOrders();
   const [fields, setFields] = useState<CheckoutFields>(() => {
     try { return { ...initialFields, ...JSON.parse(localStorage.getItem("10x-profile") ?? "{}")} as CheckoutFields; } catch { return initialFields; }
   });
   const [errors, setErrors] = useState<CheckoutErrors>({});
-  const [confirmedOrder, setConfirmedOrder] = useState<ConfirmedOrder | null>(null);
+  const [confirmedOrder, setConfirmedOrder] = useState<Order | null>(null);
   const [suggestedProducts, setSuggestedProducts] = useState<Product[]>([]);
 
   useEffect(() => {
@@ -56,12 +45,12 @@ function CheckoutPage() {
           <p className="text-base font-medium uppercase tracking-wide text-violet-800">Order confirmed</p>
           <h1 className="mt-3 text-4xl font-semibold tracking-tight text-slate-900 sm:text-5xl">Thank you for your order</h1>
           <p className="mt-5 text-lg leading-8 text-slate-700">
-            Your order has been placed locally for this demo. No real payment was processed.
+            Order <span className="font-semibold text-slate-900">{confirmedOrder.id}</span> has been placed locally for this demo. No real payment was processed.
           </p>
           <section aria-labelledby="order-summary-heading" className="mt-8 rounded-2xl border border-violet-100 bg-white p-6 text-left">
             <h2 id="order-summary-heading" className="text-xl font-semibold text-slate-900">Order summary</h2>
             <p className="mt-2 text-sm text-slate-600">
-              Delivering to {confirmedOrder.fullName}, {confirmedOrder.address}, {confirmedOrder.city}. Confirmation sent to {confirmedOrder.email}.
+              Delivering to {confirmedOrder.customer.fullName}, {confirmedOrder.customer.address}, {confirmedOrder.customer.city}. Confirmation sent to {confirmedOrder.customer.email}.
             </p>
             <ul className="mt-5 space-y-3 border-b border-slate-200 pb-5">
               {confirmedOrder.items.map(({ product, quantity }) => (
@@ -71,18 +60,24 @@ function CheckoutPage() {
                 </li>
               ))}
             </ul>
-            <dl className="mt-5 space-y-2 text-sm">
-              <div className="flex justify-between gap-4"><dt className="text-slate-600">Subtotal</dt><dd className="font-semibold text-slate-900">{formatPrice(confirmedOrder.subtotal)}</dd></div>
-              <div className="flex justify-between gap-4"><dt className="text-slate-600">Discount</dt><dd className="font-semibold text-violet-700">−{formatPrice(confirmedOrder.discount)}</dd></div>
-              <div className="flex justify-between gap-4 pt-2 text-lg font-semibold text-slate-900"><dt>Total</dt><dd>{formatPrice(confirmedOrder.total)}</dd></div>
-            </dl>
+            <div className="mt-5">
+              <OrderTotals {...confirmedOrder} size="sm" />
+            </div>
           </section>
+          <div className="mt-8 flex flex-wrap gap-3">
+          <Link
+            to={`/orders/${confirmedOrder.id}`}
+            className="inline-flex min-h-14 items-center rounded-xl border border-violet-300 bg-white px-7 text-lg font-semibold text-violet-800 transition-colors hover:bg-violet-50 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-violet-700"
+          >
+            View order
+          </Link>
           <Link
             to="/products"
-            className="mt-8 inline-flex min-h-14 items-center rounded-xl bg-violet-700 px-7 text-lg font-semibold text-white transition-colors hover:bg-violet-800 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-violet-700"
+            className="inline-flex min-h-14 items-center rounded-xl bg-violet-700 px-7 text-lg font-semibold text-white transition-colors hover:bg-violet-800 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-violet-700"
           >
             Continue shopping
           </Link>
+          </div>
         </div>
         {suggestedProducts.length > 0 && <section className="mt-12 rounded-[1.5rem] bg-[#f4efff] p-5 text-left sm:p-8" aria-labelledby="checkout-recommendations">
           <p className="text-xs font-semibold uppercase tracking-[0.18em] text-violet-700">Keep browsing</p>
@@ -108,7 +103,6 @@ function CheckoutPage() {
     );
   }
 
-  const { subtotal, discount, total } = getCartTotals(items);
 
   function updateField(field: keyof CheckoutFields, value: string) {
     setFields((current) => ({ ...current, [field]: value }));
@@ -130,8 +124,17 @@ function CheckoutPage() {
     const nextErrors = validate();
     setErrors(nextErrors);
     if (Object.keys(nextErrors).length > 0) return;
-    // Snapshot the order before clearing the cart so the confirmation can show it.
-    setConfirmedOrder({ ...fields, items, subtotal, discount, total });
+    // Save the order before clearing the cart so the confirmation and order history can show it.
+    const order = placeOrder({
+      items,
+      customer: fields,
+      subtotal: totals.subtotal,
+      discount: totals.discount,
+      promoCode: promo?.code ?? null,
+      promoDiscount: totals.promoDiscount,
+      total: totals.total,
+    });
+    setConfirmedOrder(order);
     clearCart();
   }
 
@@ -167,11 +170,9 @@ function CheckoutPage() {
               </li>
             ))}
           </ul>
-          <dl className="mt-5 space-y-2 text-sm">
-            <div className="flex justify-between gap-4"><dt className="text-slate-600">Subtotal</dt><dd className="font-semibold text-slate-900">{formatPrice(subtotal)}</dd></div>
-            <div className="flex justify-between gap-4"><dt className="text-slate-600">Discount</dt><dd className="font-semibold text-violet-700">−{formatPrice(discount)}</dd></div>
-            <div className="flex justify-between gap-4 pt-2 text-lg font-semibold text-slate-900"><dt>Total</dt><dd>{formatPrice(total)}</dd></div>
-          </dl>
+          <div className="mt-5">
+            <OrderTotals {...totals} promoCode={promo?.code ?? null} size="sm" />
+          </div>
           <Link to="/cart" className="mt-5 inline-flex min-h-11 items-center text-sm font-semibold text-red-900 underline focus-visible:outline-2 focus-visible:outline-red-900">
             Edit cart
           </Link>
