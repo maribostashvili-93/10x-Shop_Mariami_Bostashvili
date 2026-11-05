@@ -3,15 +3,15 @@ import { test, expect } from "@playwright/test";
 test.describe("10X Shop smoke coverage", () => {
   test("unknown route shows recovery page", async ({ page }) => {
     await page.goto("/does-not-exist");
-    await expect(page.getByRole("link", { name: "Go to catalog" })).toHaveAttribute("href", "/");
+    await expect(page.getByRole("link", { name: "Go to catalog" })).toHaveAttribute("href", "/products");
   });
 
   test("product details back button returns to the catalog", async ({ page }) => {
-    await page.goto("/?category=beauty");
+    await page.goto("/products?category=beauty");
     await page.locator("main article.product-card h2 a").first().click();
     await expect(page).toHaveURL(/\/products\/\d+$/);
     await page.getByRole("button", { name: /back to catalog/i }).click();
-    await expect(page).toHaveURL(/\/\?category=beauty$/);
+    await expect(page).toHaveURL(/\/products\?category=beauty$/);
   });
 
   test("guest checkout redirects to login", async ({ page }) => {

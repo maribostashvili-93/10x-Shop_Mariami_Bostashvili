@@ -26,7 +26,7 @@ async function tabTo(page: Page, target: Locator) {
 }
 
 for (const [name, path, heading] of [
-  ['catalog', '/', 'Catalog'],
+  ['catalog', '/products', 'Catalog'],
   ['product', '/products/1', 'QA Beauty Product'],
   ['cart-empty', '/cart', 'Your cart is empty.'],
   ['login', '/login', 'Login'],
@@ -48,7 +48,7 @@ test('keyboard: catalog → product → cart → login → checkout → confirma
     browserName === 'webkit',
     'Playwright WebKit never moves focus to links with Tab or Alt+Tab, even on a bare <a href> page (docs/compat/webkit-keyboard-baseline.json). Check this flow in real Safari with "Press Tab to highlight each item" enabled.',
   );
-  await page.goto('/');
+  await page.goto('/products');
   // The mocked API returns one product everywhere, so target the card inside the Catalog section.
   const productLink = page.getByRole('region', { name: 'Catalog' }).getByRole('heading', { name: product.title, exact: true }).getByRole('link');
   await tabTo(page, productLink);

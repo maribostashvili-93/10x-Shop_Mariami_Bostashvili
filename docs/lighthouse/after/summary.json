@@ -2,22 +2,22 @@
   {
     "page": "catalog",
     "mode": "mobile",
-    "performance": 92,
+    "performance": 86,
     "accessibility": 100,
     "bestPractices": 100,
-    "lcp": "3.2 s",
+    "lcp": "3.8 s",
     "cls": "0",
-    "tbt": "90 ms"
+    "tbt": "190 ms"
   },
   {
     "page": "product",
     "mode": "mobile",
-    "performance": 95,
+    "performance": 92,
     "accessibility": 100,
     "bestPractices": 100,
-    "lcp": "2.9 s",
+    "lcp": "3.0 s",
     "cls": "0",
-    "tbt": "70 ms"
+    "tbt": "190 ms"
   },
   {
     "page": "cart",
@@ -27,17 +27,17 @@
     "bestPractices": 100,
     "lcp": "0.8 s",
     "cls": "0",
-    "tbt": "60 ms"
+    "tbt": "80 ms"
   },
   {
     "page": "catalog",
     "mode": "desktop",
-    "performance": 80,
+    "performance": 79,
     "accessibility": 100,
     "bestPractices": 100,
-    "lcp": "3.1 s",
-    "cls": "0.018",
-    "tbt": "130 ms"
+    "lcp": "3.6 s",
+    "cls": "0.016",
+    "tbt": "90 ms"
   },
   {
     "page": "product",
@@ -46,8 +46,8 @@
     "accessibility": 100,
     "bestPractices": 100,
     "lcp": "2.9 s",
-    "cls": "0.018",
-    "tbt": "80 ms"
+    "cls": "0.016",
+    "tbt": "70 ms"
   },
   {
     "page": "cart",
@@ -56,7 +56,7 @@
     "accessibility": 100,
     "bestPractices": 100,
     "lcp": "0.8 s",
-    "cls": "0.018",
-    "tbt": "80 ms"
+    "cls": "0.016",
+    "tbt": "50 ms"
   }
 ]

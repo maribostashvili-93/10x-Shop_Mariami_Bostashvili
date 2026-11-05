@@ -26,7 +26,7 @@ async function mockApi(page: Page) {
 
 test('pricing: cards show the discounted price, original price and badge', async ({ page }) => {
   await mockApi(page);
-  await page.goto('/');
+  await page.goto('/products');
   const card = page.locator('main article.product-card').filter({ has: page.getByRole('heading', { name: 'Discounted thirty', exact: true }) });
   await expect(card.getByText('Sale price $30.00', { exact: true }).first()).toBeVisible();
   await expect(card.getByText('Original price $60.00', { exact: true }).first()).toBeVisible();
@@ -35,8 +35,8 @@ test('pricing: cards show the discounted price, original price and badge', async
 
 test('pricing: sorting is requested from the API and kept in the URL history', async ({ page }) => {
   const requests = await mockApi(page);
-  await page.goto('/?q=Discounted');
-  await expect(page.getByLabel('Search', { exact: true })).toHaveValue('Discounted');
+  await page.goto('/products?q=Discounted');
+  await expect(page.getByLabel('Find your next favorite')).toHaveValue('Discounted');
   await page.getByLabel('Sort by').selectOption('price-asc');
   await expect(page).toHaveURL(/q=Discounted&sort=price-asc/);
   await expect.poll(() => requests.at(-1)).toContain('/products/search?q=Discounted&limit=12&skip=0&sortBy=price&order=asc');
