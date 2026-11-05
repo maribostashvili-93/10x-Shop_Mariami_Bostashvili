@@ -1,0 +1,97 @@
+{
+  "startedAt": "2026-11-05T12:55:28.513Z",
+  "baseURL": "https://10x-shop-mariami-bostashvili-mt61.vercel.app",
+  "browser": "Chromium",
+  "api": "real network; no interception",
+  "checks": [
+    {
+      "name": "desktop-home-availability",
+      "status": "PASS",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "screenshot": "docs/compat/live/desktop-home-availability.png",
+      "detail": {
+        "httpStatus": 200,
+        "url": "https://10x-shop-mariami-bostashvili-mt61.vercel.app/"
+      }
+    },
+    {
+      "name": "desktop-product-deep-link-refresh",
+      "status": "FAIL",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "screenshot": "docs/compat/live/desktop-product-deep-link-refresh-failed.png",
+      "error": "expect(received).toBe(expected) // Object.is equality\n\nExpected: 200\nReceived: 404"
+    },
+    {
+      "name": "desktop-guest-checkout-refresh",
+      "status": "BLOCKED",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "screenshot": "docs/compat/live/desktop-guest-checkout-refresh-failed.png",
+      "error": "expect(received).toBe(expected) // Object.is equality\n\nExpected: 200\nReceived: 404"
+    },
+    {
+      "name": "live-discount-consistency",
+      "status": "FAIL",
+      "screenshot": "docs/compat/live/desktop-checkout.png",
+      "detail": {
+        "title": "Essence Mascara Lash Princess",
+        "price": 9.99,
+        "discountPercentage": 10.48,
+        "expectedTotal": "8.94",
+        "actualTotal": "9.99"
+      }
+    },
+    {
+      "name": "desktop-shopping-flow",
+      "status": "PASS",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "screenshot": "docs/compat/live/desktop-shopping-flow.png",
+      "detail": {
+        "title": "Essence Mascara Lash Princess",
+        "summary": "Order summary\nEssence Mascara Lash Princess × 1\n$9.99\nTotal\n$9.99\nEdit cart",
+        "confirmation": "PASS",
+        "clearedCart": "PASS",
+        "checkout": "local demo simulation; no real payment"
+      }
+    },
+    {
+      "name": "mobile-product-deep-link-refresh",
+      "status": "FAIL",
+      "viewport": {
+        "width": 375,
+        "height": 812
+      },
+      "screenshot": "docs/compat/live/mobile-product-deep-link-refresh-failed.png",
+      "error": "expect(received).toBe(expected) // Object.is equality\n\nExpected: 200\nReceived: 404"
+    }
+  ],
+  "networkFailures": [
+    {
+      "check": "desktop-product-deep-link-refresh",
+      "url": "https://10x-shop-mariami-bostashvili-mt61.vercel.app/products/5",
+      "status": 404
+    },
+    {
+      "check": "desktop-guest-checkout-refresh",
+      "url": "https://10x-shop-mariami-bostashvili-mt61.vercel.app/checkout",
+      "status": 404
+    },
+    {
+      "check": "mobile-product-deep-link-refresh",
+      "url": "https://10x-shop-mariami-bostashvili-mt61.vercel.app/products/5",
+      "status": 404
+    }
+  ],
+  "finishedAt": "2026-11-05T12:55:34.983Z"
+}

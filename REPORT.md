@@ -2,6 +2,12 @@
 
 ## Status
 
+### Current local verification and deployment limits — 2026-11-05
+
+The local compatibility/pricing suite reports 70 passed, 0 failed, and 2 WebKit keyboard skips. The route/auth smoke suite reports 16 passed. Discounted-price filtering/sorting uses shared final-price calculations. Current axe scans found no violations; four local Lighthouse Accessibility audits scored 100/100.
+
+Deployed verification is separate: home and in-app simulated checkout work, but direct product/checkout URLs return provider 404 and live checkout still charges the original API price ($9.99 rather than $8.94 for the checked product). These are open release blockers. See `QA-REPORT.md`, `BUG-REPORT.md`, and `docs/compat/live-results.json`. Earlier completion statements below concern implemented local source, not full deployed compliance.
+
 The CORE scope from the graduation project PRD is implemented. The application is a responsive React SPA built with TypeScript, Tailwind CSS v4, React Router, and the DummyJSON products API.
 
 ## Completed CORE requirements

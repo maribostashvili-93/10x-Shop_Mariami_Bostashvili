@@ -3,6 +3,7 @@ import { getProducts } from "../api/products";
 import type { Product } from "../types/product";
 import ProductGrid from "../components/products/ProductGrid";
 import { Link, useSearchParams } from "react-router";
+import { getFinalPrice } from "../utils/formatPrice";
 
 export default function ProductsPage() {
   const [params] = useSearchParams();
@@ -23,11 +24,14 @@ export default function ProductsPage() {
     return () => { active = false; };
   }, []);
 
-  const filtered = products.filter((product) =>
-    (!category || product.category === category) &&
-    (price === "under-50" ? product.price < 50 : price === "50-100" ? product.price >= 50 && product.price <= 100 : price === "over-100" ? product.price > 100 : true) &&
-    (!query || `${product.title} ${product.description} ${product.category}`.toLowerCase().includes(query)),
-  ).sort((a, b) => sort === "price-asc" ? a.price - b.price : sort === "price-desc" ? b.price - a.price : sort === "rating" ? b.rating - a.rating : 0);
+  const filtered = products.filter((product) => {
+    const finalPrice = getFinalPrice(product);
+    return (
+      (!category || product.category === category) &&
+      (price === "under-50" ? finalPrice < 50 : price === "50-100" ? finalPrice >= 50 && finalPrice <= 100 : price === "over-100" ? finalPrice > 100 : true) &&
+      (!query || `${product.title} ${product.description} ${product.category}`.toLowerCase().includes(query))
+    );
+  }).sort((a, b) => sort === "price-asc" ? getFinalPrice(a) - getFinalPrice(b) : sort === "price-desc" ? getFinalPrice(b) - getFinalPrice(a) : sort === "rating" ? b.rating - a.rating : 0);
 
   return (
     <section>

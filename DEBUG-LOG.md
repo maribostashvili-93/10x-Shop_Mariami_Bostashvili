@@ -72,6 +72,18 @@ This document records real issues found and fixed while building 10X Shop. The p
 - **Fix (commit):** [655a720 fix: apply discounts and complete CORE cart/login/product requirements](https://github.com/maribostashvili-93/10x-Shop_Mariami_Bostashvili/commit/655a720)
 - **What I learned:** Validation rules should mirror the specification exactly and be tested with empty, short and valid input.
 
+## 8. Price filters and sorting used the original price
+
+- **Symptom:** A product displayed at $30 ($60 with a 50% discount) was absent from Under $50 and appeared after a $40 product when sorted low to high.
+- **Reproduction:** Supply those API products and open `/products?price=under-50` or `/products?sort=price-asc`.
+- **Tool:** Chromium diagnosis with deterministic API responses, then Playwright regressions across all six compatibility projects.
+- **Root cause:** `ProductsPage` compared `product.price`, while cards displayed `getFinalPrice(product)`.
+- **Fix:** Use shared rounded final prices in price-band comparisons and both price sort directions.
+- **Verification:** 36 pricing cases passed, including $50/$100 boundaries, cent rounding, reload, and filter/search/sort browser history.
+- **Fix (commit):** `fix: align catalog price filters and refresh QA evidence`.
+- **Deployment note:** Live deep links return provider 404 and live checkout still ignores discounts; these remain separate release issues in `BUG-REPORT.md`.
+- **What I learned:** Filtering, sorting, and display must use the same business-rule calculation.
+
 ## Debugging checklist
 
 - Run `npm run typecheck` before investigating runtime behavior.

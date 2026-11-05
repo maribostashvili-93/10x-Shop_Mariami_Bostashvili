@@ -1,35 +1,51 @@
 # PRD Compliance Audit — 10X Shop
 
-The repository contains `PLAN.md` and README scope documentation, but no separate diploma PRD file was found. Statuses below therefore use the documented CORE scope and explicitly mark unavailable verification.
+Updated: 2026-11-05. Source: the user-provided 10X-Shop-Graduation-Project-PRD.docx, version 1.1, especially its 28-step CORE/FULL checklist. It references Appendix A, which is not included in the supplied DOCX. Detailed criteria outside this file are not assumed.
+
+PASS means verified in the stated scope. PARTIAL distinguishes implementation from incomplete or failing deployment verification. Missing FULL work is not a CORE blocker.
 
 ## CORE
 
-| Requirement | Status | Evidence |
-| --- | --- | --- |
-| Responsive storefront layout | NOT TESTED | Tailwind responsive classes exist; viewport run unavailable |
-| DummyJSON product catalog | PASS | `src/api/products.ts`, `ProductsPage.tsx` |
-| Product details by route | PASS | `/products/:id` registered in `src/App.tsx` |
-| Loading/error/empty/invalid states | PASS | Catalog and product page branches exist |
-| Demo login and AuthContext | PARTIAL | Context exists; minimum password rule is absent |
-| Shared cart state | PASS | `CartProvider.tsx` exposes immutable cart operations |
-| Stock-aware quantities | PASS | Add/set operations clamp to `product.stock` |
-| Protected checkout | PASS | `CheckoutPage.tsx` redirects guests to `/login` |
-| Checkout field validation | PASS | Required fields and email format are validated |
-| Local order confirmation and cart clearing | PASS | Successful submit calls `clearCart()` and renders confirmation |
-| Unknown-route recovery | PASS | Wildcard route renders `NotFoundPage` |
-| Direct nested-route deployment fallback | PASS | `vercel.json` rewrites to `index.html` |
+| PRD steps | Requirement | Status | Evidence and limits |
+| --- | --- | --- | --- |
+| 1, 23 | Vite, React, strict TypeScript, Tailwind v4; checks/build | PASS | Typecheck, lint and production build passed |
+| 2, 25 | PLAN, English README, REPORT, meaningful Git history | PASS | Files/history exist; this DOCX does not specify 40 commits or 15 distinct days |
+| 3 | Typed products, API, cart, login and checkout fields | PASS | Types, API guards, typed state/props and strict checking |
+| 4 | Layout, props/children, required routes and client navigation | PASS | App, providers, FormField, smoke/keyboard suites |
+| 5–6 | Local login/logout, required fields, checkout guard/return | PASS locally | Smoke and keyboard tests pass; direct live checkout is blocked by BUG-004 |
+| 7–8 | API catalog, loading/error/empty, grid/cards, stable keys | PASS implementation | CatalogSection requests 12 products; state branches/keys exist. Successful mocked responses tested; all network failure branches are not exhaustively tested |
+| 10–11 | Product details, invalid IDs, quantity and add-to-cart | PASS locally | API 404/invalid IDs handled; browser flow passes; stock guards inspected |
+| 12–13 | Shared immutable cart, badge, quantity/removal, totals/empty | PASS locally | CartProvider, shared totals, compatibility/pricing regression; live original-price total is BUG-005 |
+| 14–15 | Controlled checkout, required validation, confirmation/clear | PASS locally | Typed controlled fields, field errors, clearCart, tested confirmation; live internal-navigation simulation completed |
+| 16 | Props, children, callbacks, hooks, Context, map/key and immutability | PASS | Present in source |
+| 19–20 | Responsive CORE pages and interactive states | PARTIAL verification | Current matrix passes at 390/1440; prior audit performed 375px diagnostics. Current automation is not an exhaustive 375px/device test |
+| 21–22 | CORE shopping flow, state/error handling and debugging | PASS locally | Chromium/Firefox keyboard flow, ErrorBoundary and historical DEBUG-LOG; all failure branches/screen-reader interactions not exhaustively tested |
+| 24 | Working deployment, direct product URL and refresh | FAIL deployed | Root/internal navigation work; direct /products/5 and /checkout return provider 404 |
+| 28 | Final QA and repository submission | PARTIAL | Local QA complete; deployment blockers remain. Course-form submission not verified |
 
-## FULL / BONUS
+The deployed CORE release is not fully compliant until nested-route access and discounted checkout totals are fixed and rechecked.
 
-| Area | Status | Notes |
-| --- | --- | --- |
-| Wishlist, profile, journal, filters, sorting | PASS | Implemented in source |
-| Real authentication, payments, orders, delivery | MISSING | Explicitly out of scope in README |
-| Automated Playwright suite | MISSING | Test scaffold/dependency absent |
-| Lighthouse and axe-core CI | NOT TESTED | No tooling/configuration present |
+## FULL / additional work
 
-## Priority plan
+| PRD steps | Area | Status | Current implementation |
+| --- | --- | --- | --- |
+| 9 | Search/category/sort/pagination/URL | PARTIAL | Search/category/sort/URL exist; discounted filtering/sorting fixed locally; pagination missing |
+| 17 | Reviews, Related Products, Promo Code, complex cart | PARTIAL | API reviews/gallery and related products exist; promo application/reducer cart not implemented |
+| 18 | Orders, Profile, hooks, Formik + Yup | PARTIAL | Profile/settings and context hooks exist; Orders is a placeholder; persistent order/details and Formik/Yup missing |
+| 26 | Lazy loading, Lighthouse before/after, cross-browser evidence | PARTIAL | Image lazy loading and local browser/accessibility evidence exist; route lazy loading/performance before-after missing |
+| 27 | Advanced Tailwind/TypeScript | PARTIAL | @theme, generic helper, type guards, union state and ApiError exist; full module-specific criteria need missing appendix |
 
-1. Fix BUG-001 and confirm the intended password rule with the official PRD.
-2. Install/configure Playwright and add API-mocked deterministic tests.
-3. Run Chromium, Firefox, WebKit, mobile viewport, axe, and deployed-route checks.
+BONUS is optional, but a complete itemized BONUS checklist is not included in this DOCX. Optional dark mode, libraries, or detailed OOP classes must not be promoted to mandatory CORE requirements without the applicable module specification.
+
+## Required versus intentionally simulated
+
+- Local React Context authentication and local controlled checkout are required; real authentication APIs/payment processing are not required by this DOCX.
+- Playwright, axe and Lighthouse are verification tools, not missing product features.
+- The local repository currently has 36 commits across nine author dates. Numeric FULL GitHub requirements from the earlier pasted summary are absent from this DOCX; separate instructor instructions should be considered independently.
+
+## Priorities
+
+1. Publish current source with its committed Vercel SPA rewrite and discounted pricing; resolve BUG-004/005.
+2. Repeat node scripts/qa-live.mjs; confirm deep links, refresh, guest redirect, totals and confirmation.
+3. For FULL, implement pagination, Orders and Formik/Yup only if expanded scope is chosen.
+4. Obtain Appendix A before claiming complete FULL/BONUS compliance.

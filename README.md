@@ -155,7 +155,7 @@ Build command: `npm run build`. Output directory: `dist`.
 
 For SPA deployments, configure a rewrite so direct visits and refreshes on routes such as `/products/5` and `/checkout` serve `index.html`.
 
-Vercel uses the committed [`vercel.json`](vercel.json) rewrite for this behavior.
+The repository includes this fallback in [`vercel.json`](vercel.json). The latest deployed-site check found provider 404 responses on direct nested URLs; publishing the current configuration and rechecking deployment are still required. See [QA-REPORT.md](QA-REPORT.md).
 
 ## Project documentation
 
