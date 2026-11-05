@@ -1,6 +1,6 @@
 # Compatibility — 10X Shop
 
-Run started (UTC): 2026-11-05T19:04:05.980Z. Duration: 82.8 seconds. Local production build: http://127.0.0.1:4173. Desktop: 1440×900; Mobile: 390×844. Chromium, Firefox, and WebKit are Playwright browser engines; branded Chrome/Firefox/Safari applications and physical phones were not tested. Firefox Mobile uses viewport and touch emulation only.
+Run started (UTC): 2026-11-05T19:24:36.919Z. Duration: 71.8 seconds. Local production build: http://127.0.0.1:4173. Desktop: 1440×900; Mobile: 390×844. Chromium, Firefox, and WebKit are Playwright browser engines; branded Chrome/Firefox/Safari applications and physical phones were not tested. Firefox Mobile uses viewport and touch emulation only.
 
 Matrix and keyboard tests replace DummyJSON responses with one fixed product (QA Beauty Product), using favicon.svg as its image. Pricing regression tests use six products with different discounts and boundary prices. This verifies the UI and shopping flow but does not verify the live API or real product images. Lighthouse uses real network requests; its results apply to the state displayed during each run. Deployed-site checks, when available, are recorded separately in docs/compat/live-results.json and QA-REPORT.md.
 
@@ -59,10 +59,10 @@ The WebKit control experiment uses plain `<a>`, `<button>`, and `<input>` elemen
 
 A score of 100 does not establish full WCAG compliance. Lighthouse and axe use different scoring and audits. Failed Lighthouse audits, if any, are listed below independently of each score. Reports: `docs/compat/lighthouse/*.html` and `*.json`. Lighthouse Mobile uses its default mobile viewport.
 
-- catalog / desktop: captured 2026-11-05T19:14:32.848Z; failed audits: none; run warnings: none.
-- catalog / mobile: captured 2026-11-05T19:14:47.603Z; failed audits: none; run warnings: none.
-- login / desktop: captured 2026-11-05T19:14:41.478Z; failed audits: none; run warnings: none.
-- login / mobile: captured 2026-11-05T19:14:54.314Z; failed audits: none; run warnings: none.
+- catalog / desktop: captured 2026-11-05T19:27:07.493Z; failed audits: none; run warnings: none.
+- catalog / mobile: captured 2026-11-05T19:27:21.994Z; failed audits: none; run warnings: none.
+- login / desktop: captured 2026-11-05T19:27:15.066Z; failed audits: none; run warnings: none.
+- login / mobile: captured 2026-11-05T19:27:28.583Z; failed audits: none; run warnings: none.
 
 ## Screenshots
 

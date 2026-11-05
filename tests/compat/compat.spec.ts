@@ -49,7 +49,8 @@ test('keyboard: catalog → product → cart → login → checkout → confirma
     'Playwright WebKit never moves focus to links with Tab or Alt+Tab, even on a bare <a href> page (docs/compat/webkit-keyboard-baseline.json). Check this flow in real Safari with "Press Tab to highlight each item" enabled.',
   );
   await page.goto('/');
-  const productLink = page.getByRole('main').getByRole('heading', { name: product.title, exact: true }).getByRole('link');
+  // The mocked API returns one product everywhere, so target the card inside the Catalog section.
+  const productLink = page.getByRole('region', { name: 'Catalog' }).getByRole('heading', { name: product.title, exact: true }).getByRole('link');
   await tabTo(page, productLink);
   await page.keyboard.press('Enter');
   await expect(page.getByRole('heading', { name: product.title, exact: true })).toBeVisible();

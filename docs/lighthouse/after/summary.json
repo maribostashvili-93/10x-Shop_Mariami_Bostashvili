@@ -2,12 +2,12 @@
   {
     "page": "catalog",
     "mode": "mobile",
-    "performance": 94,
+    "performance": 92,
     "accessibility": 100,
     "bestPractices": 100,
-    "lcp": "2.7 s",
+    "lcp": "3.2 s",
     "cls": "0",
-    "tbt": "170 ms"
+    "tbt": "90 ms"
   },
   {
     "page": "product",
@@ -15,9 +15,9 @@
     "performance": 95,
     "accessibility": 100,
     "bestPractices": 100,
-    "lcp": "2.7 s",
+    "lcp": "2.9 s",
     "cls": "0",
-    "tbt": "120 ms"
+    "tbt": "70 ms"
   },
   {
     "page": "cart",
@@ -32,22 +32,22 @@
   {
     "page": "catalog",
     "mode": "desktop",
-    "performance": 85,
+    "performance": 80,
     "accessibility": 100,
     "bestPractices": 100,
-    "lcp": "2.6 s",
+    "lcp": "3.1 s",
     "cls": "0.018",
-    "tbt": "70 ms"
+    "tbt": "130 ms"
   },
   {
     "page": "product",
     "mode": "desktop",
-    "performance": 81,
+    "performance": 83,
     "accessibility": 100,
     "bestPractices": 100,
-    "lcp": "2.8 s",
+    "lcp": "2.9 s",
     "cls": "0.018",
-    "tbt": "140 ms"
+    "tbt": "80 ms"
   },
   {
     "page": "cart",
@@ -57,6 +57,6 @@
     "bestPractices": 100,
     "lcp": "0.8 s",
     "cls": "0.018",
-    "tbt": "60 ms"
+    "tbt": "80 ms"
   }
 ]
