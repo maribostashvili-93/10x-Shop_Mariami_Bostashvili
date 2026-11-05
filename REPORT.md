@@ -67,7 +67,7 @@ Verified locally in the browser: 12 catalog cards, 1 column at 375px without hor
 
 All FULL items of PRD Annex A were checked against the code; the list below matches the annex sections.
 
-- **P2 Catalog (`/`):** server-side requests (`/products`, `/products/search`, `/products/category/{slug}`) with `limit=12`, `skip = (page − 1) × 12` and `sortBy`/`order`; debounced search (one request per pause in typing), category filter, five sort options, pagination with "Showing 13–24 of 194", skeleton, Retry, `AbortController`; `q`, `category`, `sort` and `page` in the URL.
+- **P2 Catalog (`/products`, with a six-product preview on `/`):** server-side requests (`/products`, `/products/search`, `/products/category/{slug}`) with `limit=12`, `skip = (page − 1) × 12` and `sortBy`/`order`; debounced search (one request per pause in typing), category filter, five sort options, pagination with "Showing 13–24 of 194", skeleton, Retry, `AbortController`; `q`, `category`, `sort` and `page` in the URL.
 - **P3 Product:** gallery, stock-limited stepper, Description/Reviews tabs, review form (exact messages "Please select a rating" and "Comment must be at least 10 characters") stored as `shop_reviews`, recalculated average, related products from `/products/category/{slug}?limit=5`.
 - **P4 Cart:** `useReducer` with `ADD_ITEM`/`SET_QTY`/`REMOVE_ITEM`/`CLEAR`/`APPLY_PROMO`/`REMOVE_PROMO`, `Cart implements ICart`, `StorageService<T>` (`shop_cart`), promo `10X10` shown as "Discount (10X10 −10%)", shipping $10 and free from $100, confirmation before clearing.
 - **P5 Checkout:** phone, postal code and country fields with the exact messages from the annex; empty cart redirects to `/cart`; "Place order" disabled while submitting; "Thank you! Your order has been placed."
@@ -85,12 +85,12 @@ Production build on a local Vite preview server, Lighthouse 13 with default thro
 
 | Page | Mode | Performance | Accessibility | Best Practices | LCP | CLS |
 | --- | --- | --- | --- | --- | --- | --- |
-| Catalog | mobile | 87 → 92 | 100 → 100 | 100 → 100 | 3.8 s → 3.2 s | 0 → 0 |
-| Product | mobile | 95 → 95 | 100 → 100 | 100 → 100 | 2.9 s → 2.9 s | 0 → 0 |
+| Home (/) | mobile | 87 → 86 | 100 → 100 | 100 → 100 | 3.8 s → 3.8 s | 0 → 0 |
+| Product | mobile | 95 → 92 | 100 → 100 | 100 → 100 | 2.9 s → 3.0 s | 0 → 0 |
 | Cart | mobile | 100 → 100 | 100 → 100 | 100 → 100 | 0.8 s → 0.8 s | 0 → 0 |
-| Catalog | desktop | 76 → 80 | 100 → 100 | 100 → 100 | 5.0 s → 3.1 s | 0.06 → 0.018 |
-| Product | desktop | 78 → 83 | 100 → 100 | 100 → 100 | 2.9 s → 2.9 s | 0.15 → 0.018 |
-| Cart | desktop | 97 → 99 | 100 → 100 | 100 → 100 | 0.8 s → 0.8 s | 0.083 → 0.018 |
+| Home (/) | desktop | 76 → 79 | 100 → 100 | 100 → 100 | 5.0 s → 3.6 s | 0.06 → 0.016 |
+| Product | desktop | 78 → 83 | 100 → 100 | 100 → 100 | 2.9 s → 2.9 s | 0.15 → 0.016 |
+| Cart | desktop | 97 → 99 | 100 → 100 | 100 → 100 | 0.8 s → 0.8 s | 0.083 → 0.016 |
 
 What changed between the runs:
 
@@ -98,7 +98,7 @@ What changed between the runs:
 2. Route-level code splitting. Lazy-loading every page at first made results worse (mobile product CLS 0.661); catalog, product and cart stay in the entry chunk and the main area reserves its height (`DEBUG-LOG.md` entry 10).
 3. Hidden hero slides download their photo only when shown; card images have width and height; restored home sections keep their size while loading (`DEBUG-LOG.md` entry 14).
 
-FULL targets (Performance ≥ 85, Accessibility ≥ 90, Best Practices ≥ 90, CLS < 0.1) are met on mobile for every page and on desktop for the cart. Desktop catalog (80) and desktop product (83) stay below 85: the catalog page deliberately keeps the image-led storefront sections (hero, collection banners, journal), and without them it measured 85. Local runs vary by several points between runs and are not a substitute for an audit of the deployed site.
+FULL targets (Performance ≥ 85, Accessibility ≥ 90, Best Practices ≥ 90, CLS < 0.1): accessibility, best practices and CLS meet them on every measured page; performance meets them on mobile for every page and on desktop for the cart. The home page on desktop (79) and product details on desktop (83) stay below 85 because the home page keeps its image-led storefront sections (hero, collection banners, journal). The script still labels `/` as "catalog", the name it had in the baseline run. Local runs vary by several points and are not a substitute for an audit of the deployed site.
 
 ## Out of scope
 

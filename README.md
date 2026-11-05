@@ -37,7 +37,7 @@ This is a front-end demo. Login and checkout are local simulations: no real auth
 
 ### FULL
 
-- **Catalog (`/`):** one page of 12 products is requested at a time — `/products`, `/products/search?q=` or `/products/category/{slug}` with `limit`, `skip = (page − 1) × 12` and `sortBy`/`order`. Debounced search (`useDebounce(value, 400)`), category filter, five sort options (Default, Price low/high, Rating, Name A→Z), pagination `‹ 1 2 … N ›`, "Showing 13–24 of 194", skeleton, Retry and `AbortController`. `q`, `category`, `sort` and `page` live in the URL, so refresh, Back/Forward and shared links restore the same results
+- **Catalog (`/products`):** one page of 12 products is requested at a time — `/products`, `/products/search?q=` or `/products/category/{slug}` with `limit`, `skip = (page − 1) × 12` and `sortBy`/`order`. Debounced search (`useDebounce(value, 400)`), category filter, five sort options (Default, Price low/high, Rating, Name A→Z), pagination `‹ 1 2 … N ›`, "Showing 13–24 of 194", skeleton, Retry and `AbortController`. `q`, `category`, `sort` and `page` live in the URL, so refresh, Back/Forward and shared links restore the same results
 - **Product details:** API image gallery, quantity stepper limited by stock, Description/Reviews tabs, review form (rating 1–5, comment of at least 10 characters) saved in `localStorage`, recalculated average rating, and four related products from the same category (`?limit=5`)
 - **Cart:** `useReducer` with typed actions (`ADD_ITEM`, `SET_QTY`, `REMOVE_ITEM`, `CLEAR`, `APPLY_PROMO`, `REMOVE_PROMO`), an immutable `Cart` class that implements `ICart`, a generic `StorageService<T>`, promo code **`10X10`** (−10%; other codes show "Invalid promo code") and shipping: **$10, free from $100**
 - **Checkout:** full name, email, phone, address, city, postal code and country (Georgia by default) with exact validation messages; the button is disabled while the order is placed
@@ -51,7 +51,7 @@ This is a front-end demo. Login and checkout are local simulations: no real auth
 
 ### Additional interface work
 
-- Storefront sections on the unfiltered catalog page: hero carousel, feature strip, The Signature Edit with collection banners, Shop by category, New arrivals, Best sellers, Sale edit, journal, Top brands and community stories (each loads only the few products it shows)
+- Home page (`/`): hero carousel, feature strip, the search bar (search, category, sort — opens the catalog), The Signature Edit with collection banners, Shop by category, a six-product catalog preview with "View all products", New arrivals, Best sellers, Sale edit, journal, Top brands and community stories. Each section loads only the few products it shows.
 - Wishlist state and wishlist page
 - Mobile bottom navigation and a desktop sidebar with curated categories
 - Featured collection carousels with animated dot controls
@@ -65,8 +65,9 @@ Journal articles are illustrative demo content. Product reviews combine the Dumm
 
 | Route | Purpose |
 | --- | --- |
-| `/` | Catalog with search, category, sort and pagination |
-| `/?q=phone&sort=price-asc&page=2` | Example of a shareable catalog URL |
+| `/` | Home: hero, search bar, The Signature Edit, categories, a six-product catalog preview with "View all products", product rails, journal and brands |
+| `/products` | Full catalog with search, category, sort and pagination |
+| `/products?q=phone&sort=price-asc&page=2` | Example of a shareable catalog URL |
 | `/products/:id` | Product details |
 | `/cart` | Shopping cart with promo code and shipping |
 | `/checkout` | Protected checkout form |
@@ -77,8 +78,6 @@ Journal articles are illustrative demo content. Product reviews combine the Dumm
 | `/wishlist` | Local wishlist |
 | `/journal/:slug` | Lifestyle article with related products |
 | `*` | Not-found page |
-
-Older `/products?…` links redirect to the catalog with the same query.
 
 ## Tech stack
 
