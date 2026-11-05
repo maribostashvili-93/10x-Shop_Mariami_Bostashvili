@@ -15,11 +15,11 @@ async function capture(page: Page, name: string, project: string) {
   await page.screenshot({ path: `docs/compat/current/${project}-${name}.png`, fullPage: true, animations: 'disabled' });
 }
 
-async function tabTo(page: Page, target: Locator) {
+async function tabTo(page: Page, target: Locator, key: 'Tab' | 'Shift+Tab' = 'Tab') {
   // Lazy-loaded routes render a short fallback first; wait for the real control like a user would.
   await target.waitFor({ state: 'visible' });
   for (let i = 0; i < 180; i++) {
-    await page.keyboard.press('Tab');
+    await page.keyboard.press(key);
     if (await target.evaluate(el => el === document.activeElement)) return;
   }
   throw new Error('Keyboard target unreachable after 180 Tab presses');
@@ -56,7 +56,10 @@ test('keyboard: catalog → product → cart → login → checkout → confirma
   await expect(page.getByRole('heading', { name: product.title, exact: true })).toBeVisible();
   await tabTo(page, page.getByRole('button', { name: 'Add to cart', exact: true }));
   await page.keyboard.press('Enter');
-  await tabTo(page, page.getByRole('link', { name: 'View cart', exact: true }));
+  // The button now confirms with "Added ✓" (no dialog); continue through the header Cart link.
+  await expect(page.getByRole('button', { name: 'Added ✓' })).toBeVisible();
+  // The header is above the button, so go back with Shift+Tab (Firefox does not wrap forward Tab to the top).
+  await tabTo(page, page.getByRole('banner').getByRole('link', { name: /^Cart/ }), 'Shift+Tab');
   await page.keyboard.press('Enter');
   await expect(page).toHaveURL(/\/cart$/);
   await capture(page, 'cart-populated', info.project.name);
