@@ -13,7 +13,10 @@ function Header() {
   const { user, logout } = useAuth();
   const [menuOpen, setMenuOpen] = useState(false);
   const [accountOpen, setAccountOpen] = useState(false);
-  const accountLinks = ["My Orders", "My Wishlist", "Coupons", "Addresses", "Account Settings"];
+  const accountLinks = [
+    { to: "/wishlist", label: "My Wishlist" },
+    { to: "/account-settings", label: "Account Settings" },
+  ];
 
   return (
     <header className="sticky top-0 z-30 border-b border-violet-100 bg-[#fcfaff]/95 backdrop-blur">
@@ -45,7 +48,7 @@ function Header() {
         {user ? (
           <div className="relative">
             <button type="button" onClick={() => setAccountOpen((open) => !open)} aria-expanded={accountOpen} aria-haspopup="menu" className="flex min-h-11 items-center gap-2 rounded-lg bg-violet-50 px-3 text-sm font-semibold text-violet-800 hover:bg-violet-100 focus-visible:outline-2 focus-visible:outline-violet-700"><span className="flex size-7 items-center justify-center rounded-full bg-violet-700 text-xs text-white">{user.username.charAt(0).toUpperCase()}</span>{user.username}<svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" className="size-4"><path d="m6 9 6 6 6-6" /></svg></button>
-            {accountOpen && <nav aria-label="Account menu" role="menu" className="absolute right-0 top-full z-50 mt-2 w-56 rounded-xl border border-violet-100 bg-white p-2 shadow-xl"><NavLink to="/profile" onClick={() => setAccountOpen(false)} role="menuitem" className="flex min-h-10 items-center rounded-lg px-3 text-sm font-semibold text-violet-800 hover:bg-violet-50">My profile</NavLink>{accountLinks.map((label) => <NavLink key={label} to={`/${label.toLowerCase().replaceAll(" ", "-")}`} onClick={() => setAccountOpen(false)} role="menuitem" className="flex min-h-10 items-center rounded-lg px-3 text-sm text-slate-700 hover:bg-violet-50 hover:text-violet-800">{label}</NavLink>)}</nav>}
+            {accountOpen && <nav aria-label="Account menu" role="menu" className="absolute right-0 top-full z-50 mt-2 w-56 rounded-xl border border-violet-100 bg-white p-2 shadow-xl"><NavLink to="/profile" onClick={() => setAccountOpen(false)} role="menuitem" className="flex min-h-10 items-center rounded-lg px-3 text-sm font-semibold text-violet-800 hover:bg-violet-50">My profile</NavLink>{accountLinks.map(({ to, label }) => <NavLink key={to} to={to} onClick={() => setAccountOpen(false)} role="menuitem" className="flex min-h-10 items-center rounded-lg px-3 text-sm text-slate-700 hover:bg-violet-50 hover:text-violet-800">{label}</NavLink>)}</nav>}
           </div>
         ) : (
           <NavLink

@@ -33,11 +33,16 @@ export function ShoppingPanels() {
   return (
     <div ref={container} className="relative ml-2 flex items-center gap-2">
       {/* The cart has its own header link (CartLink); this quick panel is for the wishlist. */}
-      <button type="button" aria-expanded={open} aria-controls="shopping-panel" aria-label={`Open wishlist (${products.length} items)`} onClick={() => { setMode("wishlist"); setOpen(!open); }} className={`${control} relative border border-slate-200`}>
+      <button type="button" aria-expanded={open} aria-controls="shopping-panel" onClick={() => { setMode("wishlist"); setOpen(!open); }} className={`${control} relative border border-slate-200`}>
         <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" className="size-5">
           <path d="M12 21 3.5 12.5a5.5 5.5 0 0 1 8.5-7 5.5 5.5 0 0 1 8.5 7Z"/>
         </svg>
-        <span aria-hidden="true" className="absolute -right-1 -top-1 rounded-full bg-violet-950 px-1.5 text-xs text-white">{products.length}</span>
+        {/* Accessible name ("Wishlist 2 items") is built from the visible count. */}
+        <span className="sr-only">Wishlist&nbsp;</span>
+        <span className="absolute -right-1 -top-1 rounded-full bg-violet-950 px-1.5 text-xs text-white">
+          {products.length}
+          <span className="sr-only">&nbsp;items</span>
+        </span>
       </button>
       {open && <aside id="shopping-panel" aria-labelledby="shopping-panel-title" className="absolute right-0 top-full z-40 mt-3 max-h-[70dvh] w-[min(340px,calc(100vw-2rem))] overflow-y-auto rounded-2xl border border-slate-200 bg-white p-4 text-slate-900 shadow-xl">
         <div className="flex items-center justify-between gap-3">

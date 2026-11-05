@@ -19,6 +19,14 @@ export type Product = {
   reviews?: ProductReview[];
 };
 
+/** Shape of DummyJSON list responses such as GET /products?limit=12&skip=0. */
+export type ProductsResponse = {
+  products: Product[];
+  total: number;
+  skip: number;
+  limit: number;
+};
+
 export type Category = {
   slug: string;
   name: string;

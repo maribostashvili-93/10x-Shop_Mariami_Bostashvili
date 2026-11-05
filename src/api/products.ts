@@ -1,4 +1,4 @@
-import type { Category, Product, ProductReview } from "../types/product";
+import type { Category, Product, ProductReview, ProductsResponse } from "../types/product";
 import { ApiError, fetchJson, isRecord } from "./client";
 
 const API_URL = "https://dummyjson.com/products";
@@ -54,11 +54,22 @@ function isCategory(value: unknown): value is Category {
   return isRecord(value) && typeof value.slug === "string" && typeof value.name === "string" && typeof value.url === "string";
 }
 
+export function isProductsResponse(value: unknown): value is ProductsResponse {
+  return (
+    isRecord(value) &&
+    Array.isArray(value.products) &&
+    value.products.every(isProduct) &&
+    typeof value.total === "number" &&
+    typeof value.skip === "number" &&
+    typeof value.limit === "number"
+  );
+}
+
 function parseProductList(data: unknown): Product[] {
-  if (!isRecord(data) || !Array.isArray(data.products)) {
+  if (!isProductsResponse(data)) {
     throw new Error("Unexpected products response");
   }
-  return data.products.filter(isProduct);
+  return data.products;
 }
 
 /** CORE catalog request: GET /products?limit=12&skip=0 */

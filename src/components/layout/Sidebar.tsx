@@ -9,20 +9,10 @@ const links = [
   { to: "/products", label: "Products", path: "M3 3h7v7H3zM14 3h7v7h-7zM3 14h7v7H3zM14 14h7v7h-7z" },
 ];
 
-const upcomingGroups = [
-  [
-    { label: "New Arrivals", path: "M12 3v12m-4-4 4 4 4-4M5 15v6h14v-6" },
-    { label: "Best Sellers", path: "m12 3 3 6 6 1-4.5 4.5 1 6.5-5.5-3-5.5 3 1-6.5L3 10l6-1z" },
-    { label: "Brands", path: "m12 3 9 7-9 11-9-11zM3 10h18M8 4l4 17 4-17" },
-    { label: "Collections", path: "M7 3h14v14H7zM3 7v14h14" },
-  ],
-  [
-    { label: "My Orders", path: "M6 4h12v17H6zM9 3h6v4H9zM9 11h6M9 15h6" },
-    { label: "Wishlist", path: "M12 21 3.5 12.5a5.5 5.5 0 0 1 8.5-7 5.5 5.5 0 0 1 8.5 7z" },
-    { label: "Coupons", path: "M3 6h18v4a2 2 0 0 0 0 4v4H3v-4a2 2 0 0 0 0-4zM14 6v12" },
-    { label: "Addresses", path: "M19 10c0 5-7 11-7 11S5 15 5 10a7 7 0 1 1 14 0ZM9 10a3 3 0 1 0 6 0 3 3 0 1 0-6 0" },
-    { label: "Account Settings", path: "M16 7a4 4 0 1 1-8 0 4 4 0 0 1 8 0ZM4 21v-3a8 8 0 0 1 16 0v3" },
-  ],
+const accountLinks = [
+  { to: "/profile", label: "My Profile", path: "M16 7a4 4 0 1 1-8 0 4 4 0 0 1 8 0ZM4 21v-3a8 8 0 0 1 16 0v3" },
+  { to: "/wishlist", label: "My Wishlist", path: "M12 21 3.5 12.5a5.5 5.5 0 0 1 8.5-7 5.5 5.5 0 0 1 8.5 7z" },
+  { to: "/account-settings", label: "Account Settings", path: "M12 15a3 3 0 1 0 0-6 3 3 0 0 0 0 6ZM19 12a7 7 0 0 0-.1-1.2l2-1.6-2-3.4-2.4 1a7 7 0 0 0-2-1.2L14 3h-4l-.5 2.6a7 7 0 0 0-2 1.2l-2.4-1-2 3.4 2 1.6a7 7 0 0 0 0 2.4l-2 1.6 2 3.4 2.4-1a7 7 0 0 0 2 1.2L10 21h4l.5-2.6a7 7 0 0 0 2-1.2l2.4 1 2-3.4-2-1.6c.1-.4.1-.8.1-1.2Z" },
 ];
 
 export function Sidebar() {
@@ -40,26 +30,13 @@ export function Sidebar() {
         ))}
         {user ? <button type="button" onClick={logout} className="min-h-11 rounded-xl px-3 text-left text-sm font-semibold text-red-900 hover:bg-red-50 focus-visible:outline-2 focus-visible:outline-red-900">Logout</button> : <NavLink to="/login" className={({ isActive }) => `flex min-h-11 items-center rounded-xl px-3 text-sm font-semibold focus-visible:outline-2 focus-visible:outline-red-900 ${isActive ? "bg-red-900 text-white" : "text-slate-600 hover:bg-red-50"}`}>Login</NavLink>}
       </nav>
-      {user && <ul aria-label="Account navigation" className="mt-3 grid gap-1 border-t border-slate-200 pt-3">{upcomingGroups[1].map(({ label, path }) => <li key={label}><NavLink to={`/${label.toLowerCase().replaceAll(" ", "-")}`} className="flex min-h-11 w-full items-center gap-3 rounded-xl px-3 py-2 text-left text-sm font-medium text-slate-600 hover:bg-violet-50 hover:text-violet-800"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" className="size-4 shrink-0"><path d={path}/></svg><span>{label === "Wishlist" ? "My Wishlist" : label}</span></NavLink></li>)}</ul>}
+      {user && <ul aria-label="Account navigation" className="mt-3 grid gap-1 border-t border-slate-200 pt-3">{accountLinks.map(({ to, label, path }) => <li key={to}><NavLink to={to} className={({ isActive }) => `flex min-h-11 w-full items-center gap-3 rounded-xl px-3 py-2 text-left text-sm font-medium focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-violet-700 ${isActive ? "bg-violet-100 text-violet-800" : "text-slate-600 hover:bg-violet-50 hover:text-violet-800"}`}><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" className="size-4 shrink-0"><path d={path}/></svg><span>{label}</span></NavLink></li>)}</ul>}
       <div className="mt-5 border-t border-purple-100 pt-4">
         <p className="px-3 text-[11px] font-bold tracking-[0.16em] text-purple-700 uppercase">Shop by category</p>
         <nav aria-label="Product categories" className="mt-2 grid gap-1">
           {categories.slice(0, 9).map((category) => <NavLink key={category.slug} to={`/products?category=${category.slug}`} className={({ isActive }) => `flex min-h-10 items-center rounded-xl px-3 text-sm font-medium transition ${isActive ? "bg-purple-100 text-purple-800" : "text-slate-600 hover:bg-pink-50 hover:text-purple-800"}`}>{category.name}</NavLink>)}
         </nav>
       </div>
-      {upcomingGroups.slice(0, 1).map((group, index) => (
-        index === 1 && !user ? null :
-        <ul key={index} aria-label={index === 0 ? "Upcoming shopping features" : "Upcoming account features"} className="mt-3 grid gap-1 border-t border-slate-200 pt-3 sm:grid-cols-2 lg:grid-cols-1">
-          {group.map(({ label, path }) => (
-            <li key={label}>
-              <NavLink to={`/${label.toLowerCase().replaceAll(" ", "-")}`} className={({ isActive }) => `flex min-h-11 w-full items-center gap-3 rounded-xl px-3 py-2 text-left text-sm font-medium focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-red-900 ${isActive ? "bg-red-900 text-white" : "text-slate-600 hover:bg-red-50 hover:text-red-900"}`}>
-              <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" className="size-4 shrink-0"><path d={path}/></svg>
-              <span>{label === "Wishlist" ? "My Wishlist" : label}</span>
-              </NavLink>
-            </li>
-          ))}
-        </ul>
-      ))}
       <div className="mt-6 hidden rounded-2xl bg-gradient-to-br from-[#21134f] via-[#6036a8] to-[#e06aa8] p-5 text-white lg:block">
         <p className="text-xs text-purple-100">The 10X collection</p>
         <p className="mt-3 text-xl font-semibold">Find your everyday favorites</p>

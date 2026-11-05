@@ -4,6 +4,7 @@ import { useAuth } from "../hooks/useAuth";
 import { useCart } from "../hooks/useCart";
 import { getProducts } from "../api/products";
 import type { Product } from "../types/product";
+import type { CartItem } from "../types/cart";
 import ProductCard from "../components/products/ProductCard";
 import { formatPrice, getCartTotals, getFinalPrice } from "../utils/formatPrice";
 
@@ -12,6 +13,13 @@ type CheckoutFields = {
   email: string;
   address: string;
   city: string;
+};
+
+type ConfirmedOrder = CheckoutFields & {
+  items: CartItem[];
+  subtotal: number;
+  discount: number;
+  total: number;
 };
 
 type CheckoutErrors = Partial<Record<keyof CheckoutFields, string>>;
@@ -30,7 +38,7 @@ function CheckoutPage() {
     try { return { ...initialFields, ...JSON.parse(localStorage.getItem("10x-profile") ?? "{}")} as CheckoutFields; } catch { return initialFields; }
   });
   const [errors, setErrors] = useState<CheckoutErrors>({});
-  const [submitted, setSubmitted] = useState(false);
+  const [confirmedOrder, setConfirmedOrder] = useState<ConfirmedOrder | null>(null);
   const [suggestedProducts, setSuggestedProducts] = useState<Product[]>([]);
 
   useEffect(() => {
@@ -41,7 +49,7 @@ function CheckoutPage() {
     return <Navigate to="/login" state={{ from: "/checkout" }} replace />;
   }
 
-  if (submitted) {
+  if (confirmedOrder) {
     return (
       <section className="mx-auto max-w-4xl py-10 sm:py-14">
         <div className="rounded-[1.5rem] border border-violet-200 bg-violet-50/80 p-8 sm:p-12">
@@ -50,6 +58,25 @@ function CheckoutPage() {
           <p className="mt-5 text-lg leading-8 text-slate-700">
             Your order has been placed locally for this demo. No real payment was processed.
           </p>
+          <section aria-labelledby="order-summary-heading" className="mt-8 rounded-2xl border border-violet-100 bg-white p-6 text-left">
+            <h2 id="order-summary-heading" className="text-xl font-semibold text-slate-900">Order summary</h2>
+            <p className="mt-2 text-sm text-slate-600">
+              Delivering to {confirmedOrder.fullName}, {confirmedOrder.address}, {confirmedOrder.city}. Confirmation sent to {confirmedOrder.email}.
+            </p>
+            <ul className="mt-5 space-y-3 border-b border-slate-200 pb-5">
+              {confirmedOrder.items.map(({ product, quantity }) => (
+                <li key={product.id} className="flex justify-between gap-4 text-sm">
+                  <span className="text-slate-600">{product.title} × {quantity}</span>
+                  <span className="shrink-0 font-semibold text-slate-900">{formatPrice(getFinalPrice(product) * quantity)}</span>
+                </li>
+              ))}
+            </ul>
+            <dl className="mt-5 space-y-2 text-sm">
+              <div className="flex justify-between gap-4"><dt className="text-slate-600">Subtotal</dt><dd className="font-semibold text-slate-900">{formatPrice(confirmedOrder.subtotal)}</dd></div>
+              <div className="flex justify-between gap-4"><dt className="text-slate-600">Discount</dt><dd className="font-semibold text-violet-700">−{formatPrice(confirmedOrder.discount)}</dd></div>
+              <div className="flex justify-between gap-4 pt-2 text-lg font-semibold text-slate-900"><dt>Total</dt><dd>{formatPrice(confirmedOrder.total)}</dd></div>
+            </dl>
+          </section>
           <Link
             to="/products"
             className="mt-8 inline-flex min-h-14 items-center rounded-xl bg-violet-700 px-7 text-lg font-semibold text-white transition-colors hover:bg-violet-800 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-violet-700"
@@ -103,8 +130,9 @@ function CheckoutPage() {
     const nextErrors = validate();
     setErrors(nextErrors);
     if (Object.keys(nextErrors).length > 0) return;
+    // Snapshot the order before clearing the cart so the confirmation can show it.
+    setConfirmedOrder({ ...fields, items, subtotal, discount, total });
     clearCart();
-    setSubmitted(true);
   }
 
   return (

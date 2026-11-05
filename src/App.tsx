@@ -5,7 +5,7 @@ import CartPage from "./pages/CartPage";
 import LoginPage from "./pages/LoginPage";
 import ProductPage from "./pages/ProductPage";
 import ProductsPage from "./pages/ProductsPage";
-import ComingSoonPage from "./pages/ComingSoonPage";
+import AccountSettingsPage from "./pages/AccountSettingsPage";
 import WishlistPage from "./pages/WishlistPage";
 import CheckoutPage from "./pages/CheckoutPage";
 import NotFoundPage from "./pages/NotFoundPage";
@@ -20,9 +20,7 @@ function App() {
         <Route path="/products" element={<ProductsPage />} />
         <Route path="/journal/:slug" element={<JournalPage />} />
         <Route path="/wishlist" element={<WishlistPage />} />
-        {["New Arrivals", "Best Sellers", "Brands", "Collections", "My Orders", "Coupons", "Addresses", "Account Settings"].map((title) => (
-          <Route key={title} path={`/${title.toLowerCase().replaceAll(" ", "-")}`} element={<ComingSoonPage title={title} />} />
-        ))}
+        <Route path="/account-settings" element={<AccountSettingsPage />} />
         <Route path="/cart" element={<CartPage />} />
         <Route path="/checkout" element={<CheckoutPage />} />
         <Route path="/profile" element={<ProfilePage />} />

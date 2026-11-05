@@ -16,7 +16,6 @@ function CartLink({ showLabel = false, className = "", onClick }: CartLinkProps)
     <NavLink
       to="/cart"
       onClick={onClick}
-      aria-label={`Cart, ${count} ${count === 1 ? "item" : "items"}`}
       className={({ isActive }) =>
         `relative flex min-h-11 min-w-11 items-center justify-center gap-2 rounded-lg px-3 text-sm font-semibold transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-violet-700 ${isActive ? "bg-violet-700 text-white" : "text-stone-600 hover:bg-violet-50 hover:text-violet-800"} ${className}`
       }
@@ -26,9 +25,12 @@ function CartLink({ showLabel = false, className = "", onClick }: CartLinkProps)
         <circle cx="9" cy="20" r="1" />
         <circle cx="18" cy="20" r="1" />
       </svg>
-      {showLabel && <span>Cart</span>}
-      <span aria-hidden="true" className="absolute -top-1 -right-1 flex min-w-5 items-center justify-center rounded-full bg-violet-950 px-1 text-[11px] leading-5 text-white">
+      {/* Accessible name ("Cart 2 items") is built from the visible text so it matches what users see. */}
+      <span className={showLabel ? "" : "sr-only"}>Cart</span>
+      <span className="absolute -top-1 -right-1 flex min-w-5 items-center justify-center rounded-full bg-violet-950 px-1 text-[11px] leading-5 text-white">
+        <span className="sr-only">&nbsp;</span>
         {count > 99 ? "99+" : count}
+        <span className="sr-only">&nbsp;{count === 1 ? "item" : "items"}</span>
       </span>
     </NavLink>
   );
