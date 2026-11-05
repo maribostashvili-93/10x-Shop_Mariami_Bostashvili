@@ -67,7 +67,7 @@ function HomePage() {
       <CatalogPreview />
       <ProductRail title="New arrivals" eyebrow="Just in" sortBy="id" viewAllTo="/products" />
       <ProductRail title="Best sellers" eyebrow="Most wanted" sortBy="rating" viewAllTo="/products?sort=rating-desc" />
-      <ProductRail title="Sale edit" eyebrow="Limited offers" sortBy="discountPercentage" viewAllTo="/products" />
+      <ProductRail title="Sale edit" eyebrow="Limited offers" sortBy="discountPercentage" viewAllTo="/products?deals=1" />
       <JournalCards />
       <TopBrands />
       <CommunityStories />

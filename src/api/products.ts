@@ -1,5 +1,5 @@
 import type { Category, Product, ProductReview, ProductsResponse } from "../types/product";
-import { PAGE_SIZE, toApiSort, type CatalogParams } from "../utils/url";
+import { DEALS_MIN_DISCOUNT, PAGE_SIZE, toApiSort, type CatalogParams } from "../utils/url";
 import { ApiClient, isApiError, isRecord } from "./client";
 
 const api = new ApiClient("https://dummyjson.com");
@@ -83,6 +83,7 @@ export async function getCatalogProducts(limit = CATALOG_PAGE_SIZE, skip = 0, si
  * Sorting is sent to the API as sortBy/order; skip = (page − 1) × 12.
  */
 export async function fetchCatalog(params: CatalogParams, signal?: AbortSignal): Promise<ProductsResponse> {
+  if (params.deals) return fetchBestDeals(params.page, signal);
   const query = new URLSearchParams({ limit: String(PAGE_SIZE), skip: String((params.page - 1) * PAGE_SIZE) });
   const sort = toApiSort(params.sort);
   if (sort) {
@@ -101,6 +102,35 @@ export async function fetchCatalog(params: CatalogParams, signal?: AbortSignal):
 export async function getSortedProducts(sortBy: "id" | "rating" | "discountPercentage", order: "asc" | "desc", limit = 4, signal?: AbortSignal): Promise<Product[]> {
   const data = await api.get(`/products?limit=${limit}&sortBy=${sortBy}&order=${order}`, isProductsResponse, { signal });
   return data.products;
+}
+
+type DiscountSummary = { products: { id: number; discountPercentage: number }[] };
+
+function isDiscountSummary(value: unknown): value is DiscountSummary {
+  return isRecord(value) && Array.isArray(value.products) && value.products.every((item) =>
+    isRecord(item) && typeof item.id === "number" && typeof item.discountPercentage === "number");
+}
+
+/**
+ * Best deals: products with a discount of at least DEALS_MIN_DISCOUNT %.
+ * DummyJSON cannot filter by discount, so two small requests are combined:
+ *   1. ?select=discountPercentage — only ids and discounts, to count the deals;
+ *   2. one page of 12 products sorted by discount, highest first.
+ * Because the page is sorted, the deals are always the first `total` products.
+ */
+async function fetchBestDeals(page: number, signal?: AbortSignal): Promise<ProductsResponse> {
+  const skip = (page - 1) * PAGE_SIZE;
+  const [summary, pageData] = await Promise.all([
+    api.get("/products?limit=0&select=discountPercentage", isDiscountSummary, { signal }),
+    api.get(`/products?limit=${PAGE_SIZE}&skip=${skip}&sortBy=discountPercentage&order=desc`, isProductsResponse, { signal }),
+  ]);
+  const total = summary.products.filter((item) => item.discountPercentage >= DEALS_MIN_DISCOUNT).length;
+  return {
+    products: pageData.products.filter((product) => (product.discountPercentage ?? 0) >= DEALS_MIN_DISCOUNT),
+    total,
+    skip,
+    limit: PAGE_SIZE,
+  };
 }
 
 /** Products from one category, used for "related products". */

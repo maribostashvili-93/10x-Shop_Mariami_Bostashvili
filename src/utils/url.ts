@@ -1,5 +1,8 @@
 export const PAGE_SIZE = 12;
 
+/** "Best deals" lists products with at least this discount. Every product keeps its own badge. */
+export const DEALS_MIN_DISCOUNT = 15;
+
 export const SORT_OPTIONS = [
   { value: "", label: "Default" },
   { value: "price-asc", label: "Price: low to high" },
@@ -16,6 +19,8 @@ export type CatalogParams = {
   category: string;
   sort: SortOption;
   page: number;
+  /** ?deals=1 — only products with a discount of DEALS_MIN_DISCOUNT % or more. */
+  deals: boolean;
 };
 
 function isSortOption(value: string): value is SortOption {
@@ -25,21 +30,25 @@ function isSortOption(value: string): value is SortOption {
 export function parseCatalogParams(params: URLSearchParams): CatalogParams {
   const sort = params.get("sort") ?? "";
   const page = Number(params.get("page") ?? "1");
+  const deals = params.get("deals") === "1";
   return {
-    q: (params.get("q") ?? "").trim(),
+    // Best deals is its own list (sorted by discount), so search, category and sort do not apply.
+    q: deals ? "" : (params.get("q") ?? "").trim(),
     // Search and category are mutually exclusive (DummyJSON cannot combine them).
-    category: params.get("q") ? "" : params.get("category") ?? "",
-    sort: isSortOption(sort) ? sort : "",
+    category: deals || params.get("q") ? "" : params.get("category") ?? "",
+    sort: !deals && isSortOption(sort) ? sort : "",
     page: Number.isInteger(page) && page > 0 ? page : 1,
+    deals,
   };
 }
 
 /** Builds the catalog URL, leaving out empty values and page 1. */
 export function buildCatalogUrl(params: Partial<CatalogParams>): string {
   const search = new URLSearchParams();
-  if (params.q) search.set("q", params.q);
+  if (params.deals) search.set("deals", "1");
+  else if (params.q) search.set("q", params.q);
   else if (params.category) search.set("category", params.category);
-  if (params.sort) search.set("sort", params.sort);
+  if (params.sort && !params.deals) search.set("sort", params.sort);
   if (params.page && params.page > 1) search.set("page", String(params.page));
   const query = search.toString();
   return query ? `/products?${query}` : "/products";

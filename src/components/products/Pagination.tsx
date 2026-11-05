@@ -10,7 +10,11 @@ const base = "flex min-h-11 min-w-11 items-center justify-center rounded-lg px-3
 function pageNumbers(page: number, totalPages: number): (number | "gap")[] {
   const pages = new Set([1, totalPages, page - 1, page, page + 1].filter((value) => value >= 1 && value <= totalPages));
   const sorted = [...pages].sort((a, b) => a - b);
-  return sorted.flatMap((value, index) => (index > 0 && value - sorted[index - 1] > 1 ? ["gap" as const, value] : [value]));
+  return sorted.flatMap((value, index): (number | "gap")[] => {
+    const gap = index > 0 ? value - sorted[index - 1] : 1;
+    if (gap === 2) return [value - 1, value]; // a single hidden page is shown instead of "…"
+    return gap > 2 ? ["gap", value] : [value];
+  });
 }
 
 /** ‹ 1 2 3 … N › — the current page is highlighted; ‹ and › are disabled at the edges. */

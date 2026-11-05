@@ -6,7 +6,7 @@ import type { ProductsResponse } from "../types/product";
 import ProductGrid from "../components/products/ProductGrid";
 import Pagination from "../components/products/Pagination";
 import CatalogSearchBar from "../components/products/CatalogSearchBar";
-import { PAGE_SIZE, buildCatalogUrl, parseCatalogParams } from "../utils/url";
+import { DEALS_MIN_DISCOUNT, PAGE_SIZE, buildCatalogUrl, parseCatalogParams } from "../utils/url";
 
 const gridClass = "grid grid-cols-1 gap-4 min-[481px]:grid-cols-2 md:grid-cols-3 lg:grid-cols-4";
 
@@ -63,11 +63,30 @@ function CatalogPage() {
       <div className="mb-4 flex flex-wrap items-end justify-between gap-2">
         <h1 id="catalog-heading" className="text-2xl font-semibold text-slate-900 sm:text-3xl">Catalog</h1>
         <p aria-live="polite" className="text-sm text-slate-600">
-          {data ? `${data.total} ${data.total === 1 ? "product" : "products"}${params.q ? ` for “${params.q}”` : ""}` : "Loading products..."}
+          {data
+            ? `${data.total} ${data.total === 1 ? "product" : "products"}${params.deals ? ` with ${DEALS_MIN_DISCOUNT}% off or more` : params.q ? ` for “${params.q}”` : ""}`
+            : "Loading products..."}
         </p>
       </div>
 
       <CatalogSearchBar params={params} live />
+
+      {/* Every product keeps its own discount badge; Best deals only lists the biggest ones. */}
+      <nav aria-label="Catalog views" className="-mt-3 mb-6 flex flex-wrap gap-2">
+        {[
+          { to: "/products", label: "All products", active: !params.deals },
+          { to: buildCatalogUrl({ deals: true }), label: `Best deals · ${DEALS_MIN_DISCOUNT}%+ off`, active: params.deals },
+        ].map((view) => (
+          <Link
+            key={view.label}
+            to={view.to}
+            aria-current={view.active ? "page" : undefined}
+            className={`inline-flex min-h-11 items-center rounded-full border px-4 text-sm font-semibold transition focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-violet-700 ${view.active ? "border-violet-700 bg-violet-700 text-white" : "border-violet-200 bg-white text-violet-800 hover:bg-violet-50"}`}
+          >
+            {view.label}
+          </Link>
+        ))}
+      </nav>
 
       {state.status === "loading" && (
         <div role="status" aria-label="Loading products" className={gridClass}>
