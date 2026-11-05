@@ -21,7 +21,7 @@ export default function HeroCarousel() {
     setShown((current) => (current.has(index) ? current : new Set(current).add(index)));
   }
   return (
-    <section aria-label="Featured collections" aria-roledescription="carousel" className="relative isolate overflow-hidden rounded-3xl bg-violet-100">
+    <section aria-label="Featured collections" aria-roledescription="carousel" className="keep-light relative isolate overflow-hidden rounded-3xl bg-violet-100">
       <div className="relative min-h-[420px] sm:min-h-[460px]">
         {slides.map((slide, index) => <article key={slide.category} aria-hidden={active !== index} aria-label={`${index + 1} of ${slides.length}: ${slide.label}`} aria-roledescription="slide" inert={active !== index} className={`absolute inset-0 transition-opacity duration-700 motion-reduce:transition-none ${active === index ? "z-10 opacity-100" : "pointer-events-none opacity-0"}`}>
           {shown.has(index) && <img src={slide.image} alt="" width={1200} height={600} fetchPriority={index === 0 ? "high" : "auto"} decoding={index === 0 ? "sync" : "async"} className="absolute inset-0 h-full w-full object-cover object-[65%_center]" />}

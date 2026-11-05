@@ -13,7 +13,7 @@ const slides = [
 export default function CollectionBanner() {
   const [active, setActive] = useState(0);
   return (
-    <div role="region" aria-label="Accessory collections" aria-roledescription="carousel" className="relative isolate overflow-hidden rounded-2xl bg-violet-950">
+    <div role="region" aria-label="Accessory collections" aria-roledescription="carousel" className="keep-light relative isolate overflow-hidden rounded-2xl bg-violet-950">
       <div className="relative min-h-80 sm:min-h-72">
         {slides.map((slide, index) => <article key={slide.image} inert={index !== active} aria-hidden={index !== active} aria-roledescription="slide" aria-label={`${index + 1} of ${slides.length}: ${slide.label}`} className={`absolute inset-0 transition-opacity duration-700 motion-reduce:transition-none ${active === index ? "z-10 opacity-100" : "pointer-events-none opacity-0"}`}>
           <img src={slide.image} alt={slide.alt} loading="lazy" className="absolute inset-0 h-full w-full object-cover object-center" />

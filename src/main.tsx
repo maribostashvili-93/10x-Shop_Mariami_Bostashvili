@@ -7,12 +7,16 @@ import { AuthProvider } from './context/AuthContext'
 import { CartProvider } from './context/CartProvider'
 import { WishlistProvider } from './context/WishlistProvider'
 import { OrdersProvider } from './context/OrdersProvider'
+import { ToastProvider } from './context/ToastProvider'
+import { ThemeProvider } from './context/ThemeProvider'
 import ErrorBoundary from './components/ui/ErrorBoundary'
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
     <ErrorBoundary>
       <BrowserRouter>
+        <ThemeProvider>
+        <ToastProvider>
         <AuthProvider>
           <CartProvider>
             <OrdersProvider>
@@ -22,6 +26,8 @@ createRoot(document.getElementById('root')!).render(
             </OrdersProvider>
           </CartProvider>
         </AuthProvider>
+        </ToastProvider>
+        </ThemeProvider>
       </BrowserRouter>
     </ErrorBoundary>
    
