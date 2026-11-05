@@ -187,7 +187,7 @@ function ProfileOverview({ onEdit }: ProfileOverviewProps) {
                   <li key={order.id} className="relative">
                     <span aria-hidden="true" className="absolute top-5 -left-[33px] size-4 rounded-full border-4 border-white bg-violet-600" />
                     <Link to={`/orders/${order.id}`} className="flex items-center gap-4 rounded-2xl bg-violet-50/70 p-4 transition hover:bg-violet-100 focus-visible:outline-2 focus-visible:outline-violet-700">
-                      {firstItem && <img src={firstItem.product.thumbnail} alt="" width={56} height={56} loading="lazy" className="size-14 shrink-0 rounded-xl bg-white object-contain" />}
+                      {firstItem && <img src={firstItem.product.thumbnail} alt="" width={56} height={56} loading="lazy" className="product-stage size-14 shrink-0 rounded-xl bg-white object-contain" />}
                       <div className="min-w-0 flex-1">
                         <p className="font-semibold text-slate-900">Order #{order.number}</p>
                         <p className="truncate text-sm text-slate-600">{formatDate(order.placedAt)} · {order.itemCount} {order.itemCount === 1 ? "item" : "items"} · {formatPrice(order.total)}</p>

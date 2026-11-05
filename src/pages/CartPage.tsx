@@ -62,7 +62,7 @@ function CartPage() {
               className="rounded-2xl border border-slate-200 bg-white p-4"
             >
               <div className="flex flex-col gap-4 sm:flex-row">
-                <div className="size-28 shrink-0 rounded-xl bg-slate-100">
+                <div className="product-stage size-28 shrink-0 rounded-xl bg-slate-100">
                   <img
                     src={product.thumbnail}
                     alt={product.title}

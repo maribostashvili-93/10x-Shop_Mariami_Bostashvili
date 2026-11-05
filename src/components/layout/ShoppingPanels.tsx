@@ -58,7 +58,7 @@ export function ShoppingPanels() {
                 const full = cart.quantityOf(product.id) >= product.stock;
                 return (
                   <li key={product.id} className="flex gap-3 border-b border-slate-100 pb-5">
-                    <Link to={`/products/${product.id}`} onClick={close} className="shrink-0"><img src={product.thumbnail} alt={product.title} className="size-20 rounded-xl bg-slate-100 object-contain"/></Link>
+                    <Link to={`/products/${product.id}`} onClick={close} className="shrink-0"><img src={product.thumbnail} alt={product.title} className="product-stage size-20 rounded-xl bg-slate-100 object-contain"/></Link>
                     <div className="min-w-0 flex-1">
                       <Link to={`/products/${product.id}`} onClick={close} className="text-sm font-semibold hover:text-violet-800">{product.title}</Link>
                       <p className="mt-2 font-semibold">{formatPrice(getFinalPrice(product))}</p>

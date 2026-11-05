@@ -109,7 +109,7 @@ function OrderDetailsPage() {
                 <tr key={Cart.lineId({ product, options })}>
                   <td className="py-3">
                     <div className="flex items-center gap-3">
-                      <span className="size-12 shrink-0 rounded-lg bg-slate-100"><img src={product.thumbnail} alt="" style={{ filter: colorFilter(options?.color) }} width={48} height={48} loading="lazy" className="size-12 object-contain" /></span>
+                      <span className="product-stage size-12 shrink-0 rounded-lg bg-slate-100"><img src={product.thumbnail} alt="" style={{ filter: colorFilter(options?.color) }} width={48} height={48} loading="lazy" className="size-12 object-contain" /></span>
                       <div>
                         <Link to={`/products/${product.id}`} className="font-semibold text-slate-900 hover:text-brand-800 focus-visible:outline-2 focus-visible:outline-brand-700">{product.title}</Link>
                         {options && <p className="text-xs text-slate-600">{describeOptions(options)}</p>}

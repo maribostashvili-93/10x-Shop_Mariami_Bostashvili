@@ -403,3 +403,72 @@
   --color-brand-900: oklch(38% 0.189 293.745);
   --color-brand-950: oklch(28.3% 0.141 291.089);
 }
+
+/* ---------------------------------------------------------------------------
+   Bold dark theme: near-black surfaces, neon violet accents with a glow and
+   gradient page titles. It builds on the mirrored scales above; contrast of
+   text on the new colours stays at or above 4.5:1.
+   ------------------------------------------------------------------------- */
+[data-theme="dark"] {
+  --color-white: #1a1526;
+  --color-violet-700: #c084fc;
+  --color-violet-800: #d8b4fe;
+  --color-brand-700: #c084fc;
+  --color-brand-800: #d8b4fe;
+  --color-red-900: #c084fc;
+  --color-red-950: #d8b4fe;
+}
+
+[data-theme="dark"] .app-shell {
+  background:
+    radial-gradient(60rem 40rem at 5% -10%, rgb(168 85 247 / 0.22), transparent 60%),
+    radial-gradient(50rem 36rem at 105% 5%, rgb(236 72 153 / 0.14), transparent 60%),
+    #07060b;
+  background-attachment: fixed;
+}
+
+[data-theme="dark"] header.sticky {
+  background: rgb(7 6 11 / 0.94);
+  border-bottom-color: rgb(192 132 252 / 0.25);
+}
+
+[data-theme="dark"] .product-card {
+  background: linear-gradient(180deg, #2a2140 0%, #1d172b 100%);
+  border: 1px solid rgb(192 132 252 / 0.22);
+  box-shadow: none;
+}
+
+[data-theme="dark"] .product-card:hover,
+[data-theme="dark"] .product-card:focus-within {
+  border-color: rgb(192 132 252 / 0.55);
+  box-shadow: 0 0 0 1px rgb(192 132 252 / 0.25), 0 18px 50px -12px rgb(168 85 247 / 0.45);
+}
+
+[data-theme="dark"] :is(.bg-violet-700, .bg-brand-700):not(:disabled) {
+  box-shadow: 0 0 24px -6px rgb(192 132 252 / 0.75);
+}
+
+[data-theme="dark"] main h1:not(.keep-light *) {
+  background: linear-gradient(90deg, #ffffff 0%, #e9d5ff 45%, #c084fc 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+[data-theme="dark"] ::selection {
+  background: #c084fc;
+  color: #0e0b16;
+}
+
+/* Product photos sit on a light "stage" in dark mode, so dark products such as
+   phones and watches stay visible against the near-black page. */
+[data-theme="dark"] .product-stage {
+  background: radial-gradient(120% 95% at 50% 30%, #f7f4fc 0%, #e6def3 55%, #cfc2e8 100%) !important;
+  border-color: rgb(192 132 252 / 0.3);
+}
+
+/* The light-theme brand colours inside .keep-light panels keep their glow off. */
+[data-theme="dark"] .keep-light :is(.bg-violet-700, .bg-brand-700),
+[data-theme="dark"] .keep-light:is(.bg-violet-700, .bg-brand-700) {
+  box-shadow: none;
+}

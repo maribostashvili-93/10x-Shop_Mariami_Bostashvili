@@ -41,7 +41,7 @@ export default function CollectionShowcase() {
           ))}
           {selected?.map((product) => <article key={product.id} className="min-w-0">
             <Link to={`/products/${product.id}`} className="group block rounded-xl focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-violet-700">
-              <div className="flex aspect-[4/5] items-center justify-center overflow-hidden rounded-xl bg-violet-50/70 p-3"><img src={product.thumbnail} alt={product.title} width={240} height={300} loading="lazy" className="h-full w-full object-contain transition-transform motion-safe:group-hover:scale-105" /></div>
+              <div className="flex aspect-[4/5] items-center justify-center overflow-hidden rounded-xl product-stage bg-violet-50/70 p-3"><img src={product.thumbnail} alt={product.title} width={240} height={300} loading="lazy" className="h-full w-full object-contain transition-transform motion-safe:group-hover:scale-105" /></div>
               <p className="mt-3 text-[10px] font-medium tracking-wide text-violet-700 uppercase">{product.category.replaceAll("-", " ")}</p>
               <h3 className="mt-1 line-clamp-2 min-h-10 text-xs font-semibold leading-5 text-slate-900">{product.title}</h3>
               <p className="mt-2 text-sm font-semibold text-slate-900">{formatPrice(getFinalPrice(product))}</p>
