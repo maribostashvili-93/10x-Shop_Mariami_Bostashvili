@@ -4,7 +4,8 @@
       "C:\\Program Files\\nodejs\\node.exe",
       "C:\\samushao\\ფრონტ დველოპერი\\ფინალური პროექტი\\10x-Shop\\node_modules\\@playwright\\test\\cli.js",
       "test",
-      "--config=playwright.compat.config.ts"
+      "-c",
+      "playwright.compat.config.ts"
     ],
     "configFile": "C:\\samushao\\ფრონტ დველოპერი\\ფინალური პროექტი\\10x-Shop\\playwright.compat.config.ts",
     "rootDir": "C:/samushao/ფრონტ დველოპერი/ფინალური პროექტი/10x-Shop/tests/compat",
@@ -381,12 +382,12 @@
                   "workerIndex": 0,
                   "parallelIndex": 0,
                   "status": "passed",
-                  "duration": 3684,
+                  "duration": 1937,
                   "errors": [],
                   "stdout": [],
                   "stderr": [],
                   "retry": 0,
-                  "startTime": "2026-11-05T12:53:51.637Z",
+                  "startTime": "2026-11-05T19:04:08.665Z",
                   "annotations": [],
                   "attachments": [
                     {
@@ -402,7 +403,7 @@
           ],
           "id": "6d8778aa2e7a24d8a2df-29f14893e30b17b8c990",
           "file": "compat.spec.ts",
-          "line": 33,
+          "line": 35,
           "column": 3
         },
         {
@@ -421,12 +422,12 @@
                   "workerIndex": 0,
                   "parallelIndex": 0,
                   "status": "passed",
-                  "duration": 2014,
+                  "duration": 1657,
                   "errors": [],
                   "stdout": [],
                   "stderr": [],
                   "retry": 0,
-                  "startTime": "2026-11-05T12:53:55.559Z",
+                  "startTime": "2026-11-05T19:04:10.746Z",
                   "annotations": [],
                   "attachments": [
                     {
@@ -442,7 +443,7 @@
           ],
           "id": "6d8778aa2e7a24d8a2df-743a1d4468e97c1b029b",
           "file": "compat.spec.ts",
-          "line": 33,
+          "line": 35,
           "column": 3
         },
         {
@@ -461,12 +462,12 @@
                   "workerIndex": 0,
                   "parallelIndex": 0,
                   "status": "passed",
-                  "duration": 2508,
+                  "duration": 1120,
                   "errors": [],
                   "stdout": [],
                   "stderr": [],
                   "retry": 0,
-                  "startTime": "2026-11-05T12:53:57.596Z",
+                  "startTime": "2026-11-05T19:04:12.419Z",
                   "annotations": [],
                   "attachments": [
                     {
@@ -482,7 +483,7 @@
           ],
           "id": "6d8778aa2e7a24d8a2df-1eb9a15d80a75297fab8",
           "file": "compat.spec.ts",
-          "line": 33,
+          "line": 35,
           "column": 3
         },
         {
@@ -501,12 +502,12 @@
                   "workerIndex": 0,
                   "parallelIndex": 0,
                   "status": "passed",
-                  "duration": 1704,
+                  "duration": 1496,
                   "errors": [],
                   "stdout": [],
                   "stderr": [],
                   "retry": 0,
-                  "startTime": "2026-11-05T12:54:00.125Z",
+                  "startTime": "2026-11-05T19:04:13.561Z",
                   "annotations": [],
                   "attachments": [
                     {
@@ -522,7 +523,7 @@
           ],
           "id": "6d8778aa2e7a24d8a2df-dee169b42b54bfcf7457",
           "file": "compat.spec.ts",
-          "line": 33,
+          "line": 35,
           "column": 3
         },
         {
@@ -541,12 +542,12 @@
                   "workerIndex": 0,
                   "parallelIndex": 0,
                   "status": "passed",
-                  "duration": 1913,
+                  "duration": 1388,
                   "errors": [],
                   "stdout": [],
                   "stderr": [],
                   "retry": 0,
-                  "startTime": "2026-11-05T12:54:01.849Z",
+                  "startTime": "2026-11-05T19:04:15.075Z",
                   "annotations": [],
                   "attachments": [
                     {
@@ -562,7 +563,7 @@
           ],
           "id": "6d8778aa2e7a24d8a2df-042d36da4af84d308c46",
           "file": "compat.spec.ts",
-          "line": 33,
+          "line": 35,
           "column": 3
         },
         {
@@ -581,12 +582,12 @@
                   "workerIndex": 0,
                   "parallelIndex": 0,
                   "status": "passed",
-                  "duration": 5695,
+                  "duration": 5699,
                   "errors": [],
                   "stdout": [],
                   "stderr": [],
                   "retry": 0,
-                  "startTime": "2026-11-05T12:54:03.793Z",
+                  "startTime": "2026-11-05T19:04:16.479Z",
                   "annotations": [],
                   "attachments": [
                     {
@@ -602,7 +603,7 @@
           ],
           "id": "6d8778aa2e7a24d8a2df-67a2604ddf5add5a5f78",
           "file": "compat.spec.ts",
-          "line": 44,
+          "line": 46,
           "column": 1
         },
         {
@@ -621,12 +622,12 @@
                   "workerIndex": 2,
                   "parallelIndex": 1,
                   "status": "passed",
-                  "duration": 4298,
+                  "duration": 3809,
                   "errors": [],
                   "stdout": [],
                   "stderr": [],
                   "retry": 0,
-                  "startTime": "2026-11-05T12:54:00.145Z",
+                  "startTime": "2026-11-05T19:04:11.487Z",
                   "annotations": [],
                   "attachments": [
                     {
@@ -642,7 +643,7 @@
           ],
           "id": "6d8778aa2e7a24d8a2df-a581aa0bd39496a0026a",
           "file": "compat.spec.ts",
-          "line": 33,
+          "line": 35,
           "column": 3
         },
         {
@@ -661,12 +662,12 @@
                   "workerIndex": 2,
                   "parallelIndex": 1,
                   "status": "passed",
-                  "duration": 5458,
+                  "duration": 3920,
                   "errors": [],
                   "stdout": [],
                   "stderr": [],
                   "retry": 0,
-                  "startTime": "2026-11-05T12:54:04.642Z",
+                  "startTime": "2026-11-05T19:04:15.446Z",
                   "annotations": [],
                   "attachments": [
                     {
@@ -682,7 +683,7 @@
           ],
           "id": "6d8778aa2e7a24d8a2df-fb51d4057d2657a713a2",
           "file": "compat.spec.ts",
-          "line": 33,
+          "line": 35,
           "column": 3
         },
         {
@@ -701,12 +702,12 @@
                   "workerIndex": 2,
                   "parallelIndex": 1,
                   "status": "passed",
-                  "duration": 2214,
+                  "duration": 1520,
                   "errors": [],
                   "stdout": [],
                   "stderr": [],
                   "retry": 0,
-                  "startTime": "2026-11-05T12:54:10.118Z",
+                  "startTime": "2026-11-05T19:04:19.383Z",
                   "annotations": [],
                   "attachments": [
                     {
@@ -722,7 +723,7 @@
           ],
           "id": "6d8778aa2e7a24d8a2df-f800760e16a14cde1170",
           "file": "compat.spec.ts",
-          "line": 33,
+          "line": 35,
           "column": 3
         },
         {
@@ -741,12 +742,12 @@
                   "workerIndex": 2,
                   "parallelIndex": 1,
                   "status": "passed",
-                  "duration": 1916,
+                  "duration": 1887,
                   "errors": [],
                   "stdout": [],
                   "stderr": [],
                   "retry": 0,
-                  "startTime": "2026-11-05T12:54:12.352Z",
+                  "startTime": "2026-11-05T19:04:20.921Z",
                   "annotations": [],
                   "attachments": [
                     {
@@ -762,7 +763,7 @@
           ],
           "id": "6d8778aa2e7a24d8a2df-71cac9530e7970daabde",
           "file": "compat.spec.ts",
-          "line": 33,
+          "line": 35,
           "column": 3
         },
         {
@@ -781,12 +782,12 @@
                   "workerIndex": 2,
                   "parallelIndex": 1,
                   "status": "passed",
-                  "duration": 1954,
+                  "duration": 1622,
                   "errors": [],
                   "stdout": [],
                   "stderr": [],
                   "retry": 0,
-                  "startTime": "2026-11-05T12:54:14.287Z",
+                  "startTime": "2026-11-05T19:04:22.826Z",
                   "annotations": [],
                   "attachments": [
                     {
@@ -802,7 +803,7 @@
           ],
           "id": "6d8778aa2e7a24d8a2df-2b3073e3fb7c6131dbd4",
           "file": "compat.spec.ts",
-          "line": 33,
+          "line": 35,
           "column": 3
         },
         {
@@ -821,12 +822,12 @@
                   "workerIndex": 2,
                   "parallelIndex": 1,
                   "status": "passed",
-                  "duration": 5840,
+                  "duration": 7624,
                   "errors": [],
                   "stdout": [],
                   "stderr": [],
                   "retry": 0,
-                  "startTime": "2026-11-05T12:54:16.259Z",
+                  "startTime": "2026-11-05T19:04:24.469Z",
                   "annotations": [],
                   "attachments": [
                     {
@@ -842,7 +843,7 @@
           ],
           "id": "6d8778aa2e7a24d8a2df-bdd4892b5f91cfbb2ca4",
           "file": "compat.spec.ts",
-          "line": 44,
+          "line": 46,
           "column": 1
         },
         {
@@ -861,12 +862,12 @@
                   "workerIndex": 4,
                   "parallelIndex": 0,
                   "status": "passed",
-                  "duration": 10253,
+                  "duration": 4028,
                   "errors": [],
                   "stdout": [],
                   "stderr": [],
                   "retry": 0,
-                  "startTime": "2026-11-05T12:54:21.761Z",
+                  "startTime": "2026-11-05T19:04:27.399Z",
                   "annotations": [],
                   "attachments": [
                     {
@@ -882,7 +883,7 @@
           ],
           "id": "6d8778aa2e7a24d8a2df-6ad94503a34047a3fe4c",
           "file": "compat.spec.ts",
-          "line": 33,
+          "line": 35,
           "column": 3
         },
         {
@@ -901,12 +902,12 @@
                   "workerIndex": 4,
                   "parallelIndex": 0,
                   "status": "passed",
-                  "duration": 3508,
+                  "duration": 2851,
                   "errors": [],
                   "stdout": [],
                   "stderr": [],
                   "retry": 0,
-                  "startTime": "2026-11-05T12:54:33.595Z",
+                  "startTime": "2026-11-05T19:04:32.037Z",
                   "annotations": [],
                   "attachments": [
                     {
@@ -922,7 +923,7 @@
           ],
           "id": "6d8778aa2e7a24d8a2df-889125690e6e9c825fbc",
           "file": "compat.spec.ts",
-          "line": 33,
+          "line": 35,
           "column": 3
         },
         {
@@ -941,12 +942,12 @@
                   "workerIndex": 4,
                   "parallelIndex": 0,
                   "status": "passed",
-                  "duration": 2668,
+                  "duration": 2646,
                   "errors": [],
                   "stdout": [],
                   "stderr": [],
                   "retry": 0,
-                  "startTime": "2026-11-05T12:54:37.135Z",
+                  "startTime": "2026-11-05T19:04:34.909Z",
                   "annotations": [],
                   "attachments": [
                     {
@@ -962,7 +963,7 @@
           ],
           "id": "6d8778aa2e7a24d8a2df-fa8734ec0b1a20f6ec33",
           "file": "compat.spec.ts",
-          "line": 33,
+          "line": 35,
           "column": 3
         },
         {
@@ -981,12 +982,12 @@
                   "workerIndex": 4,
                   "parallelIndex": 0,
                   "status": "passed",
-                  "duration": 2368,
+                  "duration": 2974,
                   "errors": [],
                   "stdout": [],
                   "stderr": [],
                   "retry": 0,
-                  "startTime": "2026-11-05T12:54:39.834Z",
+                  "startTime": "2026-11-05T19:04:37.574Z",
                   "annotations": [],
                   "attachments": [
                     {
@@ -1002,7 +1003,7 @@
           ],
           "id": "6d8778aa2e7a24d8a2df-ea7fccc33cac7c670c72",
           "file": "compat.spec.ts",
-          "line": 33,
+          "line": 35,
           "column": 3
         },
         {
@@ -1021,12 +1022,12 @@
                   "workerIndex": 4,
                   "parallelIndex": 0,
                   "status": "passed",
-                  "duration": 2922,
+                  "duration": 2830,
                   "errors": [],
                   "stdout": [],
                   "stderr": [],
                   "retry": 0,
-                  "startTime": "2026-11-05T12:54:42.225Z",
+                  "startTime": "2026-11-05T19:04:40.566Z",
                   "annotations": [],
                   "attachments": [
                     {
@@ -1042,7 +1043,7 @@
           ],
           "id": "6d8778aa2e7a24d8a2df-4432ef03c17de45f5324",
           "file": "compat.spec.ts",
-          "line": 33,
+          "line": 35,
           "column": 3
         },
         {
@@ -1061,12 +1062,12 @@
                   "workerIndex": 4,
                   "parallelIndex": 0,
                   "status": "passed",
-                  "duration": 6749,
+                  "duration": 9301,
                   "errors": [],
                   "stdout": [],
                   "stderr": [],
                   "retry": 0,
-                  "startTime": "2026-11-05T12:54:45.175Z",
+                  "startTime": "2026-11-05T19:04:43.422Z",
                   "annotations": [],
                   "attachments": [
                     {
@@ -1082,7 +1083,7 @@
           ],
           "id": "6d8778aa2e7a24d8a2df-380a698c99facf549265",
           "file": "compat.spec.ts",
-          "line": 44,
+          "line": 46,
           "column": 1
         },
         {
@@ -1101,12 +1102,12 @@
                   "workerIndex": 6,
                   "parallelIndex": 1,
                   "status": "passed",
-                  "duration": 11450,
+                  "duration": 5344,
                   "errors": [],
                   "stdout": [],
                   "stderr": [],
                   "retry": 0,
-                  "startTime": "2026-11-05T12:54:42.596Z",
+                  "startTime": "2026-11-05T19:04:41.596Z",
                   "annotations": [],
                   "attachments": [
                     {
@@ -1122,7 +1123,7 @@
           ],
           "id": "6d8778aa2e7a24d8a2df-c4d5ffee12f7b172d7f5",
           "file": "compat.spec.ts",
-          "line": 33,
+          "line": 35,
           "column": 3
         },
         {
@@ -1141,12 +1142,12 @@
                   "workerIndex": 6,
                   "parallelIndex": 1,
                   "status": "passed",
-                  "duration": 4263,
+                  "duration": 3550,
                   "errors": [],
                   "stdout": [],
                   "stderr": [],
                   "retry": 0,
-                  "startTime": "2026-11-05T12:54:55.086Z",
+                  "startTime": "2026-11-05T19:04:47.679Z",
                   "annotations": [],
                   "attachments": [
                     {
@@ -1162,7 +1163,7 @@
           ],
           "id": "6d8778aa2e7a24d8a2df-a116baaf5599040fdba0",
           "file": "compat.spec.ts",
-          "line": 33,
+          "line": 35,
           "column": 3
         },
         {
@@ -1181,12 +1182,12 @@
                   "workerIndex": 6,
                   "parallelIndex": 1,
                   "status": "passed",
-                  "duration": 2639,
+                  "duration": 2859,
                   "errors": [],
                   "stdout": [],
                   "stderr": [],
                   "retry": 0,
-                  "startTime": "2026-11-05T12:54:59.370Z",
+                  "startTime": "2026-11-05T19:04:51.250Z",
                   "annotations": [],
                   "attachments": [
                     {
@@ -1202,7 +1203,7 @@
           ],
           "id": "6d8778aa2e7a24d8a2df-1363c53a5a6f89db99dc",
           "file": "compat.spec.ts",
-          "line": 33,
+          "line": 35,
           "column": 3
         },
         {
@@ -1221,12 +1222,12 @@
                   "workerIndex": 6,
                   "parallelIndex": 1,
                   "status": "passed",
-                  "duration": 2252,
+                  "duration": 2521,
                   "errors": [],
                   "stdout": [],
                   "stderr": [],
                   "retry": 0,
-                  "startTime": "2026-11-05T12:55:02.030Z",
+                  "startTime": "2026-11-05T19:04:54.127Z",
                   "annotations": [],
                   "attachments": [
                     {
@@ -1242,7 +1243,7 @@
           ],
           "id": "6d8778aa2e7a24d8a2df-53cfefbe5db3d821cb60",
           "file": "compat.spec.ts",
-          "line": 33,
+          "line": 35,
           "column": 3
         },
         {
@@ -1261,12 +1262,12 @@
                   "workerIndex": 6,
                   "parallelIndex": 1,
                   "status": "passed",
-                  "duration": 2391,
+                  "duration": 2840,
                   "errors": [],
                   "stdout": [],
                   "stderr": [],
                   "retry": 0,
-                  "startTime": "2026-11-05T12:55:04.299Z",
+                  "startTime": "2026-11-05T19:04:56.668Z",
                   "annotations": [],
                   "attachments": [
                     {
@@ -1282,7 +1283,7 @@
           ],
           "id": "6d8778aa2e7a24d8a2df-dac92d5d3b63636f1e97",
           "file": "compat.spec.ts",
-          "line": 33,
+          "line": 35,
           "column": 3
         },
         {
@@ -1301,12 +1302,12 @@
                   "workerIndex": 6,
                   "parallelIndex": 1,
                   "status": "passed",
-                  "duration": 5486,
+                  "duration": 8842,
                   "errors": [],
                   "stdout": [],
                   "stderr": [],
                   "retry": 0,
-                  "startTime": "2026-11-05T12:55:06.707Z",
+                  "startTime": "2026-11-05T19:04:59.527Z",
                   "annotations": [],
                   "attachments": [
                     {
@@ -1322,7 +1323,7 @@
           ],
           "id": "6d8778aa2e7a24d8a2df-0d971ca9323c524c0992",
           "file": "compat.spec.ts",
-          "line": 44,
+          "line": 46,
           "column": 1
         },
         {
@@ -1341,12 +1342,12 @@
                   "workerIndex": 8,
                   "parallelIndex": 0,
                   "status": "passed",
-                  "duration": 2661,
+                  "duration": 2354,
                   "errors": [],
                   "stdout": [],
                   "stderr": [],
                   "retry": 0,
-                  "startTime": "2026-11-05T12:55:10.703Z",
+                  "startTime": "2026-11-05T19:05:03.033Z",
                   "annotations": [],
                   "attachments": [
                     {
@@ -1362,7 +1363,7 @@
           ],
           "id": "6d8778aa2e7a24d8a2df-c05fb12b545a1063b6e7",
           "file": "compat.spec.ts",
-          "line": 33,
+          "line": 35,
           "column": 3
         },
         {
@@ -1381,12 +1382,12 @@
                   "workerIndex": 8,
                   "parallelIndex": 0,
                   "status": "passed",
-                  "duration": 2956,
+                  "duration": 2332,
                   "errors": [],
                   "stdout": [],
                   "stderr": [],
                   "retry": 0,
-                  "startTime": "2026-11-05T12:55:13.562Z",
+                  "startTime": "2026-11-05T19:05:05.513Z",
                   "annotations": [],
                   "attachments": [
                     {
@@ -1402,7 +1403,7 @@
           ],
           "id": "6d8778aa2e7a24d8a2df-5a829d9d3466269d9ca8",
           "file": "compat.spec.ts",
-          "line": 33,
+          "line": 35,
           "column": 3
         },
         {
@@ -1421,12 +1422,12 @@
                   "workerIndex": 8,
                   "parallelIndex": 0,
                   "status": "passed",
-                  "duration": 2139,
+                  "duration": 1659,
                   "errors": [],
                   "stdout": [],
                   "stderr": [],
                   "retry": 0,
-                  "startTime": "2026-11-05T12:55:16.537Z",
+                  "startTime": "2026-11-05T19:05:07.866Z",
                   "annotations": [],
                   "attachments": [
                     {
@@ -1442,51 +1443,11 @@
           ],
           "id": "6d8778aa2e7a24d8a2df-14c5dfa17673b6136759",
           "file": "compat.spec.ts",
-          "line": 33,
+          "line": 35,
           "column": 3
         },
         {
           "title": "matrix: login",
-          "ok": true,
-          "tags": [],
-          "tests": [
-            {
-              "timeout": 60000,
-              "annotations": [],
-              "expectedStatus": "passed",
-              "projectId": "webkit-desktop",
-              "projectName": "webkit-desktop",
-              "results": [
-                {
-                  "workerIndex": 8,
-                  "parallelIndex": 0,
-                  "status": "passed",
-                  "duration": 2210,
-                  "errors": [],
-                  "stdout": [],
-                  "stderr": [],
-                  "retry": 0,
-                  "startTime": "2026-11-05T12:55:18.699Z",
-                  "annotations": [],
-                  "attachments": [
-                    {
-                      "name": "axe",
-                      "contentType": "application/json",
-                      "body": "W10="
-                    }
-                  ]
-                }
-              ],
-              "status": "expected"
-            }
-          ],
-          "id": "6d8778aa2e7a24d8a2df-0d0a6561f7fe334f9eaf",
-          "file": "compat.spec.ts",
-          "line": 33,
-          "column": 3
-        },
-        {
-          "title": "matrix: not-found",
           "ok": true,
           "tags": [],
           "tests": [
@@ -1506,7 +1467,47 @@
                   "stdout": [],
                   "stderr": [],
                   "retry": 0,
-                  "startTime": "2026-11-05T12:55:20.928Z",
+                  "startTime": "2026-11-05T19:05:09.543Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "axe",
+                      "contentType": "application/json",
+                      "body": "W10="
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "6d8778aa2e7a24d8a2df-0d0a6561f7fe334f9eaf",
+          "file": "compat.spec.ts",
+          "line": 35,
+          "column": 3
+        },
+        {
+          "title": "matrix: not-found",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 60000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "webkit-desktop",
+              "projectName": "webkit-desktop",
+              "results": [
+                {
+                  "workerIndex": 8,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 1641,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-05T19:05:11.669Z",
                   "annotations": [],
                   "attachments": [
                     {
@@ -1522,7 +1523,7 @@
           ],
           "id": "6d8778aa2e7a24d8a2df-3ae26207a73230ba69ee",
           "file": "compat.spec.ts",
-          "line": 33,
+          "line": 35,
           "column": 3
         },
         {
@@ -1538,7 +1539,7 @@
                   "description": "Playwright WebKit never moves focus to links with Tab or Alt+Tab, even on a bare <a href> page (docs/compat/webkit-keyboard-baseline.json). Check this flow in real Safari with \"Press Tab to highlight each item\" enabled.",
                   "location": {
                     "file": "C:\\samushao\\ფრონტ დველოპერი\\ფინალური პროექტი\\10x-Shop\\tests\\compat\\compat.spec.ts",
-                    "line": 45,
+                    "line": 47,
                     "column": 8
                   }
                 }
@@ -1551,19 +1552,19 @@
                   "workerIndex": 8,
                   "parallelIndex": 0,
                   "status": "skipped",
-                  "duration": 520,
+                  "duration": 347,
                   "errors": [],
                   "stdout": [],
                   "stderr": [],
                   "retry": 0,
-                  "startTime": "2026-11-05T12:55:23.057Z",
+                  "startTime": "2026-11-05T19:05:13.331Z",
                   "annotations": [
                     {
                       "type": "skip",
                       "description": "Playwright WebKit never moves focus to links with Tab or Alt+Tab, even on a bare <a href> page (docs/compat/webkit-keyboard-baseline.json). Check this flow in real Safari with \"Press Tab to highlight each item\" enabled.",
                       "location": {
                         "file": "C:\\samushao\\ფრონტ დველოპერი\\ფინალური პროექტი\\10x-Shop\\tests\\compat\\compat.spec.ts",
-                        "line": 45,
+                        "line": 47,
                         "column": 8
                       }
                     }
@@ -1576,7 +1577,7 @@
           ],
           "id": "6d8778aa2e7a24d8a2df-e2475e02f4e95a53acf1",
           "file": "compat.spec.ts",
-          "line": 44,
+          "line": 46,
           "column": 1
         },
         {
@@ -1595,12 +1596,12 @@
                   "workerIndex": 10,
                   "parallelIndex": 1,
                   "status": "passed",
-                  "duration": 4428,
+                  "duration": 3412,
                   "errors": [],
                   "stdout": [],
                   "stderr": [],
                   "retry": 0,
-                  "startTime": "2026-11-05T12:55:22.568Z",
+                  "startTime": "2026-11-05T19:05:14.188Z",
                   "annotations": [],
                   "attachments": [
                     {
@@ -1616,7 +1617,7 @@
           ],
           "id": "6d8778aa2e7a24d8a2df-c02bc75cc043e3a96c18",
           "file": "compat.spec.ts",
-          "line": 33,
+          "line": 35,
           "column": 3
         },
         {
@@ -1635,12 +1636,12 @@
                   "workerIndex": 10,
                   "parallelIndex": 1,
                   "status": "passed",
-                  "duration": 4503,
+                  "duration": 3225,
                   "errors": [],
                   "stdout": [],
                   "stderr": [],
                   "retry": 0,
-                  "startTime": "2026-11-05T12:55:27.113Z",
+                  "startTime": "2026-11-05T19:05:17.696Z",
                   "annotations": [],
                   "attachments": [
                     {
@@ -1656,7 +1657,7 @@
           ],
           "id": "6d8778aa2e7a24d8a2df-cbd0ffac36cb1914d17f",
           "file": "compat.spec.ts",
-          "line": 33,
+          "line": 35,
           "column": 3
         },
         {
@@ -1675,12 +1676,12 @@
                   "workerIndex": 10,
                   "parallelIndex": 1,
                   "status": "passed",
-                  "duration": 3740,
+                  "duration": 2207,
                   "errors": [],
                   "stdout": [],
                   "stderr": [],
                   "retry": 0,
-                  "startTime": "2026-11-05T12:55:31.636Z",
+                  "startTime": "2026-11-05T19:05:20.944Z",
                   "annotations": [],
                   "attachments": [
                     {
@@ -1696,7 +1697,7 @@
           ],
           "id": "6d8778aa2e7a24d8a2df-4a9b8a39594733c5bcf3",
           "file": "compat.spec.ts",
-          "line": 33,
+          "line": 35,
           "column": 3
         },
         {
@@ -1715,12 +1716,12 @@
                   "workerIndex": 10,
                   "parallelIndex": 1,
                   "status": "passed",
-                  "duration": 2712,
+                  "duration": 2402,
                   "errors": [],
                   "stdout": [],
                   "stderr": [],
                   "retry": 0,
-                  "startTime": "2026-11-05T12:55:35.393Z",
+                  "startTime": "2026-11-05T19:05:23.170Z",
                   "annotations": [],
                   "attachments": [
                     {
@@ -1736,7 +1737,7 @@
           ],
           "id": "6d8778aa2e7a24d8a2df-c288d0f3a6aa3624ebb9",
           "file": "compat.spec.ts",
-          "line": 33,
+          "line": 35,
           "column": 3
         },
         {
@@ -1755,12 +1756,12 @@
                   "workerIndex": 10,
                   "parallelIndex": 1,
                   "status": "passed",
-                  "duration": 2719,
+                  "duration": 2267,
                   "errors": [],
                   "stdout": [],
                   "stderr": [],
                   "retry": 0,
-                  "startTime": "2026-11-05T12:55:38.121Z",
+                  "startTime": "2026-11-05T19:05:25.593Z",
                   "annotations": [],
                   "attachments": [
                     {
@@ -1776,7 +1777,7 @@
           ],
           "id": "6d8778aa2e7a24d8a2df-133f80c43a416c816fbd",
           "file": "compat.spec.ts",
-          "line": 33,
+          "line": 35,
           "column": 3
         },
         {
@@ -1792,7 +1793,7 @@
                   "description": "Playwright WebKit never moves focus to links with Tab or Alt+Tab, even on a bare <a href> page (docs/compat/webkit-keyboard-baseline.json). Check this flow in real Safari with \"Press Tab to highlight each item\" enabled.",
                   "location": {
                     "file": "C:\\samushao\\ფრონტ დველოპერი\\ფინალური პროექტი\\10x-Shop\\tests\\compat\\compat.spec.ts",
-                    "line": 45,
+                    "line": 47,
                     "column": 8
                   }
                 }
@@ -1805,19 +1806,19 @@
                   "workerIndex": 10,
                   "parallelIndex": 1,
                   "status": "skipped",
-                  "duration": 422,
+                  "duration": 343,
                   "errors": [],
                   "stdout": [],
                   "stderr": [],
                   "retry": 0,
-                  "startTime": "2026-11-05T12:55:40.858Z",
+                  "startTime": "2026-11-05T19:05:27.880Z",
                   "annotations": [
                     {
                       "type": "skip",
                       "description": "Playwright WebKit never moves focus to links with Tab or Alt+Tab, even on a bare <a href> page (docs/compat/webkit-keyboard-baseline.json). Check this flow in real Safari with \"Press Tab to highlight each item\" enabled.",
                       "location": {
                         "file": "C:\\samushao\\ფრონტ დველოპერი\\ფინალური პროექტი\\10x-Shop\\tests\\compat\\compat.spec.ts",
-                        "line": 45,
+                        "line": 47,
                         "column": 8
                       }
                     }
@@ -1830,7 +1831,7 @@
           ],
           "id": "6d8778aa2e7a24d8a2df-0d1c24d08b4af81db539",
           "file": "compat.spec.ts",
-          "line": 44,
+          "line": 46,
           "column": 1
         }
       ]
@@ -1842,7 +1843,7 @@
       "line": 0,
       "specs": [
         {
-          "title": "pricing: displayed final price drives price=under-50",
+          "title": "pricing: cards show the discounted price, original price and badge",
           "ok": true,
           "tags": [],
           "tests": [
@@ -1857,12 +1858,12 @@
                   "workerIndex": 1,
                   "parallelIndex": 1,
                   "status": "passed",
-                  "duration": 1976,
+                  "duration": 676,
                   "errors": [],
                   "stdout": [],
                   "stderr": [],
                   "retry": 0,
-                  "startTime": "2026-11-05T12:53:51.485Z",
+                  "startTime": "2026-11-05T19:04:08.552Z",
                   "annotations": [],
                   "attachments": []
                 }
@@ -1870,183 +1871,13 @@
               "status": "expected"
             }
           ],
-          "id": "727e3f52dedb009881fb-028ba3ebe98294d8aefe",
+          "id": "727e3f52dedb009881fb-13a2896cd53d8b8dd47a",
           "file": "pricing.spec.ts",
-          "line": 28,
-          "column": 3
-        },
-        {
-          "title": "pricing: displayed final price drives price=50-100",
-          "ok": true,
-          "tags": [],
-          "tests": [
-            {
-              "timeout": 60000,
-              "annotations": [],
-              "expectedStatus": "passed",
-              "projectId": "chromium-desktop",
-              "projectName": "chromium-desktop",
-              "results": [
-                {
-                  "workerIndex": 1,
-                  "parallelIndex": 1,
-                  "status": "passed",
-                  "duration": 834,
-                  "errors": [],
-                  "stdout": [],
-                  "stderr": [],
-                  "retry": 0,
-                  "startTime": "2026-11-05T12:53:53.754Z",
-                  "annotations": [],
-                  "attachments": []
-                }
-              ],
-              "status": "expected"
-            }
-          ],
-          "id": "727e3f52dedb009881fb-dd3ab25fa2d9f0b308d4",
-          "file": "pricing.spec.ts",
-          "line": 28,
-          "column": 3
-        },
-        {
-          "title": "pricing: displayed final price drives price=over-100",
-          "ok": true,
-          "tags": [],
-          "tests": [
-            {
-              "timeout": 60000,
-              "annotations": [],
-              "expectedStatus": "passed",
-              "projectId": "chromium-desktop",
-              "projectName": "chromium-desktop",
-              "results": [
-                {
-                  "workerIndex": 1,
-                  "parallelIndex": 1,
-                  "status": "passed",
-                  "duration": 894,
-                  "errors": [],
-                  "stdout": [],
-                  "stderr": [],
-                  "retry": 0,
-                  "startTime": "2026-11-05T12:53:54.613Z",
-                  "annotations": [],
-                  "attachments": []
-                }
-              ],
-              "status": "expected"
-            }
-          ],
-          "id": "727e3f52dedb009881fb-d66e463a7cba2e169890",
-          "file": "pricing.spec.ts",
-          "line": 28,
-          "column": 3
-        },
-        {
-          "title": "pricing: displayed final price drives sort=price-asc",
-          "ok": true,
-          "tags": [],
-          "tests": [
-            {
-              "timeout": 60000,
-              "annotations": [],
-              "expectedStatus": "passed",
-              "projectId": "chromium-desktop",
-              "projectName": "chromium-desktop",
-              "results": [
-                {
-                  "workerIndex": 1,
-                  "parallelIndex": 1,
-                  "status": "passed",
-                  "duration": 690,
-                  "errors": [],
-                  "stdout": [],
-                  "stderr": [],
-                  "retry": 0,
-                  "startTime": "2026-11-05T12:53:55.540Z",
-                  "annotations": [],
-                  "attachments": []
-                }
-              ],
-              "status": "expected"
-            }
-          ],
-          "id": "727e3f52dedb009881fb-f1a6428d5213078f3917",
-          "file": "pricing.spec.ts",
-          "line": 28,
-          "column": 3
-        },
-        {
-          "title": "pricing: displayed final price drives sort=price-desc",
-          "ok": true,
-          "tags": [],
-          "tests": [
-            {
-              "timeout": 60000,
-              "annotations": [],
-              "expectedStatus": "passed",
-              "projectId": "chromium-desktop",
-              "projectName": "chromium-desktop",
-              "results": [
-                {
-                  "workerIndex": 1,
-                  "parallelIndex": 1,
-                  "status": "passed",
-                  "duration": 768,
-                  "errors": [],
-                  "stdout": [],
-                  "stderr": [],
-                  "retry": 0,
-                  "startTime": "2026-11-05T12:53:56.253Z",
-                  "annotations": [],
-                  "attachments": []
-                }
-              ],
-              "status": "expected"
-            }
-          ],
-          "id": "727e3f52dedb009881fb-6785f2e36634087650ec",
-          "file": "pricing.spec.ts",
-          "line": 28,
-          "column": 3
-        },
-        {
-          "title": "pricing: filter changes preserve search and sort through browser history",
-          "ok": true,
-          "tags": [],
-          "tests": [
-            {
-              "timeout": 60000,
-              "annotations": [],
-              "expectedStatus": "passed",
-              "projectId": "chromium-desktop",
-              "projectName": "chromium-desktop",
-              "results": [
-                {
-                  "workerIndex": 1,
-                  "parallelIndex": 1,
-                  "status": "passed",
-                  "duration": 776,
-                  "errors": [],
-                  "stdout": [],
-                  "stderr": [],
-                  "retry": 0,
-                  "startTime": "2026-11-05T12:53:57.038Z",
-                  "annotations": [],
-                  "attachments": []
-                }
-              ],
-              "status": "expected"
-            }
-          ],
-          "id": "727e3f52dedb009881fb-359f547a85671401fa7c",
-          "file": "pricing.spec.ts",
-          "line": 40,
+          "line": 27,
           "column": 1
         },
         {
-          "title": "pricing: displayed final price drives price=under-50",
+          "title": "pricing: sorting is requested from the API and kept in the URL history",
           "ok": true,
           "tags": [],
           "tests": [
@@ -2054,19 +1885,19 @@
               "timeout": 60000,
               "annotations": [],
               "expectedStatus": "passed",
-              "projectId": "chromium-mobile",
-              "projectName": "chromium-mobile",
+              "projectId": "chromium-desktop",
+              "projectName": "chromium-desktop",
               "results": [
                 {
-                  "workerIndex": 3,
-                  "parallelIndex": 0,
+                  "workerIndex": 1,
+                  "parallelIndex": 1,
                   "status": "passed",
-                  "duration": 1722,
+                  "duration": 483,
                   "errors": [],
                   "stdout": [],
                   "stderr": [],
                   "retry": 0,
-                  "startTime": "2026-11-05T12:54:10.605Z",
+                  "startTime": "2026-11-05T19:04:09.390Z",
                   "annotations": [],
                   "attachments": []
                 }
@@ -2074,183 +1905,13 @@
               "status": "expected"
             }
           ],
-          "id": "727e3f52dedb009881fb-bb00510287d495643ee4",
+          "id": "727e3f52dedb009881fb-b4c8307a913d3a96fa56",
           "file": "pricing.spec.ts",
-          "line": 28,
-          "column": 3
-        },
-        {
-          "title": "pricing: displayed final price drives price=50-100",
-          "ok": true,
-          "tags": [],
-          "tests": [
-            {
-              "timeout": 60000,
-              "annotations": [],
-              "expectedStatus": "passed",
-              "projectId": "chromium-mobile",
-              "projectName": "chromium-mobile",
-              "results": [
-                {
-                  "workerIndex": 3,
-                  "parallelIndex": 0,
-                  "status": "passed",
-                  "duration": 1433,
-                  "errors": [],
-                  "stdout": [],
-                  "stderr": [],
-                  "retry": 0,
-                  "startTime": "2026-11-05T12:54:12.541Z",
-                  "annotations": [],
-                  "attachments": []
-                }
-              ],
-              "status": "expected"
-            }
-          ],
-          "id": "727e3f52dedb009881fb-071a941c780f13feb573",
-          "file": "pricing.spec.ts",
-          "line": 28,
-          "column": 3
-        },
-        {
-          "title": "pricing: displayed final price drives price=over-100",
-          "ok": true,
-          "tags": [],
-          "tests": [
-            {
-              "timeout": 60000,
-              "annotations": [],
-              "expectedStatus": "passed",
-              "projectId": "chromium-mobile",
-              "projectName": "chromium-mobile",
-              "results": [
-                {
-                  "workerIndex": 3,
-                  "parallelIndex": 0,
-                  "status": "passed",
-                  "duration": 1511,
-                  "errors": [],
-                  "stdout": [],
-                  "stderr": [],
-                  "retry": 0,
-                  "startTime": "2026-11-05T12:54:14.000Z",
-                  "annotations": [],
-                  "attachments": []
-                }
-              ],
-              "status": "expected"
-            }
-          ],
-          "id": "727e3f52dedb009881fb-d3d8b854edb1cc07db3d",
-          "file": "pricing.spec.ts",
-          "line": 28,
-          "column": 3
-        },
-        {
-          "title": "pricing: displayed final price drives sort=price-asc",
-          "ok": true,
-          "tags": [],
-          "tests": [
-            {
-              "timeout": 60000,
-              "annotations": [],
-              "expectedStatus": "passed",
-              "projectId": "chromium-mobile",
-              "projectName": "chromium-mobile",
-              "results": [
-                {
-                  "workerIndex": 3,
-                  "parallelIndex": 0,
-                  "status": "passed",
-                  "duration": 1475,
-                  "errors": [],
-                  "stdout": [],
-                  "stderr": [],
-                  "retry": 0,
-                  "startTime": "2026-11-05T12:54:15.535Z",
-                  "annotations": [],
-                  "attachments": []
-                }
-              ],
-              "status": "expected"
-            }
-          ],
-          "id": "727e3f52dedb009881fb-86eab4d8033b08ffb585",
-          "file": "pricing.spec.ts",
-          "line": 28,
-          "column": 3
-        },
-        {
-          "title": "pricing: displayed final price drives sort=price-desc",
-          "ok": true,
-          "tags": [],
-          "tests": [
-            {
-              "timeout": 60000,
-              "annotations": [],
-              "expectedStatus": "passed",
-              "projectId": "chromium-mobile",
-              "projectName": "chromium-mobile",
-              "results": [
-                {
-                  "workerIndex": 3,
-                  "parallelIndex": 0,
-                  "status": "passed",
-                  "duration": 1722,
-                  "errors": [],
-                  "stdout": [],
-                  "stderr": [],
-                  "retry": 0,
-                  "startTime": "2026-11-05T12:54:17.032Z",
-                  "annotations": [],
-                  "attachments": []
-                }
-              ],
-              "status": "expected"
-            }
-          ],
-          "id": "727e3f52dedb009881fb-79d197db36156f70de64",
-          "file": "pricing.spec.ts",
-          "line": 28,
-          "column": 3
-        },
-        {
-          "title": "pricing: filter changes preserve search and sort through browser history",
-          "ok": true,
-          "tags": [],
-          "tests": [
-            {
-              "timeout": 60000,
-              "annotations": [],
-              "expectedStatus": "passed",
-              "projectId": "chromium-mobile",
-              "projectName": "chromium-mobile",
-              "results": [
-                {
-                  "workerIndex": 3,
-                  "parallelIndex": 0,
-                  "status": "passed",
-                  "duration": 1860,
-                  "errors": [],
-                  "stdout": [],
-                  "stderr": [],
-                  "retry": 0,
-                  "startTime": "2026-11-05T12:54:18.795Z",
-                  "annotations": [],
-                  "attachments": []
-                }
-              ],
-              "status": "expected"
-            }
-          ],
-          "id": "727e3f52dedb009881fb-9fcbf4870a3c2603bd2c",
-          "file": "pricing.spec.ts",
-          "line": 40,
+          "line": 36,
           "column": 1
         },
         {
-          "title": "pricing: displayed final price drives price=under-50",
+          "title": "pricing: cart adds $10 shipping below $100 and applies 10X10",
           "ok": true,
           "tags": [],
           "tests": [
@@ -2258,19 +1919,19 @@
               "timeout": 60000,
               "annotations": [],
               "expectedStatus": "passed",
-              "projectId": "firefox-desktop",
-              "projectName": "firefox-desktop",
+              "projectId": "chromium-desktop",
+              "projectName": "chromium-desktop",
               "results": [
                 {
-                  "workerIndex": 5,
+                  "workerIndex": 1,
                   "parallelIndex": 1,
                   "status": "passed",
-                  "duration": 8101,
+                  "duration": 777,
                   "errors": [],
                   "stdout": [],
                   "stderr": [],
                   "retry": 0,
-                  "startTime": "2026-11-05T12:54:23.360Z",
+                  "startTime": "2026-11-05T19:04:09.885Z",
                   "annotations": [],
                   "attachments": []
                 }
@@ -2278,183 +1939,13 @@
               "status": "expected"
             }
           ],
-          "id": "727e3f52dedb009881fb-6b8218c187ea1a885c16",
+          "id": "727e3f52dedb009881fb-cb0e26217a5a606499ed",
           "file": "pricing.spec.ts",
-          "line": 28,
-          "column": 3
-        },
-        {
-          "title": "pricing: displayed final price drives price=50-100",
-          "ok": true,
-          "tags": [],
-          "tests": [
-            {
-              "timeout": 60000,
-              "annotations": [],
-              "expectedStatus": "passed",
-              "projectId": "firefox-desktop",
-              "projectName": "firefox-desktop",
-              "results": [
-                {
-                  "workerIndex": 5,
-                  "parallelIndex": 1,
-                  "status": "passed",
-                  "duration": 1943,
-                  "errors": [],
-                  "stdout": [],
-                  "stderr": [],
-                  "retry": 0,
-                  "startTime": "2026-11-05T12:54:32.462Z",
-                  "annotations": [],
-                  "attachments": []
-                }
-              ],
-              "status": "expected"
-            }
-          ],
-          "id": "727e3f52dedb009881fb-7e01ff23c49a7ba1266a",
-          "file": "pricing.spec.ts",
-          "line": 28,
-          "column": 3
-        },
-        {
-          "title": "pricing: displayed final price drives price=over-100",
-          "ok": true,
-          "tags": [],
-          "tests": [
-            {
-              "timeout": 60000,
-              "annotations": [],
-              "expectedStatus": "passed",
-              "projectId": "firefox-desktop",
-              "projectName": "firefox-desktop",
-              "results": [
-                {
-                  "workerIndex": 5,
-                  "parallelIndex": 1,
-                  "status": "passed",
-                  "duration": 1587,
-                  "errors": [],
-                  "stdout": [],
-                  "stderr": [],
-                  "retry": 0,
-                  "startTime": "2026-11-05T12:54:34.442Z",
-                  "annotations": [],
-                  "attachments": []
-                }
-              ],
-              "status": "expected"
-            }
-          ],
-          "id": "727e3f52dedb009881fb-f966834700b8761936dc",
-          "file": "pricing.spec.ts",
-          "line": 28,
-          "column": 3
-        },
-        {
-          "title": "pricing: displayed final price drives sort=price-asc",
-          "ok": true,
-          "tags": [],
-          "tests": [
-            {
-              "timeout": 60000,
-              "annotations": [],
-              "expectedStatus": "passed",
-              "projectId": "firefox-desktop",
-              "projectName": "firefox-desktop",
-              "results": [
-                {
-                  "workerIndex": 5,
-                  "parallelIndex": 1,
-                  "status": "passed",
-                  "duration": 1666,
-                  "errors": [],
-                  "stdout": [],
-                  "stderr": [],
-                  "retry": 0,
-                  "startTime": "2026-11-05T12:54:36.055Z",
-                  "annotations": [],
-                  "attachments": []
-                }
-              ],
-              "status": "expected"
-            }
-          ],
-          "id": "727e3f52dedb009881fb-131b1171f01281f45988",
-          "file": "pricing.spec.ts",
-          "line": 28,
-          "column": 3
-        },
-        {
-          "title": "pricing: displayed final price drives sort=price-desc",
-          "ok": true,
-          "tags": [],
-          "tests": [
-            {
-              "timeout": 60000,
-              "annotations": [],
-              "expectedStatus": "passed",
-              "projectId": "firefox-desktop",
-              "projectName": "firefox-desktop",
-              "results": [
-                {
-                  "workerIndex": 5,
-                  "parallelIndex": 1,
-                  "status": "passed",
-                  "duration": 1510,
-                  "errors": [],
-                  "stdout": [],
-                  "stderr": [],
-                  "retry": 0,
-                  "startTime": "2026-11-05T12:54:37.746Z",
-                  "annotations": [],
-                  "attachments": []
-                }
-              ],
-              "status": "expected"
-            }
-          ],
-          "id": "727e3f52dedb009881fb-f2efc7b7b0012d0bbf37",
-          "file": "pricing.spec.ts",
-          "line": 28,
-          "column": 3
-        },
-        {
-          "title": "pricing: filter changes preserve search and sort through browser history",
-          "ok": true,
-          "tags": [],
-          "tests": [
-            {
-              "timeout": 60000,
-              "annotations": [],
-              "expectedStatus": "passed",
-              "projectId": "firefox-desktop",
-              "projectName": "firefox-desktop",
-              "results": [
-                {
-                  "workerIndex": 5,
-                  "parallelIndex": 1,
-                  "status": "passed",
-                  "duration": 1427,
-                  "errors": [],
-                  "stdout": [],
-                  "stderr": [],
-                  "retry": 0,
-                  "startTime": "2026-11-05T12:54:39.275Z",
-                  "annotations": [],
-                  "attachments": []
-                }
-              ],
-              "status": "expected"
-            }
-          ],
-          "id": "727e3f52dedb009881fb-ab5ed0a50b9a805e3915",
-          "file": "pricing.spec.ts",
-          "line": 40,
+          "line": 49,
           "column": 1
         },
         {
-          "title": "pricing: displayed final price drives price=under-50",
+          "title": "pricing: cards show the discounted price, original price and badge",
           "ok": true,
           "tags": [],
           "tests": [
@@ -2462,19 +1953,19 @@
               "timeout": 60000,
               "annotations": [],
               "expectedStatus": "passed",
-              "projectId": "firefox-mobile",
-              "projectName": "firefox-mobile",
+              "projectId": "chromium-mobile",
+              "projectName": "chromium-mobile",
               "results": [
                 {
-                  "workerIndex": 7,
+                  "workerIndex": 3,
                   "parallelIndex": 0,
                   "status": "passed",
-                  "duration": 5033,
+                  "duration": 1071,
                   "errors": [],
                   "stdout": [],
                   "stderr": [],
                   "retry": 0,
-                  "startTime": "2026-11-05T12:54:54.047Z",
+                  "startTime": "2026-11-05T19:04:23.040Z",
                   "annotations": [],
                   "attachments": []
                 }
@@ -2482,183 +1973,13 @@
               "status": "expected"
             }
           ],
-          "id": "727e3f52dedb009881fb-bde88f38b89e5f4aec1c",
+          "id": "727e3f52dedb009881fb-b4b63b4ab82399db4fb5",
           "file": "pricing.spec.ts",
-          "line": 28,
-          "column": 3
-        },
-        {
-          "title": "pricing: displayed final price drives price=50-100",
-          "ok": true,
-          "tags": [],
-          "tests": [
-            {
-              "timeout": 60000,
-              "annotations": [],
-              "expectedStatus": "passed",
-              "projectId": "firefox-mobile",
-              "projectName": "firefox-mobile",
-              "results": [
-                {
-                  "workerIndex": 7,
-                  "parallelIndex": 0,
-                  "status": "passed",
-                  "duration": 2005,
-                  "errors": [],
-                  "stdout": [],
-                  "stderr": [],
-                  "retry": 0,
-                  "startTime": "2026-11-05T12:55:00.120Z",
-                  "annotations": [],
-                  "attachments": []
-                }
-              ],
-              "status": "expected"
-            }
-          ],
-          "id": "727e3f52dedb009881fb-576b3391664ff134c199",
-          "file": "pricing.spec.ts",
-          "line": 28,
-          "column": 3
-        },
-        {
-          "title": "pricing: displayed final price drives price=over-100",
-          "ok": true,
-          "tags": [],
-          "tests": [
-            {
-              "timeout": 60000,
-              "annotations": [],
-              "expectedStatus": "passed",
-              "projectId": "firefox-mobile",
-              "projectName": "firefox-mobile",
-              "results": [
-                {
-                  "workerIndex": 7,
-                  "parallelIndex": 0,
-                  "status": "passed",
-                  "duration": 1671,
-                  "errors": [],
-                  "stdout": [],
-                  "stderr": [],
-                  "retry": 0,
-                  "startTime": "2026-11-05T12:55:02.147Z",
-                  "annotations": [],
-                  "attachments": []
-                }
-              ],
-              "status": "expected"
-            }
-          ],
-          "id": "727e3f52dedb009881fb-ad6c2dc56d5bba0e6bca",
-          "file": "pricing.spec.ts",
-          "line": 28,
-          "column": 3
-        },
-        {
-          "title": "pricing: displayed final price drives sort=price-asc",
-          "ok": true,
-          "tags": [],
-          "tests": [
-            {
-              "timeout": 60000,
-              "annotations": [],
-              "expectedStatus": "passed",
-              "projectId": "firefox-mobile",
-              "projectName": "firefox-mobile",
-              "results": [
-                {
-                  "workerIndex": 7,
-                  "parallelIndex": 0,
-                  "status": "passed",
-                  "duration": 1684,
-                  "errors": [],
-                  "stdout": [],
-                  "stderr": [],
-                  "retry": 0,
-                  "startTime": "2026-11-05T12:55:03.836Z",
-                  "annotations": [],
-                  "attachments": []
-                }
-              ],
-              "status": "expected"
-            }
-          ],
-          "id": "727e3f52dedb009881fb-e8079cae0831eba7f04d",
-          "file": "pricing.spec.ts",
-          "line": 28,
-          "column": 3
-        },
-        {
-          "title": "pricing: displayed final price drives sort=price-desc",
-          "ok": true,
-          "tags": [],
-          "tests": [
-            {
-              "timeout": 60000,
-              "annotations": [],
-              "expectedStatus": "passed",
-              "projectId": "firefox-mobile",
-              "projectName": "firefox-mobile",
-              "results": [
-                {
-                  "workerIndex": 7,
-                  "parallelIndex": 0,
-                  "status": "passed",
-                  "duration": 1718,
-                  "errors": [],
-                  "stdout": [],
-                  "stderr": [],
-                  "retry": 0,
-                  "startTime": "2026-11-05T12:55:05.560Z",
-                  "annotations": [],
-                  "attachments": []
-                }
-              ],
-              "status": "expected"
-            }
-          ],
-          "id": "727e3f52dedb009881fb-e9252c80e204b45516de",
-          "file": "pricing.spec.ts",
-          "line": 28,
-          "column": 3
-        },
-        {
-          "title": "pricing: filter changes preserve search and sort through browser history",
-          "ok": true,
-          "tags": [],
-          "tests": [
-            {
-              "timeout": 60000,
-              "annotations": [],
-              "expectedStatus": "passed",
-              "projectId": "firefox-mobile",
-              "projectName": "firefox-mobile",
-              "results": [
-                {
-                  "workerIndex": 7,
-                  "parallelIndex": 0,
-                  "status": "passed",
-                  "duration": 1822,
-                  "errors": [],
-                  "stdout": [],
-                  "stderr": [],
-                  "retry": 0,
-                  "startTime": "2026-11-05T12:55:07.297Z",
-                  "annotations": [],
-                  "attachments": []
-                }
-              ],
-              "status": "expected"
-            }
-          ],
-          "id": "727e3f52dedb009881fb-09813b45419c090b344b",
-          "file": "pricing.spec.ts",
-          "line": 40,
+          "line": 27,
           "column": 1
         },
         {
-          "title": "pricing: displayed final price drives price=under-50",
+          "title": "pricing: sorting is requested from the API and kept in the URL history",
           "ok": true,
           "tags": [],
           "tests": [
@@ -2666,19 +1987,19 @@
               "timeout": 60000,
               "annotations": [],
               "expectedStatus": "passed",
-              "projectId": "webkit-desktop",
-              "projectName": "webkit-desktop",
+              "projectId": "chromium-mobile",
+              "projectName": "chromium-mobile",
               "results": [
                 {
-                  "workerIndex": 9,
-                  "parallelIndex": 1,
+                  "workerIndex": 3,
+                  "parallelIndex": 0,
                   "status": "passed",
-                  "duration": 1352,
+                  "duration": 1401,
                   "errors": [],
                   "stdout": [],
                   "stderr": [],
                   "retry": 0,
-                  "startTime": "2026-11-05T12:55:13.646Z",
+                  "startTime": "2026-11-05T19:04:24.278Z",
                   "annotations": [],
                   "attachments": []
                 }
@@ -2686,183 +2007,13 @@
               "status": "expected"
             }
           ],
-          "id": "727e3f52dedb009881fb-87d915f17848f35478b0",
+          "id": "727e3f52dedb009881fb-442513162fb18b3e0c4b",
           "file": "pricing.spec.ts",
-          "line": 28,
-          "column": 3
-        },
-        {
-          "title": "pricing: displayed final price drives price=50-100",
-          "ok": true,
-          "tags": [],
-          "tests": [
-            {
-              "timeout": 60000,
-              "annotations": [],
-              "expectedStatus": "passed",
-              "projectId": "webkit-desktop",
-              "projectName": "webkit-desktop",
-              "results": [
-                {
-                  "workerIndex": 9,
-                  "parallelIndex": 1,
-                  "status": "passed",
-                  "duration": 1197,
-                  "errors": [],
-                  "stdout": [],
-                  "stderr": [],
-                  "retry": 0,
-                  "startTime": "2026-11-05T12:55:15.195Z",
-                  "annotations": [],
-                  "attachments": []
-                }
-              ],
-              "status": "expected"
-            }
-          ],
-          "id": "727e3f52dedb009881fb-4a8c6e2b2739e6485dc0",
-          "file": "pricing.spec.ts",
-          "line": 28,
-          "column": 3
-        },
-        {
-          "title": "pricing: displayed final price drives price=over-100",
-          "ok": true,
-          "tags": [],
-          "tests": [
-            {
-              "timeout": 60000,
-              "annotations": [],
-              "expectedStatus": "passed",
-              "projectId": "webkit-desktop",
-              "projectName": "webkit-desktop",
-              "results": [
-                {
-                  "workerIndex": 9,
-                  "parallelIndex": 1,
-                  "status": "passed",
-                  "duration": 1096,
-                  "errors": [],
-                  "stdout": [],
-                  "stderr": [],
-                  "retry": 0,
-                  "startTime": "2026-11-05T12:55:16.416Z",
-                  "annotations": [],
-                  "attachments": []
-                }
-              ],
-              "status": "expected"
-            }
-          ],
-          "id": "727e3f52dedb009881fb-44f0e28bf0ace5d97a5f",
-          "file": "pricing.spec.ts",
-          "line": 28,
-          "column": 3
-        },
-        {
-          "title": "pricing: displayed final price drives sort=price-asc",
-          "ok": true,
-          "tags": [],
-          "tests": [
-            {
-              "timeout": 60000,
-              "annotations": [],
-              "expectedStatus": "passed",
-              "projectId": "webkit-desktop",
-              "projectName": "webkit-desktop",
-              "results": [
-                {
-                  "workerIndex": 9,
-                  "parallelIndex": 1,
-                  "status": "passed",
-                  "duration": 1214,
-                  "errors": [],
-                  "stdout": [],
-                  "stderr": [],
-                  "retry": 0,
-                  "startTime": "2026-11-05T12:55:17.531Z",
-                  "annotations": [],
-                  "attachments": []
-                }
-              ],
-              "status": "expected"
-            }
-          ],
-          "id": "727e3f52dedb009881fb-e9bbbca28424f27c2dda",
-          "file": "pricing.spec.ts",
-          "line": 28,
-          "column": 3
-        },
-        {
-          "title": "pricing: displayed final price drives sort=price-desc",
-          "ok": true,
-          "tags": [],
-          "tests": [
-            {
-              "timeout": 60000,
-              "annotations": [],
-              "expectedStatus": "passed",
-              "projectId": "webkit-desktop",
-              "projectName": "webkit-desktop",
-              "results": [
-                {
-                  "workerIndex": 9,
-                  "parallelIndex": 1,
-                  "status": "passed",
-                  "duration": 1266,
-                  "errors": [],
-                  "stdout": [],
-                  "stderr": [],
-                  "retry": 0,
-                  "startTime": "2026-11-05T12:55:18.764Z",
-                  "annotations": [],
-                  "attachments": []
-                }
-              ],
-              "status": "expected"
-            }
-          ],
-          "id": "727e3f52dedb009881fb-aa405a54bf45bf4dd2fc",
-          "file": "pricing.spec.ts",
-          "line": 28,
-          "column": 3
-        },
-        {
-          "title": "pricing: filter changes preserve search and sort through browser history",
-          "ok": true,
-          "tags": [],
-          "tests": [
-            {
-              "timeout": 60000,
-              "annotations": [],
-              "expectedStatus": "passed",
-              "projectId": "webkit-desktop",
-              "projectName": "webkit-desktop",
-              "results": [
-                {
-                  "workerIndex": 9,
-                  "parallelIndex": 1,
-                  "status": "passed",
-                  "duration": 1558,
-                  "errors": [],
-                  "stdout": [],
-                  "stderr": [],
-                  "retry": 0,
-                  "startTime": "2026-11-05T12:55:20.053Z",
-                  "annotations": [],
-                  "attachments": []
-                }
-              ],
-              "status": "expected"
-            }
-          ],
-          "id": "727e3f52dedb009881fb-647f3090c74a576a3785",
-          "file": "pricing.spec.ts",
-          "line": 40,
+          "line": 36,
           "column": 1
         },
         {
-          "title": "pricing: displayed final price drives price=under-50",
+          "title": "pricing: cart adds $10 shipping below $100 and applies 10X10",
           "ok": true,
           "tags": [],
           "tests": [
@@ -2870,19 +2021,19 @@
               "timeout": 60000,
               "annotations": [],
               "expectedStatus": "passed",
-              "projectId": "webkit-mobile",
-              "projectName": "webkit-mobile",
+              "projectId": "chromium-mobile",
+              "projectName": "chromium-mobile",
               "results": [
                 {
-                  "workerIndex": 11,
+                  "workerIndex": 3,
                   "parallelIndex": 0,
                   "status": "passed",
-                  "duration": 1776,
+                  "duration": 947,
                   "errors": [],
                   "stdout": [],
                   "stderr": [],
                   "retry": 0,
-                  "startTime": "2026-11-05T12:55:24.448Z",
+                  "startTime": "2026-11-05T19:04:25.697Z",
                   "annotations": [],
                   "attachments": []
                 }
@@ -2890,13 +2041,13 @@
               "status": "expected"
             }
           ],
-          "id": "727e3f52dedb009881fb-0caaed4a02b9c199fc1a",
+          "id": "727e3f52dedb009881fb-ed4975980b2919f11bc0",
           "file": "pricing.spec.ts",
-          "line": 28,
-          "column": 3
+          "line": 49,
+          "column": 1
         },
         {
-          "title": "pricing: displayed final price drives price=50-100",
+          "title": "pricing: cards show the discounted price, original price and badge",
           "ok": true,
           "tags": [],
           "tests": [
@@ -2904,19 +2055,19 @@
               "timeout": 60000,
               "annotations": [],
               "expectedStatus": "passed",
-              "projectId": "webkit-mobile",
-              "projectName": "webkit-mobile",
+              "projectId": "firefox-desktop",
+              "projectName": "firefox-desktop",
               "results": [
                 {
-                  "workerIndex": 11,
-                  "parallelIndex": 0,
+                  "workerIndex": 5,
+                  "parallelIndex": 1,
                   "status": "passed",
-                  "duration": 1731,
+                  "duration": 3708,
                   "errors": [],
                   "stdout": [],
                   "stderr": [],
                   "retry": 0,
-                  "startTime": "2026-11-05T12:55:26.328Z",
+                  "startTime": "2026-11-05T19:04:32.826Z",
                   "annotations": [],
                   "attachments": []
                 }
@@ -2924,13 +2075,13 @@
               "status": "expected"
             }
           ],
-          "id": "727e3f52dedb009881fb-5cebbf2881f899701276",
+          "id": "727e3f52dedb009881fb-5adea188c2cf1a98f07c",
           "file": "pricing.spec.ts",
-          "line": 28,
-          "column": 3
+          "line": 27,
+          "column": 1
         },
         {
-          "title": "pricing: displayed final price drives price=over-100",
+          "title": "pricing: sorting is requested from the API and kept in the URL history",
           "ok": true,
           "tags": [],
           "tests": [
@@ -2938,19 +2089,19 @@
               "timeout": 60000,
               "annotations": [],
               "expectedStatus": "passed",
-              "projectId": "webkit-mobile",
-              "projectName": "webkit-mobile",
+              "projectId": "firefox-desktop",
+              "projectName": "firefox-desktop",
               "results": [
                 {
-                  "workerIndex": 11,
-                  "parallelIndex": 0,
+                  "workerIndex": 5,
+                  "parallelIndex": 1,
                   "status": "passed",
-                  "duration": 1675,
+                  "duration": 1142,
                   "errors": [],
                   "stdout": [],
                   "stderr": [],
                   "retry": 0,
-                  "startTime": "2026-11-05T12:55:28.080Z",
+                  "startTime": "2026-11-05T19:04:37.242Z",
                   "annotations": [],
                   "attachments": []
                 }
@@ -2958,13 +2109,13 @@
               "status": "expected"
             }
           ],
-          "id": "727e3f52dedb009881fb-5e9f9de45fe5447cb8cf",
+          "id": "727e3f52dedb009881fb-e10f19a4e2c3609d2433",
           "file": "pricing.spec.ts",
-          "line": 28,
-          "column": 3
+          "line": 36,
+          "column": 1
         },
         {
-          "title": "pricing: displayed final price drives sort=price-asc",
+          "title": "pricing: cart adds $10 shipping below $100 and applies 10X10",
           "ok": true,
           "tags": [],
           "tests": [
@@ -2972,19 +2123,19 @@
               "timeout": 60000,
               "annotations": [],
               "expectedStatus": "passed",
-              "projectId": "webkit-mobile",
-              "projectName": "webkit-mobile",
+              "projectId": "firefox-desktop",
+              "projectName": "firefox-desktop",
               "results": [
                 {
-                  "workerIndex": 11,
-                  "parallelIndex": 0,
+                  "workerIndex": 5,
+                  "parallelIndex": 1,
                   "status": "passed",
-                  "duration": 1742,
+                  "duration": 1904,
                   "errors": [],
                   "stdout": [],
                   "stderr": [],
                   "retry": 0,
-                  "startTime": "2026-11-05T12:55:29.786Z",
+                  "startTime": "2026-11-05T19:04:38.411Z",
                   "annotations": [],
                   "attachments": []
                 }
@@ -2992,13 +2143,13 @@
               "status": "expected"
             }
           ],
-          "id": "727e3f52dedb009881fb-32f83dfd59a59fa65891",
+          "id": "727e3f52dedb009881fb-81de55e8abbff4f8ce17",
           "file": "pricing.spec.ts",
-          "line": 28,
-          "column": 3
+          "line": 49,
+          "column": 1
         },
         {
-          "title": "pricing: displayed final price drives sort=price-desc",
+          "title": "pricing: cards show the discounted price, original price and badge",
           "ok": true,
           "tags": [],
           "tests": [
@@ -3006,19 +2157,19 @@
               "timeout": 60000,
               "annotations": [],
               "expectedStatus": "passed",
-              "projectId": "webkit-mobile",
-              "projectName": "webkit-mobile",
+              "projectId": "firefox-mobile",
+              "projectName": "firefox-mobile",
               "results": [
                 {
-                  "workerIndex": 11,
+                  "workerIndex": 7,
                   "parallelIndex": 0,
                   "status": "passed",
-                  "duration": 1833,
+                  "duration": 3810,
                   "errors": [],
                   "stdout": [],
                   "stderr": [],
                   "retry": 0,
-                  "startTime": "2026-11-05T12:55:31.548Z",
+                  "startTime": "2026-11-05T19:04:54.046Z",
                   "annotations": [],
                   "attachments": []
                 }
@@ -3026,13 +2177,183 @@
               "status": "expected"
             }
           ],
-          "id": "727e3f52dedb009881fb-ecc0fbe62ab5208633d2",
+          "id": "727e3f52dedb009881fb-d10567e6375586903df1",
           "file": "pricing.spec.ts",
-          "line": 28,
-          "column": 3
+          "line": 27,
+          "column": 1
         },
         {
-          "title": "pricing: filter changes preserve search and sort through browser history",
+          "title": "pricing: sorting is requested from the API and kept in the URL history",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 60000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "firefox-mobile",
+              "projectName": "firefox-mobile",
+              "results": [
+                {
+                  "workerIndex": 7,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 1315,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-05T19:04:58.520Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "727e3f52dedb009881fb-005c78a65a87103410e8",
+          "file": "pricing.spec.ts",
+          "line": 36,
+          "column": 1
+        },
+        {
+          "title": "pricing: cart adds $10 shipping below $100 and applies 10X10",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 60000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "firefox-mobile",
+              "projectName": "firefox-mobile",
+              "results": [
+                {
+                  "workerIndex": 7,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 1939,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-05T19:04:59.855Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "727e3f52dedb009881fb-705c4ffde3d3639f84ca",
+          "file": "pricing.spec.ts",
+          "line": 49,
+          "column": 1
+        },
+        {
+          "title": "pricing: cards show the discounted price, original price and badge",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 60000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "webkit-desktop",
+              "projectName": "webkit-desktop",
+              "results": [
+                {
+                  "workerIndex": 9,
+                  "parallelIndex": 1,
+                  "status": "passed",
+                  "duration": 983,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-05T19:05:09.548Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "727e3f52dedb009881fb-2355a3b101ddc774d27d",
+          "file": "pricing.spec.ts",
+          "line": 27,
+          "column": 1
+        },
+        {
+          "title": "pricing: sorting is requested from the API and kept in the URL history",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 60000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "webkit-desktop",
+              "projectName": "webkit-desktop",
+              "results": [
+                {
+                  "workerIndex": 9,
+                  "parallelIndex": 1,
+                  "status": "passed",
+                  "duration": 869,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-05T19:05:10.623Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "727e3f52dedb009881fb-96e49e0f8f7d2da83c4f",
+          "file": "pricing.spec.ts",
+          "line": 36,
+          "column": 1
+        },
+        {
+          "title": "pricing: cart adds $10 shipping below $100 and applies 10X10",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 60000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "webkit-desktop",
+              "projectName": "webkit-desktop",
+              "results": [
+                {
+                  "workerIndex": 9,
+                  "parallelIndex": 1,
+                  "status": "passed",
+                  "duration": 2058,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-05T19:05:11.505Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "727e3f52dedb009881fb-35782fa85813f1349ce6",
+          "file": "pricing.spec.ts",
+          "line": 49,
+          "column": 1
+        },
+        {
+          "title": "pricing: cards show the discounted price, original price and badge",
           "ok": true,
           "tags": [],
           "tests": [
@@ -3047,12 +2368,12 @@
                   "workerIndex": 11,
                   "parallelIndex": 0,
                   "status": "passed",
-                  "duration": 2449,
+                  "duration": 1165,
                   "errors": [],
                   "stdout": [],
                   "stderr": [],
                   "retry": 0,
-                  "startTime": "2026-11-05T12:55:33.405Z",
+                  "startTime": "2026-11-05T19:05:14.205Z",
                   "annotations": [],
                   "attachments": []
                 }
@@ -3060,9 +2381,77 @@
               "status": "expected"
             }
           ],
-          "id": "727e3f52dedb009881fb-5a127373197284ae8a44",
+          "id": "727e3f52dedb009881fb-42e228bbdee463cbaa84",
           "file": "pricing.spec.ts",
-          "line": 40,
+          "line": 27,
+          "column": 1
+        },
+        {
+          "title": "pricing: sorting is requested from the API and kept in the URL history",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 60000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "webkit-mobile",
+              "projectName": "webkit-mobile",
+              "results": [
+                {
+                  "workerIndex": 11,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 1176,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-05T19:05:15.454Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "727e3f52dedb009881fb-2c78be108f2867bc987b",
+          "file": "pricing.spec.ts",
+          "line": 36,
+          "column": 1
+        },
+        {
+          "title": "pricing: cart adds $10 shipping below $100 and applies 10X10",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 60000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "webkit-mobile",
+              "projectName": "webkit-mobile",
+              "results": [
+                {
+                  "workerIndex": 11,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 2330,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-05T19:05:16.639Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "727e3f52dedb009881fb-812853d4dee670aa8d97",
+          "file": "pricing.spec.ts",
+          "line": 49,
           "column": 1
         }
       ]
@@ -3070,9 +2459,9 @@
   ],
   "errors": [],
   "stats": {
-    "startTime": "2026-11-05T12:53:50.162Z",
-    "duration": 111299.212,
-    "expected": 70,
+    "startTime": "2026-11-05T19:04:05.980Z",
+    "duration": 82813.632,
+    "expected": 52,
     "skipped": 2,
     "unexpected": 0,
     "flaky": 0

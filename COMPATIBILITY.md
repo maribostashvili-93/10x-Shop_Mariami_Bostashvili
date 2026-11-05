@@ -1,10 +1,10 @@
 # Compatibility — 10X Shop
 
-Run started (UTC): 2026-11-05T12:53:50.162Z. Duration: 111.3 seconds. Local production build: http://127.0.0.1:4173. Desktop: 1440×900; Mobile: 390×844. Chromium, Firefox, and WebKit are Playwright browser engines; branded Chrome/Firefox/Safari applications and physical phones were not tested. Firefox Mobile uses viewport and touch emulation only.
+Run started (UTC): 2026-11-05T19:04:05.980Z. Duration: 82.8 seconds. Local production build: http://127.0.0.1:4173. Desktop: 1440×900; Mobile: 390×844. Chromium, Firefox, and WebKit are Playwright browser engines; branded Chrome/Firefox/Safari applications and physical phones were not tested. Firefox Mobile uses viewport and touch emulation only.
 
 Matrix and keyboard tests replace DummyJSON responses with one fixed product (QA Beauty Product), using favicon.svg as its image. Pricing regression tests use six products with different discounts and boundary prices. This verifies the UI and shopping flow but does not verify the live API or real product images. Lighthouse uses real network requests; its results apply to the state displayed during each run. Deployed-site checks, when available, are recorded separately in docs/compat/live-results.json and QA-REPORT.md.
 
-Tests: 70 passed, 0 failed, 2 skipped. FAIL includes axe violations and does not always indicate a broken page or keyboard flow.
+Tests: 52 passed, 0 failed, 2 skipped. FAIL includes axe violations and does not always indicate a broken page or keyboard flow.
 
 ## Testing Tools and Methodology
 
@@ -27,12 +27,9 @@ Tests: 70 passed, 0 failed, 2 skipped. FAIL includes axe violations and does not
 | matrix: login | PASS | PASS | PASS | PASS | PASS | PASS |
 | matrix: not-found | PASS | PASS | PASS | PASS | PASS | PASS |
 | keyboard: catalog → product → cart → login → checkout → confirmation | PASS | PASS | PASS | PASS | skipped | skipped |
-| pricing: displayed final price drives price=under-50 | PASS | PASS | PASS | PASS | PASS | PASS |
-| pricing: displayed final price drives price=50-100 | PASS | PASS | PASS | PASS | PASS | PASS |
-| pricing: displayed final price drives price=over-100 | PASS | PASS | PASS | PASS | PASS | PASS |
-| pricing: displayed final price drives sort=price-asc | PASS | PASS | PASS | PASS | PASS | PASS |
-| pricing: displayed final price drives sort=price-desc | PASS | PASS | PASS | PASS | PASS | PASS |
-| pricing: filter changes preserve search and sort through browser history | PASS | PASS | PASS | PASS | PASS | PASS |
+| pricing: cards show the discounted price, original price and badge | PASS | PASS | PASS | PASS | PASS | PASS |
+| pricing: sorting is requested from the API and kept in the URL history | PASS | PASS | PASS | PASS | PASS | PASS |
+| pricing: cart adds $10 shipping below $100 and applies 10X10 | PASS | PASS | PASS | PASS | PASS | PASS |
 
 The matrix covers Catalog, Product Details, empty Cart, Login, 404, and populated Cart/Checkout/Confirmation within the shopping flow. Home, Journal, Wishlist, Profile, and supporting pages are outside the scope of this run.
 
@@ -62,10 +59,10 @@ The WebKit control experiment uses plain `<a>`, `<button>`, and `<input>` elemen
 
 A score of 100 does not establish full WCAG compliance. Lighthouse and axe use different scoring and audits. Failed Lighthouse audits, if any, are listed below independently of each score. Reports: `docs/compat/lighthouse/*.html` and `*.json`. Lighthouse Mobile uses its default mobile viewport.
 
-- catalog / desktop: captured 2026-11-05T12:54:26.081Z; failed audits: none; run warnings: none.
-- catalog / mobile: captured 2026-11-05T12:54:44.302Z; failed audits: none; run warnings: none.
-- login / desktop: captured 2026-11-05T12:54:37.214Z; failed audits: none; run warnings: none.
-- login / mobile: captured 2026-11-05T12:54:54.467Z; failed audits: none; run warnings: none.
+- catalog / desktop: captured 2026-11-05T19:14:32.848Z; failed audits: none; run warnings: none.
+- catalog / mobile: captured 2026-11-05T19:14:47.603Z; failed audits: none; run warnings: none.
+- login / desktop: captured 2026-11-05T19:14:41.478Z; failed audits: none; run warnings: none.
+- login / mobile: captured 2026-11-05T19:14:54.314Z; failed audits: none; run warnings: none.
 
 ## Screenshots
 
