@@ -26,9 +26,9 @@ async function tabTo(page: Page, target: Locator) {
 }
 
 for (const [name, path, heading] of [
-  ['catalog', '/products', 'Shop'],
+  ['catalog', '/', 'Catalog'],
   ['product', '/products/1', 'QA Beauty Product'],
-  ['cart-empty', '/cart', 'Your cart is empty'],
+  ['cart-empty', '/cart', 'Your cart is empty.'],
   ['login', '/login', 'Login'],
   ['not-found', '/missing-compat-route', 'Page not found'],
 ] as const) {
@@ -48,7 +48,7 @@ test('keyboard: catalog → product → cart → login → checkout → confirma
     browserName === 'webkit',
     'Playwright WebKit never moves focus to links with Tab or Alt+Tab, even on a bare <a href> page (docs/compat/webkit-keyboard-baseline.json). Check this flow in real Safari with "Press Tab to highlight each item" enabled.',
   );
-  await page.goto('/products');
+  await page.goto('/');
   const productLink = page.getByRole('main').getByRole('heading', { name: product.title, exact: true }).getByRole('link');
   await tabTo(page, productLink);
   await page.keyboard.press('Enter');
@@ -73,12 +73,16 @@ test('keyboard: catalog → product → cart → login → checkout → confirma
   const axe = await new AxeBuilder({ page }).withTags(['wcag2a', 'wcag2aa', 'wcag21a', 'wcag21aa']).analyze();
   await info.attach('checkout-axe', { body: JSON.stringify(axe.violations, null, 2), contentType: 'application/json' });
   await tabTo(page, page.getByLabel('Full name', { exact: false }));
-  for (const value of ['QA Customer', 'qa@example.com', '10 Test Street', 'Tbilisi']) {
+  // Full name is pre-filled with the username, so each field is selected before typing.
+  for (const value of ['QA Customer', 'qa@example.com', '+995 555 123 456', '10 Test Street', 'Tbilisi', '0101']) {
+    await page.keyboard.press('ControlOrMeta+a');
     await page.keyboard.type(value);
     await page.keyboard.press('Tab');
   }
+  // Country keeps its default (Georgia); one more Tab reaches "Place order".
+  await page.keyboard.press('Tab');
   await page.keyboard.press('Enter');
-  await expect(page.getByRole('heading', { name: 'Thank you for your order' })).toBeVisible();
+  await expect(page.getByRole('heading', { name: 'Thank you! Your order has been placed.' })).toBeVisible();
   await capture(page, 'confirmation', info.project.name);
   expect.soft(axe.violations).toEqual([]);
 });
