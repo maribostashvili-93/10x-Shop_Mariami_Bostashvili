@@ -16,6 +16,8 @@ async function capture(page: Page, name: string, project: string) {
 }
 
 async function tabTo(page: Page, target: Locator) {
+  // Lazy-loaded routes render a short fallback first; wait for the real control like a user would.
+  await target.waitFor({ state: 'visible' });
   for (let i = 0; i < 180; i++) {
     await page.keyboard.press('Tab');
     if (await target.evaluate(el => el === document.activeElement)) return;
