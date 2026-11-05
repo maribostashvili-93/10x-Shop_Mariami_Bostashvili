@@ -80,9 +80,19 @@ This document records real issues found and fixed while building 10X Shop. The p
 - **Root cause:** `ProductsPage` compared `product.price`, while cards displayed `getFinalPrice(product)`.
 - **Fix:** Use shared rounded final prices in price-band comparisons and both price sort directions.
 - **Verification:** 36 pricing cases passed, including $50/$100 boundaries, cent rounding, reload, and filter/search/sort browser history.
-- **Fix (commit):** `fix: align catalog price filters and refresh QA evidence`.
+- **Fix (commit):** [8e326bc fix: align catalog price filters and refresh QA evidence](https://github.com/maribostashvili-93/10x-Shop_Mariami_Bostashvili/commit/8e326bc)
 - **Deployment note:** Live deep links return provider 404 and live checkout still ignores discounts; these remain separate release issues in `BUG-REPORT.md`.
 - **What I learned:** Filtering, sorting, and display must use the same business-rule calculation.
+
+## 9. Account menu linked to a missing page and to placeholder pages
+
+- **Symptom:** "My Wishlist" in the header account menu opened the 404 page. Other menu items (My Orders, Coupons, Addresses, New Arrivals, Best Sellers, Brands, Collections) opened placeholder pages; My Orders always showed "No orders yet" and Coupons showed codes that did not work in the cart.
+- **Reproduction:** Log in, open the account menu in the header and choose "My Wishlist"; then open `/my-orders` or `/coupons`.
+- **Tool:** Browser navigation and the React Router route table.
+- **Root cause:** Menu paths were generated from labels (`"My Wishlist"` → `/my-wishlist`), but the wishlist route is `/wishlist`. The placeholder routes were added for future features that are not in the CORE scope.
+- **Fix:** Menus now use explicit `to` paths. Placeholder routes and links were removed; the working settings form moved to `AccountSettingsPage`. Removed paths now show the 404 page.
+- **Fix (commit):** [192c198 fix: close remaining CORE gaps and remove placeholder pages](https://github.com/maribostashvili-93/10x-Shop_Mariami_Bostashvili/commit/192c198)
+- **What I learned:** Build links from explicit route constants, and do not show navigation for features that do not exist yet.
 
 ## Debugging checklist
 

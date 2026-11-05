@@ -31,7 +31,7 @@ This is a front-end demo. Login and checkout are local simulations: no real auth
 - Protected checkout flow for signed-in users
 - Checkout fields: full name, email, address, and city
 - Field-level checkout validation
-- Local order confirmation and cart clearing
+- Local order confirmation with an order summary (items, subtotal, discount, total, delivery details) and cart clearing
 - Responsive Tailwind UI with hover, focus, and disabled states
 - 404 page for unknown routes
 
@@ -47,9 +47,9 @@ This is a front-end demo. Login and checkout are local simulations: no real auth
 - Lifestyle journal articles with related DummyJSON products below each story
 - Brand and community inspiration sections
 - Expanded footer with product search and navigation
-- Supporting navigation pages prepared for future features
+- Profile page and local account settings that pre-fill checkout
 
-These additional pages do not represent real order history, coupons, addresses, or account services yet.
+Profile and account settings are stored only in the browser; there is no order history, coupon, or account service.
 
 Community stories are illustrative demo content. Product reviews come from the DummyJSON API. New-arrival ordering uses product IDs, and the best-seller section uses ratings rather than sales data.
 
@@ -64,6 +64,8 @@ Community stories are illustrative demo content. Product reviews come from the D
 | `/journal/:slug` | Lifestyle article with related products |
 | `/wishlist` | Local wishlist |
 | `/cart` | Shopping cart |
+| `/profile` | Local profile overview |
+| `/account-settings` | Local delivery details used by checkout |
 | `/checkout` | Protected checkout form |
 | `/login` | Local demo login |
 | `*` | Not-found page |
