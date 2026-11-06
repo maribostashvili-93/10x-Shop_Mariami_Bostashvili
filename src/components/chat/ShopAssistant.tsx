@@ -64,7 +64,7 @@ function ShopAssistant() {
   }
 
   return (
-    <div className="fixed bottom-5 right-4 z-40 sm:right-6">
+    <div className="fixed bottom-[calc(7rem+env(safe-area-inset-bottom))] right-4 z-40 sm:right-6 lg:bottom-5">
       {open && (
         <section aria-label="Shop assistant" className="mb-3 flex w-[min(22rem,calc(100vw-2rem))] flex-col overflow-hidden rounded-2xl border border-violet-200 bg-white shadow-2xl dark:border-violet-800 dark:bg-[#1a1526]">
           <header className="flex items-center justify-between bg-violet-700 px-4 py-3 text-white">
