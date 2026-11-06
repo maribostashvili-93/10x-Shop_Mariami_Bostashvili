@@ -12,7 +12,8 @@ import { OrdersContext } from "./orders-context";
 const SHIPPING_FIELDS = ["fullName", "email", "phone", "address", "city", "postalCode", "country"] as const;
 
 function isShippingInfo(value: unknown): value is ShippingInfo {
-  return isRecord(value) && SHIPPING_FIELDS.every((key) => typeof value[key] === "string");
+  return isRecord(value) && SHIPPING_FIELDS.every((key) => typeof value[key] === "string") &&
+    (value.paymentMethod === undefined || value.paymentMethod === "card" || value.paymentMethod === "cash-on-delivery");
 }
 
 function isOrderData(value: unknown): value is OrderData {

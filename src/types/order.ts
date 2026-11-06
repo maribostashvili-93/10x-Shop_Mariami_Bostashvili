@@ -1,6 +1,8 @@
 import type { CartItem } from "./cart";
 
-/** Delivery details collected at checkout. No payment data exists in this project. */
+export type PaymentMethod = "card" | "cash-on-delivery";
+
+/** Delivery and demo payment choice collected at checkout. No real payment data is stored. */
 export interface ShippingInfo {
   fullName: string;
   email: string;
@@ -9,6 +11,7 @@ export interface ShippingInfo {
   city: string;
   postalCode: string;
   country: string;
+  paymentMethod: PaymentMethod;
 }
 
 export type OrderStatus = "Processing" | "Shipped" | "Delivered";

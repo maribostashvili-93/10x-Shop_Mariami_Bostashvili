@@ -25,15 +25,16 @@ function initialFields(username: string): ShippingInfo {
     fullName: fullName || username,
     email: profile.email,
     phone: profile.phone,
-    address: "",
-    city: "",
-    postalCode: "",
-    country: "Georgia",
+    address: profile.address ?? "",
+    city: profile.city ?? "",
+    postalCode: profile.postalCode ?? "",
+    country: profile.country ?? "Georgia",
+    paymentMethod: profile.paymentMethod ?? "card",
   };
 }
 
 function CheckoutPage() {
-  const { user } = useAuth();
+  const { user, updateProfile } = useAuth();
   const { items, promo, totals, clearCart } = useCart();
   const { placeOrder } = useOrders();
   const [fields, setFields] = useState<ShippingInfo>(() => initialFields(user?.username ?? ""));
@@ -137,6 +138,17 @@ function CheckoutPage() {
       city: fields.city.trim(),
       postalCode: fields.postalCode.trim(),
     });
+    updateProfile({
+      firstName: readProfile().firstName,
+      lastName: readProfile().lastName,
+      email: fields.email.trim(),
+      phone: fields.phone.trim(),
+      address: fields.address.trim(),
+      city: fields.city.trim(),
+      postalCode: fields.postalCode.trim(),
+      country: fields.country,
+      paymentMethod: fields.paymentMethod,
+    });
     setConfirmedOrder(order);
     clearCart();
     setSubmitting(false);
@@ -199,6 +211,12 @@ function CheckoutPage() {
               >
                 <option value="">Select a country</option>
                 {COUNTRIES.map((country) => <option key={country} value={country}>{country}</option>)}
+              </select>
+            </FormField>
+            <FormField id="paymentMethod" label="Payment method" error={errors.paymentMethod}>
+              <select id="paymentMethod" name="paymentMethod" required value={fields.paymentMethod} onChange={(event) => updateField("paymentMethod", event.target.value)} className={inputClass("paymentMethod")}>
+                <option value="card">Card (demo)</option>
+                <option value="cash-on-delivery">Cash on delivery</option>
               </select>
             </FormField>
           </fieldset>

@@ -1,6 +1,7 @@
 import { StorageService } from "./StorageService";
 import { isRecord } from "../api/client";
 import { STORAGE_KEYS } from "./storageKeys";
+import type { PaymentMethod } from "../types/order";
 
 /** Editable profile details, stored only in this browser. */
 export type ProfileData = {
@@ -8,6 +9,11 @@ export type ProfileData = {
   lastName: string;
   email: string;
   phone: string;
+  address?: string;
+  city?: string;
+  postalCode?: string;
+  country?: string;
+  paymentMethod?: PaymentMethod;
   /** ISO date of the first sign-in in this browser. */
   memberSince?: string;
   /** ISO date of the last "Save changes". */
@@ -15,7 +21,7 @@ export type ProfileData = {
 };
 
 /** The fields the profile form can change. */
-export type EditableProfile = Pick<ProfileData, "firstName" | "lastName" | "email" | "phone">;
+export type EditableProfile = Pick<ProfileData, "firstName" | "lastName" | "email" | "phone" | "address" | "city" | "postalCode" | "country" | "paymentMethod">;
 
 export const emptyProfile: ProfileData = { firstName: "", lastName: "", email: "", phone: "" };
 

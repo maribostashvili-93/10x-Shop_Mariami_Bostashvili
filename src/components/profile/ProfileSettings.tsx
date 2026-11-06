@@ -27,6 +27,12 @@ const FIELDS: { id: keyof EditableProfile; label: string; type: string; autoComp
   { id: "phone", label: "Phone (optional)", type: "tel", autoComplete: "tel" },
 ];
 
+const SHIPPING_FIELDS: { id: keyof EditableProfile; label: string; autoComplete: string }[] = [
+  { id: "address", label: "Shipping address", autoComplete: "street-address" },
+  { id: "city", label: "City", autoComplete: "address-level2" },
+  { id: "postalCode", label: "Postal code", autoComplete: "postal-code" },
+];
+
 /** Settings tab: edit details (P7.2), theme, clear local data and log out. */
 function ProfileSettings() {
   const { profile, updateProfile } = useAuth();
@@ -39,6 +45,11 @@ function ProfileSettings() {
     lastName: profile.lastName,
     email: profile.email,
     phone: profile.phone,
+    address: profile.address ?? "",
+    city: profile.city ?? "",
+    postalCode: profile.postalCode ?? "",
+    country: profile.country ?? "Georgia",
+    paymentMethod: profile.paymentMethod ?? "card",
   });
   const [errors, setErrors] = useState<FieldErrors<EditableProfile>>({});
 
@@ -52,6 +63,11 @@ function ProfileSettings() {
       lastName: values.lastName.trim(),
       email: values.email.trim(),
       phone: values.phone.trim(),
+        address: values.address?.trim(),
+        city: values.city?.trim(),
+        postalCode: values.postalCode?.trim(),
+        country: values.country,
+        paymentMethod: values.paymentMethod,
     });
     showToast("Profile saved ✓");
   }
@@ -95,6 +111,26 @@ function ProfileSettings() {
         <button type="submit" className="min-h-11 rounded-lg bg-violet-700 px-5 font-semibold text-white hover:bg-violet-800 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-violet-700">
           Save changes
         </button>
+        <div className="border-t border-slate-200 pt-5">
+          <h2 className="text-xl font-semibold text-slate-900">Shipping and payment</h2>
+          <p className="mt-1 text-sm text-slate-600">These details pre-fill your next checkout. Payment is simulated for this demo.</p>
+          <div className="mt-4 grid gap-5 sm:grid-cols-2">
+            {SHIPPING_FIELDS.map(({ id, label, autoComplete }) => (
+              <FormField key={id} id={`profile-${id}`} label={label} error={errors[id]}>
+                <input id={`profile-${id}`} autoComplete={autoComplete} value={values[id] ?? ""} onChange={(event) => setValues((current) => ({ ...current, [id]: event.target.value }))} className="min-h-11 w-full rounded-lg border border-slate-300 bg-white px-3 text-slate-900 focus-visible:outline-2 focus-visible:outline-violet-700" />
+              </FormField>
+            ))}
+            <FormField id="profile-country" label="Country">
+              <input id="profile-country" value={values.country ?? "Georgia"} onChange={(event) => setValues((current) => ({ ...current, country: event.target.value }))} className="min-h-11 w-full rounded-lg border border-slate-300 bg-white px-3 text-slate-900 focus-visible:outline-2 focus-visible:outline-violet-700" />
+            </FormField>
+            <FormField id="profile-paymentMethod" label="Payment method">
+              <select id="profile-paymentMethod" value={values.paymentMethod ?? "card"} onChange={(event) => setValues((current) => ({ ...current, paymentMethod: event.target.value as "card" | "cash-on-delivery" }))} className="min-h-11 w-full rounded-lg border border-slate-300 bg-white px-3 text-slate-900 focus-visible:outline-2 focus-visible:outline-violet-700">
+                <option value="card">Card (demo)</option>
+                <option value="cash-on-delivery">Cash on delivery</option>
+              </select>
+            </FormField>
+          </div>
+        </div>
       </form>
 
       <div className="h-fit space-y-5 rounded-3xl border border-violet-100 bg-white p-6 sm:p-8">
