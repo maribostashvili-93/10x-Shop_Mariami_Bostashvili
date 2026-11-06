@@ -11,6 +11,23 @@ Use this guide for new and updated interfaces throughout the project. The visual
 
 This guide adapts recommendations from the UI/UX Pro Max design-system generator for an ecommerce store. Use violet consistently as the main accent, supported by lilac, sky blue, sage, and warm amber details.
 
+### Tailwind token reference
+
+| Purpose | Token | Use |
+| --- | --- | --- |
+| Page background | `bg-[#fcfaff]` | Main app canvas |
+| Header background | `bg-[#fcfaff]/95` | Sticky header |
+| Soft lavender surface | `bg-violet-50` | Filters and account cards |
+| Lavender border | `border-violet-100` | Cards and controls |
+| Primary action | `bg-violet-700` | Search, login, add to cart |
+| Primary hover | `hover:bg-violet-800` | Interactive action hover |
+| Primary text | `text-slate-900` | Headings and important content |
+| Secondary text | `text-slate-600` | Supporting copy |
+| Success/confirmation | `text-violet-800` | Confirmation and selected states |
+| Product image background | `bg-[#faf8ff]` | Product card image area |
+
+Avoid warm red and mint green as brand colors. Reserve amber for rating/attention states and keep error feedback semantically distinct.
+
 ## Store experience
 
 Take inspiration from the clear navigation of modern delivery apps and the useful product information of large marketplaces, while giving 10X Shop its own identity. Customers should be able to find a product, understand its price and availability, and proceed to checkout without unnecessary steps. Do not copy another company's branding or interface.

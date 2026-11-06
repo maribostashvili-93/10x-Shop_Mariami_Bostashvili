@@ -151,7 +151,7 @@ Build first (`npm run build`); the Playwright suites start `vite preview` on por
 | `node scripts/lighthouse-perf.mjs current` | Lighthouse Performance, Accessibility and Best Practices for Home, Product and Cart; reports in `docs/lighthouse/current/` |
 | `node scripts/qa-live.mjs` | Checks the deployed site with real network requests; results in `docs/compat/live-results.json` |
 
-Latest results (2026-11-06): smoke 16/16; compatibility 94 passed, 0 failed, 2 skipped (a WebKit automation limit on Tab to links); axe found no violations in either theme; Lighthouse Accessibility 100/100; live site 6/6. Details: [QA-REPORT.md](QA-REPORT.md).
+Latest results (2026-11-06): smoke 16/16; compatibility 94 passed, 0 failed, 2 skipped (a WebKit automation limit on Tab to links); axe found no violations in either theme; Lighthouse Accessibility 100/100; live site 6/6. Details: [REPORT.md](REPORT.md) and [COMPATIBILITY.md](COMPATIBILITY.md).
 
 ## Demo login
 
@@ -187,17 +187,15 @@ Build command: `npm run build`. Output directory: `dist`.
 
 For SPA deployments, configure a rewrite so direct visits and refreshes on routes such as `/products/5` and `/checkout` serve `index.html`.
 
-The repository includes this fallback in [`vercel.json`](vercel.json). The latest deployed-site check (2026-11-06) passed all six checks: direct product and checkout URLs load after a refresh, the shopping flow reaches confirmation, and the checkout total matches the discounted price plus shipping. See [QA-REPORT.md](QA-REPORT.md).
+The repository includes this fallback in [`vercel.json`](vercel.json). The latest deployed-site check (2026-11-06) passed all six checks: direct product and checkout URLs load after a refresh, the shopping flow reaches confirmation, and the checkout total matches the discounted price plus shipping. See [REPORT.md](REPORT.md).
 
 ## Project documentation
 
-- [PLAN.md](PLAN.md) — project plan and implementation scope
-- [REPORT.md](REPORT.md) — completion report and final results
+- [REPORT.md](REPORT.md) — plan, PRD compliance, QA and final results
 - [STYLE_GUIDE.md](STYLE_GUIDE.md) — UI and Tailwind conventions
 - [DEBUG-LOG.md](DEBUG-LOG.md) — real bugs, their root causes and fixes
 - [COMPATIBILITY.md](COMPATIBILITY.md) — browser and device test matrix
-- [QA-REPORT.md](QA-REPORT.md) — latest test results, local and deployed
-- [BUG-REPORT.md](BUG-REPORT.md) — reported bugs and their status
+- Defect history is included in [REPORT.md](REPORT.md)
 
 ## Credits
 

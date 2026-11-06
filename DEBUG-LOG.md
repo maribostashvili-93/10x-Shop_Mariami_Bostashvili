@@ -1,6 +1,6 @@
 # Debug Log
 
-This document records real issues found and fixed while building 10X Shop. The project uses the browser Console and Network panel, React DevTools, the TypeScript compiler, and production builds as debugging tools.
+This document is the consolidated debugging and QA report. It records real issues found and fixed, verification evidence and remaining limitations. The project uses the browser Console and Network panel, React DevTools, the TypeScript compiler, production builds and Playwright.
 
 ## 1. Checkout page existed but the route did not exist
 
@@ -81,7 +81,7 @@ This document records real issues found and fixed while building 10X Shop. The p
 - **Fix:** Use shared rounded final prices in price-band comparisons and both price sort directions.
 - **Verification:** 36 pricing cases passed, including $50/$100 boundaries, cent rounding, reload, and filter/search/sort browser history.
 - **Fix (commit):** [8e326bc fix: align catalog price filters and refresh QA evidence](https://github.com/maribostashvili-93/10x-Shop_Mariami_Bostashvili/commit/8e326bc)
-- **Deployment note:** Live deep links return provider 404 and live checkout still ignores discounts; these remain separate release issues in `BUG-REPORT.md`.
+- **Deployment note:** Earlier live deep-link and checkout-pricing issues are now closed; their history is summarized in `QA-REPORT.md`.
 - **What I learned:** Filtering, sorting, and display must use the same business-rule calculation.
 
 ## 9. Account menu linked to a missing page and to placeholder pages

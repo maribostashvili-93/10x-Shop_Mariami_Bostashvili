@@ -1,12 +1,26 @@
 # Project Report
 
+## PRD compliance summary
+
+The supplied PRD v1.1 defines CORE as the release minimum. CORE is implemented: React/Vite/TypeScript/Tailwind v4 setup, required routes, simulated authentication, catalog, product details, shared cart, protected checkout, responsive UI, error handling, deployment and documentation are present. Typecheck, lint, build, smoke, compatibility and live checks are recorded in this report and `COMPATIBILITY.md`.
+
+Additional FULL work is partial by design: pagination, persistent Orders, and Formik/Yup are not complete. They are not CORE blockers. Appendix A expands the technical criteria, so any claim of complete FULL/BONUS compliance must be checked against that appendix separately.
+
+## Project plan
+
+The implementation plan covered setup, shared layout, DummyJSON catalog and product details, simulated authentication, shared cart, checkout, quality checks, documentation and deployment. Main risks were API failure, SPA deep-link 404s and mobile overflow; these were handled with error states, the Vercel rewrite and responsive testing. Definition of Done was: working CORE routes and flow, distinct loading/error/empty states, synchronized immutable cart state, accessible forms, passing lint/typecheck/build, and documented deployment.
+
+## QA summary
+
+The current release passes typecheck, lint, build, route/auth smoke tests, compatibility/pricing tests and all six deployed-site checks. axe found no WCAG A/AA violations in the tested light and dark pages. Lighthouse Accessibility scored 100/100 on the audited Catalog and Login pages. Remaining limitations are the manual Safari keyboard pass and desktop Lighthouse performance below 85 on Home and Product. Detailed browser/device matrices remain in `COMPATIBILITY.md`.
+
 ## Status
 
 ### Current verification — 2026-11-06
 
 Everything was re-run from scratch on `main` after the bold dark theme was merged. Typecheck, lint and build pass. The compatibility/pricing/dark-theme suite reports 94 passed, 0 failed and 2 WebKit keyboard skips across six browser/device projects; the route/auth smoke suite reports 16 passed. axe found no WCAG A/AA violations on nine pages in the light theme or in the dark theme. Four Lighthouse Accessibility audits scored 100/100.
 
-The deployed Vercel site passes all six live checks: direct product and checkout URLs load after a refresh, the shopping flow reaches confirmation, and the checkout total matches the discounted API price plus shipping ($18.94 for the checked product). The two earlier deployment bugs (BUG-004, BUG-005) are fixed. See `QA-REPORT.md`, `BUG-REPORT.md`, `COMPATIBILITY.md` and `docs/compat/live-results.json`.
+The deployed Vercel site passes all six live checks: direct product and checkout URLs load after a refresh, the shopping flow reaches confirmation, and the checkout total matches the discounted API price plus shipping ($18.94 for the checked product). The tracked deployment bugs are closed. See this report, `COMPATIBILITY.md` and `docs/compat/live-results.json`.
 
 The CORE scope from the graduation project PRD is implemented. The application is a responsive React SPA built with TypeScript, Tailwind CSS v4, React Router, and the DummyJSON products API.
 

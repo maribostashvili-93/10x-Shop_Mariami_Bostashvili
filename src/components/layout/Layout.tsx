@@ -4,6 +4,7 @@ import Header from "./Header";
 import Footer from "./Footer";
 import MobileBottomNav from "./MobileBottomNav";
 import { Sidebar } from "./Sidebar";
+import ShopAssistant from "../chat/ShopAssistant";
 
 function Layout() {
   const { pathname, search } = useLocation();
@@ -24,6 +25,7 @@ function Layout() {
         </div>
         <Footer />
         <MobileBottomNav />
+        <ShopAssistant />
       </div>
     </div>
   );
