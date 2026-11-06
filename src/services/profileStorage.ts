@@ -33,8 +33,41 @@ function isProfileData(value: unknown): value is ProfileData {
   );
 }
 
-export const profileStorage = new StorageService<ProfileData>(STORAGE_KEYS.profile, isProfileData, emptyProfile);
+type ProfilesByUser = Record<string, ProfileData>;
 
-export function readProfile(): ProfileData {
-  return profileStorage.load();
+function isProfilesByUser(value: unknown): value is ProfilesByUser {
+  return isRecord(value) && Object.values(value).every(isProfileData);
+}
+
+// One profile per username, so a second shopper in the same browser never sees
+// (or overwrites) the first shopper's name, contact details or address.
+const profilesStorage = new StorageService<ProfilesByUser>(STORAGE_KEYS.profiles, isProfilesByUser, {});
+
+// Before profiles were per user, one shared profile was kept under `shop_profile`.
+const legacyProfileStorage = new StorageService<ProfileData | null>(
+  STORAGE_KEYS.profile,
+  (value): value is ProfileData | null => value === null || isProfileData(value),
+  null,
+);
+
+/**
+ * Moves the old shared profile to `username` (the shopper who was signed in when it
+ * was saved) once, then deletes it so it can never be shown to anyone else.
+ */
+export function migrateLegacyProfile(username: string | null): void {
+  const legacy = legacyProfileStorage.load();
+  if (!legacy) return;
+  if (username) {
+    const profiles = profilesStorage.load();
+    if (!profiles[username]) profilesStorage.save({ ...profiles, [username]: legacy });
+  }
+  legacyProfileStorage.clear();
+}
+
+export function loadProfile(username: string): ProfileData {
+  return profilesStorage.load()[username] ?? emptyProfile;
+}
+
+export function saveProfile(username: string, profile: ProfileData): void {
+  profilesStorage.save({ ...profilesStorage.load(), [username]: profile });
 }

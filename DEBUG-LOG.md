@@ -174,6 +174,16 @@ This document is the consolidated debugging and QA report. It records real issue
 - **Fix (commit):** [c0f55b5 test: check the dark theme with axe and bring the live checks up to date](https://github.com/maribostashvili-93/10x-Shop_Mariami_Bostashvili/commit/c0f55b5)
 - **What I learned:** Check whether a tool actually measured something before trusting its number.
 
+## 18. A second shopper saw the first shopper's profile and address
+
+- **Symptom:** After user A saved a profile (or placed an order, which saves delivery details), logging out and signing in as user B showed A's name, email, phone and address on Profile and prefilled them in Checkout. Orders were already filtered per user, so the two layers disagreed.
+- **Reproduction:** sign in as `alice`, save profile details, log out, sign in as `bob`, open `/profile` or `/checkout`.
+- **Tool:** code review of `services/profileStorage.ts` and `context/AuthContext.tsx`, then the browser pane: `localStorage` inspection plus a log-out → log-in flow.
+- **Root cause:** every profile was stored under one shared key, `shop_profile`, and logout did not touch it; Checkout also read that key directly with `readProfile()`.
+- **Fix:** Profiles are stored per username under `shop_profiles`; `AuthProvider` loads the signed-in shopper's profile on login and resets it on logout, and Checkout prefills from that context profile. An old `shop_profile` is moved once to the user who was signed in and then deleted. Verified in the browser: `alice`'s data migrated, and `bob` saw none of it. `StorageService.clear()` now ignores disabled storage like `load()`/`save()` do.
+- **Fix (commit):** `fix: keep each shopper's profile separate`
+- **What I learned:** Everything personal must be keyed by the same owner; filtering one layer (orders) per user is not enough if another layer (profile) is shared.
+
 ## Debugging checklist
 
 - Run `npm run typecheck` before investigating runtime behavior.

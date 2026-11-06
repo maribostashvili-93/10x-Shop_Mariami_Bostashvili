@@ -34,6 +34,10 @@ export class StorageService<T> {
   }
 
   clear(): void {
-    localStorage.removeItem(this.key);
+    try {
+      localStorage.removeItem(this.key);
+    } catch {
+      // Storage can be disabled; there is nothing left to remove in that case.
+    }
   }
 }

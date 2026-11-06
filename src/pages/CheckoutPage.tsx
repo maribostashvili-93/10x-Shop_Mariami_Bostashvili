@@ -12,14 +12,14 @@ import type { Order } from "../models/Order";
 import ProductCard from "../components/products/ProductCard";
 import OrderTotals from "../components/cart/OrderTotals";
 import FormField from "../components/ui/FormField";
-import { readProfile } from "../services/profileStorage";
+import type { ProfileData } from "../services/profileStorage";
 import { COUNTRIES, validateShipping, type FieldErrors } from "../utils/validation";
 import { formatPrice, getFinalPrice } from "../utils/formatPrice";
 
 const wait = (ms: number) => new Promise((resolve) => window.setTimeout(resolve, ms));
 
-function initialFields(username: string): ShippingInfo {
-  const profile = readProfile();
+/** Prefill from the signed-in shopper's own profile only. */
+function initialFields(username: string, profile: ProfileData): ShippingInfo {
   const fullName = [profile.firstName, profile.lastName].filter(Boolean).join(" ");
   return {
     fullName: fullName || username,
@@ -34,10 +34,10 @@ function initialFields(username: string): ShippingInfo {
 }
 
 function CheckoutPage() {
-  const { user, updateProfile } = useAuth();
+  const { user, profile, updateProfile } = useAuth();
   const { items, promo, totals, clearCart } = useCart();
   const { placeOrder } = useOrders();
-  const [fields, setFields] = useState<ShippingInfo>(() => initialFields(user?.username ?? ""));
+  const [fields, setFields] = useState<ShippingInfo>(() => initialFields(user?.username ?? "", profile));
   const [errors, setErrors] = useState<FieldErrors<ShippingInfo>>({});
   const [submitting, setSubmitting] = useState(false);
   const [confirmedOrder, setConfirmedOrder] = useState<Order | null>(null);
@@ -139,8 +139,8 @@ function CheckoutPage() {
       postalCode: fields.postalCode.trim(),
     });
     updateProfile({
-      firstName: readProfile().firstName,
-      lastName: readProfile().lastName,
+      firstName: profile.firstName,
+      lastName: profile.lastName,
       email: fields.email.trim(),
       phone: fields.phone.trim(),
       address: fields.address.trim(),

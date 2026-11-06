@@ -2,7 +2,14 @@ import { useState, type ReactNode } from "react";
 import type { User } from "../types/user";
 import { StorageService } from "../services/StorageService";
 import { STORAGE_KEYS } from "../services/storageKeys";
-import { profileStorage, type EditableProfile, type ProfileData } from "../services/profileStorage";
+import {
+  emptyProfile,
+  loadProfile,
+  migrateLegacyProfile,
+  saveProfile as storeProfile,
+  type EditableProfile,
+  type ProfileData,
+} from "../services/profileStorage";
 import { AuthContext } from "./auth-context";
 
 function isUser(value: unknown): value is User | null {
@@ -12,23 +19,22 @@ function isUser(value: unknown): value is User | null {
 // Only the username is remembered; no password or token is ever stored.
 const userStorage = new StorageService<User | null>(STORAGE_KEYS.user, isUser, null);
 
+/** The signed-in shopper's own profile; a first sign-in records "member since" once. */
+function profileFor(username: string): ProfileData {
+  const saved = loadProfile(username);
+  if (saved.memberSince) return saved;
+  const withDate = { ...saved, memberSince: new Date().toISOString() };
+  storeProfile(username, withDate);
+  return withDate;
+}
+
 export function AuthProvider({ children }: { children: ReactNode }) {
   const [user, setUser] = useState<User | null>(() => userStorage.load());
   const [profile, setProfile] = useState<ProfileData>(() => {
-    const saved = profileStorage.load();
-    // Shoppers who signed in before "member since" existed get today's date once.
-    if (userStorage.load() && !saved.memberSince) {
-      const withDate = { ...saved, memberSince: new Date().toISOString() };
-      profileStorage.save(withDate);
-      return withDate;
-    }
-    return saved;
+    const current = userStorage.load();
+    migrateLegacyProfile(current?.username ?? null);
+    return current ? profileFor(current.username) : emptyProfile;
   });
-
-  function saveProfile(next: ProfileData) {
-    setProfile(next);
-    profileStorage.save(next);
-  }
 
   function login(username: string) {
     const trimmedUsername = username.trim();
@@ -36,16 +42,20 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     const nextUser = { username: trimmedUsername };
     setUser(nextUser);
     userStorage.save(nextUser);
-    if (!profile.memberSince) saveProfile({ ...profile, memberSince: new Date().toISOString() });
+    setProfile(profileFor(trimmedUsername));
   }
 
   function logout() {
     setUser(null);
+    setProfile(emptyProfile);
     userStorage.clear();
   }
 
   function updateProfile(fields: EditableProfile) {
-    saveProfile({ ...profile, ...fields, updatedAt: new Date().toISOString() });
+    if (!user) return;
+    const next = { ...profile, ...fields, updatedAt: new Date().toISOString() };
+    setProfile(next);
+    storeProfile(user.username, next);
   }
 
   return (
