@@ -4,6 +4,7 @@ import type { Category, Product } from "../../types/product";
 import { getCategories, getSortedProducts } from "../../api/products";
 import { CategoryIcon } from "./CategoryIcon";
 import ProductCard from "./ProductCard";
+import { buildCatalogUrl } from "../../utils/url";
 
 const FEATURES = [
   ["Delivery", "Browse everyday essentials", "M3 6h11v11H3zM14 10h4l3 3v4h-7M6 20h1M17 20h1"],
@@ -101,7 +102,8 @@ export function ProductRail({ title, eyebrow, sortBy, viewAllTo }: ProductRailPr
   );
 }
 
-const BRANDS = ["SONY", "SAMSUNG", "NIKE", "adidas", "PHILIPS", "LŌRÉAL"];
+// Brands that exist in the DummyJSON catalog and whose name finds all of their products through search.
+const BRANDS = ["Samsung", "Rolex", "Nike", "Calvin Klein", "Gucci", "Chanel"] as const;
 
 export function TopBrands() {
   return (
@@ -110,11 +112,20 @@ export function TopBrands() {
         <h2 id="top-brands-heading" className="text-xl font-bold text-stone-900">Top brands</h2>
         <Link to="/products" className="inline-flex min-h-11 items-center text-sm font-semibold text-violet-700">View all <span aria-hidden="true" className="ml-1">→</span></Link>
       </div>
-      <div className="mt-6 grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-6">
+      <ul className="mt-6 grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-6">
         {BRANDS.map((brand) => (
-          <div key={brand} className="flex min-h-16 items-center justify-center rounded-2xl border border-stone-100 bg-stone-50 px-3 text-center text-sm font-black tracking-tight text-slate-700 grayscale transition hover:border-violet-200 hover:bg-violet-50 hover:text-violet-800">{brand}</div>
+          <li key={brand}>
+            <Link
+              to={buildCatalogUrl({ q: brand })}
+              aria-label={`Shop ${brand}`}
+              className="group flex min-h-16 flex-col items-center justify-center rounded-2xl border border-stone-100 bg-stone-50 px-3 py-2 text-center transition hover:border-violet-200 hover:bg-violet-50 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-violet-700"
+            >
+              <span className="text-sm font-black tracking-tight text-slate-700 uppercase group-hover:text-violet-800">{brand}</span>
+              <span aria-hidden="true" className="mt-0.5 text-[10px] font-semibold text-violet-700 opacity-0 transition-opacity group-hover:opacity-100 group-focus-visible:opacity-100">Shop now →</span>
+            </Link>
+          </li>
         ))}
-      </div>
+      </ul>
     </section>
   );
 }
