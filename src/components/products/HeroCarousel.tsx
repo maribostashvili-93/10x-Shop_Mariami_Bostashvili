@@ -23,13 +23,13 @@ export default function HeroCarousel() {
   return (
     <section aria-label="Featured collections" aria-roledescription="carousel" className="keep-light relative isolate overflow-hidden rounded-3xl bg-violet-100">
       <div className="relative min-h-[420px] sm:min-h-[460px]">
-        {slides.map((slide, index) => <article key={slide.category} aria-hidden={active !== index} aria-label={`${index + 1} of ${slides.length}: ${slide.label}`} aria-roledescription="slide" inert={active !== index} className={`absolute inset-0 transition-opacity duration-700 motion-reduce:transition-none ${active === index ? "z-10 opacity-100" : "pointer-events-none opacity-0"}`}>
+        {slides.map((slide, index) => <article key={slide.category} role="group" aria-hidden={active !== index} aria-label={`${index + 1} of ${slides.length}: ${slide.label}`} aria-roledescription="slide" inert={active !== index} className={`absolute inset-0 transition-opacity duration-700 motion-reduce:transition-none ${active === index ? "z-10 opacity-100" : "pointer-events-none opacity-0"}`}>
           {shown.has(index) && <img src={slide.image} alt="" width={1200} height={600} fetchPriority={index === 0 ? "high" : "auto"} decoding={index === 0 ? "sync" : "async"} className="absolute inset-0 h-full w-full object-cover object-[65%_center]" />}
           <div aria-hidden="true" className="absolute inset-0 bg-linear-to-r from-violet-950/85 via-violet-950/45 to-transparent" />
           <div className="relative flex h-full max-w-[85%] flex-col justify-center px-6 pb-16 pt-8 text-white sm:max-w-[65%] sm:px-10">
-            <p className="text-[10px] font-semibold tracking-[0.2em] text-violet-100 uppercase">{slide.label}</p>
+            <p className="text-[10px] font-semibold tracking-[0.2em] text-white uppercase">{slide.label}</p>
             <h1 className="mt-4 max-w-[13ch] text-[clamp(2.25rem,7vw,3.5rem)] font-semibold leading-[1.05] tracking-[-0.03em] sm:max-w-md">{slide.title}</h1>
-            <p className="mt-4 max-w-[28rem] text-sm leading-6 text-violet-50 sm:text-base">{slide.description}</p>
+            <p className="mt-4 max-w-[28rem] text-sm leading-6 text-white sm:text-base">{slide.description}</p>
             <Link to={`/products?category=${slide.category}`} className="mt-6 inline-flex min-h-11 w-fit items-center gap-3 rounded-full bg-white px-5 text-sm font-semibold text-violet-900 transition-colors hover:bg-violet-100 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white">{slide.action}<span aria-hidden="true">→</span></Link>
           </div>
         </article>)}

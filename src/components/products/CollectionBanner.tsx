@@ -15,13 +15,13 @@ export default function CollectionBanner() {
   return (
     <div role="region" aria-label="Accessory collections" aria-roledescription="carousel" className="keep-light relative isolate overflow-hidden rounded-2xl bg-violet-950">
       <div className="relative min-h-80 sm:min-h-72">
-        {slides.map((slide, index) => <article key={slide.image} inert={index !== active} aria-hidden={index !== active} aria-roledescription="slide" aria-label={`${index + 1} of ${slides.length}: ${slide.label}`} className={`absolute inset-0 transition-opacity duration-700 motion-reduce:transition-none ${active === index ? "z-10 opacity-100" : "pointer-events-none opacity-0"}`}>
+        {slides.map((slide, index) => <article key={slide.image} role="group" inert={index !== active} aria-hidden={index !== active} aria-roledescription="slide" aria-label={`${index + 1} of ${slides.length}: ${slide.label}`} className={`absolute inset-0 transition-opacity duration-700 motion-reduce:transition-none ${active === index ? "z-10 opacity-100" : "pointer-events-none opacity-0"}`}>
           <img src={slide.image} alt={slide.alt} loading="lazy" className="absolute inset-0 h-full w-full object-cover object-center" />
           <div aria-hidden="true" className="absolute inset-0 bg-linear-to-r from-violet-950/95 via-violet-950/70 to-violet-950/5" />
           <div className="relative max-w-[85%] px-6 pb-14 pt-7 sm:max-w-[58%] sm:px-8">
-            <p className="text-[10px] font-semibold tracking-[0.18em] text-violet-200 uppercase">{slide.label}</p>
+            <p className="text-[10px] font-semibold tracking-[0.18em] text-white uppercase">{slide.label}</p>
             <h3 className="mt-3 text-2xl font-semibold leading-tight tracking-tight text-white sm:text-3xl">{slide.title}</h3>
-            <p className="mt-3 max-w-xs text-sm leading-6 text-violet-100">{slide.text}</p>
+            <p className="mt-3 max-w-xs text-sm leading-6 text-white">{slide.text}</p>
             <Link to={slide.to} className="mt-5 inline-flex min-h-11 items-center gap-3 rounded-xl bg-white px-4 text-xs font-semibold text-violet-900 hover:bg-violet-50 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white">{slide.action}<span aria-hidden="true">→</span></Link>
           </div>
         </article>)}

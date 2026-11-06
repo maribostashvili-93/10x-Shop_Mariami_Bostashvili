@@ -45,7 +45,7 @@ export default function CollectionShowcase() {
               <p className="mt-3 text-[10px] font-medium tracking-wide text-violet-700 uppercase">{product.category.replaceAll("-", " ")}</p>
               <h3 className="mt-1 line-clamp-2 min-h-10 text-xs font-semibold leading-5 text-slate-900">{product.title}</h3>
               <p className="mt-2 text-sm font-semibold text-slate-900">{formatPrice(getFinalPrice(product))}</p>
-              <p className="mt-1 text-[10px] text-slate-500">Rated {product.rating.toFixed(1)} / 5</p>
+              <p className="mt-1 text-[10px] text-slate-600">Rated {product.rating.toFixed(1)} / 5</p>
             </Link>
           </article>)}
         </div>

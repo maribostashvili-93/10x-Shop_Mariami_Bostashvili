@@ -53,7 +53,7 @@ export function Sidebar() {
         </nav>
       </div>
       <div className="keep-light mt-6 hidden rounded-2xl bg-gradient-to-br from-[#21134f] via-[#6036a8] to-[#e06aa8] p-5 text-white lg:block">
-        <p className="text-xs text-purple-100">The 10X collection</p>
+        <p className="text-xs text-white">The 10X collection</p>
         <p className="mt-3 text-xl font-semibold">Find your everyday favorites</p>
         <Link to="/products" className="mt-5 inline-flex min-h-11 items-center rounded-lg bg-white px-4 text-sm font-semibold text-red-900 hover:bg-red-50 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white">Shop now</Link>
       </div>

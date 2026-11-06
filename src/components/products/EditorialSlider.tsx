@@ -22,7 +22,7 @@ export default function EditorialSlider({ products }: { products: Product[] }) {
   if (!stories.length) return null;
 
   return (
-    <aside aria-label="Shopping inspiration" aria-roledescription="carousel" className="mt-6 min-w-0">
+    <aside role="region" aria-label="Shopping inspiration" aria-roledescription="carousel" className="mt-6 min-w-0">
       <div ref={track} onScroll={(event) => {
         const element = event.currentTarget;
         const slides = Array.from(element.children).filter((child): child is HTMLElement => child instanceof HTMLElement);
@@ -30,7 +30,7 @@ export default function EditorialSlider({ products }: { products: Product[] }) {
         setActive(closest);
       }} className="relative flex snap-x snap-mandatory gap-3 overflow-x-auto rounded-2xl [scrollbar-width:none]">
         {stories.map(({ product, title, label, image }, index) => product && (
-          <article key={product.id} aria-label={`${index + 1} of ${stories.length}`} aria-roledescription="slide" className="relative isolate flex min-h-44 min-w-0 basis-[94%] shrink-0 snap-start items-center overflow-hidden rounded-2xl border border-red-900/5 bg-stone-100 p-5 sm:min-h-56 sm:basis-[96%] sm:p-8">
+          <article key={product.id} role="group" aria-label={`${index + 1} of ${stories.length}`} aria-roledescription="slide" className="relative isolate flex min-h-44 min-w-0 basis-[94%] shrink-0 snap-start items-center overflow-hidden rounded-2xl border border-red-900/5 bg-stone-100 p-5 sm:min-h-56 sm:basis-[96%] sm:p-8">
             <img src={image || product.thumbnail} alt={image ? "Fresh vegetables in a paper bag" : product.title} loading="lazy" className={`absolute inset-y-0 right-0 -z-10 h-full w-[62%] ${image ? "object-cover object-[center_65%]" : "object-contain p-3"}`} />
             <div aria-hidden="true" className="absolute inset-0 -z-10 bg-linear-to-r from-stone-100 via-stone-100/95 to-transparent" />
             <div className="w-[62%] max-w-xs">
