@@ -16,9 +16,9 @@ The current release passes typecheck, lint, build, route/auth smoke tests, compa
 
 ## Status
 
-### Current verification — 2026-11-06 (Playwright run started 20:04 UTC)
+### Current verification — 2026-11-06 (Playwright run started 20:29 UTC, commit `cbdca4f`)
 
-Re-run on local `main` after the per-user profile, "Clear local data" scope, checkout save opt-in and "Back to catalog" fixes. Typecheck, lint and build pass. The compatibility/pricing/dark-theme suite reports 94 passed, 0 failed and 2 WebKit keyboard skips across six browser/device projects; the route/auth smoke suite reports 16 passed. axe found no WCAG A/AA violations on nine pages in the light theme or in the dark theme.
+Re-run on `main` at `cbdca4f`, after the per-user profile, "Clear local data" scope, checkout save opt-in, "Back to catalog" and mobile chat button fixes. Typecheck, lint and build pass. The compatibility/pricing/dark-theme suite reports 94 passed, 0 failed and 2 WebKit keyboard skips across six browser/device projects; the route/auth smoke suite reports 16 passed. axe found no WCAG A/AA violations on nine pages in the light theme or in the dark theme.
 
 Not re-run in this pass: the four Lighthouse Accessibility audits (100/100, captured 2026-11-05) and the six deployed-site checks. The deployed site does not yet include these local commits.
 
