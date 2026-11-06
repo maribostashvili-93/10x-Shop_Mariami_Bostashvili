@@ -54,6 +54,27 @@ export function buildCatalogUrl(params: Partial<CatalogParams>): string {
   return query ? `/products?${query}` : "/products";
 }
 
+const LAST_CATALOG_KEY = "shop_last_catalog";
+
+/** Remembers the catalog view (filters, sort, page) the shopper last saw in this tab. */
+export function rememberCatalogUrl(url: string): void {
+  try {
+    sessionStorage.setItem(LAST_CATALOG_KEY, url);
+  } catch {
+    // Storage can be disabled; "Back to catalog" then opens the plain catalog.
+  }
+}
+
+/** The catalog view to return to from a product page; the plain catalog if none was seen. */
+export function lastCatalogUrl(): string {
+  try {
+    const url = sessionStorage.getItem(LAST_CATALOG_KEY);
+    return url && url.startsWith("/products") ? url : "/products";
+  } catch {
+    return "/products";
+  }
+}
+
 /** "price-asc" → { sortBy: "price", order: "asc" } for the DummyJSON API. */
 export function toApiSort(sort: SortOption): { sortBy: string; order: "asc" | "desc" } | null {
   if (!sort) return null;

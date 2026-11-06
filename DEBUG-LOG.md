@@ -194,6 +194,16 @@ This document is the consolidated debugging and QA report. It records real issue
 - **Fix (commit):** `fix: clear only the shopper's own data and ask before saving checkout details`
 - **What I learned:** A "clear my data" action must use the same owner key as the data it shows, and saving personal details needs an explicit choice from the shopper.
 
+## 20. "Back to catalog" lost the filters, and two compatibility tests broke
+
+- **Symptom:** (1) The smoke test "product details back button returns to the catalog" failed in all four projects: from `/products?category=beauty`, "Back to catalog" opened the unfiltered `/products`. (2) The keyboard flow never reached the order confirmation in Chromium and Firefox. (3) The dark-theme axe scan failed once in WebKit mobile with a 4.13:1 contrast on the active bottom-nav item.
+- **Reproduction:** `npx playwright test` and `npx playwright test --config=playwright.compat.config.ts` after `npm run build`.
+- **Tool:** Playwright list/JSON reports, failure screenshots and the axe attachment in `docs/compat/results.json`; `git show c9bb440`.
+- **Root cause:** (1) Commit `c9bb440` replaced the history-based back button with a fixed `<Link to="/products">`. (2) The test pressed Tab a fixed number of times to reach "Place order"; the payment method select and the new "Save these details" checkbox added tab stops, so Enter landed on the wrong control. (3) axe sampled the nav item during its `transition-colors` animation (`#b77bf6` on `#3d2676`); the final colours pass, and three single reruns passed.
+- **Fix:** (1) The catalog remembers its current URL in `sessionStorage`; "Back to catalog" stays a real link to that URL (or `/products` if none), so it keeps the filters and also works when the product page was opened directly. The smoke test now looks for a link. (2) The keyboard test tabs to the "Place order" button by name. (3) The dark-theme test waits for running CSS animations to finish before scanning. Result: smoke 16 passed; compatibility 94 passed, 0 failed, 2 WebKit keyboard skips.
+- **Fix (commit):** `fix: keep catalog filters on "Back to catalog" and refresh test evidence`
+- **What I learned:** Tests that count keystrokes break whenever a form grows; target controls by their accessible name. Re-run the suites after every UI change instead of trusting an older green report.
+
 ## Debugging checklist
 
 - Run `npm run typecheck` before investigating runtime behavior.

@@ -17,6 +17,7 @@ import ProductCard from "../components/products/ProductCard";
 import ProductPrice, { StockStatus } from "../components/products/ProductPrice";
 import NotFoundPage from "./NotFoundPage";
 import SEO, { SITE_URL } from "../components/SEO";
+import { lastCatalogUrl } from "../utils/url";
 
 function Stars({ rating }: { rating: number }) {
   const rounded = Math.round(rating);
@@ -162,7 +163,7 @@ function ProductPage() {
   return (
     <div className="pb-10 sm:pb-16">
       <SEO title={product.title} description={product.description.slice(0, 155)} path={`/products/${product.id}`} structuredData={structuredData} />
-      <Link to="/products" className="inline-flex min-h-11 items-center text-sm font-medium text-stone-600 transition hover:text-violet-800 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-violet-700">
+      <Link to={lastCatalogUrl()} className="inline-flex min-h-11 items-center text-sm font-medium text-stone-600 transition hover:text-violet-800 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-violet-700">
         <span aria-hidden="true" className="mr-1">←</span> Back to catalog
       </Link>
 

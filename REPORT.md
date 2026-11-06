@@ -16,9 +16,11 @@ The current release passes typecheck, lint, build, route/auth smoke tests, compa
 
 ## Status
 
-### Current verification — 2026-11-06
+### Current verification — 2026-11-06 (Playwright run started 20:04 UTC)
 
-Everything was re-run from scratch on `main` after the bold dark theme was merged. Typecheck, lint and build pass. The compatibility/pricing/dark-theme suite reports 94 passed, 0 failed and 2 WebKit keyboard skips across six browser/device projects; the route/auth smoke suite reports 16 passed. axe found no WCAG A/AA violations on nine pages in the light theme or in the dark theme. Four Lighthouse Accessibility audits scored 100/100.
+Re-run on local `main` after the per-user profile, "Clear local data" scope, checkout save opt-in and "Back to catalog" fixes. Typecheck, lint and build pass. The compatibility/pricing/dark-theme suite reports 94 passed, 0 failed and 2 WebKit keyboard skips across six browser/device projects; the route/auth smoke suite reports 16 passed. axe found no WCAG A/AA violations on nine pages in the light theme or in the dark theme.
+
+Not re-run in this pass: the four Lighthouse Accessibility audits (100/100, captured 2026-11-05) and the six deployed-site checks. The deployed site does not yet include these local commits.
 
 The deployed Vercel site passes all six live checks: direct product and checkout URLs load after a refresh, the shopping flow reaches confirmation, and the checkout total matches the discounted API price plus shipping ($18.94 for the checked product). The tracked deployment bugs are closed. See this report, `COMPATIBILITY.md` and `docs/compat/live-results.json`.
 

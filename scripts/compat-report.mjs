@@ -66,7 +66,7 @@ for (const [id, finding] of findings) {
 }
 if (!findings.size) md += '- No violations were recorded in the available axe attachments.\n';
 md += '- Every result, including axe output, is stored in `docs/compat/results.json`. The HTML report and failure traces (`docs/compat/report/`, `docs/compat/artifacts/`) are generated locally by the run and are not committed.\n\n';
-md += '## Keyboard Navigation\n\nThe shopping flow uses Tab, Enter, and keyboard typing: Catalog → Product → Add to cart → View cart → Checkout → Login → Return to checkout → Complete all four fields → Place order → Confirmation. No click/focus/fill actions are used to complete this flow. When the only keyboard test error is an axe assertion, the flow reached confirmation and the FAIL refers to accessibility. This is not a complete assessment of every dropdown, focus trap, Shift+Tab interaction, or screen reader.\n\n';
+md += '## Keyboard Navigation\n\nThe shopping flow uses Tab, Enter, and keyboard typing: Catalog → Product → Add to cart → View cart → Checkout → Login → Return to checkout → Fill in the delivery details → Place order → Confirmation. No click/focus/fill actions are used to complete this flow. When the only keyboard test error is an axe assertion, the flow reached confirmation and the FAIL refers to accessibility. This is not a complete assessment of every dropdown, focus trap, Shift+Tab interaction, or screen reader.\n\n';
 md += '| Engine | Desktop keyboard flow | Mobile keyboard flow |\n| --- | --- | --- |\n';
 function keyboardStatus(project) {
   const row = rows.find(r => r.project === project && r.name.startsWith('keyboard:'));

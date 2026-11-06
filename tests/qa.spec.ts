@@ -10,7 +10,8 @@ test.describe("10X Shop smoke coverage", () => {
     await page.goto("/products?category=beauty");
     await page.locator("main article.product-card h2 a").first().click();
     await expect(page).toHaveURL(/\/products\/\d+$/);
-    await page.getByRole("button", { name: /back to catalog/i }).click();
+    // A real link (not history.back), so it also works when the product page was opened directly.
+    await page.getByRole("link", { name: /back to catalog/i }).click();
     await expect(page).toHaveURL(/\/products\?category=beauty$/);
   });
 

@@ -1,6 +1,6 @@
 # Compatibility — 10X Shop
 
-Run started (UTC): 2026-11-05T23:09:09.838Z. Duration: 216.0 seconds. Local production build: http://127.0.0.1:4173. Desktop: 1440×900; Mobile: 390×844. Chromium, Firefox, and WebKit are Playwright browser engines; branded Chrome/Firefox/Safari applications and physical phones were not tested. Firefox Mobile uses viewport and touch emulation only.
+Run started (UTC): 2026-11-06T20:04:19.983Z. Duration: 229.5 seconds. Local production build: http://127.0.0.1:4173. Desktop: 1440×900; Mobile: 390×844. Chromium, Firefox, and WebKit are Playwright browser engines; branded Chrome/Firefox/Safari applications and physical phones were not tested. Firefox Mobile uses viewport and touch emulation only.
 
 Matrix and keyboard tests replace DummyJSON responses with one fixed product (QA Beauty Product), using favicon.svg as its image. Pricing regression tests use six products with different discounts and boundary prices. This verifies the UI and shopping flow but does not verify the live API or real product images. Lighthouse uses real network requests; its results apply to the state displayed during each run. Deployed-site checks, when available, are recorded separately in docs/compat/live-results.json and QA-REPORT.md.
 
@@ -47,7 +47,7 @@ The matrix covers Home, Catalog, Best deals, Product Details, empty Cart, Login,
 
 ## Keyboard Navigation
 
-The shopping flow uses Tab, Enter, and keyboard typing: Catalog → Product → Add to cart → View cart → Checkout → Login → Return to checkout → Complete all four fields → Place order → Confirmation. No click/focus/fill actions are used to complete this flow. When the only keyboard test error is an axe assertion, the flow reached confirmation and the FAIL refers to accessibility. This is not a complete assessment of every dropdown, focus trap, Shift+Tab interaction, or screen reader.
+The shopping flow uses Tab, Enter, and keyboard typing: Catalog → Product → Add to cart → View cart → Checkout → Login → Return to checkout → Fill in the delivery details → Place order → Confirmation. No click/focus/fill actions are used to complete this flow. When the only keyboard test error is an axe assertion, the flow reached confirmation and the FAIL refers to accessibility. This is not a complete assessment of every dropdown, focus trap, Shift+Tab interaction, or screen reader.
 
 | Engine | Desktop keyboard flow | Mobile keyboard flow |
 | --- | --- | --- |
@@ -129,6 +129,7 @@ A score of 100 does not establish full WCAG compliance. Lighthouse and axe use d
 - [firefox-mobile-orders.png](docs/compat/current/firefox-mobile-orders.png)
 - [firefox-mobile-product.png](docs/compat/current/firefox-mobile-product.png)
 - [firefox-mobile-profile.png](docs/compat/current/firefox-mobile-profile.png)
+- [mobile-chat-account-fixed.png](docs/compat/current/mobile-chat-account-fixed.png)
 - [webkit-desktop-best-deals.png](docs/compat/current/webkit-desktop-best-deals.png)
 - [webkit-desktop-cart-empty.png](docs/compat/current/webkit-desktop-cart-empty.png)
 - [webkit-desktop-catalog-dark.png](docs/compat/current/webkit-desktop-catalog-dark.png)

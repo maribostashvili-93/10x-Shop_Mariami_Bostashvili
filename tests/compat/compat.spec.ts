@@ -66,6 +66,9 @@ test('dark: every matrix page passes axe in the dark theme', async ({ page }, in
     await expect(page.locator('html')).toHaveAttribute('data-theme', 'dark');
     await expect(page.getByRole('heading', { name: heading, exact: true })).toBeVisible();
     if (name === 'home' || name === 'catalog') await capture(page, `${name}-dark`, info.project.name);
+    // Let colour transitions (e.g. the active bottom-nav item) finish, so axe measures
+    // the final colours rather than a mid-transition blend.
+    await page.evaluate(() => Promise.all(document.getAnimations().map((animation) => animation.finished.catch(() => undefined))));
     const results = await new AxeBuilder({ page }).withTags(['wcag2a', 'wcag2aa', 'wcag21a', 'wcag21aa']).analyze();
     if (results.violations.length) found[name] = results.violations;
   }
@@ -113,8 +116,8 @@ test('keyboard: catalog → product → cart → login → checkout → confirma
     await page.keyboard.type(value);
     await page.keyboard.press('Tab');
   }
-  // Country keeps its default (Georgia); one more Tab reaches "Place order".
-  await page.keyboard.press('Tab');
+  // Country, payment method and "Save these details" keep their defaults; Tab on to "Place order".
+  await tabTo(page, page.getByRole('button', { name: 'Place order' }));
   await page.keyboard.press('Enter');
   await expect(page.getByRole('heading', { name: 'Thank you! Your order has been placed.' })).toBeVisible();
   await capture(page, 'confirmation', info.project.name);

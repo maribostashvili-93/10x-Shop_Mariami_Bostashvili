@@ -6,7 +6,7 @@ import type { ProductsResponse } from "../types/product";
 import ProductGrid from "../components/products/ProductGrid";
 import Pagination from "../components/products/Pagination";
 import CatalogSearchBar from "../components/products/CatalogSearchBar";
-import { DEALS_MIN_DISCOUNT, PAGE_SIZE, buildCatalogUrl, parseCatalogParams } from "../utils/url";
+import { DEALS_MIN_DISCOUNT, PAGE_SIZE, buildCatalogUrl, parseCatalogParams, rememberCatalogUrl } from "../utils/url";
 
 const gridClass = "grid grid-cols-1 gap-4 min-[481px]:grid-cols-2 md:grid-cols-3 lg:grid-cols-4";
 
@@ -29,6 +29,11 @@ function CatalogPage() {
     setLoadedKey(requestKey);
     setState({ status: "loading" });
   }
+
+  // "Back to catalog" on a product page returns to this exact view.
+  useEffect(() => {
+    rememberCatalogUrl(requestKey);
+  }, [requestKey]);
 
   useEffect(() => {
     // Cancel the previous request when the filters change before it finishes,
