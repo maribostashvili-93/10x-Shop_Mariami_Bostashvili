@@ -62,8 +62,10 @@ export function OrdersProvider({ children }: { children: ReactNode }) {
     return order;
   }
 
+  /** Deletes the signed-in shopper's orders only; other shoppers' orders stay. */
   function clearOrders() {
-    setAllOrders([]);
+    if (!user) return;
+    setAllOrders((current) => current.filter((order) => order.username !== user.username));
   }
 
   return <OrdersContext.Provider value={{ orders, placeOrder, clearOrders }}>{children}</OrdersContext.Provider>;

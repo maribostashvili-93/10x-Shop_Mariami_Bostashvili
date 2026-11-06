@@ -40,6 +40,8 @@ function CheckoutPage() {
   const [fields, setFields] = useState<ShippingInfo>(() => initialFields(user?.username ?? "", profile));
   const [errors, setErrors] = useState<FieldErrors<ShippingInfo>>({});
   const [submitting, setSubmitting] = useState(false);
+  // Delivery and payment details are saved to the profile only when the shopper asks.
+  const [saveDetails, setSaveDetails] = useState(false);
   const [confirmedOrder, setConfirmedOrder] = useState<Order | null>(null);
   const [suggestedProducts, setSuggestedProducts] = useState<Product[]>([]);
 
@@ -138,17 +140,19 @@ function CheckoutPage() {
       city: fields.city.trim(),
       postalCode: fields.postalCode.trim(),
     });
-    updateProfile({
-      firstName: profile.firstName,
-      lastName: profile.lastName,
-      email: fields.email.trim(),
-      phone: fields.phone.trim(),
-      address: fields.address.trim(),
-      city: fields.city.trim(),
-      postalCode: fields.postalCode.trim(),
-      country: fields.country,
-      paymentMethod: fields.paymentMethod,
-    });
+    if (saveDetails) {
+      updateProfile({
+        firstName: profile.firstName,
+        lastName: profile.lastName,
+        email: fields.email.trim(),
+        phone: fields.phone.trim(),
+        address: fields.address.trim(),
+        city: fields.city.trim(),
+        postalCode: fields.postalCode.trim(),
+        country: fields.country,
+        paymentMethod: fields.paymentMethod,
+      });
+    }
     setConfirmedOrder(order);
     clearCart();
     setSubmitting(false);
@@ -219,6 +223,22 @@ function CheckoutPage() {
                 <option value="cash-on-delivery">Cash on delivery</option>
               </select>
             </FormField>
+            <div className="sm:col-span-2">
+              <label htmlFor="saveDetails" className="flex min-h-11 cursor-pointer items-start gap-3 text-sm text-slate-700">
+                <input
+                  id="saveDetails"
+                  name="saveDetails"
+                  type="checkbox"
+                  checked={saveDetails}
+                  onChange={(event) => setSaveDetails(event.target.checked)}
+                  className="mt-0.5 size-5 shrink-0 accent-violet-700 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-violet-700"
+                />
+                <span>
+                  <span className="font-semibold text-slate-900">Save these details to my profile</span>
+                  <span className="block text-slate-600">Pre-fills your next checkout. Stored only in this browser.</span>
+                </span>
+              </label>
+            </div>
           </fieldset>
           <button
             type="submit"

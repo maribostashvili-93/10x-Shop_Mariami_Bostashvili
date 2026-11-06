@@ -184,6 +184,16 @@ This document is the consolidated debugging and QA report. It records real issue
 - **Fix (commit):** `fix: keep each shopper's profile separate`
 - **What I learned:** Everything personal must be keyed by the same owner; filtering one layer (orders) per user is not enough if another layer (profile) is shared.
 
+## 19. "Clear local data" deleted other shoppers' orders, and Checkout saved details without asking
+
+- **Symptom:** (1) Pressing "Clear local data" as one shopper also removed the orders and reviews of every other shopper in the same browser. (2) Every order silently copied the delivery address, phone and payment method into the profile.
+- **Reproduction:** (1) save orders and reviews for `alice` and `bob`, sign in as `alice`, Profile → Settings → Clear local data, then inspect `shop_orders` / `shop_reviews`. (2) place an order and inspect `shop_profiles`.
+- **Tool:** code review of `ProfileSettings.tsx`, `OrdersProvider.tsx` and `CheckoutPage.tsx`, then the browser pane with seeded `localStorage` for two users.
+- **Root cause:** `clearOrders()` replaced the whole order list with `[]` and `reviewStorage.clear()` removed the whole review key; Checkout called `updateProfile` unconditionally after placing the order.
+- **Fix:** `clearOrders()` keeps orders whose `username` is not the signed-in user, and `removeReviewsBy(username)` keeps other reviewers' reviews; the cart (shared by design) is still cleared. Checkout has a "Save these details to my profile" checkbox, unchecked by default, and updates the profile only when it is ticked. Verified in the browser: after clearing as `alice`, `bob`'s order and review remained; an order with the box unchecked left the profile empty, and with it ticked saved the address.
+- **Fix (commit):** `fix: clear only the shopper's own data and ask before saving checkout details`
+- **What I learned:** A "clear my data" action must use the same owner key as the data it shows, and saving personal details needs an explicit choice from the shopper.
+
 ## Debugging checklist
 
 - Run `npm run typecheck` before investigating runtime behavior.

@@ -6,7 +6,7 @@ import { useLogout } from "../../hooks/useLogout";
 import { useToast } from "../../hooks/useToast";
 import FormField from "../ui/FormField";
 import ThemeToggle from "../ui/ThemeToggle";
-import { reviewStorage } from "../../services/reviewStorage";
+import { removeReviewsBy } from "../../services/reviewStorage";
 import type { EditableProfile } from "../../services/profileStorage";
 import { isValidEmail, isValidPhone, type FieldErrors } from "../../utils/validation";
 
@@ -35,7 +35,7 @@ const SHIPPING_FIELDS: { id: keyof EditableProfile; label: string; autoComplete:
 
 /** Settings tab: edit details (P7.2), theme, clear local data and log out. */
 function ProfileSettings() {
-  const { profile, updateProfile } = useAuth();
+  const { user, profile, updateProfile } = useAuth();
   const { clearOrders } = useOrders();
   const { clearCart } = useCart();
   const logout = useLogout();
@@ -73,11 +73,12 @@ function ProfileSettings() {
   }
 
   function clearLocalData() {
-    if (!window.confirm("Clear your cart, orders and reviews saved in this browser? This cannot be undone.")) return;
-    // Keeps the session and the theme, as the specification requires.
+    if (!user || !window.confirm("Clear the cart and your orders and reviews saved in this browser? This cannot be undone.")) return;
+    // Keeps the session and the theme, as the specification requires. Orders and
+    // reviews of other shoppers in this browser are not touched.
     clearCart();
     clearOrders();
-    reviewStorage.clear();
+    removeReviewsBy(user.username);
     showToast("Local data cleared", "info");
   }
 
@@ -141,7 +142,7 @@ function ProfileSettings() {
         </div>
         <div className="border-t border-slate-200 pt-5">
           <h2 className="text-xl font-semibold text-slate-900">Local data</h2>
-          <p className="mt-1 text-sm text-slate-600">Removes the cart, orders and reviews saved in this browser. You stay signed in.</p>
+          <p className="mt-1 text-sm text-slate-600">Removes the cart and your orders and reviews saved in this browser. You stay signed in.</p>
           <button type="button" onClick={clearLocalData} className="mt-3 min-h-11 rounded-lg border border-rose-300 px-4 text-sm font-semibold text-rose-700 hover:bg-rose-50 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-rose-700">
             Clear local data
           </button>

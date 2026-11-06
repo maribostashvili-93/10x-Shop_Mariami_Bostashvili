@@ -24,6 +24,16 @@ function isLocalReviews(value: unknown): value is LocalReviews {
 
 export const reviewStorage = new StorageService<LocalReviews>(STORAGE_KEYS.reviews, isLocalReviews, {});
 
+/** Deletes only the reviews this shopper wrote; other shoppers' reviews stay. */
+export function removeReviewsBy(username: string): void {
+  const remaining: LocalReviews = {};
+  for (const [productId, list] of Object.entries(reviewStorage.load())) {
+    const kept = list.filter((review) => review.reviewerName !== username);
+    if (kept.length > 0) remaining[productId] = kept;
+  }
+  reviewStorage.save(remaining);
+}
+
 export function averageRating(reviews: readonly ProductReview[], fallback: number): number {
   if (reviews.length === 0) return fallback;
   return reviews.reduce((sum, review) => sum + review.rating, 0) / reviews.length;
