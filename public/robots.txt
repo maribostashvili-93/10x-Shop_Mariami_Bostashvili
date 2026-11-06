@@ -1,0 +1,10 @@
+User-agent: *
+Allow: /
+Disallow: /cart
+Disallow: /checkout
+Disallow: /login
+Disallow: /orders
+Disallow: /profile
+Disallow: /wishlist
+
+Sitemap: https://10x-shop-mariami-bostashvili-mt61.vercel.app/sitemap.xml

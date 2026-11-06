@@ -1,7 +1,7 @@
 import { useEffect, useState, type FormEvent } from "react";
 import { Link, useLocation, useNavigate, useParams } from "react-router";
 import { useToast } from "../hooks/useToast";
-import { formatDate } from "../utils/formatPrice";
+import { formatDate, getFinalPrice } from "../utils/formatPrice";
 import { getProduct, getProductsByCategory } from "../api/products";
 import type { Product, ProductReview } from "../types/product";
 import ReviewForm from "../components/products/ReviewForm";
@@ -16,6 +16,7 @@ import type { ProductOptions } from "../types/cart";
 import ProductCard from "../components/products/ProductCard";
 import ProductPrice, { StockStatus } from "../components/products/ProductPrice";
 import NotFoundPage from "./NotFoundPage";
+import SEO, { SITE_URL } from "../components/SEO";
 
 function Stars({ rating }: { rating: number }) {
   const rounded = Math.round(rating);
@@ -143,6 +144,16 @@ function ProductPage() {
   }
   // Stock is shared by every colour/size line of this product.
   const available = Math.max(0, product.stock - new Cart(items).quantityOf(product.id));
+  const structuredData = {
+    "@context": "https://schema.org",
+    "@type": "Product",
+    name: product.title,
+    description: product.description,
+    image: images,
+    brand: product.brand ? { "@type": "Brand", name: product.brand } : undefined,
+    offers: { "@type": "Offer", priceCurrency: "USD", price: getFinalPrice(product).toFixed(2), availability: product.stock > 0 ? "https://schema.org/InStock" : "https://schema.org/OutOfStock", url: `${SITE_URL}/products/${product.id}` },
+    aggregateRating: { "@type": "AggregateRating", ratingValue: rating.toFixed(1), reviewCount: Math.max(1, reviews.length) },
+  };
   const options = chosenOptions ?? defaultOptions(product);
 
   function handleAddToCart(event: FormEvent<HTMLFormElement>) {
@@ -157,6 +168,7 @@ function ProductPage() {
 
   return (
     <div className="pb-10 sm:pb-16">
+      <SEO title={product.title} description={product.description.slice(0, 155)} path={`/products/${product.id}`} structuredData={structuredData} />
       <button type="button" onClick={goBack} className="inline-flex min-h-11 items-center text-sm font-medium text-stone-600 transition hover:text-violet-800 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-violet-700">
         <span aria-hidden="true" className="mr-1">←</span> Back to catalog
       </button>
