@@ -4,7 +4,7 @@
 
 The supplied PRD v1.1 defines CORE as the release minimum. CORE is implemented: React/Vite/TypeScript/Tailwind v4 setup, required routes, simulated authentication, catalog, product details, shared cart, protected checkout, responsive UI, error handling, deployment and documentation are present. Typecheck, lint, build, smoke, compatibility and live checks are recorded in this report and `COMPATIBILITY.md`.
 
-Additional FULL work is partial by design: pagination, persistent Orders, and Formik/Yup are not complete. They are not CORE blockers. Appendix A expands the technical criteria, so any claim of complete FULL/BONUS compliance must be checked against that appendix separately.
+Additional FULL work is substantially implemented: orders, profile, reviews, promo pricing, shipping, Formik/Yup, dark mode, and compatibility evidence are present. Remaining evidence gaps are pagination, GitHub workflow artifacts, progress notes, and a demo video. Appendix A expands the technical criteria, so complete FULL/BONUS compliance must be checked against that appendix separately.
 
 ## Project plan
 

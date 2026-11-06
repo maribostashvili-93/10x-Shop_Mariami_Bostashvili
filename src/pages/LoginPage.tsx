@@ -3,11 +3,7 @@ import * as Yup from "yup";
 import { Link, useLocation, useNavigate } from "react-router";
 import { useAuth } from "../hooks/useAuth";
 import FormField from "../components/ui/FormField";
-
-type LoginFields = {
-  username: string;
-  password: string;
-};
+import type { LoginFields } from "../types/auth";
 
 const MIN_PASSWORD_LENGTH = 6;
 

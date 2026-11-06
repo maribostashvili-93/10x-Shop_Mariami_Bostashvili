@@ -1,5 +1,5 @@
 import { useEffect, useState, type FormEvent } from "react";
-import { Link, useLocation, useNavigate, useParams } from "react-router";
+import { Link, useParams } from "react-router";
 import { useToast } from "../hooks/useToast";
 import { formatDate, getFinalPrice } from "../utils/formatPrice";
 import { getProduct, getProductsByCategory } from "../api/products";
@@ -36,8 +36,6 @@ function ProductPage() {
   const { items, addToCart } = useCart();
   const [quantity, setQuantity] = useState(1);
   const [activeTab, setActiveTab] = useState<"description" | "reviews">("description");
-  const navigate = useNavigate();
-  const location = useLocation();
   const { showToast } = useToast();
   const [chosenOptions, setChosenOptions] = useState<ProductOptions | null>(null);
   const [justAdded, markAdded] = useJustAdded();
@@ -137,11 +135,6 @@ function ProductPage() {
     showToast("Review added ✓");
   }
 
-  function goBack() {
-    // Return to the previous catalog view (its filters live in the URL); fall back to the catalog.
-    if (location.key !== "default") navigate(-1);
-    else navigate("/products");
-  }
   // Stock is shared by every colour/size line of this product.
   const available = Math.max(0, product.stock - new Cart(items).quantityOf(product.id));
   const structuredData = {
@@ -169,9 +162,9 @@ function ProductPage() {
   return (
     <div className="pb-10 sm:pb-16">
       <SEO title={product.title} description={product.description.slice(0, 155)} path={`/products/${product.id}`} structuredData={structuredData} />
-      <button type="button" onClick={goBack} className="inline-flex min-h-11 items-center text-sm font-medium text-stone-600 transition hover:text-violet-800 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-violet-700">
+      <Link to="/products" className="inline-flex min-h-11 items-center text-sm font-medium text-stone-600 transition hover:text-violet-800 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-violet-700">
         <span aria-hidden="true" className="mr-1">←</span> Back to catalog
-      </button>
+      </Link>
 
       <div className="mt-8 grid gap-8 overflow-hidden rounded-[2rem] border border-violet-100 bg-white p-4 shadow-[0_18px_50px_rgba(76,29,149,0.08)] sm:p-6 md:grid-cols-2 md:gap-8 md:p-6 lg:gap-10">
         <div>

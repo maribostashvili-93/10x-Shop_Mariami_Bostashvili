@@ -6,7 +6,7 @@ The objective is the PRD CORE shopping flow: catalog, product details, simulated
 
 Completed: Vite/React/strict TypeScript/Tailwind v4 setup; routing and responsive catalog; typed DummyJSON API; product details and invalid-ID handling; AuthContext; immutable CartContext with totals/promo/shipping; controlled checkout and confirmation; dark theme; deployment rewrite; compatibility, keyboard, pricing, accessibility, Lighthouse and live verification.
 
-Remaining optional FULL work: pagination, persistent order details, Formik + Yup and CI automation.
+Remaining optional FULL work: pagination, GitHub workflow evidence, progress notes, and a demo video. Orders, profile, reviews, promo pricing, shipping, Formik/Yup, dark mode, and compatibility artifacts are already delivered in the current implementation.
 
 1. Set up Vite, React, TypeScript, Tailwind CSS, and the project structure.
 2. Build a responsive shared layout and navigation.
@@ -15,7 +15,7 @@ Remaining optional FULL work: pagination, persistent order details, Formik + Yup
 5. Implement the cart, including quantity changes and item removal.
 6. Build and validate the checkout form.
 7. Add loading, empty, and error states; review accessibility and responsive behavior.
-8. If time allows, add search, filtering, sorting, orders, and a profile page.
+8. Add search, filtering, sorting, orders, profile, reviews, promo pricing, and theme support.
 9. Run checks, document the project, and deploy it.
 
 ## Goal and CORE scope
