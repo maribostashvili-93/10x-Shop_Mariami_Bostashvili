@@ -8,7 +8,9 @@ const themeStorage = new StorageService<Theme>(STORAGE_KEYS.theme, isTheme, "lig
 
 function initialTheme(): Theme {
   if (localStorage.getItem(STORAGE_KEYS.theme) !== null) return themeStorage.load();
-  return window.matchMedia?.("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+  // Start new visitors in the storefront's light theme. Dark mode is opt-in
+  // through the theme toggle and remains available on later visits.
+  return "light";
 }
 
 /** One theme for the whole app: the Header and Profile switches both use this context. */
